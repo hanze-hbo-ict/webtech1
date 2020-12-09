@@ -1,0 +1,8 @@
+mkdocs
+nbdime
+ipython
+mknotebooks
+mkdocs-material
+pymdown-extensions
+mkdocs-bootswatch
+
