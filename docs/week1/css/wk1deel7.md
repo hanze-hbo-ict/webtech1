@@ -42,3 +42,6 @@ Alle tekst opgenomen binnen een paragraaf heeft daadwerkelijk een rode kleur gek
 ## De anatomie van css-regels
 
 Voordat er dieper op de materie wordt ingegaan aandacht voor de anatomie van een set CSS-regels. 
+
+![CSS rules](imgs/css.png)
+
