@@ -1,4 +1,4 @@
-# Webtechnologie week 1 deel 1 – Inleiding
+# HTML – Inleiding
 
 Het doel van het vak *Webtechnologie* is om een applicatie te bouwen die is opgebouwd uit meerdere componenten. Deze componenten zorgen er samen voor dat de applicatie zijn werk naar behoren kan uitvoeren.
 

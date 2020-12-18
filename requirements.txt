@@ -5,4 +5,4 @@ mknotebooks
 mkdocs-material
 pymdown-extensions
 mkdocs-bootswatch
-
+nodeenv
