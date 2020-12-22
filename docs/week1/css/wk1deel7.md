@@ -91,7 +91,7 @@ Er zijn *erg veel* lettertypen beschikbaar (letterlijk duizenden) en het is onmo
 
 Bekijk de site [https://fonts.google.com/](https://fonts.google.com/). Er wordt een site geopend waarin op dit moment 1003 font-family’s beschikbaar zijn. 
 
-![Google fonts](imgs/google_font.png)
+![Google fonts](imgs/google_fonts.png)
  
 Zoek bijvoorbeeld naar het font ‘Bungee’.
 
