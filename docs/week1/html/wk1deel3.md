@@ -1,5 +1,7 @@
 # HTML – Lists, Divs en Spans
 
+Aan het eind van deze tekst maken we [oefening nummer 1](../oefeningen/wk1oefening1.md).
+
 ## List
 
 Veel webinhoud bestaat uit lijsten en om die reden heeft HTML daar speciale elementen voor. De gebruikelijkste lijsttypes zijn *geordend* en *ongeordend* lijsten:
@@ -158,3 +160,5 @@ De link in het vorige voorbeeld is een zogenaamd *volledig pad*: er zit een voll
 Tenslotte kun je ook nog een link maken naar een element *binnen* dezelfde pagina. Kijk bijvoorbeeld eens in het menu van deze pagina. Hier zie je de inhoudsopgave staan; door op één van deze links te klikken, ga je direct naar het betreffende onderdeel op deze pagina zelf.
 
 Als je met je muis over zo'n link heengaat, zie je hoe die link eruit ziet: er wordt gebruik gemaakt van een *hashtag* (`#`) gevolgd door een stukje tekst. Die tekst correspondeert dan weer met het `id`-attribuut van het element in kwestie. Daar komen we later op terug, wanneer we het gaan hebben over stylesheets.
+
+Maak nu [oefening nummer 1](../oefeningen/wk1oefening1.md).
