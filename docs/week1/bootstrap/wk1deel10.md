@@ -91,7 +91,7 @@ Het meeste uit het bovenstaande zal je bekend voorkomen uit de vorige paragrafen
 
 De eerste is checked, en de derde disabled. Let ook op de nieuwe `fieldset`-tag.
 
-```html
+```htm  l
 <fieldset class="form-group">
    <legend>Radio buttons</legend>
    <div class="form-check">

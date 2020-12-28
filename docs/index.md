@@ -10,6 +10,9 @@
 
 
 ### CSS
-[CSS inleiding](week1/css/wk1deel5.md)
-[CSS selectors en rules](week1/css/wk1deel6.md)
-[CSS fonts](week1/css/wk1deel7.md)
+1. [CSS inleiding](week1/css/wk1deel5.md)
+2. [CSS selectors en rules](week1/css/wk1deel6.md)
+3. [CSS fonts](week1/css/wk1deel7.md)
+
+
+### Bootstrap
