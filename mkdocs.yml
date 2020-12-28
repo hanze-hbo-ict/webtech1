@@ -44,6 +44,7 @@ markdown_extensions:
   - pymdownx.tilde
 
 extra_javascript:
+  - js/imgs.js
 
 nav:
 
