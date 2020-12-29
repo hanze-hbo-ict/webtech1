@@ -2,6 +2,8 @@
 
 Bootstrap is een gratis front-end framework voor snellere en eenvoudigere webontwikkeling. Het bevat op html en css gebaseerde ontwerpsjablonen voor typografie, formulieren, knoppen, tabellen, navigatie, afbeeldingscarrousels en vele andere, evenals optionele Javascript-plug-ins. Tevens geeft het een gebruiker de mogelijkheid om eenvoudig responsieve ontwerpen te maken.
 
+## Voordelen
+
 Voordelen van Bootstrap:
 
 - Eenvoudig in gebruik: iedereen met alleen basiskennis van HTML en CSS kan Bootstrap gaan gebruiken.
@@ -26,6 +28,8 @@ Open de pagina [GetBootstrap.com](https://getbootstrap.com/). Een klik op de but
 ![Boostrap CDN](imgs/get_boootstrap_cdn.png)
 
 Als je gebruik wilt maken van een CDN, moet je de beide regels aan de rechterkant van het scherm opnemen in je html-document. In het beginscherm zijn een tweetal buttons rood omkaderd. Het kan erg nuttig zijn, zeker voor gebruikers die nog niet heel bedreven zijn in het werken met dit pakket, de onderliggende documentatie te bestuderen.
+
+## Buttons
 
 Als voorbeeld een overzicht van de component ‘Buttons’. Een keurige beschrijving, voorbeelden plus de bijbehorende code, klaar voor gebruik. Dat is voor elk van de items in het linker-menu prachtig uitgewerkt.
 

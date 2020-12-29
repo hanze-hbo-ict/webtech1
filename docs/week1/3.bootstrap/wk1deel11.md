@@ -15,6 +15,8 @@ Ga eventueel naar [de site van jQuery](https://code.jquery.com/) om een beeld te
 
 Hiermee is de voorbereiding geslaagd; over naar de navigatie. 
 
+## Navigatie toevoegen
+
 Om een navigatiebalk toe te kunnen voegen worden er op de Bootstrap-site onder het kopje Components twee mogelijkheden aangeboden: [`Nav`](https://getbootstrap.com/docs/5.0/components/navs-tabs/) en [`Navbar`](https://getbootstrap.com/docs/5.0/components/navbar/). Onder `Nav` worden alle opties beschreven, aanlijning, wel of geen tabs, achtergrondkleur en nog veel meer. Uiteraard kan de corresponderende code weer overgezet worden naar de webpagina om daar aan de wensen aangepast te worden.
 
 Hier wordt gekozen voor de `Navbar`, waarom zal zo duidelijk worden. Navigatiebalken worden geleverd met ingebouwde ondersteuning voor een handvol sub componenten. 
@@ -74,6 +76,7 @@ Als deze code in de browser wordt geladen, wordt de volgende navigatiebalk zicht
 
 ![Navbar met Bootstrap en navigatie](imgs/navbar.png)
 
+## Voordelen van `Navbar`
 Een keuze voor `Navbar` kent een tweetal voordelen:
 
 1.	Het logo van het bedrijf of product wordt getoond als BRAND.
@@ -100,6 +103,8 @@ Dat er nog wat op het scherm te zien is komt doordat de volgende snippet buiten 
 	<span class="navbar-toggler-icon"></span>
 </button>
 ```
+
+## Extra link
 
 Het is natuurlijk ook mogelijk de navigatiebalk uit te breiden met een extra link. Het kan een link zijn of een drop down-menu; het gaat op vergelijkbare wijze. Als demo wordt een ‘NewLink’ aan de navigatie toegevoegd:
 
