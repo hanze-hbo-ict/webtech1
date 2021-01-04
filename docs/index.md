@@ -23,10 +23,10 @@
 ### Oefeningen
 
 1. [Eenvoudige webpagina](week1/oefeningen/wk1oefening1.md)
-2. [Formulier maken](wk1oefeningen/wk1oefening2.md)
-3. [Tabelletje maken](wk1oefeningen/wk1oefening3.md)
-4. [Html en css](wk1oefeningen/wk1oefening4.md)
-5. [Bootstrap Carroussel](wk1oefeningen/wk1oefening5.md)
+2. [Formulier maken](week1/oefeningen/wk1oefening2.md)
+3. [Tabelletje maken](week1/oefeningen/wk1oefening3.md)
+4. [Html en css](week1/oefeningen/wk1oefening4.md)
+5. [Bootstrap Carroussel](week1/oefeningen/wk1oefening5.md)
 
 
 ## Week 2: Python OOP
