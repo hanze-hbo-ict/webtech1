@@ -5,7 +5,7 @@ site_url: 'https://blackboard.hanze.nl/webapps/blackboard/content/listContentEdi
 use_directory_urls: false
 
 theme:
-  name: 'darkly'
+  name: 'material'
   custom_dir: 'overrides'
   palette:
     primary: 'blue grey'
@@ -19,8 +19,8 @@ extra_css:
 
 markdown_extensions:
   - markdown.extensions.codehilite:
-      guess_lang: false
-      linenums: true
+      guess_lang: False
+      linenums: True
   - markdown.extensions.toc:
       permalink: true
   - markdown.extensions.def_list
