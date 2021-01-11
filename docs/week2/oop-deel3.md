@@ -2,6 +2,8 @@
 
 Het is belangrijk om commentaar op te nemen binnen codeblokken. Het is dan voor iemand die de code niet ontwikkeld heeft en deze moet refactoren, duidelijk wat de bedoeling is. Gaan we hier ook doen.
 
+## De klasse `Song`
+
 Als voorbeeld wordt hier een applicatie opgebouwd, waarbij gegevens vanuit drie klassen aangeroepen zullen worden. Die klassen zijn `Song`, `Artist` en `Album`. De naamgeving is hier in het Engels omdat deze bestanden later gekoppeld zullen worden aan een databestand waarin alle gegevens onder de Engelse notaties staan opgeslagen. De code is te vinden in het bestand [muziek.py](../../bestanden/muziek.py). 
 
 De eerste klasse is `Song`. In het commentaar van deze klasse zetten we een korte beschrijving van de klasse, gevolgd door een omschrijving van de attributen die van objecten deze klasse worden bijgehouden. Na dit commentaar volgt de *constructor*, die we ook voorzien van een korte beschrijving.
@@ -22,6 +24,8 @@ class Song:
         self.duration = duration
 
 ``` 
+
+## De klasse `Album`
 
 In hetzelfde bestand maken we nu een tweede klasse: `Album`. Aan deze klasse kunnen Songs aan worden toegevoegd.
 
@@ -70,6 +74,8 @@ def add_song(self, song, position=None):
         self.tracks.insert(position, song)
 ```
 
+## De klasse `Artist`
+
 Er is al verwezen naar de klasse Artist, maar die bestaat op dit moment nog niet. Daar gaat nu verandering in komen.
 
 ```python
@@ -102,6 +108,8 @@ def add_album(self, album):
 ```
 
 Qua ontwerp is het allemaal nog niet zo optimaal, maar daar kijken we later wel naar. 
+
+## Het tonen van gegevens
 
 Tijd om gegevens te tonen. Het is niet de bedoeling ongelofelijk veel typewerk te verrichten, maar er wordt gebruik gemaakt van de file `albums.txt`. De gegevens worden met behulp van een methode weer ingeladen.
 
@@ -147,4 +155,45 @@ ZZ Top:Mescalero:2003:Liquor
 There are 28 artists 
 ```
 
+<!---
+## Checkfile
 
+Aan het einde van de vorige paragraaf werd gebruik gemaakt van een file (`albums.txt`) om de data uit die file met behulp van de methode `load_data()` naar het scherm te schrijven. Het werken met een dergelijke testfile is prima om de werking van het programma te testen. Nog belangrijker is ervoor te zorgen dat het programma ook daadwerkelijk een gebruiker in staat stelt gegevens in te geven die vervolgens aan de juiste bestanden worden toegevoegd. Songs moeten aan een albumlijst toegevoegd kunnen worden en albums aan de artiestenlijst. En dat komt in deze paragraaf ter sprake.
+
+Nu kan de code opgemaakt worden om de gegevens netjes aan de juiste lijsten toe te voegen. Op het moment dat er geconstateerd wordt dat `new_artist` geen waarde heeft, wordt er een nieuw object voor gecreëerd. Vervolgens worden er eigenschappen toegekend aan dit object. 
+
+```python
+if new_artist is None:
+    new_artist = Artist(artist_field)
+elif new_artist.name != artist_field: 
+    new_artist.add_album(new_album)
+    artist_list.append(new_artist)
+    new_artist = Artist(artist_field)
+    new_album = None
+```
+
+De gegevens van een nieuwe artiest zijn dus net ingelezen en er is een nieuw object aangemaakt. Het huidige album wordt opgeslagen in de artiestencollectie en het artiestenobject krijgt invulling.
+
+Hetzelfde kan nu gedaan worden voor albums. We laten dat even regel voor regel zien:
+
+```python
+if new_album is None:
+       new_album = Album(album_field, year_field, new_artist)
+elif new_album.name != album_field:
+```
+
+Er is een nieuw album voor de huidige artiest ingeladen. Dit album wordt opgeslagen in de collectie van de artiest en vervolgens wordt een nieuw albumobject aangemaakt. Per regel wordt er ook een song meegestuurd. Het is de bedoeling dat het nummer wordt toegevoegd aan het huidige album.
+
+```python
+    new_song = Song(song_field, new_artist)
+    new_album.add_song(new_song)
+```
+
+Het vervelende is dat de laatste regel wel is ingelezen maar nog niet verwerkt. Daarvoor moeten nog een paar regels aangemaakt worden.
+
+
+Tot slot een coderegel om uitsluitend de verschillende artiesten terug te geven.
+
+
+
+--->

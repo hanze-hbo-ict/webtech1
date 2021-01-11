@@ -5,9 +5,13 @@ Inkapseling is één van de fundamenten van object-georiënteerd programmeren. H
 !!! Info "zichtbaarheid"
     Python wijkt nadrukkelijk af van het idee van inkapseling zoals het bijvoorbeeld gedaan wordt bij Java. Python gebruikt niet de sleutel-woorden `private` of `protected` om de zichtbaarheid van een methode aan te geven.
 
+## Het voorbeeld Bank
+
 Als voorbeeld hier een bank, waarbij het mogelijk is een rekening te openen, geld te storten en op te nemen en een overzicht van alle gedane transacties op te vragen, waarbij tevens het tijdstip van de transactie getoond wordt. Uiteraard is de opzet erg beperkt.
 
 De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand `Bankrekening.py`.
+
+## Klasse en methoden
 
 Stap 1: de klasse
 
@@ -31,6 +35,8 @@ def current_time():
 
 De functie `current_time()` retourneert het tijdstip van storten in het opgegeven formaat, tot op de seconde nauwkeurig.
 
+## De constructor
+
 Stap 4: de constructor
 
 ```python
@@ -40,6 +46,8 @@ def __init__(self, naam, saldo):
     self._transactie_overzicht = []
     print("Bankrekening aangemaakt voor " + self._name)
 ```
+
+## Storten en opnemen
 
 Bij het openen van een nieuwe rekening wordt gevraagd om een naam en een inlegbedrag. Een rekeningnummer wordt hier niet uitgedeeld. De variabele `transactie_overzicht` is een lijst (`[]`) waarin alle transacties worden vastgelegd. 
 
@@ -77,6 +85,8 @@ def toon_saldo(self):
     print("Saldo bedraagt {}".format(self.__saldo))
 ```
 
+## Transactie-overzicht
+
 Stap 8: het transactie-overzicht
 
 ```python
@@ -91,6 +101,8 @@ def toon_transacties(self):
 ```
 
 Belangrijk is na te gaan of het bedrag gestort dan wel opgenomen is. Omdat een bedrag altijd groter is dan nul (0), dient dit bedrag bij opnemen met de factor -1 vermenigvuldigd te worden om het saldo te kunnen verlagen. De printopdracht toont alle transacties.
+
+## Interactieve test
 
 Nu gaan we kijken of het werkt. Dit doen we weer in onze interactieve shell, waar we eerst het bestand `Bankrekening.py` inladen
 
@@ -120,7 +132,11 @@ In [8]: angela.toon_transacties()
 In [9]: 
 ```
 
+## Oefening 1
+
 Maak nu [oefening 1](oefeningen/oop-oefening1.md)
+
+## Te veel mogelijkheden
 
 Het idee is gewekt dat alles nu in kannen en kruiken geregeld is. Helaas, er zijn toch nog een aantal onvolkomenheden die aanpassing behoeven. Kijk eens naar het volgende scenario, waarbij een min of meer criminele activiteit is aangegeven:
 
