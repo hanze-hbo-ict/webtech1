@@ -209,5 +209,5 @@ def score(self):
 def score(self, score):
     self.__score = score
 ```
-
+        
 Een andere schrijfwijze: de bovenste methode geeft de waarde van `score` terug (`getter`), terwijl de onderste methode een waarde vastlegt voor `score` (`setter`).

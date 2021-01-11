@@ -1,3 +1,5 @@
+body { color:#007575;}
+
 div.admonition { font-size:small; border:solid gray 1px; width:75%; margin:auto !important; margin-bottom:2vh; }
 img { display:block; margin:auto; width:55%; border:solid gray 1px;cursor:pointer; }
 img:hover{opacity:0.7}
