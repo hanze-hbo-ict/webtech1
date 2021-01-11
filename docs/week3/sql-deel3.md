@@ -6,7 +6,7 @@ Aan het eind van dit document maken we [oefening 1](oefeningen/sql-oefening1.md)
 
 ## kennismaken een aardigheidje
 
-De database is te vinden [via deze link](../../bestanden/music.sqlite). Neem de database over en bewaar deze op je laptop. Het simpelst is om deze database een plekje te geven in de directory waarin ook SQLite3 te vinden is. De database kan dan automatisch geopend worden zonder dat de directory gewijzigd hoeft te worden.
+De database is te vinden [via deze link](../bestanden/music.sqlite). Neem de database over en bewaar deze op je laptop. Het simpelst is om deze database een plekje te geven in de directory waarin ook SQLite3 te vinden is. De database kan dan automatisch geopend worden zonder dat de directory gewijzigd hoeft te worden.
 
 ```
 hostname:user$ sqlite3 music.sqlite 

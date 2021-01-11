@@ -4,7 +4,7 @@ Het is belangrijk om commentaar op te nemen binnen codeblokken. Het is dan voor 
 
 ## De klasse `Song`
 
-Als voorbeeld wordt hier een applicatie opgebouwd, waarbij gegevens vanuit drie klassen aangeroepen zullen worden. Die klassen zijn `Song`, `Artist` en `Album`. De naamgeving is hier in het Engels omdat deze bestanden later gekoppeld zullen worden aan een databestand waarin alle gegevens onder de Engelse notaties staan opgeslagen. De code is te vinden in het bestand [muziek.py](../../bestanden/muziek.py). 
+Als voorbeeld wordt hier een applicatie opgebouwd, waarbij gegevens vanuit drie klassen aangeroepen zullen worden. Die klassen zijn `Song`, `Artist` en `Album`. De naamgeving is hier in het Engels omdat deze bestanden later gekoppeld zullen worden aan een databestand waarin alle gegevens onder de Engelse notaties staan opgeslagen. De code is te vinden in het bestand [muziek.py](../bestanden/muziek.py)
 
 De eerste klasse is `Song`. In het commentaar van deze klasse zetten we een korte beschrijving van de klasse, gevolgd door een omschrijving van de attributen die van objecten deze klasse worden bijgehouden. Na dit commentaar volgt de *constructor*, die we ook voorzien van een korte beschrijving.
 
