@@ -1,0 +1,9 @@
+Flask-forms-deel3:
+
+Line 70: Op wat voor manier staan linkjes het mooist? Heb het nu met 'hier' gedaan
+Line 164: Hier nog een mooie afsluiting van dit gedeelte? Het eindigt nu zo abrupt.
+
+Flask-forms-oefening1:
+
+Ik heb er maar wat random bestandsnamen ingegooid (oefening1.py en home3.html) maar heb daar verder nog geen link naartoe, want weet niet of die bestanden al bestaan. Maar het idee is duidelijk.
+
