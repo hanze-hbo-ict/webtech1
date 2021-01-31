@@ -67,11 +67,9 @@ Als er elementen van Bootstrap gebruikt gaan worden in een HTML-file is het nodi
 ```
 
 Deze code is overgenomen uit het HTML-bestand met daarin oplossing van oefening 5 uit het onderdeel HTML/CSS/Bootstrap. 
-Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Gebruik daarvoor de volgende link:
+Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Dat gedeelte kan [hier](https://getbootstrap.com/docs/4.0/components/alerts/) gevonden worden.
 
-https://getbootstrap.com/docs/4.0/components/alerts/
-
-Voor de melding wordt als component `Alert` geselecteerd. Hiermee kunnen feedbackberichten als reactie op gebruikersacties aangemaakt worden. Van de beschikbare opties is hier gekozen voor `Dismissing`.
+Voor de melding wordt als component `Alert` geselecteerd. Hiermee kunnen feedbackberichten als reactie op gebruikersacties aangemaakt worden. Van de beschikbare opties is hier gekozen voor `dismissing`.
 Het onderstaande plaatje is rechtstreeks overgenomen van de Bootstrap-site.
 
 ![Alert melding code en voorbeeld op bootstrap site](imgs/alert-melding-bootstrap.png)
@@ -109,15 +107,15 @@ Wat gebeurt er nu precies wanneer de boodschap verstuurd wordt? Of anders gezegd
 Als het flash-commando afgaat dan worden de meldingen naar de template gestuurd die in de view is opgenomen. Dat gaat in de vorm van de methode `get_flashed_messages()`. 
 Hierin zullen alle berichten ondergebracht en kunnen dus ook, als het er meerdere zijn, na elkaar worden afgespeeld.
 
-De enorme aanroep naar de Bootstrap-klasse zorgt ervoor dat de gebruiker de mogelijkheid krijgt het bericht weer te laten verdwijnen door op het kruisje rechtsboven te klikken. 
-‘fade show’ geeft aan dat de melding gaat vervagen totdat deze niet meer zichtbaar is.
+De aanroep naar de Bootstrap-klasse zorgt ervoor dat de gebruiker de mogelijkheid krijgt het bericht weer te laten verdwijnen door op het kruisje rechtsboven te klikken. 
+`fade show` geeft aan dat de melding gaat vervagen totdat deze niet meer zichtbaar is.
 
 De regel die begint met `<button type….> `is nodig om het kruisje rechtsboven in weer te geven, en dat een klik op dat kruisje het bericht afsluit. 
 
 Het aria-label attribuut wordt gebruikt om een string te definiëren die het huidige element labelt. Het wordt vaak gebruikt als er geen tekstlabel zichtbaar is.
-
 Door `aria-hidden = "true"` aan een element toe te voegen, worden dat element en al zijn onderliggende elementen verwijderd en is daarna niet langer beschikbaar.
-Nog een paar kleinigheden om deze code te kunnen afronden. Het formulier moet natuurlijk nog ontworpen worden en de container worden beëindigd.
+
+Om deze code af te maken moet het formulier nog worden ontworpen en de container beëindigd:
 
 ```html
     <form method="POST">
@@ -151,15 +149,15 @@ De gehele code wordt dan (zonder de head-sectie):
 ```
 
 
-Uiteraard weer een test. Als eerste wordt de Python-file gerund:
+Wanneer we de code testen door de python file te runnen krijgen we het volgende:
 
-![](imgs/Button-met-klik-mij-tekst.png)
+![Een button met de tekst 'Klik mij!'](imgs/Button-met-klik-mij-tekst.png)
 
 
 En na de klik:
-![](imgs/button-met-melding.png)
+![De pagina nadat er op de button is geklikt. Een bericht wordt geflasht](imgs/button-met-melding.png)
 
 Tenslotte de test wat er gebeurt wanneer er op het kruisje geklikt wordt:
 
-![](imgs/Button-met-klik-mij-tekst.png)
+![Het bericht is verdwenen](imgs/Button-met-klik-mij-tekst.png)
 
