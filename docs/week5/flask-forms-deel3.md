@@ -1,4 +1,4 @@
-# Flask - Flash-berichten
+# Flask en Forms - Flash-berichten
 
 De titel van deze paragraaf is geen typo. Er wordt inderdaad Flash bedoeld. 
 Soms is het handig de gebruiker een bericht te sturen dat niet permanent bewaard hoeft te worden op de view-pagina. Een dergelijk bericht kan naar de gebruiker ‘geflasht’ worden en vervolgens worden gesloten. Dat betekent dat het niet meer hardcoded in een view op een Python-file hoeft te worden opgenomen.

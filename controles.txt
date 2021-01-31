@@ -7,3 +7,9 @@ Flask-forms-oefening1:
 
 Ik heb er maar wat random bestandsnamen ingegooid (oefening1.py en home3.html) maar heb daar verder nog geen link naartoe, want weet niet of die bestanden al bestaan. Maar het idee is duidelijk.
 
+Flask-views-deel1:
+
+Line 7-11 :Is deze tabel zo goed?
+Line 35: Er staat hier op de gebruikelijke wijze, is hier nog een linkje voor?
+Line 40: linkje doen naar CRUD? (wat het ook maar moge zijn)
+Line 42: Wat is een bullit?
