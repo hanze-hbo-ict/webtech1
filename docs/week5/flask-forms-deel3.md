@@ -1,10 +1,14 @@
 # Flask en Forms - Flash-berichten
 
-De titel van deze paragraaf is geen typo. Er wordt inderdaad Flash bedoeld. 
+## Introductie
+De titel van deze paragraaf is geen typfout. Er wordt inderdaad Flash bedoeld. 
 Soms is het handig de gebruiker een bericht te sturen dat niet permanent bewaard hoeft te worden op de view-pagina. Een dergelijk bericht kan naar de gebruiker ‘geflasht’ worden en vervolgens worden gesloten. Dat betekent dat het niet meer hardcoded in een view op een Python-file hoeft te worden opgenomen.
 
+## Voorbeeld
 Flask kan dat op een gemakkelijke manier voor elkaar krijgen.
 Dit wordt nu weer besproken aan de hand van een voorbeeld. In dit voorbeeld zijn twee bestanden nodig, `home2.html` en `Flashing-Messages.py`.
+
+### Python gedeelte
 Zoals gebruikelijk als eerste de Python-file. Het begin moet geen vragen meer oproepen.
 
 ```python
@@ -18,6 +22,8 @@ app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 
 Het enige bijzondere bij het importeren is dat nu ook `flash` in het rijtje wordt meegenomen.
 Vervolgens wordt de applicatie weer aangemaakt en omdat er met een formulier gewerkt wordt is de geheime sleutel ook een vereiste.
+
+#### SimpelForm
 Het formulier moet ook weer aangemaakt worden:
 
 ```python
@@ -28,6 +34,7 @@ class SimpelForm(FlaskForm):
 Het formulier kent slechts een enkel veld, een knop met de tekst ‘Klik mij!’.
 Het idee is dat als de button geactiveerd wordt, er een melding op het scherm verschijnt.
 
+#### View functies
 Als derde actie wordt de view voor het formulier opgezet:
 
 ```python
@@ -46,6 +53,7 @@ De view heeft de naam index meegekregen en er wordt een instantie van de klasse 
 Wanneer er op de knop geklikt wordt, zorgt het flash-commando ervoor dat er melding naar het scherm gestuurd wordt via het redirect-statement.
 Het tweede return-statement is nodig om in eerste instantie het formulier te laten zien.
 
+#### Afsluiting python code
 De python code wordt weer afgesloten als volgt:
 
 ```python
@@ -53,6 +61,10 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
+
+### HTML gedeelte
+
+#### Bootstrap
 Bij het opzetten van de file `home2.html `komt de opgedane kennis van Bootstrap goed van pas. De melding die naar het scherm gestuurd gaat worden krijgt een opvallende lay-out mee zodat het is duidelijk herkenbaar is.
 
 Als er elementen van Bootstrap gebruikt gaan worden in een HTML-file is het nodig een aantal koppelingen te leggen naar Bootstrap. Deze linken worden in de ‘head’ van de HTML-file, `home2.html`, ondergebracht.
@@ -66,8 +78,7 @@ Als er elementen van Bootstrap gebruikt gaan worden in een HTML-file is het nodi
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"    integrity="sha384-  smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"   crossorigin="anonymous
 ```
 
-Deze code is overgenomen uit het HTML-bestand met daarin oplossing van oefening 5 uit het onderdeel HTML/CSS/Bootstrap. 
-Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Dat gedeelte kan [hier](https://getbootstrap.com/docs/4.0/components/alerts/) gevonden worden.
+Deze code is overgenomen uit het HTML-bestand met daarin oplossing van oefening 5 uit het onderdeel HTML/CSS/Bootstrap. Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Dat gedeelte kan [hier](https://getbootstrap.com/docs/4.0/components/alerts/) gevonden worden.
 
 Voor de melding wordt als component `Alert` geselecteerd. Hiermee kunnen feedbackberichten als reactie op gebruikersacties aangemaakt worden. Van de beschikbare opties is hier gekozen voor `dismissing`.
 Het onderstaande plaatje is rechtstreeks overgenomen van de Bootstrap-site.
@@ -77,6 +88,8 @@ Het onderstaande plaatje is rechtstreeks overgenomen van de Bootstrap-site.
 De button ‘Copy’ hoort er natuurlijk niet bij. Deze heeft tot doel een kopie van de code naar Clipboard te sturen. 
 
 Deze code kan natuurlijk aan `home2.html `toegevoegd worden. Voordat deze actie daadwerkelijk wordt uitgevoerd, is het nodig eerst nog twee andere stappen te verrichten:
+
+#### Container
 
 ```html
 <div class="container">
@@ -104,17 +117,22 @@ Daarna kan de Bootstrap-code worden ingeladen:
 ```
 Wat gebeurt er nu precies wanneer de boodschap verstuurd wordt? Of anders gezegd, wat staat er nu precies?
 
+#### get_flashed_messages()
 Als het flash-commando afgaat dan worden de meldingen naar de template gestuurd die in de view is opgenomen. Dat gaat in de vorm van de methode `get_flashed_messages()`. 
 Hierin zullen alle berichten ondergebracht en kunnen dus ook, als het er meerdere zijn, na elkaar worden afgespeeld.
 
+#### fade show
 De aanroep naar de Bootstrap-klasse zorgt ervoor dat de gebruiker de mogelijkheid krijgt het bericht weer te laten verdwijnen door op het kruisje rechtsboven te klikken. 
 `fade show` geeft aan dat de melding gaat vervagen totdat deze niet meer zichtbaar is.
 
+#### button
 De regel die begint met `<button type….> `is nodig om het kruisje rechtsboven in weer te geven, en dat een klik op dat kruisje het bericht afsluit. 
 
+#### aria-label
 Het aria-label attribuut wordt gebruikt om een string te definiëren die het huidige element labelt. Het wordt vaak gebruikt als er geen tekstlabel zichtbaar is.
 Door `aria-hidden = "true"` aan een element toe te voegen, worden dat element en al zijn onderliggende elementen verwijderd en is daarna niet langer beschikbaar.
 
+#### afsluiting html code
 Om deze code af te maken moet het formulier nog worden ontworpen en de container beëindigd:
 
 ```html
@@ -127,6 +145,7 @@ Om deze code af te maken moet het formulier nog worden ontworpen en de container
 
 Tenslotte is het niet zo heel erg netjes om een tekst als ‘Holy guacamole’ als boodschap te flashen. Omdat de melding al in de view is opgenomen kan deze regel geschrapt worden.
 
+#### volledige html code
 De gehele code wordt dan (zonder de head-sectie):
 
 ```html
@@ -148,6 +167,8 @@ De gehele code wordt dan (zonder de head-sectie):
 </div>
 ```
 
+
+### Runnen van de applicatie
 
 Wanneer we de code testen door de python file te runnen krijgen we het volgende:
 
