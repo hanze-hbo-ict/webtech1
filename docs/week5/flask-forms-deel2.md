@@ -1,4 +1,4 @@
-# Form Fields
+# Flask - Form Fields
 
 Het mooie aan het werken met formulieren is hier dat voor elk mogelijk HTML-formulierveld  een bijbehorende wtforms-klasse bestaat die geïmporteerd kan worden. wtforms heeft ook validators die op gemakkelijke wijze ingevoegd kunnen worden. Validators kunnen ingezet worden om controles uitvoeren op de formuliergegevens, zoals bijvoorbeeld een controle of een verplicht veld inderdaad een waarde gekregen heeft.
 
