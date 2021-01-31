@@ -2,7 +2,7 @@
 
 In totaal worden een drietal Python-files aangemaakt bij de demonstratie hoe een database aan een Flask-applicatie gekoppeld kan worden.
 
-## BasicModelApp.py
+## I. BasicModelApp.py
 
 De eerste stap bij het opzetten van een database in een Python-file is uiteraard het importeren van de benodigde pakketten en klassen:
 
@@ -12,7 +12,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 ```
 
-De middelste coderegel is bekend en de onderste regel zorgt ervoor dat het pakket SQLAlchemy beschikbaar komt bij het runnen van de file. Het nut van de bovenste regel komt zo ter sprake.
+De middelste coderegel is bekend, en de onderste regel zorgt ervoor dat het pakket SQLAlchemy beschikbaar komt bij het runnen van de file. Het nut van de bovenste regel komt zo ter sprake.
 
 De volgende actie is om het programma te vertellen wat de basis-directory is. Normaal gesproken zou een gebruiker dat zelf moeten opgeven, maar doordat os geïmporteerd is, kan dat geheel automatisch geregeld worden:
 
@@ -20,7 +20,9 @@ De volgende actie is om het programma te vertellen wat de basis-directory is. No
 basedir = os.path.abspath(os.path.dirname(__file__)
 ```
 
-Wat nadere uitleg over wat hier gebeurt, is wel nodig. Er wordt achteraan begonnen. Op de plaats van `__file__` wordt bij het runnen de naam van de Python-file ingevuld, hier wordt dat dan `BasisModelApp.py`.
+Er gebeurt hier het volgende: 
+
+Er wordt achteraan begonnen. Op de plaats van `__file__` wordt bij het runnen de naam van de Python-file ingevuld, hier wordt dat dan `BasisModelApp.py`.
 
 `(os.path.dirname(__file__)` gaat op zoek naar de plek waar `BasicModelApp.py` te vinden is. Dat zou hier zoiets zijn als IdeaProjects->Flask_database->BasicModelApp.py.
 
@@ -96,3 +98,54 @@ def __repr__(self):
 ```
 
 Tot zover de basiscode voor het opzetten van een database. Een aantal elementen van de code worden geïmporteerd in de file `SetUpDatabase.py`, waarin de eerste records aan de database toegevoegd zullen worden.
+
+## II. SetUpDatabase.py
+
+Let wel: Dit is een heel eenvoudig script dat laat zien hoe een database in te stellen. Later worden hierbij weer templates gebruikt.
+
+Ook voor deze file zal de opbouw van de code stap voor stap beschreven worden. In de eerste plaats worden er een aantal elementen uit de file `BasicModelApp.py` geïmporteerd:
+
+```python
+from BasicModelApp import db, Cursist
+```
+
+De database en de tabel Cursist zijn ingeladen en nu moet de database en het bestand worden aangemaakt. Daarvoor is onderstaand commando beschikbaar:
+
+```python
+db.create_all()
+```
+
+Wanneer tabel klaar staat kunnen de eerste records toegevoegd worden:
+
+```python
+joyce = Cursist('Joyce', 36)
+bram = Cursist('Bram',24)
+```
+
+De objecten zijn aangemaakt, maar zijn nog niet bekend bij de database. Dat kan als volgt:
+
+```python
+db.session.add_all([joyce,bram])
+```
+
+De id's worden dus automatisch aangemaakt zodra de gegevens aan de database zijn toegevoegd.
+De data kan definitief vastgelegd worden door de functie `commit()`:
+
+```python
+db.session.commit()
+```
+
+Als alles naar behoren is ingevoerd kan getest worden of de gegevens inderdaad zijn vastgelegd in de database. Daarvoor vragen we de beide id’s op uit de tabel Cursist. De nummers 1 en 2 zouden te zien moeten zijn:
+
+```python
+print(joyce.id)
+print(bram.id)
+```
+
+Het resultaat:
+
+![de geprinte id's die in de database staan (1 en 2)](imgs/ids-geprint.png)
+
+
+
+
