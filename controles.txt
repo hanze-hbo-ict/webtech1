@@ -12,6 +12,7 @@ Flask-forms-oefening1:
 
 Ik heb er maar wat random bestandsnamen ingegooid (oefening1.py en home3.html) maar heb daar verder nog geen link naartoe, want weet niet of die bestanden al bestaan. Maar het idee is duidelijk.
 
+--WEEK-6--
 Flask-views-deel1:
 
 Line 7-11 :Is deze tabel zo goed?
@@ -32,4 +33,10 @@ Algemeen: als stof af is dan nog onderverdelen in kopjes
 
 Flask-views-deel6:
 30: er bestaat al een bestand home.html. Toch een apart mapje of een andere naam?
+
+--WEEK-7--
+Flask-applicaties-deel1.md
+10: Er staat hier mentor_site.py, moet dat niet beheer_cursist.py zijn? Als die in flask-views-deel6?
+14: hier moet nog een link naar de blueprints bibliotheek
+22-46: moeten hier nog linkjes naar bestanden?
 
