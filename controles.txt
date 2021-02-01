@@ -6,6 +6,8 @@ Flask-forms-deel3:
 Line 81: Op wat voor manier staan linkjes het mooist? Heb het nu met 'hier' gedaan
 Line 164: Hier nog een mooie afsluiting van dit gedeelte? Het eindigt nu zo abrupt.
 
+------------------------------------------------------------------------------
+
 Flask-forms-oefening1:
 
 Ik heb er maar wat random bestandsnamen ingegooid (oefening1.py en home3.html) maar heb daar verder nog geen link naartoe, want weet niet of die bestanden al bestaan. Maar het idee is duidelijk.
@@ -28,6 +30,6 @@ Flask-views-deel4:
 57: Hier was al over geappt (dingen werkten niet). Ik hoor het wel als ik hier nog iets aan toe moet voegen
 Algemeen: als stof af is dan nog onderverdelen in kopjes
 
-Flask-views-deel5:
-
+Flask-views-deel6:
+30: er bestaat al een bestand home.html. Toch een apart mapje of een andere naam?
 
