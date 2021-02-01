@@ -17,7 +17,7 @@ Dat zijn de volgende onderdelen:
 ## Voorbeeld
 Om deze materie te kunnen begrijpen volgt nu een uitgebreid voorbeeld. Dit voorbeeld bestaat uit een Python-file (`Basis-Flask-form.py`) en een enkele HTML-file, getiteld `home.html`. Dit HTML-bestand wordt weer opgenomen in de folder ‘templates’.
 
-### Python gedeelte: Basis-Flask-form.py
+### Python gedeelte
 Als eerste de Python-file. Er moeten nu meerdere zaken worden geïmporteerd, zie onderstaand kader.
 
 ```python
@@ -31,7 +31,7 @@ app = Flask(__name__)
 Even een korte uitleg. FlaskForm is een klasse waarvan overerft wordt om onze eigen formulieren te kunnen maken. De daaropvolgende regel geeft aan welke velden er gebruikt worden op de formulieren. Voor het basisformulier wordt hier aangegeven dat er Stringfields en SubmitFields gebruik gaan worden.
 De laatste regel zorgt er weer voor dat de applicatie gecreëerd wordt.
 
-### Installatie van flask.wtf en wtforms
+#### Installatie van flask.wtf en wtforms
 Het kan zijn dat de pakketten `flask.wtf `en `wtforms` nog niet geïnstalleerd zijn. Dat kan snel verholpen worden. Hier wordt het gedaan met IntelliJ. Navigeer dan naar File | Project Structure. Selecteer SDKs onder het kopje Platform Settings en klik op de tab Packages.
 
 ![SDKs packages installeren](imgs/SDKs-packages.png)
@@ -40,14 +40,14 @@ Uit dit overzicht kan afgelezen worden dat de gevraagde pakketten al geïnstalle
 
 ![Flask_wtf package installeren](imgs/install-Flask-WTF-package.png)
 
-### De geheime sleutel
+#### De geheime sleutel
 Nadat de installatie van de applicatie is afgerond is de volgende stap het configureren van een geheime `SECRET_KEY`. Hier is het ter demonstratie, maar later wordt er echt veel meer aandacht aan besteed en zullen er betere manieren aangeleerd worden om dit te doen.
 
 ```python
 app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 ```
 
-### InfoForm
+#### InfoForm
 De volgende stap is het aanmaken van een klasse `InfoForm`, een subklasse van `FlaskForm`. 
 
 ```python
@@ -63,7 +63,7 @@ class InfoForm(FlaskForm):
     submit = SubmitField('Verzend')
 ```
 
-### View functie
+#### View functie
 Wanneer alle voorbereidingen zijn getroffen, kan de viewfunctie aangemaakt worden. Standaard wordt de eerste view doorgelinkt naar de indexpagina.
 
 ```python

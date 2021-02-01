@@ -20,4 +20,14 @@ Flask-views-deel2:
 147: het plaatje is nogal groot
 Algemeen: misschien meer kopjes?
 
+Flask-views-deel3:
+Algemeen: is het Basis of BasicCRUD?
+
+Flask-views-deel4:
+28: Linkje naar Flask en Forms- een basis Flask Formulier misschien?
+57: Hier was al over geappt (dingen werkten niet). Ik hoor het wel als ik hier nog iets aan toe moet voegen
+Algemeen: als stof af is dan nog onderverdelen in kopjes
+
+Flask-views-deel5:
+
 
