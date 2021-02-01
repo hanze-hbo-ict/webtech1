@@ -7,7 +7,7 @@ Tot nu toe hebben we ons gericht op vormgeving van teksten en dergelijke aan de 
 
 Om dit wat nader toe te lichten, herhalen we hier het plaatje uit week 1; bekijk eventueel [de beschrijving daarbij op de betreffende pagina](../week1/1.html/html-deel1.md):
 
-![Client-server architectuur](../week1/1.html/imgs/database-site.png)
+![hr](../week1/1.html/imgs/database-site.png)
 
 Voor deze module hebben we voor de tweede optie gekozen. JavaScript en front-end development komen uitgebreid aan bod in het tweede jaar.
 

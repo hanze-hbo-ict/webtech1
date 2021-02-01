@@ -1,6 +1,6 @@
 # De muziek databases 
 
-Het werken met een database die bestaat uit een enkele tabel met 3 of 4 records is niet heel erg zinvol. Het gaat dan sneller om een gegeven op te zoeken dan door er een query aan te wijden. Daarom maken we vanaf nu gebruik van een andere database `music.db`. Deze database bevat een aantal bekende tabellen die ook bij het werken met OOP aan bod zijn gekomen: artists, albums en songs. Alleen bevat deze database nog veel meer data.
+Het werken met een database die bestaat uit een enkele tabel met 3 of 4 records is niet heel erg zinvol. Het gaat dan sneller om een gegeven op te zoeken dan door er een query aan te wijden. Daarom maken we vanaf nu gebruik van een andere database [`music.sqlite`](../bestanden/music.sqlite). Deze database bevat een aantal bekende tabellen die ook bij het werken met OOP aan bod zijn gekomen: artists, albums en songs. Alleen bevat deze database nog veel meer data.
 
 Aan het eind van dit document maken we [oefening 1](oefeningen/sql-oefening1.md).
 

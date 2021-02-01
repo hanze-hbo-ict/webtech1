@@ -4,7 +4,7 @@ Hoewel SQL uitvoerig besproken is in het eerste kwartaal, kan het absoluut geen 
 
 Alles begint met het aanmaken van een database, dus ook hier. De database krijgt de passende naam ’test.db’. Om de database aan te maken moet er in de command-line ingetoetst worden: `SQLite 3 test.db`. Hiermee wordt de interactive shell geopend met de database `test`:
 
-```
+```shell
 hostname:user$ sqlite3 test.db
 SQLite version 3.24.0 2018-06-04 14:10:15
 Enter ".help" for usage hints.
@@ -15,7 +15,7 @@ Een bestaande database of tabel kan opgeroepen worden met het commando `.open <f
 
 Een belangrijk eerste commando om te leren is `.headers on`. Daarmee worden de kolomnamen boven de gegevens ook getoond. Laten we bij wijze van voorbeeld nu eerst een tabel maken.
 
-```
+```shell
 sqlite> .headers on
 sqlite> create table contacts(name text, phone integer, mail text);
 sqlite> 
