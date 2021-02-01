@@ -17,7 +17,7 @@ Dat zijn de volgende onderdelen:
 ## Voorbeeld
 Om deze materie te kunnen begrijpen volgt nu een uitgebreid voorbeeld. Dit voorbeeld bestaat uit een Python-file ([`Basis-Flask-form.py`](../bestanden/Basis-Flask-form.py)) en een enkele HTML-bestand, getiteld [`home.html`](../bestanden/home.html). Dit HTML-bestand wordt weer opgenomen in de folder ‘templates’.
 
-### Python gedeelte: Basis-Flask-form.py
+### Python gedeelte
 Als eerste de Python-file. Er moeten nu meerdere zaken worden geïmporteerd, zie onderstaand kader.
 
 ```python
@@ -40,14 +40,14 @@ Uit dit overzicht kan afgelezen worden dat de gevraagde pakketten al geïnstalle
 
 ![Flask_wtf package installeren](imgs/install-Flask-WTF-package.png)
 
-### De geheime sleutel
+#### De geheime sleutel
 Nadat de installatie van de applicatie is afgerond is de volgende stap het configureren van een geheime `SECRET_KEY`. Hier is het ter demonstratie, maar later wordt er echt veel meer aandacht aan besteed en zullen er betere manieren aangeleerd worden om dit te doen.
 
 ```python
 app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 ```
 
-### InfoForm
+#### InfoForm
 De volgende stap is het aanmaken van een klasse `InfoForm`, een subklasse van `FlaskForm`. 
 
 ```python
@@ -63,7 +63,7 @@ class InfoForm(FlaskForm):
     submit = SubmitField('Verzend')
 ```
 
-### View functie
+#### View functie
 Wanneer alle voorbereidingen zijn getroffen, kan de viewfunctie aangemaakt worden. Standaard wordt de eerste view doorgelinkt naar de indexpagina.
 
 ```python

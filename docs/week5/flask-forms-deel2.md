@@ -34,7 +34,7 @@ Van de validators wordt de klasse `DataRequired` opgehaald. Er zijn er nog veel 
 Vervolgens wordt de applicatie en de geheime sleutel gecreëerd.
 
 
-### InfoForm
+#### InfoForm
 Volgende stap is weer het opzetten van het formulier:
 
 ```python
@@ -53,7 +53,7 @@ Dit formulier bevat wat meer velden dan het vorige. De HTML-kennis moet voldoend
 
 De naam is een verplicht veld, en voor ieder instrument en plaats is een tuple aangemaakt. De eerste waarde wordt in de code gebruikt terwijl de tweede waarde steeds zichtbaar is op het formulier.
 
-### View functies
+#### View functies
 Daarna is het de beurt voor de viewfuncties. Als eerste het formulier.
 
 ```python
@@ -92,7 +92,7 @@ def bedankt():
     return render_template('bedankt.html')
 ```
 
-### Afsluiting python code
+#### Afsluiting python code
 En aan het eind het vertrouwde:
 
 ```python
@@ -127,7 +127,7 @@ Het lijkt weer veel op het de code van `home.html` uit de vorige pagina. Bovenaa
 Binnen het formulier is als eerste de geheime sleutel opgenomen waarna de diverse velden worden geïntroduceerd, zoals in de lijst die is vastgelegd in de Python-file 
 `bedankt.html`.
 
-### bedankt.html
+#### bedankt.html
 Als het formulier is ingevuld en er op de ‘Verzend’-knop is geklikt wordt de inhoud van de velden doorgestuurd naar `bedankt.html` en daar getoond:
 
 ```html
