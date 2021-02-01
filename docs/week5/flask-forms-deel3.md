@@ -6,12 +6,12 @@ Soms is het handig de gebruiker een bericht te sturen dat niet permanent bewaard
 
 ## Voorbeeld
 Flask kan dat op een gemakkelijke manier voor elkaar krijgen.
-Dit wordt nu weer besproken aan de hand van een voorbeeld. In dit voorbeeld zijn twee bestanden nodig, `home2.html` en `Flashing-Messages.py`.
+Dit wordt nu weer besproken aan de hand van een voorbeeld. In dit voorbeeld zijn twee bestanden nodig, [`home2.html`](../bestanden/home2.html) en [`Flashing-Messages.py`](../bestanden/Flashing-Messages.py).
 
 ### Python gedeelte
 Zoals gebruikelijk als eerste de Python-file. Het begin moet geen vragen meer oproepen.
 
-```python
+```python hl_lines="1"
 from flask import Flask, render_template, flash, session, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField
@@ -49,12 +49,10 @@ def index():
     return render_template('home2.html', form=form)  
 ```
 
-De view heeft de naam index meegekregen en er wordt een instantie van de klasse SimpelForm() aangemaakt.
-Wanneer er op de knop geklikt wordt, zorgt het flash-commando ervoor dat er melding naar het scherm gestuurd wordt via het redirect-statement.
-Het tweede return-statement is nodig om in eerste instantie het formulier te laten zien.
+De view heeft de naam index meegekregen en er wordt een instantie van de klasse `SimpelForm` aangemaakt. Wanneer er op de knop geklikt wordt, zorgt het flash-commando ervoor dat er melding naar het scherm gestuurd wordt via het redirect-statement. Het tweede return-statement is nodig om in eerste instantie het formulier te laten zien.
 
 #### Afsluiting python code
-De python code wordt weer afgesloten als volgt:
+Om de boel te laten runnen, gebruiken we de inmiddels bekende code:
 
 ```python
 if __name__ == '__main__':
@@ -71,14 +69,13 @@ Als er elementen van Bootstrap gebruikt gaan worden in een HTML-file is het nodi
 
 ```html
 <head>
-    <link rel="stylesheet"     href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"     integrity="sha384-  WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"   crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-   q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"   crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
-    integrity="sha384-  ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"   crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"    integrity="sha384-  smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"   crossorigin="anonymous
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-  WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 ```
 
-Deze code is overgenomen uit het HTML-bestand met daarin oplossing van oefening 5 uit het onderdeel HTML/CSS/Bootstrap. Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Dat gedeelte kan [hier](https://getbootstrap.com/docs/4.0/components/alerts/) gevonden worden.
+Deze code is overgenomen uit het HTML-bestand met daarin oplossing van oefening 5 uit het onderdeel HTML/CSS/Bootstrap. Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Dat gedeelte kan [hier gevonden worden](https://getbootstrap.com/docs/4.0/components/alerts/).
 
 Voor de melding wordt als component `Alert` geselecteerd. Hiermee kunnen feedbackberichten als reactie op gebruikersacties aangemaakt worden. Van de beschikbare opties is hier gekozen voor `dismissing`.
 Het onderstaande plaatje is rechtstreeks overgenomen van de Bootstrap-site.
@@ -101,7 +98,8 @@ Deze code kan natuurlijk aan `home2.html `toegevoegd worden. Voordat deze actie 
       {% endfor %}
 ```
 
-Alle bedrijvigheden worden bij elkaar gehouden door ze in een container te stoppen. Het ziet er misschien wat vreemd uit dat er een `for` is opgenomen in de code. Het kan natuurlijk mogelijk zijn dat er meerdere berichten geflitst gaan worden. De `for` verstuurt ze dan tegelijkertijd. Voor de code maakt het niet uit of het er één is of meerdere.
+Alle bedrijvigheden worden bij elkaar gehouden door ze in een container te stoppen. Het ziet er misschien wat vreemd uit dat er een `for` is opgenomen in de code. Het is natuurlijk mogelijk dat er meerdere berichten geflitst gaan worden. De `for` verstuurt ze dan tegelijkertijd. Voor de code maakt het niet uit of het er één is of meerdere.
+
 Daarna kan de Bootstrap-code worden ingeladen:
 
 ```html
@@ -118,19 +116,16 @@ Daarna kan de Bootstrap-code worden ingeladen:
 Wat gebeurt er nu precies wanneer de boodschap verstuurd wordt? Of anders gezegd, wat staat er nu precies?
 
 #### get_flashed_messages()
-Als het flash-commando afgaat dan worden de meldingen naar de template gestuurd die in de view is opgenomen. Dat gaat in de vorm van de methode `get_flashed_messages()`. 
-Hierin zullen alle berichten ondergebracht en kunnen dus ook, als het er meerdere zijn, na elkaar worden afgespeeld.
+Als het flash-commando afgaat dan worden de meldingen naar de template gestuurd die in de view is opgenomen. Dat gaat in de vorm van de methode `get_flashed_messages()`. Hierin worden alle berichten ondergebracht en deze worden als het er meer zijn, na elkaar afgespeeld.
 
 #### fade show
-De aanroep naar de Bootstrap-klasse zorgt ervoor dat de gebruiker de mogelijkheid krijgt het bericht weer te laten verdwijnen door op het kruisje rechtsboven te klikken. 
-`fade show` geeft aan dat de melding gaat vervagen totdat deze niet meer zichtbaar is.
+De aanroep naar de Bootstrap-klasse zorgt ervoor dat de gebruiker de mogelijkheid krijgt het bericht weer te laten verdwijnen door op het kruisje rechtsboven te klikken. De property `fade show` geeft aan dat de melding gaat vervagen totdat deze niet meer zichtbaar is.
 
 #### button
 De regel die begint met `<button type….> `is nodig om het kruisje rechtsboven in weer te geven, en dat een klik op dat kruisje het bericht afsluit. 
 
 #### aria-label
-Het aria-label attribuut wordt gebruikt om een string te definiëren die het huidige element labelt. Het wordt vaak gebruikt als er geen tekstlabel zichtbaar is.
-Door `aria-hidden = "true"` aan een element toe te voegen, worden dat element en al zijn onderliggende elementen verwijderd en is daarna niet langer beschikbaar.
+Het `aria-label` attribuut wordt gebruikt om een string te definiëren die het huidige element labelt. Het wordt vaak gebruikt als er geen tekstlabel zichtbaar is. Door `aria-hidden = "true"` aan een element toe te voegen, worden dat element en al zijn onderliggende elementen verwijderd en is daarna niet langer beschikbaar.
 
 #### afsluiting html code
 Om deze code af te maken moet het formulier nog worden ontworpen en de container beëindigd:

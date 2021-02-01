@@ -1,14 +1,14 @@
 # Flask en Forms - Form Fields
 
 ## Validators
-Het mooie aan het werken met formulieren is hier dat voor elk mogelijk HTML-formulierveld  een bijbehorende wtforms-klasse bestaat die geïmporteerd kan worden. wtforms heeft ook validators die op gemakkelijke wijze ingevoegd kunnen worden. Validators kunnen ingezet worden om controles uitvoeren op de formuliergegevens, zoals bijvoorbeeld een controle of een verplicht veld inderdaad een waarde gekregen heeft.
+Het mooie aan het werken met formulieren is hier dat voor elk mogelijk HTML-formulierveld  een bijbehorende `wtforms`-klasse bestaat die geïmporteerd kan worden. Deze klasse heeft ook validators die op gemakkelijke wijze ingevoegd kunnen worden. Validators kunnen ingezet worden om controles uitvoeren op de formuliergegevens, zoals bijvoorbeeld een controle of een verplicht veld inderdaad een waarde gekregen heeft.
 
 In deze paragraaf is er ook aandacht voor de wijze waarop een sessieobject van Flask ingeschakeld kan worden om de informatie in het formulier op te halen en door te geven aan een template.
 In een volgende deel wordt aandacht besteed hoe de gegevens in een SQL-database opgeslagen kunnen worden.
 
 ## Voorbeeld
 We gaan weer verder met een voorbeeld.
-Voor het volgende uitgewerkte voorbeeld zijn drie bestanden nodig, een Python-file: `Form-Fields.py` en twee HTML-bestanden, `home1.html` en `bedankt.html`.
+Voor het volgende uitgewerkte voorbeeld zijn drie bestanden nodig, een Python-file: [`Form-Fields.py`](../bestanden/Form-Fields.py) en twee HTML-bestanden, [`home1.html`](../bestanden/home1.html) en [`bedankt.html`](../bestanden/home2.html).
 
 ### Python gedeelte
 Uiteraard wordt begonnen met de Python-file. Het begin is weer meer van hetzelfde, nu alleen met wat uitbreidingen.
@@ -28,7 +28,7 @@ app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 Er worden een aantal extra elementen geïmporteerd van Flask, die zo nader uitgelegd worden. De velden die op het formulier voor gaan komen, worden als bekend verondersteld. 
 
 
-Van de validators wordt de optie DataRequired opgehaald. Er zijn er nog veel meer, bijvoorbeeld email, een optie die controleert of een ingevuld e-mailadres aan de eisen voldoet, met punt, extensie en @.
+Van de validators wordt de klasse `DataRequired` opgehaald. Er zijn er nog veel meer, bijvoorbeeld email: een klasse die controleert of een ingevuld e-mailadres aan de eisen voldoet, met punt, extensie en @.
 
 
 Vervolgens wordt de applicatie en de geheime sleutel gecreëerd.
@@ -49,7 +49,8 @@ class InfoForm(FlaskForm):
     submit = SubmitField('Verzend')
 ```
 
-Dit formulier bevat wat meer velden dan het vorige. De HTML-kennis moet voldoende zijn aangebracht om deze code te kunnen begrijpen.
+Dit formulier bevat wat meer velden dan het vorige. De HTML-kennis moet voldoende zijn om deze code te kunnen begrijpen.
+
 De naam is een verplicht veld, en voor ieder instrument en plaats is een tuple aangemaakt. De eerste waarde wordt in de code gebruikt terwijl de tweede waarde steeds zichtbaar is op het formulier.
 
 ### View functies
@@ -77,7 +78,7 @@ def index():
 Een paar opmerkingen:
 Het lijkt erg veel op de code van de vorige paragraaf. Als eerste extra item wordt session gehanteerd. 
 
-Een session-tabel is een kortstondige tijdelijke tabel waarin waarden bewaard kunnen worden om aan een andere pagina door te geven. Een mooi voorbeeld is het bestellingen van artikelen op een website. Als een artikel in een winkelmandje beland is, kan het voorkomen dat er nog een artikel aangeschaft gaat worden. Wanneer naar de pagina gesprongen wordt om het tweede artikel nog een keer uitvoerig te bekijken, wordt wanneer er geen sessievariabelen benut worden, het mandje weer geleegd. De gegevens zijn dan niet ergens opgeslagen.
+Een session-tabel is een kortstondige tijdelijke tabel waarin waarden bewaard kunnen worden om aan een andere pagina door te geven. Een mooi voorbeeld hiervan is een overzicht van bestellingen van artikelen op een website. Als een artikel in een winkelmandje beland is, kan het voorkomen dat er nog een artikel aangeschaft gaat worden. Wanneer naar de pagina gesprongen wordt om het tweede artikel nog een keer uitvoerig te bekijken, wordt wanneer er geen sessievariabelen benut worden, het mandje weer geleegd. De gegevens zijn dan niet ergens opgeslagen.
 
 Een tweede opvallend iets is dat er twee return-statements zijn aangewend. De laatste is nodig om de eerste keer een leeg formulier te tonen. 
 
@@ -157,9 +158,9 @@ Een paar opmerkingen tot slot van deze paragraaf:
 
 ### Lay-out
  De lay-out kan vele malen mooier door er CSS-stijlen aan toe te voegen. 
-Misschien ziet de output er wat vreemd uit, maar alles is precies volgens de opzet verlopen. Het RadioField en het SelectField zijn beide gevuld met tuples. De eerste waarde van iedere tuple wordt na selectie doorgegeven. 
+Misschien ziet de output er wat vreemd uit, maar alles is precies volgens de opzet verlopen. Het `RadioField` en het `SelectField` zijn beide gevuld met tuples. De eerste waarde van iedere tuple wordt na selectie doorgegeven. 
 
-In de keuzelijst kan er bijvoorbeeld gekozen worden uit de zichtbare mogelijkheden, Assen, Drachten en Groningen. De corresponderende sleutelvelden zijn as, dr en gr. Deze waarden worden doorgeven naar `bedankt.html`. Dat is met opzet gebeurd om de werking te tonen. Om de gehele plaatsnaam te tonen zou twee keer dezelfde tekenrij in de tuple moeten worden ondergebracht. 
+In de keuzelijst kan er bijvoorbeeld gekozen worden uit de zichtbare mogelijkheden, Assen, Drachten en Groningen. De corresponderende sleutelvelden zijn 'as', 'dr' en 'gr'. Deze waarden worden doorgeven naar `bedankt.html`. Dat is met opzet gebeurd om de werking te tonen. Om de gehele plaatsnaam te tonen zou twee keer dezelfde tekenrij in de tuple moeten worden ondergebracht. 
 
 ### Validator test
 Om de test op alle items te toetsen wordt nog een poging gedaan de gegevens te tonen, echter zonder een naam in te vullen. Kijken of de validator dit kan onderkennen:

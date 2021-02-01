@@ -1,6 +1,6 @@
 # Flask en Forms - een basis Flask formulier
 
-In dit deel ligt de focus op de pakketten  flask_wtf en wtforms en op welke wijze waarop deze gebruikt kunnen worden om snel formulieren te maken op basis van de Flask-Python-scripts.
+In dit deel ligt de focus op de pakketten [flask_wtf](https://flask-wtf.readthedocs.io/en/stable/) en [wtform](https://wtforms.readthedocs.io/en/2.3.x/) en op welke wijze waarop deze gebruikt kunnen worden om snel formulieren te maken op basis van de Flask-Python-scripts.
 
 ## Componenten
 Maar als eerste een bespreking van de belangrijkste componenten voor het maken van een formulier.
@@ -15,7 +15,7 @@ Dat zijn de volgende onderdelen:
     - Verwerk het formulier.
 
 ## Voorbeeld
-Om deze materie te kunnen begrijpen volgt nu een uitgebreid voorbeeld. Dit voorbeeld bestaat uit een Python-file (`Basis-Flask-form.py`) en een enkele HTML-file, getiteld `home.html`. Dit HTML-bestand wordt weer opgenomen in de folder ‘templates’.
+Om deze materie te kunnen begrijpen volgt nu een uitgebreid voorbeeld. Dit voorbeeld bestaat uit een Python-file ([`Basis-Flask-form.py`](../bestanden/Basis-Flask-form.py)) en een enkele HTML-bestand, getiteld [`home.html`](../bestanden/home.html). Dit HTML-bestand wordt weer opgenomen in de folder ‘templates’.
 
 ### Python gedeelte: Basis-Flask-form.py
 Als eerste de Python-file. Er moeten nu meerdere zaken worden geïmporteerd, zie onderstaand kader.
@@ -28,11 +28,11 @@ from wtforms import StringField,SubmitField
 app = Flask(__name__)
 ```
 
-Even een korte uitleg. FlaskForm is een klasse waarvan overerft wordt om onze eigen formulieren te kunnen maken. De daaropvolgende regel geeft aan welke velden er gebruikt worden op de formulieren. Voor het basisformulier wordt hier aangegeven dat er Stringfields en SubmitFields gebruik gaan worden.
-De laatste regel zorgt er weer voor dat de applicatie gecreëerd wordt.
+Even een korte uitleg. `FlaskForm` is een klasse waarvan overerft wordt om onze eigen formulieren te kunnen maken. De daaropvolgende regel geeft aan welke velden er gebruikt worden op de formulieren. Voor het basisformulier wordt hier aangegeven dat er Stringfields en SubmitFields gebruik gaan worden. De laatste regel zorgt er weer voor dat de applicatie gecreëerd wordt.
 
 ### Installatie van flask.wtf en wtforms
-Het kan zijn dat de pakketten `flask.wtf `en `wtforms` nog niet geïnstalleerd zijn. Dat kan snel verholpen worden. Hier wordt het gedaan met IntelliJ. Navigeer dan naar File | Project Structure. Selecteer SDKs onder het kopje Platform Settings en klik op de tab Packages.
+
+Het kan zijn dat de pakketten `flask_wtf `en `wtforms` nog niet geïnstalleerd zijn. Dat kan snel verholpen worden. Hier wordt het gedaan met IntelliJ, maar de procedure is in VSCode vergelijkbaar. Navigeer dan naar File | Project Structure. Selecteer SDKs onder het kopje Platform Settings en klik op de tab Packages.
 
 ![SDKs packages installeren](imgs/SDKs-packages.png)
 
