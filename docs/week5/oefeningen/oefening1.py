@@ -1,7 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, session, flash
-from flask_wtf import FlaskForm
-from wtforms import (StringField, SubmitField)
-from wtforms.validators import DataRequired
+# Zorg ook voor de juiste imports
 
 app = Flask(__name__)
 
