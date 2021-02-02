@@ -1,0 +1,33 @@
+Flask-forms-deel1:
+18: Wordt dit bestand opgenomen in de folder 'templates'?
+
+Flask-forms-deel3:
+
+Line 81: Op wat voor manier staan linkjes het mooist? Heb het nu met 'hier' gedaan
+Line 164: Hier nog een mooie afsluiting van dit gedeelte? Het eindigt nu zo abrupt.
+
+Flask-forms-oefening1:
+
+Ik heb er maar wat random bestandsnamen ingegooid (oefening1.py en home3.html) maar heb daar verder nog geen link naartoe, want weet niet of die bestanden al bestaan. Maar het idee is duidelijk.
+
+Flask-views-deel1:
+
+Line 7-11 :Is deze tabel zo goed?
+Line 35: Er staat hier op de gebruikelijke wijze, is hier nog een linkje voor?
+Line 40: linkje doen naar CRUD? 
+
+Flask-views-deel2:
+147: het plaatje is nogal groot
+Algemeen: misschien meer kopjes?
+
+Flask-views-deel3:
+Algemeen: is het Basis of BasicCRUD?
+
+Flask-views-deel4:
+28: Linkje naar Flask en Forms- een basis Flask Formulier misschien?
+57: Hier was al over geappt (dingen werkten niet). Ik hoor het wel als ik hier nog iets aan toe moet voegen
+Algemeen: als stof af is dan nog onderverdelen in kopjes
+
+Flask-views-deel5:
+
+

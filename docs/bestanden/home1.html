@@ -1,0 +1,17 @@
+<h1>Welkom bij de enquete van muziekschool Session</h1>
+<form  method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.naam.label }} {{form.naam}}
+    <br>
+    {{ form.geslacht.label}} {{form.geslacht}}
+    <br>
+    {{form.instrument.label}}{{form.instrument}}
+    <br>
+    {{form.plaats.label}}{{form.plaats}}
+    <br>
+    Nog andere opmerkingen?
+    <br>
+    {{form.feedback}}
+    <br>
+    {{ form.submit() }}
+</form>
