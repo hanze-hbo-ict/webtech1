@@ -15,6 +15,9 @@ HTML-formulieren worden op een webpagina geplaatst met behulp van de tag `<form>
 </form>
 ```
 
+!!! Info "Commentaar in html"
+    Zoals zo vaak in code is het ook handig om *commentaar* in html te zetten. Zoals je hierboven kunt zien, doe je dat in dit specieke geval met `<!--` en `-->`. Als je complexe html aan het schrijven bent, kan het handig zijn om de *eind*-tag van een commentaarregel te voorzien, waarin je aangeeft welke tag je hiermee afsluit...
+
 ## Input-tag
 Het HTML-element `<input>` wordt gebruikt om interactieve besturingselementen te maken voor webgebaseerde formulieren. Dit element wordt gebruikt om gegevens van de gebruiker te accepteren en is één van de krachtigst, meest complexe en gevaarlijkste elementen in heel HTML vanwege het enorme aantal combinaties van invoertypen en attributen – én omdat je hiermee de bezoeker de mogelijkheid biedt om contact met de server te maken.
 
@@ -118,11 +121,11 @@ Een andere vorm van selectie zijn de zogenaamde *selectboxes*. Deze lijken erg o
 ```
 <form method="get">
          <h3>Wel instrument bespeelt u?</h3>
-         <input type="checkbox" name="instrument[]" value="Piano">Piano
-         <input type="checkbox" name="instrument[]" value="Gitaar">Gitaar
-         <input type="checkbox" name="instrument[]" value="Trompet">Trompet
-         <input type="checkbox" name="instrument[]" value="Viool">Viool
-         <input type="checkbox" name="instrument[]" value="Kerkorgel">Kerkorgel
+         <input type="checkbox" name="instrument" value="Piano">Piano
+         <input type="checkbox" name="instrument" value="Gitaar">Gitaar
+         <input type="checkbox" name="instrument" value="Trompet">Trompet
+         <input type="checkbox" name="instrument" value="Viool">Viool
+         <input type="checkbox" name="instrument" value="Kerkorgel">Kerkorgel
 </form>
 ```
 

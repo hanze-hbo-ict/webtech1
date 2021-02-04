@@ -37,7 +37,7 @@ Alle tekst opgenomen binnen een paragraaf heeft daadwerkelijk een rode kleur gek
 !!! info "External, Internal en Inline"
     Je kunt de style van html op drie plekken neerzetten: *external*, *internal* of *inline*. Alles stijl die je definieert in een extern bestand (een ander bestand dan het html-bestand waar het betrekking op heeft) is *external*. Stijl die je definieert in het html-bestand zelf (tussen `<style>` en `</style` in de `header`) is *internal*. Verder kun je ook stijl aangeven in het `style`-attribuut van een html-tag: dit zijn zogenaamde *inline* styles.
 
-    Waar je je css neerzet heeft repercussies voor hoe *sterk* de verschillende regels zijn. Externe regels zijn het zwakst, terwijl de *inline* styles het sterkst zijn. Dat betekent dat als een element door meerdere regels wordt gestyled, dat de inline-regels het altijd winnen.
+    Waar je je css neerzet heeft repercussies voor hoe *sterk* de verschillende regels zijn. De *inline* styles zijn het sterkst, terwijl interne en externe stylesheets prioriteit krijgen op basis van welke het eerst door de browser zijn ingeladen. Dat betekent dat als een element door meerdere regels wordt gestyled, dat de inline-regels het altijd winnen.
 
 ## De anatomie van css-regels
 
