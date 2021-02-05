@@ -9,7 +9,7 @@ Inkapseling is één van de fundamenten van object-georiënteerd programmeren. H
 
 Als voorbeeld hier een bank, waarbij het mogelijk is een rekening te openen, geld te storten en op te nemen en een overzicht van alle gedane transacties op te vragen, waarbij tevens het tijdstip van de transactie getoond wordt. Uiteraard is de opzet erg beperkt.
 
-De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand `Bankrekening.py`.
+De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand [`Bankrekening.py`](../bestanden/Bankrekening.py).
 
 ## Klasse en methoden
 

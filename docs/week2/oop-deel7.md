@@ -56,7 +56,7 @@ Wat is er nu gebeurd? In de klasse `Duck` is een nieuw object gecreëerd van de 
 De klasse `Duck` bestaat nu (voor het merendeel) uit eigen methoden, maar er wordt ook een deel van de functionaliteit gedelegeerd naar objecten van een ander type (namelijk `Vleugel`). De eend is dus een *samengestelde klasse* geworden.
 
 ## Een wat realistischer voorbeeld
-Daarom nu een meer realistisch voorbeeld. Basis hiervoor is een nieuwe Python-file, getiteld `html_doc.py`.
+Daarom nu een meer realistisch voorbeeld. Basis hiervoor is een nieuwe Python-file, getiteld [`html_doc.py`](../bestanden/html_doc.py).
 
 Een HTML-pagina moet minstens drie elementen bevatten:
 
@@ -88,7 +88,7 @@ class Tag:
         self.contents = contents
 ```
 
-De volgende stap is de tags en de inhoud naar het scherm te schrijven. Met inhoud wordt bedoeld de tekens die tussen de begin- en eind tag zijn opgenomen.
+De volgende stap is de tags en de inhoud naar het scherm te schrijven. Met 'inhoud' wordt hier bedoeld de tekens die tussen de begin- en eind tag zijn opgenomen.
 
 ```python
 def __str__(self):

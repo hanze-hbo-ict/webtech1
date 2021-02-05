@@ -23,7 +23,7 @@ Het is niet zo dat beide stijlen onafhankelijk van elkaar functioneren. Binnen O
 
 ## Klasse-definitie
 
-Om te beginnen een simpel voorbeeld om het principe van klassen en methoden uit te leggen. Het draait om kroketten (Kwekkeboom en Van Dobben) en het aanzetten van de frituur (`kroket.py`).
+Om te beginnen een simpel voorbeeld om het principe van klassen en methoden uit te leggen. Het draait om kroketten (Kwekkeboom en Van Dobben) en het aanzetten van de frituur (Bekijk het bestand [`kroket.py`](../bestanden/kroket.py)).
 
 ```ipython
 In [1]: class Kroket:

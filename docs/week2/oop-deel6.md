@@ -100,9 +100,9 @@ Een tweede en waarschijnlijk meer aansprekend voorbeeld. Er is zelfs [een pagina
 
 "Als iets eruitziet als een eend, zwemt als een eend en kwaakt als een eend, dan is het waarschijnlijk een eend."
 
-Deze 'test' benoemt een categorie, in dit geval de categorie 'ducks' en maakt dan aannemelijk dat een bepaald fenomeen tot die categorie behoort. De 'test' onderzoekt of bewijst niets, maar wijst op overeenkomsten. Prima om hiermee polymorfisme te bespreken.
+Deze 'test' benoemt een categorie, in dit geval de categorie 'ducks' en maakt dan aannemelijk dat een bepaald fenomeen tot die categorie behoort. De 'test' onderzoekt of bewijst niets, maar wijst op overeenkomsten. Prima om hiermee polymorfisme te bespreken. Bekijk het bestand [`duck.py`](../bestanden/ducks.py).
 
-De klasse `Duck`, met een drietal methoden.
+De klasse `Duck` kent een drietal methoden.
 
 ```python
 class Duck: 

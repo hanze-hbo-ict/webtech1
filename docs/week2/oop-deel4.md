@@ -6,7 +6,7 @@ Getters en setters zijn niet van essentieel belang voor het werken met Python, m
 
 In dit voorbeeld maken we gebruik van twee python-bestanden. Het kan ook in één bestand ondergebracht worden, maar hier worden er twee voor gebruikt om onnodig scrollen te voorkomen en om nog een andere wijze van importeren te showen.
 
-De files zijn `main.py` en `speler.py`. Als eerste de file `speler.py`:
+De files zijn [`main.py`](../bestanden/main.py) en [`speler.py`](../bestanden/speler.py). Als eerste bespreken we de file `speler.py`:
 
 ```python
 class Speler:
@@ -51,7 +51,7 @@ Uitkomst:
 2
 ```
 
-Dit is een verschrikking voor Java-programmeurs. Van buiten de klasse kunnen attributen zomaar aangeroepen en gewijzigd worden. Om te voorkomen dat dit kan, moeten we in Python de attributen voorzien van een dubbele underscore aan het begin (`__`, een soort halve *dunder*). We illustreren dat aan de hand van de onderstaande klasse:
+Voor veel programmeurs is dit een gruwel: van buiten de klasse kunnen attributen zomaar aangeroepen en gewijzigd worden. Om te voorkomen dat dit kan, kunnen we in Python de attributen voorzien van een dubbele underscore aan het begin (`__`, een soort halve *dunder*). We illustreren dat aan de hand van de onderstaande klasse:
 
 ```python hl_lines="5"
 # klasse Foo in bestand Foo.py
@@ -211,3 +211,12 @@ def score(self, score):
 ```
         
 Een andere schrijfwijze: de bovenste methode geeft de waarde van `score` terug (`getter`), terwijl de onderste methode een waarde vastlegt voor `score` (`setter`).
+
+
+## Kritische nabeschouwing
+
+Zoals aangegeven is het gebruik van klasse-eigenschappen die alleen van binnen die klasse zelf kunnen worden benaderd (zogenaamde *private* eigenschappen) iets wat uit andere talen dan Python komt (met name Java of C# zijn hier behoorlijk strikt in). In deze talen *moet* je gebruik maken van getters en setters. In principe heeft Python dat niet nodig, omdat alle attributen en methoden van elke klasse te benaderen zijn (alles is *public*). 
+
+Het gebruiken van een dubbele underscore aan het begin van een private variabele (`__var`), zoals we hierboven hebben gezien, is een *conventie* die de variabele niet echt privaat maakt (op de manier waarop in Java of C# private variabelen bestaan). Python maakt hier gebruik van een techniek die bekend staat onder de naam [name mangling](https://en.wikipedia.org/wiki/Name_mangling) om het minder waarschijnlijk te maken dat code deze variabelen tegenkomt. Met een trukje zijn deze variabelen nog steeds prima te benaderen. In de praktijk kom je deze notatievorm dan ook eigenlijk niet tegen.
+
+Als je echt de behoefte voelt om attributen alleen via getters en setters te benaderen, kun je het beste gebruik maken van de laatste notatievorm die we hebben besproken. Bestudeer eventueel [de documentatie op python.org zelf](https://docs.python.org/3/library/functions.html#property) om hier een goed beeld bij te krijgen.

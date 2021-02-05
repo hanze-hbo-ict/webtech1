@@ -26,7 +26,7 @@ De onderste drie (3) klassen erven van de bovenliggende klassen en zij kunnen in
 
 ## De klasse `Aardman`
 
-Verder met het project `Game`. Dit project staat nog in de kinderschoenen en kent momenteel twee files, `main.py` (waarmee we de code runnen) en `Speler.py`. Daar wordt een derde file aan toegevoegd met de naam `aardman.py`. Daarin wordt als eerste een superklasse, `Aardman`, aangemaakt. Het is de bedoeling in dit spel monsters en trollen uit te schakelen. In deze klasse worden hit-points en levens bijgehouden en of de tegenstander nog in leven is.
+Verder met het project `Game`. Dit project staat nog in de kinderschoenen en kent momenteel twee files, [`main.py`](../bestanden/game/main.py) (waarmee we de code runnen) en [`Speler.py`](../bestanden/game/speler.py). Daar wordt een derde file aan toegevoegd met de naam [`aardman.py`](../bestanden/game/aardman.py). Daarin wordt als eerste een superklasse, `Aardman`, aangemaakt. Het is de bedoeling in dit spel monsters en trollen uit te schakelen. In deze klasse worden hit-points en levens bijgehouden en of de tegenstander nog in leven is.
 
 !!! Info "Werken vanuit een bestand"
     Vanaf nu werken we met het bestand `main.py` om de werking van de code te demonstreren. Dat is directer en makkelijker dan telkens alles in de interactieve shell opnieuw in te laden. Probeer dit voor je eigen project ook op deze manier te doen.
