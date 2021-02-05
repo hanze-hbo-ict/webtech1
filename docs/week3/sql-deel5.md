@@ -1,6 +1,6 @@
 # SQL-injectie
 
-Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/sql-oefening2).
+Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/sql-oefening2.md).
 
 In de vorige paragraaf is er kennis opgedaan omtrent met wijzigen van gegevens uit een database door SQL-statements uit te voeren binnen een Python-file. Dat is gedaan door het e-mailadres hardcoded in te voeren gevolgd door een voorwaarde (`WHERE...`). Het zou meer in de lijn der verwachting liggen om gebruikt te maken van variabelen en de waarde van een variabele te gebruiken bij het wijzigen van een record.
 
@@ -123,7 +123,7 @@ WHERE phone='1234\;drop table contacts\;';
 
 Dat resulteert in een update van nul regels, want er is niemand in de database die zo'n raar telefoonnummer heeft.
 
-Maak nu [oefening nummer 2](oefeningen/sql-oefening2).
+Maak nu [oefening nummer 2](oefeningen/sql-oefening2.md).
 
 
 

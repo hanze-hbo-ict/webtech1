@@ -12,7 +12,7 @@ In [1]: import sqlite3
 In [2]: db = sqlite3.connect("contacts.sqlite")
 ```
 
-Omdat de database nog niet bestaat moeten we deze eerst aanmaken. Om sql in Python uit te voeren, maken we gebruik van het commando `execute`.
+Met dit commando wordt de database aangemaakt (als je op je filesystem kijkt, zie je dat het bestand `contacts.sqlite` is aangemaakt). Omdat de database nog geen tabellen heeft, moeten we deze eerst aanmaken. Om sql in Python uit te voeren, maken we gebruik van het commando `execute`.
 
 ```ipython
 In [3]: db.execute("CREATE TABLE IF NOT EXISTS contacts(name text, phone integer, email text)")
@@ -70,10 +70,6 @@ In [8]: for row in cursor:
 
 ('Bart', 1234567, 'bart@org.nl')
 ('Henk', 7654321, 'henk@org.nl')
-('Bart', 1234567, 'bart@org.nl')
-('Henk', 7654321, 'henk@org.nl')
-('Bart', 1234567, 'bart@org.nl')
-('Henk', 7654321, 'henk@org.nl')
 ```
 
 Het resultaat van de query is een tupel. Het is daarom ook mogelijk om individuele gegevens afzonderlijk naar het scherm te schrijven.
@@ -102,10 +98,6 @@ In [10]: cursor.fetchall()
 Out[10]: 
 [('Bart', 1234567, 'bart@org.nl'),
  ('Henk', 7654321, 'henk@org.nl'),
- ('Bart', 1234567, 'bart@org.nl'),
- ('Henk', 7654321, 'henk@org.nl'),
- ('Bart', 1234567, 'bart@org.nl'),
- ('Henk', 7654321, 'henk@org.nl')]
 ```
 
 Merk op dat het resultaat van de bovenstaande methode een *list* is: er zitten blokhaken (`[` een `]`) omheen.
