@@ -2,6 +2,9 @@
 
 Als voorbeeld zullen we nu aan de hand van de documentatie een webpagina opbouwen. De basiscode kan aan het html-document worden toegevoegd en daar aangepast worden aan het gewenste ontwerp. Hierbij wordt een stapsgewijze opbouw gehanteerd.
 
+!!! Info "Download de bestanden"
+    De bestanden die in dit voorbeeld worden besproken zijn [via deze link te downloaden](../../bestanden/bootstrap.zip).
+
 __Stap 1:__ html-document zonder koppeling naar Bootstrap.
 
 ```

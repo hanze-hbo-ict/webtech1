@@ -1,33 +1,20 @@
-# Overzicht Webtechnologie
+# Webtechnologie 1
 
-## Week 1
+In deze module maken we kennis met webtechnologie. We bespreken html en css, en gebruiken uiteindelijk het [Bootstrap-framework](https://getbootstrap.com/) om de vormgeving van onze site eenvoudig professioneel te maken. Vervolgens gebruiken we de [python-library Flask](https://flask.palletsprojects.com/en/1.1.x/) om websites interactiever te maken en aan te sluiten op een sqlite-database.
 
-### 1. HTML 
-1. [HTML inleiding](week1/1.html/html-deel1.md)
-2. [HTML tags](week1/1.html/html-deel2.md)
-3. [HTML list, div en span](week1/1.html/html-deel3.md)
-4. [HTML formulieren](week1/1.html/html-deel4.md)
+De module is onderdeel van de propedeuse van de opleiding HBO-ICT en is daarom bewust breed van ondiep van opzet: we bespreken alle facetten en alle lagen waar webtechnologie mee te maken heeft, maar gaan nergens echt de diepte in. Het web is een complex apparaat waarin veel verschillende technieken samenwerken en het is binnen het tijdsbestek van tien weken niet mogelijk om die allemaal uit ten treure te behandelen. Voor deze propedeutische fase is het voldoende wanneer deelnemers aan het eind voldoendde working knowledge van dit alles hebben. In webtechnologie 2 en 3 (semester vier van de opleiding) gaan we hier uitgebreider op in.
 
+## Weekplanning
 
-### 2. CSS
-1. [CSS inleiding](week1/2.css/css-deel1.md)
-2. [CSS selectors en rules](week1/2.css/css-deel2.md)
-3. [CSS fonts](week1/2.css/css-deel3.md)
+In de tabel hieronder staan de onderwerpen per week.
 
-### 3. Bootstrap
-1. [Bootstrap inleiding](week1/3.bootstrap/bootstrap-deel1.md)
-2. [Bootstrap voorbeeld](week1/3.bootstrap/bootstrap-deel2.md)
-3. [Bootstrap formulieren](week1/3.bootstrap/bootstrap-deel3.md)
-4. [Bootstrap navigatiebalk](week1/3.bootstrap/bootstrap-deel4.md)
-
-### Oefeningen
-
-1. [Eenvoudige webpagina](week1/oefeningen/wk1oefening1.md)
-2. [Formulier maken](week1/oefeningen/wk1oefening2.md)
-3. [Tabelletje maken](week1/oefeningen/wk1oefening3.md)
-4. [Html en css](week1/oefeningen/wk1oefening4.md)
-5. [Bootstrap Carroussel](week1/oefeningen/wk1oefening5.md)
-
-
-## Week 2: Python OOP
-
+Weeknummer | Onderwerpen
+---|---
+1 | Front-end, html en css
+2 | Python OOP
+3 | Python en Databases
+4 | Flask en Jinja-templates
+5 | Flask en formulieren
+6 | Flask en views
+7 | Refactoring en ORM
+8 | Inloggen
