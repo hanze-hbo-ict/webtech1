@@ -2,7 +2,12 @@
 
 Bij grotere projecten zijn altijd meerdere modellen (tabellen) beschikbaar. Die modellen hebben een relatie met elkaar. Tot nu toe is er gewerkt met `Cursist` als model. Daarnaast bestaat er ook een model `Instrument`, waar de gegevens van de instrumenten beheerd worden, waarin de muziekschool lesgeeft. Een derde model wat erg voor de hand ligt is `Docent`. Docenten geven les aan cursisten om hen een instrument te leren bespelen. 
 
-In deze demonstratie is het uitgangspunt dat cursisten meerdere instrumenten kunnen leren bespelen en dat de lessen door een enkele docent gegeven worden.
+In deze demonstratie is het uitgangspunt dat cursisten meerdere instrumenten kunnen leren bespelen en dat de lessen door een enkele docent gegeven worden. Om de boel op dit moment niet nodeloos complex te maken, stellen we even dat een instrument maar door één cursist kan woorden bespeelt. Het strokendiagram van de database wordt dan als volgt:
+
+![Strokendiagram van de database](imgs/strokendiagram.png)
+
+### Sleutels 
+
 Om relaties te kunnen begrijpen is het nodig nog even kort aandacht te besteden aan een tweetal belangrijke termen, de primaire sleutel (__primary key__) en de refererende sleutel (__foreign key__).
 
 De modellen (tabellen) krijgen de volgende structuur:
@@ -24,12 +29,14 @@ De modellen (tabellen) krijgen de volgende structuur:
 
 Een primair sleutelveld zorgt ervoor dat elke rij uit het model uniek is. Een primaire sleutel mag bij geen enkel model een dubbele waarde krijgen. Omdat er een index als primair sleutelveld gebruikt wordt hoeven we ons daar geen zorgen om te maken.
 
-Telkens wanneer er een nieuw object van de klasse `Instrument` wordt aangemaakt, dient tevens aangegeven te worden welke cursist dat instrument gaat bespelen. Hetzelfde geldt voor ieder nieuw object uit de klasse `Docent`. 
+Telkens wanneer er een nieuw object van de klasse `Instrument` wordt aangemaakt, kunnen we aangeven welke cursist dat instrument gaat bespelen. Hetzelfde geldt voor ieder nieuw object uit de klasse `Docent` – ook hiervan kunnen we aangeven welk instrument die docent gaat doceren. Het 'strokendiagram' van deze database ziet er dan als volgt uit:
+
+
 
 Er wordt dan gevraagd welke cursist door deze docent begeleid gaat worden. En daarbij komen dan de refererende sleutels om de hoek kijken. Er moet een relatie worden geïntroduceerd tussen cursist en instrument en tussen cursist en docent. Bij het opzetten van de file `models.py` komt dit nog uitgebreid ter sprake.
 
 ## `models.py`
-De opzet van deze applicatie wordt gedaan door eerst weer een nieuw project op te starten met de naam ‘Relaties’. Daarom is het nodig als eerste een opzet van de database aan te maken. Daarvoor wordt de file `models.py` in het leven geroepen.
+De opzet van deze applicatie wordt gedaan door eerst weer een nieuw project op te starten met de naam ‘Relaties’. Daarom is het nodig als eerste een opzet van de database aan te maken. Daarvoor wordt de file [`models.py`](../bestanden/relaties/models.py) in het leven geroepen.
 
 Als eerste moeten natuurlijk weer de gebruikelijke zaken geïmporteerd worden. Daarna wordt aangegeven op welke plaats zich de basis directory bevindt. De actie wordt gevolgd door het aanmaken van de applicatie en de bijbehorende acties met `SQLALCHEMY`. Aan het einde van dit eerste blok worden applicatie en database weer aan elkaar gekoppeld en wordt het migratiepad ingericht.
 
@@ -143,7 +150,7 @@ Tot zover de code van de file `models.py`. Om de database aan te maken en om de 
 - `flask db upgrade` 
   
 ## Demonstratie
-Nu de tabel is aangemaakt kunnen er gegevens ingebracht worden. Voor deze demonstratie gebruiken we de file `populate_database.py`:
+Nu de tabel is aangemaakt kunnen er gegevens ingebracht worden. Voor deze demonstratie gebruiken we de file [`populate_database.py`](../bestanden/relaties/populate_database.py):
 
 ```python
 from models import db,Cursist,Instrument,Docent
@@ -191,7 +198,13 @@ print(joyce.overzicht_instrumenten())
 
 Na het runnen is dit het resultaat:
 
-![het resultaat van het runnen van populate_database.py](imgs/res-populate-database.py.png)
+```shell
+[Cursist Joyce heeft nog geen docent toegewezen gekregen, Cursist Bram heeft nog geen docent toegewezen gekregen]
+Cursist Joyce heeft David als docent
+Mijn instrumenten:
+Drums
+Piano
+```
 
 Bovendien kan nagegaan worden hoe de structuur van de database is opgebouwd:
 

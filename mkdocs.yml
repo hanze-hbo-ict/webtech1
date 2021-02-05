@@ -23,6 +23,7 @@ markdown_extensions:
       linenums: True
   - markdown.extensions.toc:
       permalink: true
+      toc_depth: 3
   - markdown.extensions.def_list
   - markdown.extensions.admonition
   - markdown.extensions.footnotes
