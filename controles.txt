@@ -40,3 +40,11 @@ Flask-applicaties-deel1.md
 14: hier moet nog een link naar de blueprints bibliotheek
 22-46: moeten hier nog linkjes naar bestanden?
 
+Flask-applicaties-deel2.md
+42: Misschien hier een overzicht van de bestanden die in dit onderdeel voorbij komen?
+121: in de code hierboven misschien ff highlighten? Kan ff niet zo snel zien waar, ben beetje gaar.
+213: linkje naar voegtoe_docent.html?
+232: ook linkje?
+251: nog een linkje?
+273: link?
+afsluiting: ik vind het een beetje een vage en snelle afsluiting
