@@ -48,3 +48,7 @@ Flask-applicaties-deel2.md
 251: nog een linkje?
 273: link?
 afsluiting: ik vind het een beetje een vage en snelle afsluiting
+
+Flask-applicaties-deel3.md
+algemeen: moet het woord "blueprints" hier als in die code block dingetjes (` `)
+
