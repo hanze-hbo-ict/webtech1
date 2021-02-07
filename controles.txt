@@ -63,3 +63,6 @@ User-authentication-deel2.md:
 User-authentication-deel3.md
 48: weer een ontzettend lelijke zin
 
+User-authentication-deel4.md
+136: Dit is toch de afsluiting van al het materiaal? Misschien nog een algemene recap of zoiets? Ik vind dit zo'n abrupt einde.
+
