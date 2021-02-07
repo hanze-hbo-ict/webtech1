@@ -146,7 +146,7 @@ from wtforms import ValidationError
 from mijnproject.models import User
 ```
 
-Er gaat gecontroleerd worden of velden op een formulier voldoen aan de verplichting een waarde te krijgen. Verder vindt er toezicht plaats of het opgegeven e-mailadres aan de eisen voldoet. Is er bijvoorbeeld een apenstaartje (@) meegestuurd en meer. De validator `EqualTo` is uitgerust om twee waardes met elkaar te vergelijken. Mocht er iets niet in orde dan kan er met behulp van de ValidationError een passende melding getoond wordt.
+Er gaat gecontroleerd worden of velden op een formulier voldoen aan de verplichting een waarde te krijgen. Verder vindt er toezicht plaats of het opgegeven e-mailadres aan de eisen voldoet. Is er bijvoorbeeld een apenstaartje (@) meegestuurd en meer. De validator `EqualTo` is uitgerust om twee waardes met elkaar te vergelijken. Mocht er iets niet in orde dan kan er met behulp van de `ValidationError` een passende melding getoond wordt.
 
 Nu kunnen de formulieren opgebouwd worden, te beginnen met het registratieformulier. Omdat er als veel vaker Engelse termen in de code zijn opgetekend, worden hier ook Engelse benamingen gehanteerd.
 
@@ -197,4 +197,3 @@ class LoginForm(FlaskForm):
 Ook hier geldt dat het inlogformulier eigenschappen overneemt van `FlaskForm`. Verder is er niet zo veel bijzonders bij dit formulier te vermelden. Zoals al wel vaker gezegd, meer van hetzelfde.
 
 Het formulier kent twee velden, eentje om de gebruikersnaam in te geven en het tweede veld is beschikbaar voor het wachtwoord. Tenslotte kan het inloggen worden afgesloten door op de knop met het opschrift ‘Inloggen’ te klikken.
-

@@ -60,3 +60,6 @@ User-authentication-deel1.md
 User-authentication-deel2.md:
 106: Is dit Nederlands??
 
+User-authentication-deel3.md
+48: weer een ontzettend lelijke zin
+
