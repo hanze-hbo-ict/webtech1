@@ -52,3 +52,11 @@ afsluiting: ik vind het een beetje een vage en snelle afsluiting
 Flask-applicaties-deel3.md
 algemeen: moet het woord "blueprints" hier als in die code block dingetjes (` `)
 
+--WEEK-8--
+User-authentication-deel1.md
+21/22: linkjes naar de juiste libraries
+26: heb hier linkje naar week5: basis flask formulier ingezet omdat daar wordt uitgelegd hoe je packages kan installeren.
+
+User-authentication-deel2.md:
+106: Is dit Nederlands??
+
