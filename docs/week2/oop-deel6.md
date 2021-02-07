@@ -1,4 +1,4 @@
-# OOP Python – overriding en polymorfisme
+# OOP Python – Overriding en polymorfisme
 
 ## Overriding
 

@@ -79,7 +79,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## Afsluiten van de virtuele omgeving
 
-Een meer gebruikelijke manier om de virtuele omgeving af te sluiten is met:
+Een gebruikelijke manier om de virtuele omgeving af te sluiten is met:
 
 ```shell
 (Python3.7)~/venv $> deactivate
