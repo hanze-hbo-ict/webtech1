@@ -1,4 +1,4 @@
-![Filmfan toont ook posters van films](imgs/filmfan.png)
+![Filmfan toont ook posters van films](imgs/filmfan.jpeg)
 
 Op deze website worden alle gegevens vastgelegd omtrent de films uit Nederland. Van alle films is een trailer te zien, zijn er diverse overzichten beschikbaar van bezoeker, omzetgegevens en nog veel meer.
 

@@ -1,4 +1,4 @@
-![Bos en Duin](imgs/bos-duin.png)
+![Bos en Duin](imgs/bos-duin.jpeg)
 
 Bungalowpark ‘Zee en Duin’ verhuurt bungalows aan hun gasten. Van de huisjes worden een id, een unieke naam en het type vastgelegd. Onder type wordt de grootte van het huisje verstaan. Er zijn huisjes voor 8, 6 en 4 personen beschikbaar voor de verhuur. Van ieder type wordt het id, het aantal personen en de weekprijs vastgelegd. 
 

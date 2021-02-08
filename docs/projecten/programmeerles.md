@@ -1,4 +1,4 @@
-![Programmeerles voor senioren](imgs/programmeerles.png)
+![Programmeerles voor senioren](imgs/programmeerles.jpeg)
 
 Een groot aantal ouderen die van hun pensioen genieten hebben toch vaak nog de behoefte iets geheel nieuws op te pakken. En programmeerles voor senioren is één van de onderwerpen waar veel vraag naar is.
 

@@ -1,4 +1,4 @@
-![Stage lopen met Gert](imgs/stage.png)
+![Stage lopen met Gert](imgs/stage.jpeg)
 
 Binnen het HBO-onderwijs spelen stages een belangrijke rol. Het is daarom ook belangrijk om de gegevens van de stages goed vast te leggen. 
 
