@@ -49,7 +49,7 @@ def __init__(self, naam, saldo):
 
 ## Storten en opnemen
 
-Bij het openen van een nieuwe rekening wordt gevraagd om een naam en een inlegbedrag. Een rekeningnummer wordt hier niet uitgedeeld. De variabele `transactie_overzicht` is een lijst (`[]`) waarin alle transacties worden vastgelegd. 
+Bij het openen van een nieuwe rekening wordt gevraagd om een naam en een inlegbedrag. Een rekeningnummer wordt hier niet uitgedeeld. De variabele `transactie_overzicht` is een lijst (`[]`) waarin alle transacties worden vastgelegd.
 
 Stap 5: de methode `storten()`
 
@@ -129,7 +129,7 @@ In [8]: angela.toon_transacties()
 1000 gestort op 2021-01-10 13:47:46
 500 opgenomen op 2021-01-10 13:47:46
 
-In [9]: 
+In [9]:
 ```
 
 ## Oefening 1
@@ -161,9 +161,9 @@ In [6]: britt.toon_transacties()
 In [7]: britt.toon_saldo()
 Saldo bedraagt 700
 
-In [8]: 
+In [8]:
 ```
 
 Het is dus mogelijk het saldo van een object te veranderen zodat het niet meer recht doet aan het bedrag dat beschikbaar zou moeten zijn na het uitvoeren van de gedane transacties. Dit komt doordat attributen van instanties door iedereen kunnen worden gemaakt en aanpast.
 
-Wat je zou willen is dat een attribuut alleen door *methoden van binnen de klasse* kunnnen worden aangepast. Helaas is dat in Python niet zonder meer mogelijk (er zijn wel packages voor die dat voor je kunnen regelen, [lees bijvoorbeeld deze blog](https://bogotobogo.com/python/python_private_attributes_methods.php)). Het is evenwel conventie binnen de Python-gemeenschap dat we attributen die niet van buiten mogen worden aangepast voorzien van een liggen streepje (`_`) vóór de variabele-naam, zoals we in de code hierboven al hebben laten zien. 
+Wat je zou willen is dat een attribuut alleen door *methoden van binnen de klasse* kunnnen worden aangepast. Helaas is dat in Python niet zonder meer mogelijk (er zijn wel packages voor die dat voor je kunnen regelen, [lees bijvoorbeeld deze blog](https://bogotobogo.com/python/python_private_attributes_methods.php)). Het is evenwel conventie binnen de Python-gemeenschap dat we attributen die niet van buiten mogen worden aangepast voorzien van een liggen streepje (`_`) vóór de variabele-naam, zoals we in de code hierboven al hebben laten zien.

@@ -12,10 +12,10 @@ De files zijn [`main.py`](../bestanden/main.py) en [`speler.py`](../bestanden/sp
 class Speler:
 
     def __init__(self, naam):
-           self.naam = naam
-           self.levens = 3
-           self.level = 1
-           self.score = 0
+        self.naam = naam
+        self.levens = 3
+        self.level = 1
+        self.score = 0
 ```
 
 Iedere speler heeft een naam en er worden voor iedere speler aan het begin van het spel een aantal standaardinstellingen meegegeven. Nu de eerste regels van `main.py`. De code van `speler.py` wordt in de eerste regel van `main.py` geïmporteerd:
@@ -31,7 +31,7 @@ print(bram.levens)
 
 Uitkomst:
 
-```
+```text
 Bram
 3
 ```
@@ -47,7 +47,7 @@ print(bram.levens)
 
 Uitkomst:
 
-```
+```text
 2
 ```
 
@@ -57,13 +57,13 @@ Voor veel programmeurs is dit een gruwel: van buiten de klasse kunnen attributen
 # klasse Foo in bestand Foo.py
 
 class Foo:
-  def __init__(self, var):
-    self.__var = var 
+    def __init__(self, var):
+        self.__var = var
 ```
 
 Als we deze klasse in de interactieve shell inladen, zien we de werking van het attribuut `__var`:
 
-```ipyhton
+```ipython
 In [1]: run 'Foo'
 
 In [2]: f = Foo('demo')
@@ -76,7 +76,7 @@ AttributeError                            Traceback (most recent call last)
 
 AttributeError: 'Foo' object has no attribute '__var'
 
-In [4]: 
+In [4]:
 ```
 
 ## Getters en Setters
@@ -89,11 +89,11 @@ def _get_levens(self):
     return self.__levens
 
 def _set_levens(self, levens):
-   if levens >= 0:
-       self.__levens = levens
-   else:
-      print("Levens kunnen geen negatieve waarde krijgen")
-      self.__levens = 0
+    if levens >= 0:
+        self.__levens = levens
+    else:
+        print("Levens kunnen geen negatieve waarde krijgen")
+        self.__levens = 0
 ```
 
 Vanwege die enkele underscore moet er ook een regel in `__init__()` veranderd worden:
@@ -106,7 +106,7 @@ Tevens is er een controle ingebouwd dat het aantal levens niet beneden nul (0) k
 
 ```python
 levens = property(_get_levens, _set_levens)
-``` 
+```
 
 Als laatste wordt er nog een format ingesteld voor iedere printopdracht in dit specifieke geval. Is er een printopdracht gaat Python automatisch op zoek naar een methode en wel deze, `__str__()`. Als deze methode gevonden wordt, wordt een format gebruikt voor het instellen van de gegevens.
 
@@ -141,17 +141,17 @@ Levens kunnen geen negatieve waarde krijgen
 In [7]: bram
 Out[7]: Name: bram, Levens: 0, Level: 1, Score 0
 
-In [8]: 
+In [8]:
 ```
 
-De eerste keer wordt rechtstreeks de inhoud van het object opgevraagd, terwijl als het gevraagde attribuut wordt weggelaten automatisch de property’s worden getoond. Iets soortgelijks kan gedaan worden met `level` om de setter-constructie duidelijk te maken. 
+De eerste keer wordt rechtstreeks de inhoud van het object opgevraagd, terwijl als het gevraagde attribuut wordt weggelaten automatisch de property’s worden getoond. Iets soortgelijks kan gedaan worden met `level` om de setter-constructie duidelijk te maken.
 
 ```python hl_lines="4"
 def __init__(self, naam):
-   self.naam = naam
-   self.__levens = 3
-   self.__level = 1
-   self.score = 0
+    self.naam = naam
+    self.__levens = 3
+    self.__level = 1
+    self.score = 0
 
 def _get_level(self):
     return self.__level
@@ -162,13 +162,13 @@ def _set_level(self, level):
         self.__score += delta * 1000
         self.__level = level
     else:
-        print("Het laagste level is level 1") 
+        print("Het laagste level is level 1")
 ```
 
 Ook voor `level` is er een property aangemaakt:
 
 ```python
-    level = property(_get_level, _set_level)
+level = property(_get_level, _set_level)
 ```
 
 Een test-script:
@@ -193,7 +193,7 @@ In [7]: bram.score = 500
 In [8]: bram
 Out[8]: Name: bram, Levens: 3, Level: 7, Score 500
 
-In [9]: 
+In [9]:
 ```
 
 ## Nog een andere notatie
@@ -209,13 +209,13 @@ def score(self):
 def score(self, score):
     self.__score = score
 ```
-        
+
 Een andere schrijfwijze: de bovenste methode geeft de waarde van `score` terug (`getter`), terwijl de onderste methode een waarde vastlegt voor `score` (`setter`).
 
 
 ## Kritische nabeschouwing
 
-Zoals aangegeven is het gebruik van klasse-eigenschappen die alleen van binnen die klasse zelf kunnen worden benaderd (zogenaamde *private* eigenschappen) iets wat uit andere talen dan Python komt (met name Java of C# zijn hier behoorlijk strikt in). In deze talen *moet* je gebruik maken van getters en setters. In principe heeft Python dat niet nodig, omdat alle attributen en methoden van elke klasse te benaderen zijn (alles is *public*). 
+Zoals aangegeven is het gebruik van klasse-eigenschappen die alleen van binnen die klasse zelf kunnen worden benaderd (zogenaamde *private* eigenschappen) iets wat uit andere talen dan Python komt (met name Java of C# zijn hier behoorlijk strikt in). In deze talen *moet* je gebruik maken van getters en setters. In principe heeft Python dat niet nodig, omdat alle attributen en methoden van elke klasse te benaderen zijn (alles is *public*).
 
 Het gebruiken van een dubbele underscore aan het begin van een private variabele (`__var`), zoals we hierboven hebben gezien, is een *conventie* die de variabele niet echt privaat maakt (op de manier waarop in Java of C# private variabelen bestaan). Python maakt hier gebruik van een techniek die bekend staat onder de naam [name mangling](https://en.wikipedia.org/wiki/Name_mangling) om het minder waarschijnlijk te maken dat code deze variabelen tegenkomt. Met een trukje zijn deze variabelen nog steeds prima te benaderen. In de praktijk kom je deze notatievorm dan ook eigenlijk niet tegen.
 

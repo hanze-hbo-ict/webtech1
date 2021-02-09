@@ -8,7 +8,7 @@ Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/oop-oefening
 
 ## Het principe van overerving
 
-Deze afbeelding laat het principe van overerving duidelijk zijn. Op het plaatje zijn allemaal vogels te zien. Een kenmerk van alle vogels is dat zij allen een snavel hebben en vleugels. De kenmerken die voor alle vogels gelden, worden zoveel mogelijk centraal vastgelegd, hier dus in de klasse `VOGEL`. 
+Deze afbeelding laat het principe van overerving duidelijk zijn. Op het plaatje zijn allemaal vogels te zien. Een kenmerk van alle vogels is dat zij allen een snavel hebben en vleugels. De kenmerken die voor alle vogels gelden, worden zoveel mogelijk centraal vastgelegd, hier dus in de klasse `VOGEL`.
 
 Daarna is er een tweedeling te zien tussen vogels die kunnen vliegen en vogels die die capaciteit niet beheersen. Alle vogels die kunnen vliegen bezitten de methode `vlieg()`. Deze methode wordt zo hoog mogelijk in de hiërarchie opgeslagen, hier in `VLIEGEND`. De vogels die niet kunnen vliegen hebben blijkbaar geen gemeenschappelijke methode. De struisvogel kan hardlopen (`ren()`) en de pinguïn kan zwemmen (`zwem()`). Omdat er dus allemaal individuele methoden zijn worden ze in de klasse zelf opgeslagen.
 
@@ -20,7 +20,7 @@ Overerving | Het definiëren van een klasse als uitbreiding van een andere klass
 Superklasse | Een klasse die uitgebreid wordt door een andere klasse.
 Subklasse | Een klasse die een uitbreiding erft van een andere klasse. Een subklasse erft alle attributen en methoden van de bijbehorende superklasse.
 
-Zo is `VOGEL` een superklasse van `VLIEGEND` en is `VLIEGEND` en subklasse van `VOGEL`. Maar `VLIEGEND` is tegelijkertijd een superklasse van `ADELAAR`, `KRAAI` en `MEEUW`. Super- en subklasse is een transitieve eigenschap: `VOGEL` is ook een superklasse van `KRAAI`. 
+Zo is `VOGEL` een superklasse van `VLIEGEND` en is `VLIEGEND` en subklasse van `VOGEL`. Maar `VLIEGEND` is tegelijkertijd een superklasse van `ADELAAR`, `KRAAI` en `MEEUW`. Super- en subklasse is een transitieve eigenschap: `VOGEL` is ook een superklasse van `KRAAI`.
 
 De onderste drie (3) klassen erven van de bovenliggende klassen en zij kunnen in ieder geval beschikken over de attributen snavel en vleugels en ook over de methode `vlieg()`.
 
@@ -51,8 +51,8 @@ Er wordt nog een tweede methode toegevoegd `schade()`. Het aantal keer dat een t
 def schade(self,geraakt):
     punten_over = self._hit_points - geraakt
     if punten_over >= 0:
-       self._hit_points = punten_over
-       print("Je bent {} keer geraakt en hebt nog {} hit points over".format(geraakt, 				self._hit_points))
+        self._hit_points = punten_over
+        print("Je bent {} keer geraakt en hebt nog {} hit points over".format(geraakt, self._hit_points))
     else:
         self._levens -= 1
 ```
@@ -91,7 +91,7 @@ Naam: Aardman, Levens: 1, Hit points: 8
 Je bent 8 keer geraakt en hebt nog 0 hit points over
 Naam: Aardman, Levens: 1, Hit points: 0
 Naam: Aardman, Levens: 0, Hit points: 12
-``` 
+```
 
 ## De klasse `Ork`
 
@@ -102,7 +102,7 @@ class Ork(Aardman):
     pass
 ```
 
-Een beetje apart om een commando op te nemen in de definitie van een klasse dat niets doet. Het commando `pass` heeft tot doel invulling te zijn op het moment dat er een actie gevraagd wordt, maar er eigenlijk geen reden toe is een actie in de code op te nemen. 
+Een beetje apart om een commando op te nemen in de definitie van een klasse dat niets doet. Het commando `pass` heeft tot doel invulling te zijn op het moment dat er een actie gevraagd wordt, maar er eigenlijk geen reden toe is een actie in de code op te nemen.
 
 Het kenmerkende voor de klasse `Aardman` wordt nu dat het de algemene kenmerken voor alle groepen vijanden als basiscode herbergt, zodat die code niet bij iedere subklasse (iedere tegenstander) hoeft te worden opgenomen. Daarom kunnen de testgegevens voor de klasse `Aardman` verwijderd worden uit `main.py` en vervangen worden door gegevens die naar vijandgroepen verwijzen. Vandaaruit kunnen de benodigde gegevens uit de superklasse aangeroepen worden. Een bekende ork is Shagrat. Dat wordt het eerste object uit de klasse `Ork`.
 
@@ -122,7 +122,7 @@ Naam: Aardman, Levens: 1, Hit points: 0
 
 Bij het initialiseren van het object ‘shagrat’ worden geen parameters meegegeven. De klasse `Ork` kent geen methode `__init__()`. Voor de invulling wordt daarom gekeken of de superklasse wel een methode `__init__()` kent, waarvan de attributen gebruikt kunnen worden. Die is er dus worden de default waarden van de klasse `Aardman` aan dit object uit de klasse `Ork` toegewezen.
 
-Er wordt een tweede object uit de klasse `Ork` aangemaakt, Gorbag, nu wel met de benodigde parameters erbij en een nette lay-out. 
+Er wordt een tweede object uit de klasse `Ork` aangemaakt, Gorbag, nu wel met de benodigde parameters erbij en een nette lay-out.
 
 ```python
 gorbag = Ork("Gorbag", 18, 1)
@@ -133,7 +133,7 @@ De volgorde van de parameters klopt niet helemaal, maar Python snapt de bedoelin
 
 ```shell
 Gorbag - Naam: Gorbag, Levens: 1, Hit points: 18
-```  
+```
 
 Een derde object, nu met gedeeltelijke parameters.
 
@@ -154,7 +154,7 @@ Het is niet handig dit allemaal te regelen via de `__init__()` van de superklass
 
 ```python
 def __init__(self, naam):
-   super().__init__(naam=naam, levens=1, hit_points=23)
+    super().__init__(naam=naam, levens=1, hit_points=23)
 ```
 
 Iedere object van de klasse `Ork` krijgt nu de attributen mee die meegegeven zijn in de `__init__`. De enige parameter die gevuld moet zijn is de naam, de rest wordt automatisch toegekend. De aanroep `super().__init__()` zorgt ervoor dat er een actie wordt uitgevoerd, waarbij de methode `__init__` uit de klasse `Aardman` wordt aangeroepen. De gegevens worden dan vastgelegd in de attributen, waarna de methode `__str__()` uitgevoerd wordt.
@@ -178,7 +178,7 @@ Resultaat:
 
 ```shell
 Me Gorbag. Gorbag stomp you!
-``` 
+```
 
 Deze methode is alleen beschikbaar voor de objecten uit de klasse `Ork`. Een object uit de klasse `Aardman` kan deze methode niet benaderen.
 

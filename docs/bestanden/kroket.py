@@ -1,4 +1,4 @@
-class Kroket(object):
+class Kroket:
 
     soort = "rundvleeskroket"
 

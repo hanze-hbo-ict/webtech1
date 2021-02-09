@@ -1,5 +1,4 @@
-class Speler(object):
-
+class Speler:
     def __init__(self, naam):
         self.naam = naam
         self._levens = 3
@@ -7,14 +6,14 @@ class Speler(object):
         self._score = 0
 
     def _get_levens(self):
-      return self._levens
+        return self._levens
 
     def _set_levens(self, levens):
-       if levens >= 0:
-           self._levens = levens
-       else:
-          print("Levens kunnen geen negatieve waarde krijgen")
-          self._levens = 0
+        if levens >= 0:
+            self._levens = levens
+        else:
+            print("Levens kunnen geen negatieve waarde krijgen")
+            self._levens = 0
 
     def _get_level(self):
         return self._level
@@ -39,4 +38,6 @@ class Speler(object):
         self._score = score
 
     def __str__(self):
-      return "Name: {0.naam}, Levens: {0.levens}, Level: {0.level}, Score {0.score}".format(self)
+        return "Name: {0.naam}, Levens: {0.levens}, Level: {0.level}, Score {0.score}".format(
+            self
+        )
