@@ -23,7 +23,7 @@ Als eerste de Python-file. Er moeten nu meerdere zaken worden geïmporteerd, zie
 ```python
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField
+from wtforms import StringField, SubmitField
 
 app = Flask(__name__)
 ```
@@ -48,7 +48,7 @@ app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 ```
 
 #### InfoForm
-De volgende stap is het aanmaken van een klasse `InfoForm`, een subklasse van `FlaskForm`. 
+De volgende stap is het aanmaken van een klasse `InfoForm`, een subklasse van `FlaskForm`.
 
 ```python
 class InfoForm(FlaskForm):
@@ -68,7 +68,7 @@ Wanneer alle voorbereidingen zijn getroffen, kan de viewfunctie aangemaakt worde
 
 ```python
 @app.route('/', methods=['GET', 'POST'])
-def index():    
+def index():
 ```
 
 Aan de functie worden de parametermethoden `GET` en `POST `meegegeven. Deze zorgen ervoor dat het mogelijk wordt om de ingevoerde gegevens door te geven aan een template, in dit geval `home.html`.
@@ -86,7 +86,7 @@ if form.validate_on_submit():
         form.instrument.data = ''
     return render_template('home.html', form=form, instrument=instrument)
 ```
-Op het valide zijn wordt nog nader ingegaan. 
+Op het valide zijn wordt nog nader ingegaan.
 
 En tot slot natuurlijk weer:
 
@@ -100,12 +100,12 @@ in `home.html` moet natuurlijk ook code staan. Eerst de bovenste helft:
 
 ```html
 <p>
-    {% if instrument %}
-    Het instrument van jouw keuze is {{instrument}}.
+{% if instrument %}
+    Het instrument van jouw keuze is {{ instrument }}.
     <br>De keuze kan gewijzigd worden in onderstaand formulier:
-    {% else %}
+{% else %}
     Geef de naam van een instrument op in dit formulier:
-    {% endif %}
+{% endif %}
 </p>
 ```
 

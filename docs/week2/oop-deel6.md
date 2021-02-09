@@ -30,7 +30,7 @@ print(lurtz)
 
 Het resultaat hiervan:
 
-```shell
+```console
 Naam: Lurtz, Levens: 3, Hit points: 12
 ***** Lurtz dodges *****
 Naam: Lurtz, Levens: 3, Hit points: 12
@@ -53,7 +53,7 @@ def schade(self, geraakt):
 
 Wanneer de testset na deze aanpassing nogmaals wordt uitgevoerd, wordt eerst gekeken of de methode voorkomt in de klasse `Uruk_Hai` en zo niet in de klasse erboven, en dat is de klasse `Aardman`. Lurtz krijgt als er een leven verloren is, weer 12 hit points uitgereikt.
 
-```shell
+```console
 Naam: Lurtz, Levens: 3, Hit points: 12
 Lurtz heeft een leven verloren
 Naam: Lurtz, Levens: 2, Hit points: 12
@@ -88,7 +88,7 @@ print(c)
 
 Het resultaat hiervan is niet zo heel spannend:
 
-```shell
+```console
 3
 tim
 (1, 2, 3)
@@ -165,7 +165,7 @@ test_duck(percy)
 
 Wat blijkt? Moeiteloos!
 
-```shell
+```console
 Waggel, waggel, ik waggel ook
 Kom er in, maar het is wel een beetje koud, zo zuidelijk
 Kwaken? Lachen, ik ben een pinquin, hoor!

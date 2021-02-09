@@ -147,7 +147,7 @@ if __name__=='__main__':
 
 Er zijn te veel gegevens om allemaal te tonen; hier een klein stukje van het einde van de verzameling:
 
-```shell
+```console
 ... (680 regels)
 
 ZZ Top:Mescalero:2003:Que Lastima

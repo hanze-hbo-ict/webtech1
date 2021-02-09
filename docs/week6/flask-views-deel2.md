@@ -20,7 +20,7 @@ De volgende actie is om het programma te vertellen wat de basis-directory is. No
 basedir = os.path.abspath(os.path.dirname(__file__)
 ```
 
-Er gebeurt hier het volgende: 
+Er gebeurt hier het volgende:
 
 Er wordt achteraan begonnen. Op de plaats van `__file__` wordt bij het runnen de naam van de Python-file ingevuld, hier wordt dat dan `BasisModelApp.py`.
 
@@ -45,7 +45,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'da
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 ```
 
-De bovenste regel is een *must*, en is vergelijkbaar met de noodzaak een geheime sleutel op te voeren wanneer Flask gekoppeld is aan een formulier. De kern van deze regel is dat hier de applicatie verteld wordt waar de database gevonden kan worden. 
+De bovenste regel is een *must*, en is vergelijkbaar met de noodzaak een geheime sleutel op te voeren wanneer Flask gekoppeld is aan een formulier. De kern van deze regel is dat hier de applicatie verteld wordt waar de database gevonden kan worden.
 In de opgegeven basis-directory wordt dan gezocht naar de file `data.sqlite`.
 
 De tweede regel geeft aan dat in dit geval geen modificaties gewenst zijn. Niet iedere aanpassing hoeft uitgebreid getoond te worden. De default-waarde in ingesteld op `True`, vandaar deze extra regel.
@@ -60,7 +60,7 @@ De laatst besproken vier (4) coderegels (`app = Flask(__name__)` telt niet mee) 
 
 #### Model
 
-Nu kan het *Model* aangemaakt worden. Daarvoor dient een klasse gecreëerd te worden. Model klinkt indrukwekkend, maar het is niets meer dan een representatie van een tabel in de database. 
+Nu kan het *Model* aangemaakt worden. Daarvoor dient een klasse gecreëerd te worden. Model klinkt indrukwekkend, maar het is niets meer dan een representatie van een tabel in de database.
 De eerste tabel krijgt de naam ‘Cursist’ mee:
 
 ```python
@@ -74,8 +74,8 @@ class Cursist(db.Model):
     # __tablename__ = 'cursisten'
 ```
 
-Alles staat nu klaar, de kolommen kunnen opgegeven worden. Hier is voor de demonstratie gekozen slechts een beperkt aantal kenmerken van iedere cursist op te nemen. 
-Het zijn er drie: `id`, `voornaam` en `leeftijd`. 
+Alles staat nu klaar, de kolommen kunnen opgegeven worden. Hier is voor de demonstratie gekozen slechts een beperkt aantal kenmerken van iedere cursist op te nemen.
+Het zijn er drie: `id`, `voornaam` en `leeftijd`.
 
 Het `id` is van het type `integer` en wordt de primaire sleutel van de tabel. Naam is een tekstveld en in de kolom leeftijd moet een getal komen te staan, dus dat wordt een `integer`:
 
@@ -132,7 +132,7 @@ bram = Cursist('Bram',24)
 De objecten zijn aangemaakt, maar zijn nog niet bekend bij de database. Dat kan als volgt:
 
 ```python
-db.session.add_all([joyce,bram])
+db.session.add_all([joyce, bram])
 ```
 
 De id's worden dus automatisch aangemaakt zodra de gegevens aan de database zijn toegevoegd.
@@ -151,7 +151,7 @@ print(bram.id)
 
 Het resultaat:
 
-```shell
+```console
 > 1
 > 2
 ```

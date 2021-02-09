@@ -1,6 +1,6 @@
 # Flask – basale werking
 
-Vanuit vogelvluchtperspectief werkt Flask als volgt. Er komt een request binnen bij de server. De server checkt welke route er exact wordt opgevraagd en voert de daarmee corresponderende functie uit. Deze functie retourneert iets, in de regels een string, wat door de server weer wordt doorgestuurd aan de client. 
+Vanuit vogelvluchtperspectief werkt Flask als volgt. Er komt een request binnen bij de server. De server checkt welke route er exact wordt opgevraagd en voert de daarmee corresponderende functie uit. Deze functie retourneert iets, in de regels een string, wat door de server weer wordt doorgestuurd aan de client.
 
 Aan het eind van deze tekst maken we [oefening 1](oefeningen/flask-oefening1.md)
 
@@ -17,21 +17,25 @@ Om aan te geven dat we een bepaalde string willen retourneren bij bij een specif
 
 <!-- Ik dacht toch werkelijk dat je regelnummers in fenced code block aan kon zetten -->
 <!-- maar lijkt toch van niet. Dus maar met de hand -->
-<!-- https://stackoverflow.com/questions/55653184/enable-line-numbers-for-specific-markdown-code-listings-designated-with-backtick -->
+<!-- https://stackoverflow.com/questions/55653184/enable-line-numbers-for-specific-markdown-code-listings-designated-with-backtick
 
-```python
-1. @app.route('/')
-2. def index():
-3.     # render de template Basic.html
-4.     return '<h1>Welkom bij muziekschool Session</h1>')
-5.
-6. if __name__ == '__main__':
-7      app.run() 
+HOEM: dit kan met mkdocs (nadeel, niet overdraagbaar naar andere omgevingen)
+https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#adding-line-numbers
+-->
+
+```python linenums="1"
+@app.route('/')
+def index():
+    # render de template Basic.html
+    return '<h1>Welkom bij muziekschool Session</h1>')
+
+if __name__ == '__main__':
+    app.run()
 ```
 
 We bespreken deze code regel voor regel:
 
-1. Door middel van deze decoratie geven we aan dat de methode die *hieronder* staat (de functie die met deze annotatie is gedecoreerd) moet worden uitgevoerd wanneer er een request wordt ontvangen die correspondeert met deze *route*. De route is de string-parameter (`/` in dit specifieke geval) die je ook terug ziet komen in de locatiebalk van de browser; 
+1. Door middel van deze decoratie geven we aan dat de methode die *hieronder* staat (de functie die met deze annotatie is gedecoreerd) moet worden uitgevoerd wanneer er een request wordt ontvangen die correspondeert met deze *route*. De route is de string-parameter (`/` in dit specifieke geval) die je ook terug ziet komen in de locatiebalk van de browser;
 2. Een standaard functie-definitie; in latere voorbeelden zullen we toelichten hoe hier parameters aan kunnen worden toegevoegd;
 3. commentaar;
 4. Hier wordt de string `<h1>Welkom bij muziekschool Session</h1>` aan de client (de browser) geretourneerd.
@@ -41,7 +45,7 @@ We bespreken deze code regel voor regel:
 
 Als we deze code runnen, gebeurt er het volgende:
 
-```shell
+```console
  * Serving Flask app "server1" (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
@@ -56,7 +60,7 @@ Als we dan met een browser naar de gegeven url gaan (`http://127.0.0.1:5000/`) k
 
 De eerste webpagina is aangemaakt, door het runnen van een Flask-applicatie!.
 
-## Eenn tweede pagina
+## Een tweede pagina
 
 Een enkele webpagina is natuurlijk al mooi, maar een beetje zichzelf respecterende ontwerper laat het niet bij enkel een startpagina. De applicatie wordt nu uitgebreid door er een tweede pagina aan vast te koppelen. Vanuit de startpagina kan gesprongen worden naar de tweede pagina. Ook deze tweede pagina gaat alleen tekst bevatten.
 
@@ -97,7 +101,7 @@ Hieronder staat een algemeen voorbeeld van de werking van een dynamische route. 
 
 ```python hl_lines="1"
 @app.route('/zomaar_een_pagina/<naam>')
-def andere_pagina(naam):  
+def andere_pagina(naam):
     return 'Gebruiker: {}'.format(naam)
 ```
 
@@ -123,7 +127,7 @@ Werkend met Flask zal het ongetwijfeld voorkomen dat er fouten sluipen in de cod
 
 Om dit te kunnen demonstreren wordt er een fout ingebouwd in de code. Van elke naam wordt nu gevraagd de twintigste letter af te beelden. In het geval dat de naam Joyce luidt, zal dat een foutmelding opleveren, aangezien de naam maar uit vijf (5) tekens bestaat.
 
-```python 
+```python
 @app.route('/lengte/<naam>')
 def lengte(naam):
     return 'De twintigste letter van de naam {} is {}'.format(naam, naam[20])

@@ -1,7 +1,7 @@
 # Flask en Forms - Flash-berichten
 
 ## Introductie
-De titel van deze paragraaf is geen typfout. Er wordt inderdaad Flash bedoeld. 
+De titel van deze paragraaf is geen typfout. Er wordt inderdaad Flash bedoeld.
 Soms is het handig de gebruiker een bericht te sturen dat niet permanent bewaard hoeft te worden op de view-pagina. Een dergelijk bericht kan naar de gebruiker ‘geflasht’ worden en vervolgens worden gesloten. Dat betekent dat het niet meer hardcoded in een view op een Python-file hoeft te worden opgenomen.
 
 ## Voorbeeld
@@ -28,7 +28,7 @@ Het formulier moet ook weer aangemaakt worden:
 
 ```python
 class SimpelForm(FlaskForm):
-     submit = SubmitField('Klik mij!')
+    submit = SubmitField('Klik mij!')
 ```
 
 Het formulier kent slechts een enkel veld, een knop met de tekst ‘Klik mij!’.
@@ -46,7 +46,7 @@ def index():
         flash("Je hebt zojuist de button geactiveerd!")
 
         return redirect(url_for('index'))
-    return render_template('home2.html', form=form)  
+    return render_template('home2.html', form=form)
 ```
 
 De view heeft de naam index meegekregen en er wordt een instantie van de klasse `SimpelForm` aangemaakt. Wanneer er op de knop geklikt wordt, zorgt het flash-commando ervoor dat er melding naar het scherm gestuurd wordt via het redirect-statement. Het tweede return-statement is nodig om in eerste instantie het formulier te laten zien.
@@ -82,7 +82,7 @@ Het onderstaande plaatje is rechtstreeks overgenomen van de Bootstrap-site.
 
 ![Alert melding code en voorbeeld op bootstrap site](imgs/alert-melding-bootstrap.png)
 
-De button ‘Copy’ hoort er natuurlijk niet bij. Deze heeft tot doel een kopie van de code naar Clipboard te sturen. 
+De button ‘Copy’ hoort er natuurlijk niet bij. Deze heeft tot doel een kopie van de code naar Clipboard te sturen.
 
 Deze code kan natuurlijk aan `home2.html `toegevoegd worden. Voordat deze actie daadwerkelijk wordt uitgevoerd, is het nodig eerst nog twee andere stappen te verrichten:
 
@@ -90,12 +90,11 @@ Deze code kan natuurlijk aan `home2.html `toegevoegd worden. Voordat deze actie 
 
 ```html
 <div class="container">
+{% for mess in get_flashed_messages()  %}
 
-     {% for mess in get_flashed_messages()  %}
-      
-        {{mess}}
-        </div>
-      {% endfor %}
+    {{ mess }}
+
+{% endfor %}
 ```
 
 Alle bedrijvigheden worden bij elkaar gehouden door ze in een container te stoppen. Het ziet er misschien wat vreemd uit dat er een `for` is opgenomen in de code. Het is natuurlijk mogelijk dat er meerdere berichten geflitst gaan worden. De `for` verstuurt ze dan tegelijkertijd. Voor de code maakt het niet uit of het er één is of meerdere.
@@ -104,13 +103,12 @@ Daarna kan de Bootstrap-code worden ingeladen:
 
 ```html
 {% for mess in get_flashed_messages()  %}
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{ mess }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-        </button>
-        {{mess}}
-      </div>
+    </button>
+</div>
 {% endfor %}
 ```
 Wat gebeurt er nu precies wanneer de boodschap verstuurd wordt? Of anders gezegd, wat staat er nu precies?
@@ -122,7 +120,7 @@ Als het flash-commando afgaat dan worden de meldingen naar de template gestuurd 
 De aanroep naar de Bootstrap-klasse zorgt ervoor dat de gebruiker de mogelijkheid krijgt het bericht weer te laten verdwijnen door op het kruisje rechtsboven te klikken. De property `fade show` geeft aan dat de melding gaat vervagen totdat deze niet meer zichtbaar is.
 
 #### button
-De regel die begint met `<button type….> `is nodig om het kruisje rechtsboven in weer te geven, en dat een klik op dat kruisje het bericht afsluit. 
+De regel die begint met `<button type….> `is nodig om het kruisje rechtsboven in weer te geven, en dat een klik op dat kruisje het bericht afsluit.
 
 #### aria-label
 Het `aria-label` attribuut wordt gebruikt om een string te definiëren die het huidige element labelt. Het wordt vaak gebruikt als er geen tekstlabel zichtbaar is. Door `aria-hidden = "true"` aan een element toe te voegen, worden dat element en al zijn onderliggende elementen verwijderd en is daarna niet langer beschikbaar.
@@ -148,10 +146,10 @@ De gehele code wordt dan (zonder de head-sectie):
 
     {% for mess in get_flashed_messages()  %}
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ mess }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        {{mess}}
     </div>
     {% endfor %}
 

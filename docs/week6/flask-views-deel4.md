@@ -19,12 +19,12 @@ Er zijn vier belangrijke commando’s hierbij die op de command-line worden gebr
 
 Wanneer de `FLASK_APP` niet is ingesteld, verschijnt er een foutmelding:
 
-```
-Error: Could not locate Flask application. 
+```console
+Error: Could not locate Flask application.
 You did not provide the FLASK_APP environment variable.
 ```
 
-Vaak is dit pakket nog niet geïnstalleerd. Dat kan verholpen worden door op de bekende wijze dit pakket toe te voegen. 
+Vaak is dit pakket nog niet geïnstalleerd. Dat kan verholpen worden door op de bekende wijze dit pakket toe te voegen.
 
 Nu weer de praktijk. Wat te doen om het geheel werkend te krijgen zodat migraties kunnen worden doorgevoerd? Op de eerste plaats dienen er een tweetal wijzigingen te worden aangebracht in de file [`BasicModelApp.py`](../bestanden/crud/BasicModelApp.py):
 

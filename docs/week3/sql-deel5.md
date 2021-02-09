@@ -9,7 +9,7 @@ Dat zou er zo uit kunnen zien:
 ```ipython
 In [1]: new_email = 'anotherupdate@update.com'
 In [2]: phone = 1234567
-In [3]: update_sql = "UPDATE contacts SET email = '{}' 
+In [3]: update_sql = "UPDATE contacts SET email = '{}'
 ...: WHERE phone = {}".format(new_email, phone)
 ```
 
@@ -19,7 +19,7 @@ Dit werkt allemaal prima, zoals we hiervoor al gezien hebben. Maar wat gebeurt e
 In [4]: phone = input('Voer uw nummer in ')
 Voer uw nummer in 123456
 
-In [5]: update_sql = "UPDATE contacts SET email = '{}' 
+In [5]: update_sql = "UPDATE contacts SET email = '{}'
 ...: WHERE phone = {}".format(new_email, phone)
 
 In [6]: update_sql
@@ -38,11 +38,11 @@ In [8]: phone = input("Please enter your phone number")
 
 Please enter your phone number 12345; drop table contacts;
 
-In [9]: update_sql = "UPDATE contacts SET email = '{}' 
+In [9]: update_sql = "UPDATE contacts SET email = '{}'
 ...: WHERE phone = {}".format(new_email, phone)
 
 In [10]: update_sql
-Out[10]: "UPDATE contacts SET email = 'newemail@update.com' 
+Out[10]: "UPDATE contacts SET email = 'newemail@update.com'
    WHERE phone =  12345; drop table contacts;"
 
 In [11]: update_cursor = db.cursor()
@@ -62,7 +62,7 @@ Omdat de methode `executescript()` een gebruiker dus in staat stelt meerdere SQL
 
 Wat er nu net gedemonstreerd is, staat bekend als een *SQL-injectie* aanval. Een aanvaller injecteert dan een statement in de ‘gewone’ SQL-code. Vroeger was het zo eenvoudig als hier net getoond is, maar tegenwoordig moet er meer moeite voor gedaan worden.
 
-Zoals gezegd, administrators en programmeurs zijn zich bewust van dit probleem en dus bestaat het fenomeen nog steeds, maar er veel meer specialistische kennis nodig van SQL en database om een succesvolle aanval in te kunnen zetten. 
+Zoals gezegd, administrators en programmeurs zijn zich bewust van dit probleem en dus bestaat het fenomeen nog steeds, maar er veel meer specialistische kennis nodig van SQL en database om een succesvolle aanval in te kunnen zetten.
 
 Ook hier is het in scène gezet (`executescript()`) om duidelijk te maken hoe de SQL-injection kan plaatsvinden. De methode `executescript()` wordt weer terug geschaald naar de methode `execute()`. Het volgende voorbeeld maakt dit duidelijk:
 
@@ -97,7 +97,7 @@ Een voorbeeld om dit duidelijk te maken.
 ```ipython
 In [6]: new_email = "newemail@update.com"
 In [7]: phone = input("Voer uw nummer in: ")
- 
+
 Voer uw nummer in: 1234; drop table contact;
 
 In [8]: update_sql = "UPDATE contacts SET email = ? WHERE phone = ?"
@@ -116,8 +116,8 @@ In het `UPDATE`-statement zijn de waarde van de kolommen `email` en `phone` verv
 
 Feitelijk betekent dit dat het update statement er na het invoeren van de kwalijke waarde (`1234;drop table contacts`) als volgt uit komt te zien:
 
-```
-UPDATE contacts SET email='newmail@update.com' 
+```text
+UPDATE contacts SET email='newmail@update.com'
 WHERE phone='1234\;drop table contacts\;';
 ```
 

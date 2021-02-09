@@ -84,7 +84,7 @@ print(random_aardman)
 
 Wanneer we dit runnen, krijgen we het volgende resultaat:
 
-```shell
+```console
 Naam: Aardman, Levens: 1, Hit points: 12
 Je bent 4 keer geraakt en hebt nog 8 hit points over
 Naam: Aardman, Levens: 1, Hit points: 8
@@ -115,7 +115,7 @@ print(shagrat)
 
 Dat levert het volgende resultaat op:
 
-```shell
+```console
 Naam: Aardman, Levens: 1, Hit points: 0
 ```
 
@@ -131,7 +131,7 @@ print("Gorbag - {}".format(gorbag))
 
 De volgorde van de parameters klopt niet helemaal, maar Python snapt de bedoeling.
 
-```shell
+```console
 Gorbag - Naam: Gorbag, Levens: 1, Hit points: 18
 ```
 
@@ -144,7 +144,7 @@ print(duergar)
 
 Resultaat:
 
-```shell
+```console
 Naam: Duergar, Levens: 1, Hit points: 23
 ```
 
@@ -176,7 +176,7 @@ gorbag.slaan()
 
 Resultaat:
 
-```shell
+```console
 Me Gorbag. Gorbag stomp you!
 ```
 

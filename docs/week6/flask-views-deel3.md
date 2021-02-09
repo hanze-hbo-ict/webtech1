@@ -2,7 +2,7 @@
 
 ## 3. `BasisCrud.py`
 
-Nu bekend is hoe een database opgezet kan een beetje gestoeid worden door een aantal basishandelingen uit te voeren.  
+Nu bekend is hoe een database opgezet kan een beetje gestoeid worden door een aantal basishandelingen uit te voeren.
 
 Denk erom, vaak worden de scripts op een andere wijze uitgevoerd. Het doel is hier om te laten zien op welke wijze CRUD-commando’s uitgevoerd worden. De Python-file die daarvoor gebruikt wordt, is het bestand [`BasisCRUD.py`](../bestanden/crud/BasicCRUD.py). Iedere basishandeling komt even voorbij. De opbouw geschiedt in een vijftal stappen:
 
@@ -32,7 +32,7 @@ print(*alle_cursisten, sep='\n')
 
 Dit levert het volgende resultaat op:
 
-```shell
+```console
 Cursist Joyce is 40 jaar oud
 Cursist Bram is 24 jaar oud
 Cursist Elsje is 19 jaar oud
@@ -49,7 +49,7 @@ print(cursist_twee.leeftijd)
 
 Gegevens van cursist 2:
 
-```shell
+```console
 Cursist Bram is 24 jaar oud
 24
 ```
@@ -86,7 +86,7 @@ Dit spreekt voor zich: record ophalen, verwijderen, en aanpassing vastleggen.
 
 Na het aanpassen en verwijderen zijn onderstaande gegevens overgebleven in de database:
 
-```shell
+```console
 Cursist Elsje is 19 jaar oud
 Cursist Joyce is 40 jaar oud
 Cursist Bram is 24 jaar oud

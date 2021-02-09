@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
 Resultaat:
 
-```shell
+```console
 Wauwwww, dit is fun
 ```
 
