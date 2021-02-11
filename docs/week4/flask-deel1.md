@@ -19,10 +19,10 @@ Een voorbeeld:
 ```html
 <html>
     <head>
-        <title> {{titel}} </title>
+        <title>{{ titel }}</title>
     </head>
     <body>
-        <h1> Hallo {{gebruikersnaam}} </h1>
+        <h1>Hallo {{ gebruikersnaam }}</h1>
     </body>
 </html>
 ```

@@ -11,16 +11,16 @@ Op [Wikipedia](https://nl.wikipedia.org/) kan eenieder de geboortedatum zien van
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="xx.css" />
-</head>
-<body>
-    <h2>Tekst</h2>
-    <p class="">
-    Naam
-    Waardoor bekend (geboortejaar)
-    </p>
-</body>
+    <head>
+        <link rel="stylesheet" href="xx.css" />
+    </head>
+    <body>
+        <h2>Tekst</h2>
+        <p class="">
+        Naam
+        Waardoor bekend (geboortejaar)
+        </p>
+    </body>
 </html>
 ```
 

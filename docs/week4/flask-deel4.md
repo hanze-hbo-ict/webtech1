@@ -4,9 +4,9 @@ Tot dusverre is de HTML-pagina alleen handmatig aangestuurd via een Python-strin
 
 Sjablonen kunnen eenvoudig worden weergeven door de functie `render_template` uit flask te importeren en vervolgens een .html-bestand te retourneren vanuit onze view-functie.
 
-## Tijd voor een voorbeeld.
+## Tijd voor een voorbeeld
 
-Voordat de code besproken kan worden, dient er een tweetal folders aangemaakt te worden. Zoals vermeld gaat Flask op zoek naar de map `templates`, waar de templates ondergebracht gaan worden. Die map is er nog niet. Ten tweede een folder om plaatjes in op te bergen om de sites op te leuken (deze directory noemen we `static`). De folders dienen op dezelfde hoogte in de directory te staan als de Python-files. 
+Voordat de code besproken kan worden, dient er een tweetal folders aangemaakt te worden. Zoals vermeld gaat Flask op zoek naar de map `templates`, waar de templates ondergebracht gaan worden. Die map is er nog niet. Ten tweede een folder om plaatjes in op te bergen om de sites op te leuken (deze directory noemen we `static`). De folders dienen op dezelfde hoogte in de directory te staan als de Python-files.
 
 Voor het voorbeeld wordt er een afbeelding ‘drums.jpg’ in de folder `static` geplaatst en een HTML-file aangemaakt in de folder `templates`. De totale directory-listing ziet er dan als volgt uit:
 
@@ -17,19 +17,19 @@ De template met de naam `Basic.html` heeft de onderstaande inhoud. Deze code moe
 ```html
 <!DOCTYPE html>
 <html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Basic</title>
-</head>
-<body>
-    <h1>Hallo</h1>
-    <h2>Dit drumstel wordt gebruikt tijdens de lessen.</h2>
-    <img src="../static/drums.jpg" width="600" height="400">
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Basic</title>
+    </head>
+    <body>
+        <h1>Hallo</h1>
+        <h2>Dit drumstel wordt gebruikt tijdens de lessen.</h2>
+        <img src="../static/drums.jpg" width="600" height="400">
+    </body>
 </html>
 ```
 
-## Renderen van de template 
+## Renderen van de template
 
 We maken nu in de bovenste directory van ons project (`Flask`) een python-bestand dat deze template gaat renderen wanneer er vanuit een client een specifieke request wordt gedaan. Nu tijd om een Python-file (eerste.py) aan te maken die deze template gaat inlezen. Om dit voor elkaar te krijgen, moeten we behalve de klasse `Flask` de functie `render_template` importeren. Vervolgens maken we opnieuw een *instantie* van de klasse `Flask`.
 
@@ -57,20 +57,20 @@ Met behulp van `render_template` is het mogelijk om direct een HTML-bestand te r
 
 ## Doorsturen van variabelen
 
-Wat het eigenlijke doel is, is een manier te vinden om de Python-code uit de app aan te kunnen passen door variabelen en logica te wijzigen en bij te werken, en die verse informatie vervolgens naar de HTML-template te sturen. En dan komt de *Jinja-template engine* in beeld. Met Jinja-sjablonen is het mogelijk variabelen rechtstreeks uit de Python-code in het HTML-bestand in te voegen. 
+Wat het eigenlijke doel is, is een manier te vinden om de Python-code uit de app aan te kunnen passen door variabelen en logica te wijzigen en bij te werken, en die verse informatie vervolgens naar de HTML-template te sturen. En dan komt de *Jinja-template engine* in beeld. Met Jinja-sjablonen is het mogelijk variabelen rechtstreeks uit de Python-code in het HTML-bestand in te voegen.
 
 
 De syntax voor het invoegen van een variabele is `{{ variabele }}`. Bekijk de onderstaande template:
 
-```python hl_lines="7"
+```html hl_lines="7"
 <html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Voorbeeld</title>
-</head>
-<body>
-    <h1>Hallo {{naam}}</h1>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Voorbeeld</title>
+    </head>
+    <body>
+        <h1>Hallo {{ naam }}</h1>
+    </body>
 </html>
 ```
 
@@ -102,22 +102,21 @@ def demo():
     naam ="Joyce"
     letters = list(naam)
     cur_dictionary = {'1234': "Sietse"}
+
     # voor de duidelijkheid zetten we hier de verschillende variabelen onder elkaar
     # dat hoeft natuurlijk niet per se...
-
-    return render_template('voorbeeld01.html', 
-                    naam=naam, 
-                    letters=letters,
-                    cur_dictionary=cur_dictionary)
-
+    return render_template('voorbeeld01.html',
+                            naam=naam,
+                            letters=letters,
+                            cur_dictionary=cur_dictionary)
 ```
 
 Als we dan de template als volgt aanpassen
 
 ```html
-<h1>Hallo {{naam}}</h1>
-<h1>{{letters}}</h1>
-<h1>{{cur_dictionary}}</h1>
+<h1>Hallo {{ naam }}</h1>
+<h1>{{ letters }}</h1>
+<h1>{{ cur_dictionary }}</h1>
 ```
 
 Krijgen we het onderstaande resultaat:
@@ -126,10 +125,10 @@ Krijgen we het onderstaande resultaat:
 
 Deze uitkomst is één van de vele mogelijkheden om variabelen toe te voegen aan een HTML-bestand. Wanneer alleen de laatste twee letters van de naam en uitsluitend de naam van de student zichtbaar moet zijn, dient de template een wijziging te ondergaan.
 
-```
-<h1>Hallo {{naam}}</h1>
-<h1>{{letters[3:]}}</h1>
-<h1>{{cur_dictionary['1234']}}</h1>
+```html
+<h1>Hallo {{ naam }}</h1>
+<h1>{{ letters[3:] }}</h1>
+<h1>{{ cur_dictionary['1234'] }}</h1>
 ```
 
 ## Control flow
@@ -144,9 +143,9 @@ Stel, er is een lijstvariabele aan de HTML doorgegeven. In plaats van de hele li
 
 ```html
 <ul>
-  {% for item in mylist %}
+{% for item in mylist %}
     <li> {{ item }} </li>
-  {% endfor %}
+{% endfor %}
 </ul>
 ```
 
@@ -156,8 +155,8 @@ Een voorbeeld. Een opsomming van een drietal cursisten. Joyce en Sietze zijn al 
 
 ```python
 @app.route('cursisten')
-def cursisten(): 
-    cursisten = ['Joyce','Sietze','Carla'] 
+def cursisten():
+    cursisten = ['Joyce','Sietze','Carla']
     return render_template('cursisten_template.html',
                            cursisten=cursisten)
 ```
@@ -166,18 +165,19 @@ De template:
 
 ```html
 <html>
-<head>
-    <meta charset="utf-8">
-    <title></title>
-</head>
-<body>
-<p>De cursisten met een lus naar het scherm:</p>
-<ul>
-    {% for cur in cursisten %}
-    <li>{{cur}}</li>
-    {% endfor %}
-</ul>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <p>De cursisten met een lus naar het scherm:</p>
+        <ul>
+        {% for cur in cursisten %}
+            <li>{{ cur }}</li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>
 ```
 
 En dan het resultaat:
@@ -193,9 +193,9 @@ We breiden onze eerdere template uit met de onderstaande code:
 ```html
 <h2>Komt Carla voor in de lijst?</h2>
 {% if 'Carla' in cursisten %}
-      <p>Carla komt in de lijst voor.</p>
+    <p>Carla komt in de lijst voor.</p>
 {% else %}
-      <p>Hmm, Carla komt blijkbaar niet in de lijst voor.</p>
+    <p>Hmm, Carla komt blijkbaar niet in de lijst voor.</p>
 {% endif %}
 ```
 

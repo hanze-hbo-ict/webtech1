@@ -19,7 +19,7 @@ Tot nu toe is er geprogrammeerd volgens het imperatieve paradigma. Een programma
 
 OOP (*Object Oriented Programming*) is een programmeerstijl (of *paradigma*) waarbij logische objecten gemaakt worden die methodes (functies, acties of gebeurtenissen) en eigenschappen (waarden) hebben. De bedoeling is dat dit leidt tot meer leesbare en herbruikbare code. Conceptueel bestaat een programma uit objecten die aangemaakt worden en met elkaar interacteren.
 
-Het is niet zo dat beide stijlen onafhankelijk van elkaar functioneren. Binnen OOP wordt gebruikt gemaakt van de imperatieve coderingswijze en bij het imperatieve paradigma komen objecten regelmatig voor, zonder dat een gebruiker er vaak weet van heeft. 
+Het is niet zo dat beide stijlen onafhankelijk van elkaar functioneren. Binnen OOP wordt gebruikt gemaakt van de imperatieve coderingswijze en bij het imperatieve paradigma komen objecten regelmatig voor, zonder dat een gebruiker er vaak weet van heeft.
 
 ## Klasse-definitie
 
@@ -27,7 +27,7 @@ Om te beginnen een simpel voorbeeld om het principe van klassen en methoden uit 
 
 ```ipython
 In [1]: class Kroket:
-   ...: 
+   ...:
 ```
 
 Een klasse wordt gedefinieerd door het woord `class`, gevolgd door de naam van de klasse, beginnend met een hoofdletter. De klassedefinitie wordt afgesloten met een dubbele punt (`:`).
@@ -39,7 +39,7 @@ Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze cl
    ...:         self.leverancier = leverancier
    ...:         self.prijs = prijs
    ...:         self.trek = False
-   In [2]: 
+   In [2]:
 ```
 
 Het zijn er drie (3), `leverancier`, `prijs` en `trek`. Bij `trek = True` wordt de kroket ondergedompeld in het vet. De notatie `self` lijkt nu nog wat vreemd, maar dat went snel; zie eventueel [deze blogpost](https://www.geeksforgeeks.org/self-in-python-class/) voor meer informatie rondom `self`.
@@ -59,7 +59,7 @@ Out[4]: 'Kwekkeboom'
 In [5]: kwek.prijs
 Out[5]: 2.5
 
-In [6]: 
+In [6]:
 ```
 
 Uiteraard kunnen er meerdere objecten bij deze klasse worden aangemaakt. Een tweede firma die kroketten verkoopt is Van Dobben.
@@ -75,7 +75,7 @@ In [7]: print("Fabrikanten: {} = {}, {} = {}"
    ...:     .format(kwek.leverancier, kwek.prijs, dob.leverancier, dob.prijs))
 Fabrikanten: Kwekkeboom = 2.5, Van Dobben = 2.35
 
-In [8]: 
+In [8]:
 ```
 
 Voor de overzichtelijkheid eerst een aantal beschrijvingen:
@@ -89,13 +89,13 @@ Initialisatie | 	een nieuw object van een klasse.
 Methode | een functie gedefinieerd in een klasse.
 Attribuut | een variabele die is gebonden aan een object van een klasse.
 
-## Kroketten in het vet 
+## Kroketten in het vet
 
 We breiden de definitie van `Kroket` uit met een tweede methode `in_frituur()`. Het woord `self` moet je altijd aan een methode-definitie toevoegen, zelfs wanneer de methode zelf verder helemaal geen parameters heeft.
 
 Deze methode laat de frituur weten dat er moet gebakken worden. De waarde van trek wijzigt naar `True`.
 
-```
+```python
 def in_frituur(self):
     self.trek = True
 ```
@@ -120,21 +120,21 @@ In [4]: dob.in_frituur()
 In [5]: dob.trek
 Out[5]: True
 
-In [6]: 
+In [6]:
 ```
 
 Bij het aanmaken van het object `dob` is de status `False` meegegeven. Het aanroepen van de methode `in_frituur()` zorgt er voor dat trek de status `True` krijgt.
 
 Vaak zijn er meerdere opties het gewenste resultaat te bereiken. Ook hier, alleen nu voor het object `kwek`:
 
-```
+```python
 Kroket.in_frituur(kwek)  # optie 1
 kwek.in_frituur()        # optie 2
 ```
 
 ## Constructors
 
-Nog een belangrijk begrip bij het werken met OOP betreft de `constructor`. Deze worden gebruikt om een object op de juiste manier in te stellen wanneer het wordt aangemaakt. 
+Nog een belangrijk begrip bij het werken met OOP betreft de `constructor`. Deze worden gebruikt om een object op de juiste manier in te stellen wanneer het wordt aangemaakt.
 
 In Python heeft een constructor altijd de vorm `__init__(self)`. Eventueel kun je ook meerdere parameters aan de constructor meegeven; die geef je dan aan achter de standaard-parameter `self`.
 
@@ -147,7 +147,7 @@ Het is ook mogelijk om *object* extra eigenschappen mee te geven nadat deze is g
 
 Als voorbeeld geven we hieronder een extra attribuut `waardering` aan het object `kwek`. Je zult zien dat deze eigenschap niet eveneens beschikbaar is bij het object `dob`:
 
-```
+```python
 kwek.waardering = 6.5
 print(kwek.waardering)
 print(dob.waardering)
@@ -169,7 +169,7 @@ AttributeError                            Traceback (most recent call last)
 
 AttributeError: 'Kroket' object has no attribute 'waardering'
 
-In [10]: 
+In [10]:
 ```
 
 ## Klasse-attributen
@@ -177,7 +177,7 @@ In [10]:
 Naast de attributen die meegegeven worden aan elke nieuwe instantie, is het ook mogelijk de klasse attributen mee te geven:
 
 ```python
-class Kroket(object): 
+class Kroket:
     soort = "rundvleeskroket"
 
     #rest van de definitie is weggelaten
@@ -187,7 +187,7 @@ Met de *dunder* `__dict__` kan bekeken worden wat de specifieke inhoud is van el
 
 ```ipython
 In [10]: Kroket.__dict__
-Out[10]: 
+Out[10]:
 mappingproxy({'__module__': '__main__',
               'soort': 'rundvleeskroket',
               '__init__': <function __main__.Kroket.__init__(self, leverancier, prijs)>,
@@ -202,7 +202,7 @@ Out[11]: {'leverancier': 'Van Dobben', 'prijs': 2.35, 'trek': True}
 In [12]: kwek.__dict__
 Out[12]: {'leverancier': 'Kwekkeboom', 'prijs': 2.5, 'trek': False, 'waardering': 6.5}
 
-In [13]:  
+In [13]:
 ```
 
 De klasse zelf bevat erg veel eigenschappen terwijl de beide objecten alleen de instantievariabelen laten zien, waarbij `kwek` er eentje meer toont, wat logisch is.
@@ -222,7 +222,7 @@ Out[15]: 'groentekroket'
 In [16]: kwek.soort
 Out[16]: 'groentekroket'
 
-In [17]: 
+In [17]:
 ```
 
 Het resultaat is niet echt verrassend: de wijziging in de klasse vindt ook z'n weg naar de instanties die van deze klasse zijn gemaakt.
@@ -239,7 +239,7 @@ Out[18]: 'Granalenkroket'
 In [19]: dob.soort
 Out[19]: 'groentekroket'
 
-In [20]: 
+In [20]:
 ```
 
 De uitkomst laat zien dat het specifieke klasse attribuut voor `kwek` is gewijzigd. Het waarom kan uitgelegd worden door te verwijzen naar de terminologie omtrent `global` en `local`. Het klasse-attribuut zal gelden voor *ieder object* tenzij er lokaal bij het object (de instantie) wijzigingen worden doorgevoerd. De werkwijze is altijd zo dat er eerst wordt gekeken welke eigenschappen met het object worden meegegeven en daarna of er ook nog eigenschappen gelden op een hoger niveau.

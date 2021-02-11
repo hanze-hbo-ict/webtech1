@@ -1,12 +1,12 @@
 # Flask en SQL - Relaties
 
-Bij grotere projecten zijn altijd meerdere modellen (tabellen) beschikbaar. Die modellen hebben een relatie met elkaar. Tot nu toe is er gewerkt met `Cursist` als model. Daarnaast bestaat er ook een model `Instrument`, waar de gegevens van de instrumenten beheerd worden, waarin de muziekschool lesgeeft. Een derde model wat erg voor de hand ligt is `Docent`. Docenten geven les aan cursisten om hen een instrument te leren bespelen. 
+Bij grotere projecten zijn altijd meerdere modellen (tabellen) beschikbaar. Die modellen hebben een relatie met elkaar. Tot nu toe is er gewerkt met `Cursist` als model. Daarnaast bestaat er ook een model `Instrument`, waar de gegevens van de instrumenten beheerd worden, waarin de muziekschool lesgeeft. Een derde model wat erg voor de hand ligt is `Docent`. Docenten geven les aan cursisten om hen een instrument te leren bespelen.
 
 In deze demonstratie is het uitgangspunt dat cursisten meerdere instrumenten kunnen leren bespelen en dat de lessen door een enkele docent gegeven worden. Om de boel op dit moment niet nodeloos complex te maken, stellen we even dat een instrument maar door één cursist kan woorden bespeelt. Het strokendiagram van de database wordt dan als volgt:
 
 ![Strokendiagram van de database](imgs/strokendiagram.png)
 
-### Sleutels 
+### Sleutels
 
 Om relaties te kunnen begrijpen is het nodig nog even kort aandacht te besteden aan een tweetal belangrijke termen, de primaire sleutel (__primary key__) en de refererende sleutel (__foreign key__).
 
@@ -78,15 +78,15 @@ Er wordt wat nader ingegaan op de relatie-aspecten. Aangegeven is dat de relatie
 instrumenten = db.relationship('Instrument',backref='cursist',lazy='dynamic')
 ```
 
-In de variabele `instrumenten` wordt vastgelegd dat binnen deze database er een relatie bestaat naar `Instrument` toe en dat er voor de methode `lazy=’dynamic’` gekozen is. 
+In de variabele `instrumenten` wordt vastgelegd dat binnen deze database er een relatie bestaat naar `Instrument` toe en dat er voor de methode `lazy=’dynamic’` gekozen is.
 
-De lazy-parameter bepaalt hoe de gerelateerde objecten worden geladen bij het doorzoeken van relaties. Er kan uit vier (4) verschillende opties gekozen worden. In de meeste gevallen wordt er een keuze voor `‘dynamic’` gemaakt. De andere drie mogelijke parameterinvullingen zijn: 
+De lazy-parameter bepaalt hoe de gerelateerde objecten worden geladen bij het doorzoeken van relaties. Er kan uit vier (4) verschillende opties gekozen worden. In de meeste gevallen wordt er een keuze voor `‘dynamic’` gemaakt. De andere drie mogelijke parameterinvullingen zijn:
 
 - `select` (of `True`)
-- `joined` (of `False`) 
+- `joined` (of `False`)
 - `subquery`
-  
-Nu het uitgangspunt is dat er tussen docent en cursist een één-op-één relatie bestaat, moet hier nu ingevuld worden `uselist=False`. Een cursist kan niet meer dan één docent als leraar hebben en een docent maar één cursist. 
+
+Nu het uitgangspunt is dat er tussen docent en cursist een één-op-één relatie bestaat, moet hier nu ingevuld worden `uselist=False`. Een cursist kan niet meer dan één docent als leraar hebben en een docent maar één cursist.
 De klasse `Cursist` krijgt ook nog de beschikking over de volgende methoden:
 
 ```python
@@ -145,10 +145,10 @@ Tot zover de code van de file `models.py`. Om de database aan te maken en om de 
 - Stel de omgevingsvariabele FLASK_APP in
     - Voor een MacOS / Linux-machine is dat `export FLASK_APP = models.py`
     - Voor een Windows-machine `set FLASK_APP = models.py`
-- `flask db init ` 
-- `flask db migrate -m "zomaar eenbericht"` 
-- `flask db upgrade` 
-  
+- `flask db init`
+- `flask db migrate -m "zomaar een bericht"`
+- `flask db upgrade`
+
 ## Demonstratie
 Nu de tabel is aangemaakt kunnen er gegevens ingebracht worden. Voor deze demonstratie gebruiken we de file [`populate_database.py`](../bestanden/relaties/populate_database.py):
 
@@ -166,7 +166,7 @@ db.session.commit()
 # Ter controle een print van alle cursisten, met de teksten van __repr__ uit Cursist
 print(Cursist.query.all())
 
-# Vind alle cursisten met de naam “Joyce", 
+# Vind alle cursisten met de naam “Joyce",
 # worden er meerdere gevonden in de lijst , dan alleen de eerste daarom index [0]
 # Kan ook gevonden worden door .first() te gebruiken i plaats van  .all()[0]
 joyce = Cursist.query.filter_by(naam='Joyce').all()[0]
@@ -198,7 +198,7 @@ print(joyce.overzicht_instrumenten())
 
 Na het runnen is dit het resultaat:
 
-```shell
+```console
 [Cursist Joyce heeft nog geen docent toegewezen gekregen, Cursist Bram heeft nog geen docent toegewezen gekregen]
 Cursist Joyce heeft David als docent
 Mijn instrumenten:

@@ -1,5 +1,4 @@
-class Vleugel(object):
-
+class Vleugel:
     def __init__(self, ratio):
         self.ratio = ratio
 
@@ -12,8 +11,7 @@ class Vleugel(object):
             print("Ik denk dat ik maar weer gewoon ga waggelen")
 
 
-class Duck(object):
-
+class Duck:
     def __init__(self):
         self._vleugel = Vleugel(1.8)
 
@@ -30,8 +28,7 @@ class Duck(object):
         self._vleugel.vliegen()
 
 
-class Pinguin(object):
-
+class Pinguin:
     def lopen(self):
         print("Waggel, waggel, ik waggel ook")
 
@@ -41,8 +38,8 @@ class Pinguin(object):
     def kwaken(self):
         print("Kwaken? Lachen, ik ben een pinquin, hoor!")
 
-class Toom(object):
 
+class Toom:
     def __init__(self):
         self.toom = []
 
@@ -59,7 +56,8 @@ def test_duck(duck):
     duck.zwemmen()
     duck.kwaken()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     donald = Duck()
     donald.vliegen()
     # test_duck(donald)

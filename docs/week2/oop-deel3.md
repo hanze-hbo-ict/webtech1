@@ -16,14 +16,14 @@ class Song:
         title (str): De titel van de nummer.
         artist (Artist): Een object uit de klasse artist die de componist van het nummer is.
         duration (int): De duur van het nummer in seconden.  Waarde nul (0) is toegestaan.
-    """ 
+    """
 
    def __init__(self, title, artist, duration=0):
         self.title = title
         self.artist = artist
         self.duration = duration
 
-``` 
+```
 
 ## De klasse `Album`
 
@@ -31,18 +31,19 @@ In hetzelfde bestand maken we nu een tweede klasse: `Album`. Aan deze klasse kun
 
 ```python
 class Album:
-   
-    """ Klasse waarin Aibums vastgelegd worden, met gebruikmaking van de bijbehorende track-list
 
-   Attributen:
-       name (str): De naam van het album.
-       year (int): Het jaar waarin het album werd uitgebracht.
-       artist: (Artist): De artiest verbonden aan het album. Als er geen artiest bekend is, dan
-       krijgt de artist als defaultwaarde de naam "Various Artists".
-       tracks (List[Song]):  Een lijst met de nummers van het album.
+    """Klasse waarin Aibums vastgelegd worden, met gebruikmaking van de bijbehorende track-list
 
-   Methods:
-       add_song: Deze methode voert een nieuw nummer (song) toe aan de track-list.   """
+    Attributen:
+        name (str): De naam van het album.
+        year (int): Het jaar waarin het album werd uitgebracht.
+        artist: (Artist): De artiest verbonden aan het album. Als er geen artiest bekend is, dan
+        krijgt de artist als defaultwaarde de naam "Various Artists".
+        tracks (List[Song]):  Een lijst met de nummers van het album.
+
+    Methods:
+        add_song: Deze methode voert een nieuw nummer (song) toe aan de track-list
+    """
 
     def __init__(self, name, year, artist=None):
         self.name = name
@@ -57,7 +58,7 @@ class Album:
 
 Het is hier allemaal een beetje overdone, maar het idee is duidelijk.
 
-Aan deze klasse wordt nog een methode aan toegevoegd om de songs aan een album toe te kunnen voegen. 
+Aan deze klasse wordt nog een methode aan toegevoegd om de songs aan een album toe te kunnen voegen.
 
 ```python
 def add_song(self, song, position=None):
@@ -81,13 +82,15 @@ Er is al verwezen naar de klasse Artist, maar die bestaat op dit moment nog niet
 ```python
 class Artist:
     """Klasse om artiestgegevens op te slaan.
+
     Attributen:
         name (str): de naam van de artiest.
         albums (Lijst [Album]): een lijst met de albums van deze artiest.
                 De lijst bevat alleen die albums in deze verzameling, en is derhalve niet volledig.
 
     Methods:
-        add_album: wordt gebruikt om een nieuw album aan de albumlijst toe te voegen..   """
+        add_album: wordt gebruikt om een nieuw album aan de albumlijst toe te voegen..
+    """
     def __init__(self, name):
         self.name = name
         self.albums = []
@@ -99,15 +102,15 @@ Ook deze klasse moet de mogelijkheid hebben een album aan de lijst van een artie
 def add_album(self, album):
     """Voeg een nieuw album toe aan de lijst.
 
-     Argumenten:
-         album (Album): Een object van het type Album dat aan de lijst moet worden toegevoegd.
-             Als het album al aanwezig is, wordt het niet opnieuw toegevoegd 
-             (hoewel dit nog niet is geïmplementeerd).
+    Argumenten:
+        album (Album): Een object van het type Album dat aan de lijst moet worden toegevoegd.
+            Als het album al aanwezig is, wordt het niet opnieuw toegevoegd
+            (hoewel dit nog niet is geïmplementeerd).
      """
     self.albums.append(album)
 ```
 
-Qua ontwerp is het allemaal nog niet zo optimaal, maar daar kijken we later wel naar. 
+Qua ontwerp is het allemaal nog niet zo optimaal, maar daar kijken we later wel naar.
 
 ## Het tonen van gegevens
 
@@ -115,9 +118,9 @@ Tijd om gegevens te tonen. Het is niet de bedoeling ongelofelijk veel typewerk t
 
 ```python
 def load_data():
-      new_artist = None
-      new_album = None
-      artist_list = []
+    new_artist = None
+    new_album = None
+    artist_list = []
 ```
 
 Deze methode valt buiten een klasse. Hierin wordt een nieuw object van een artist en een album aangemaakt, maar deze krijgen de waarde ‘None’ mee. Tevens wordt er een lijst aangemaakt waarin de artiesten opgeslagen worden.
@@ -144,7 +147,7 @@ if __name__=='__main__':
 
 Er zijn te veel gegevens om allemaal te tonen; hier een klein stukje van het einde van de verzameling:
 
-```
+```console
 ... (680 regels)
 
 ZZ Top:Mescalero:2003:Que Lastima
@@ -152,7 +155,7 @@ ZZ Top:Mescalero:2003:Tramp
 ZZ Top:Mescalero:2003:Crunchy
 ZZ Top:Mescalero:2003:Dusted
 ZZ Top:Mescalero:2003:Liquor
-There are 28 artists 
+There are 28 artists
 ```
 
 <!---
@@ -160,12 +163,12 @@ There are 28 artists
 
 Aan het einde van de vorige paragraaf werd gebruik gemaakt van een file (`albums.txt`) om de data uit die file met behulp van de methode `load_data()` naar het scherm te schrijven. Het werken met een dergelijke testfile is prima om de werking van het programma te testen. Nog belangrijker is ervoor te zorgen dat het programma ook daadwerkelijk een gebruiker in staat stelt gegevens in te geven die vervolgens aan de juiste bestanden worden toegevoegd. Songs moeten aan een albumlijst toegevoegd kunnen worden en albums aan de artiestenlijst. En dat komt in deze paragraaf ter sprake.
 
-Nu kan de code opgemaakt worden om de gegevens netjes aan de juiste lijsten toe te voegen. Op het moment dat er geconstateerd wordt dat `new_artist` geen waarde heeft, wordt er een nieuw object voor gecreëerd. Vervolgens worden er eigenschappen toegekend aan dit object. 
+Nu kan de code opgemaakt worden om de gegevens netjes aan de juiste lijsten toe te voegen. Op het moment dat er geconstateerd wordt dat `new_artist` geen waarde heeft, wordt er een nieuw object voor gecreëerd. Vervolgens worden er eigenschappen toegekend aan dit object.
 
 ```python
 if new_artist is None:
     new_artist = Artist(artist_field)
-elif new_artist.name != artist_field: 
+elif new_artist.name != artist_field:
     new_artist.add_album(new_album)
     artist_list.append(new_artist)
     new_artist = Artist(artist_field)

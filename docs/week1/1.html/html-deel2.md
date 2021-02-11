@@ -45,7 +45,7 @@ Hieronder staat een voorbeeld van een eenvoudige HTML-pagina. Dit voorbeeld laat
     Alle voorbeelden die we in dit onderdeel laten zien, kun je [hier downloaden](../../bestanden/html.zip).
 
 ```html
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Muziekschool Sessions</title>
@@ -67,7 +67,7 @@ Wanneer je deze code opslaat en opent in een browser, krijg je het onderstaande 
     Normaliter maken we gebruik van een webserver om bestanden in je browser te laten zien. In de eerste drie weken openen we de bestanden gewoon via het file system. Vanaf week 4, wanneer we met Flask gaan werken, zullen we daadwerkelijk met een (ontwikkel)server gaan werken.
 
 
-De eerste regel `<!DOCTYPE HTML>`, oftewel *Document Type Definition* (DTD) is bedoeld om aan te geven door welke versie van HTML het document is opgebouwd.
+De eerste regel `<!DOCTYPE html>`, oftewel *Document Type Definition* (DTD) is bedoeld om aan te geven door welke versie van HTML het document is opgebouwd.
 
 Als tweede wordt de tag `<html>` ingezet om de browser te laten weten dat HTML-code wordt gebruikt. Zoals je ziet wordt deze tag aan het eind van de pagina weer afgesloten (met `</html>`).
 
@@ -100,7 +100,7 @@ Het is de bedoeling deze regel als paragraaf te gaan gebruiken. Dat kan geregeld
 Niet alle tags kunnen hier uitvoerig besproken worden (er zijn er te veel, en je kunt ze zelf ook maken), dus we richten ons hier op de meest gebruikte. Als eerste onderwerp worden de ‘HTML-koppen’ besproken. Met de elementen `h1` tot en met `h6` kan een titel (een *heading*) gegeven worden aan het document of een deel ervan. Daarvan is `h1` het hoogste niveau dat als eerste wordt gebruikt en `h6` het laagste niveau.
 
 ```html
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Headings</title>

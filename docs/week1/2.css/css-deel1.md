@@ -2,11 +2,11 @@
 
 Cascading Style Sheets (CSS) is de code die wordt gebruikt om webpagina’s van een stijl te voorzien. Net zoals HTML is CSS  niet echt een programmeertaal, maar het is ook niet echt een opmaaktaal zoals html. Je zou kunnnen zeggen dat het een *stijltaal* is: het stelt een ontwerper in staat om diverse stijlen en stijlvormen op geselecteerde elementen in een HTML-document toe te passen.
 
-Hieronder zie je een stukje css. Deze code zorg ervoor dat de tekst van alle paragrafen (alles met het element `<p>`) *rood* wordt weergegeven. 
+Hieronder zie je een stukje css. Deze code zorg ervoor dat de tekst van alle paragrafen (alles met het element `<p>`) *rood* wordt weergegeven.
 
-```
+```css
 p {
-  color: red;
+    color: red;
 }
 ```
 
@@ -16,19 +16,19 @@ p {
 Je kunt css in het html-bestand zelf schrijven, maar je kunt het ook in een separaat bestand opslaan. Die laatste methode is wel makkelijker, omdat je op die manier dezelfde *stylesheet* in verschillende hmlt-bestanden kunt gebruiken. Om ervoor te zorgen dat een html-bestand gebruik kan maken van een css-bestand, moet je een koppeling tussen deze twee aanbrengen. Dat doe je in de `header` van het html-bestand (dus tussen `<head>` en `</head>`).
 
 
-```
-<!DOCTYPE HTML>
-<html> 
-    <head> 
-        <title>Test CSS</title> 
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test CSS</title>
         <!-- met deze regel koppelen we de stylesheet aan deze html -->
         <link href="stijl.css" rel="stylesheet" type="text/css">
-    </head> 
-    <body>        
+    </head>
+    <body>
         <p>Muziek maken is een leuke hobby!</p>
         Meld je aan voor een passende cursus.
         <p>Vul het aanmeldingsformulier in!</p>
-    </body> 
+    </body>
 </html>
 ```
 
@@ -44,7 +44,7 @@ Alle tekst opgenomen binnen een paragraaf heeft daadwerkelijk een rode kleur gek
 
 ## De anatomie van css-regels
 
-Voordat er dieper op de materie wordt ingegaan aandacht voor de anatomie van een set CSS-regels. 
+Voordat er dieper op de materie wordt ingegaan aandacht voor de anatomie van een set CSS-regels.
 
 ![CSS rules](imgs/css_anatomie.png)
 
@@ -62,38 +62,39 @@ De syntax van een CSS-file kent nog een paar belangrijke items:
 
 In het voorbeeld kregen teksten van alle paragrafen een rode kleur. Er zijn meerdere manieren om kleur aan stijlelementen mee te geven.
 
-```
+```html
  <h1>Dit is een koptekst</h1>
 
  <p>Laat maar eens een lijstje zien!</p>
  <ol>
-   <li>Appel</li>
-   <li>Banaan</li>
-   <li>Citroen</li>
+    <li>Appel</li>
+    <li>Banaan</li>
+    <li>Citroen</li>
  </ol>
 
- <h4>Koptekst four fun</h4> 
+ <h4>Koptekst four fun</h4>
 ```
 
-```
+```css
 p {
-    color:red;
+    color: red;
 }
 
 h1{
-  color: blue;
+    color: blue;
 }
 
 li {
-  color: rgb(100,200,50);
+    color: rgb(100,200,50);
 }
 ```
+
 ![Multistyle](imgs/multistyle.png)
 
 !!! info "Single line of multiline"
-    Zoals veel onderwerpen in de software engineering bestaat er een uitgebreide discussie over de vraag of de css-regels onder elkaar (*multiline*) of achter elkaar (*single line*) moet zetten – zie [deze link](https://www.newmediacampaigns.com/page/single-line-vs-multi-line-css-a-tool-to-end-the-debate) (en de daar genoemde verdere links) voor een fraai overzicht van deze discussie. Voor beide manieren is iets te zeggen. Ons advies zou zijn om je hier een eigen mening over te vormen en je daaraan te houden. 
+    Zoals veel onderwerpen in de software engineering bestaat er een uitgebreide discussie over de vraag of de css-regels onder elkaar (*multiline*) of achter elkaar (*single line*) moet zetten – zie [deze link](https://www.newmediacampaigns.com/page/single-line-vs-multi-line-css-a-tool-to-end-the-debate) (en de daar genoemde verdere links) voor een fraai overzicht van deze discussie. Voor beide manieren is iets te zeggen. Ons advies zou zijn om je hier een eigen mening over te vormen en je daaraan te houden.
 
-Er zijn *heel veel* (letterlijk honderden) attributen die je door middel van css kunt styleren. Bekijk [de uitgebreide documentatie op MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) om hier een beeld van te krijgen.  
+Er zijn *heel veel* (letterlijk honderden) attributen die je door middel van css kunt styleren. Bekijk [de uitgebreide documentatie op MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) om hier een beeld van te krijgen.
 
 ## Kleuren
 
@@ -101,15 +102,15 @@ Zoals je ziet kun je in css gewoon de naam van een kleur opgeven. Dit betreft zo
 
 De tweede manier van kleurtoewijzing, die je in het voorbeeld hierboven bij `li` ziet toegepast, is met de `rgb()`-methode. Door aan virtuele knoppen te draaien kunnen de waarden voor rood (r), groen (g) en blauw (b) aangepast worden, net zo lang tot de gewenste kleur gevonden is.
 
-Als het lastig is om een geschikte kleur te vinden kan Google uitkomst brengen. Door de zoekterm “hex color” in te geven, wordt een tool geopend waar de gewenste kleur gekozen en gekopieerd kan worden naar de CSS-file. 
+Als het lastig is om een geschikte kleur te vinden kan Google uitkomst brengen. Door de zoekterm “hex color” in te geven, wordt een tool geopend waar de gewenste kleur gekozen en gekopieerd kan worden naar de CSS-file.
 
 ![Color picker](imgs/colorpicker.png)
 
 Zoals je hier ziet, kun je die `rgb()`-waarde ook weer in een hexadecimale notatie weergeven (weet je nog hoe dat zat? We hebben het er in thema 1.1 uitgebreid over gehad). In dat geval laat je de waarde vooraf gaan door een hashtag (`#`).
 
-```
-p{
-  color: #eba134;
+```css
+p {
+    color: #eba134;
 }
 ```
 

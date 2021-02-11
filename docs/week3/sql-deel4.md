@@ -7,7 +7,7 @@ Hoogste tijd om SQL te gebruiken in Python. Het mooie van Python is dat bij de i
 Als een Python-file gekoppeld dient te worden aan een SQLite-database, moet als eerste SQLite geïmporteerd worden. De tweede stap is bekend te maken met welke database de Python-file gekoppeld gaat worden. Hieronder worden beide stappen weergegeven:
 
 
-```ipyton
+```ipython
 In [1]: import sqlite3
 In [2]: db = sqlite3.connect("contacts.sqlite")
 ```
@@ -59,10 +59,10 @@ Na het runnen van deze regels is de database aangemaakt en zijn de records toege
 In [6]: cursor = db.cursor()
 
 In [7]: cursor.execute("SELECT * FROM contacts")
-Out[7]: <sqlite3.Cursor at 0x10c06bab0> 
+Out[7]: <sqlite3.Cursor at 0x10c06bab0>
 ```
 
-De opgevraagde rijen zijn nu benaderbaar via de cursor. We kunnen hier gebruik maken van een `for`-lus om deze gegevens één voor één af te drukken. 
+De opgevraagde rijen zijn nu benaderbaar via de cursor. We kunnen hier gebruik maken van een `for`-lus om deze gegevens één voor één af te drukken.
 
 ```ipython
 In [8]: for row in cursor:
@@ -95,7 +95,7 @@ Moeten de gegevens als een lijst getoond worden is daar de methode `fetchall()` 
 
 ```ipython
 In [10]: cursor.fetchall()
-Out[10]: 
+Out[10]:
 [('Bart', 1234567, 'bart@org.nl'),
  ('Henk', 7654321, 'henk@org.nl'),
 ```
