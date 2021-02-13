@@ -21,11 +21,8 @@ class DocType(Tag):
 
 class Head(Tag):
 
-    def __init__(self, title=None):
+    def __init__(self):
         super().__init__('head', '')
-        if title:
-            self._title_tag = Tag('title', title)
-            self.contents = str(self._title_tag)
 
 
 class Body(Tag):

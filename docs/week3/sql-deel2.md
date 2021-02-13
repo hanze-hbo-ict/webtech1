@@ -107,12 +107,11 @@ Denk erom een `WHERE`-clausule toe te voegen om te voorkomen dat iedereen hetzel
 De enige nog niet besproken optie is het verwijderen van gegevens (`DELETE`). De gegevens van Kobus worden uit de tabel contacts verwijderd. Let er ook hier op een `WHERE`-clausule te gebruiken omdat anders alle records gewist worden.
 
 ```console
-sqlite> DELETE FROM contacts WHERE name='kobus';
+sqlite> DELETE FROM contacts WHERE name='Kobus';
 sqlite> SELECT * FROM contacts;
 name|phone|mail
 Bart|123456|bart@org.nl
 Henk|76543232|henk@org.nl
-Kobus|543219|kobus@org.nl
 Ilse|06-205 389|ilse@org.nl
 sqlite>
 ```

@@ -231,10 +231,10 @@ Nog een laatste test. Is het ook mogelijk voor `kwek` de inhoud van het attribuu
 
 ```ipython
 # Kwekkeboom wordt nu garnalenkroket
-In [17]: kwek.soort = "Granalenkroket"
+In [17]: kwek.soort = "Garnalenkroket"
 
 In [18]: kwek.soort
-Out[18]: 'Granalenkroket'
+Out[18]: 'Garnalenkroket'
 
 In [19]: dob.soort
 Out[19]: 'groentekroket'
