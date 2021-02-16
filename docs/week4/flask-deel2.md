@@ -8,7 +8,7 @@ In de kern is het belangrijkste doel van virtuele Python-omgevingen het creëren
 
 ## Stappenplan installatie:
 
-### Stap 1: open een command line 
+### Stap 1: open een command line
 
 ![Voorbeeld van een command-line in Windows](imgs/installatie-1.png)
 
@@ -19,15 +19,15 @@ In de kern is het belangrijkste doel van virtuele Python-omgevingen het creëren
 
 Maak een directory aan binnen deze folder en maak deze nieuwe directory actief. In het voorbeeld hieronder geven we de nieuwe directory de naam `venv`, maar je kunt hem elke naam geven die je wilt (`webtech` zou bijvoorbeeld ook handig zijn):
 
-```shell
+```console
 ~ $> mkdir venv
 ~ $> cd venv
-~/venv $> 
+~/venv $>
 ```
 
 ### Stap 3: het aanmaken van een virtuele omgeving.
 
-```shell
+```console
 $~/venv/> virtualenv Python3.7
 ```
 
@@ -43,7 +43,7 @@ Een flink rijtje bestanden, maar ongelukkigerwijze ontbreekt Flask nog. Om dat t
 
 In OS-X of Linux:
 
-```shell
+```console
 ~/venv $> source Python3.7/bin/activate
 (Python3.7)~/venv $>
 ```
@@ -52,11 +52,11 @@ In Windows:
 
 ![Installatie op Windows](imgs/installatie-3.png)
 
-### Stap 5: toevoegen module Flask. 
+### Stap 5: toevoegen module Flask.
 
 Om de module Flask te installeren maken we gebruik van `Python Package Installer`, oftewel [`pip`](https://pypi.org/project/pip/).
 
-```shell
+```console
 (Python3.7)~/venv $> pip install flask
 ```
 
@@ -66,24 +66,24 @@ Er wordt weer hard gewerkt achter de schermen en het eindresultaat mag er weer z
 
 Om te testen of het installeren goed is gegaan, proberen we het te importeren in de interactieve python-shell:
 
-```shell hl_lines="5"
+```console hl_lines="5"
 (Python3.7)~/venv $> python
-Python 3.7.6 (default, Dec 30 2019, 19:38:28) 
+Python 3.7.6 (default, Dec 30 2019, 19:38:28)
 [Clang 11.0.0 (clang-1100.0.33.16)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import flask
 >>> flask.__version__
 '1.1.2'
->>> 
+>>>
 ```
 
 ## Afsluiten van de virtuele omgeving
 
-Een meer gebruikelijke manier om de virtuele omgeving af te sluiten is met:
+Een gebruikelijke manier om de virtuele omgeving af te sluiten is met:
 
-```shell
+```console
 (Python3.7)~/venv $> deactivate
-~/venv $> 
+~/venv $>
 ```
 
 

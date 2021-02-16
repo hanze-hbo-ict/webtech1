@@ -12,49 +12,49 @@ Veel webinhoud bestaat uit lijsten en om die reden heeft HTML daar speciale elem
 
 Elk element binnen een lijst wordt ingebed door middel van een `<li>`-tag (van *list item*).
 
-```
-<body> 
-        <h2>Menu restaurant Eefje</h2>
-        <p>Voorgerechten</p>
-        <ul>
-            <li>Sashimi van tonijn</li>
-            <li>Wonton met gerookte zalm</li>
-            <li>Geitenkaas met rode uienchutney</li>
-        </ul>
-        <p>Hoofdgerechten</p>
-        <ol>
-            <li>Biefstuk Ossenhaas ‘De Roode Waard’</li>
-            <li>Kapucijners </li>
-            <li>Poké Bowl vegetarisch</li>
-        </ol>
-</body> 
+```html
+<body>
+    <h2>Menu restaurant Eefje</h2>
+    <p>Voorgerechten</p>
+    <ul>
+        <li>Sashimi van tonijn</li>
+        <li>Wonton met gerookte zalm</li>
+        <li>Geitenkaas met rode uienchutney</li>
+    </ul>
+    <p>Hoofdgerechten</p>
+    <ol>
+        <li>Biefstuk Ossenhaas ‘De Roode Waard’</li>
+        <li>Kapucijners </li>
+        <li>Poké Bowl vegetarisch</li>
+    </ol>
+</body>
 ```
 
 ![Lijsten](imgs/lists.png)
 
 Ook binnen een lijst kun je elementen nesten; je kunt dus ook een *list* in een *list* stoppen. Het kan daarbij handig zijn de nummering voor de geneste lijst afwijkend te maken. Geordende en ongeordende lijsten mogen daarbij ook door elkaar gebruikt worden.
 
-```
-<body> 
+```html
+<body>
     <h2>Programmeerkennis</h2>
     <ol>
-       <li>DBMS</li>
-       <li>Programmeertalen</li>
-           <ul>
-              <li>Python</li>
-              <li>Java</li>
-           </ul>
-    </ol>    
-</body> 
+        <li>DBMS</li>
+        <li>Programmeertalen</li>
+        <ul>
+            <li>Python</li>
+            <li>Java</li>
+        </ul>
+    </ol>
+</body>
 ```
 
 ![Geneste lists](imgs/geneste_lists.png)
 
 ## Attributen
 
-Afbeeldingen zijn een belangrijk onderdeel van veel webpagina's. Om een afbeelding toe te voegen aan het HTML-document wordt de tag `<img>` gebruikt. 
+Afbeeldingen zijn een belangrijk onderdeel van veel webpagina's. Om een afbeelding toe te voegen aan het HTML-document wordt de tag `<img>` gebruikt.
 
-```
+```html
 <img src="" alt="">
 ```
 
@@ -66,58 +66,58 @@ Behalve de url van het plaatje voegen we in de regel ook nog een `alt`-attribuut
 
 In de folder waar verder alle html-voorbeelden bewaard zijn, zijn ook afbeeldingen ondergebracht, onder meer `venazza.jpeg`, wat aan een webpagina wordt toegevoegd. De totale html wordt dan als volgt:
 
-```
-<body> 
+```html
+<body>
     <h1>Cinque terre</h1>
     <img src="venazza.jpeg" alt="Een afbeelding van Venazza">
- </body>    
+</body>
 ```
 ![Een file met een plaatje](imgs/venazza.png)
 
 Het `alt`-attribuut is handig voor mensen met een visuele beperking: op deze manier weet de spraaksoftware wat er moet worden uitgesproken wanneer er een plaatje op de pagina voorkomt. Maar ook tijdens het ontwikkelen kan het handig zijn, om bijvoorbeeld eenvoudig te achterhalen of je de bestandsnaam van de afbeelding goed hebt.
 
-```
-<body> 
-        <h1>Cinque terre</h1>
-        <img src="venazzo.jpg" alt="Ooops, verkeerd verbonden">
-</body> 
+```html
+<body>
+    <h1>Cinque terre</h1>
+    <img src="venazzo.jpg" alt="Ooops, verkeerd verbonden">
+</body>
 ```
 
 ![Wanneer het plaatje niet gevonden kan worden](imgs/verkeerd_verbonden.png)
 
 ## Div en span
 
-De elementen `<div>` en `<span>` gebruikt worden wanneer een stijl voor een deel van een document moet worden vastgelegd en dat deel niet tevens door een ander element ingesloten wordt. 
+De elementen `<div>` en `<span>` gebruikt worden wanneer een stijl voor een deel van een document moet worden vastgelegd en dat deel niet tevens door een ander element ingesloten wordt.
 
-De `<div>`-tag wordt vaak gebruikt om een stijl voor een groter deel van een document vast te leggen. Het geeft aan dat bepaalde elementen van je pagina bij elkaar horen (`div` staat ook voor [Content Division](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)). 
+De `<div>`-tag wordt vaak gebruikt om een stijl voor een groter deel van een document vast te leggen. Het geeft aan dat bepaalde elementen van je pagina bij elkaar horen (`div` staat ook voor [Content Division](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)).
 
 De `<span>`-tag lijkt erg op de `<div>`-tag, maar heeft als belangrijk verschil dat deze tag *inline* gebruikt kan worden. Waar een `<div>` normaliter gepaard gaat met een nieuwe regel ervoor en erna, kun je de `<span>`-tag gebruiken om onderdelen van de *lopende tekst* te stylen.
 
 Zowel een `<div>` als een `<span>` hebben vanuit zichzelf geen speciale style. Dit krijgen ze pas wanneer je deze style definieert, bijvoorbeeld met behulp van *stylesheets*, wat we volgende week zullen gaan doen. Je kunt ook gebruik maken van het `style`-attribuut. Zie het voorbeeld hieronder.
 
-```
-<body>         
-        <div style="color: red; background-color: white;">
-            <h2>Dit is tekst in H2</h2>
-            <p>Deze <span style="color: blue; background-color: white;">tekst</span> is ingesloten 	door het P element.</P>
-        </div>
-        <div style="color: green; background-color: yellow;">
-            <h3>Dit is tekst in H3</h3>
-            <p>Deze <span style="color: red; background-color: black;">tekst</span> is ingesloten 	door het P element.</P>
-        </div>
-</body> 
+```html
+<body>
+    <div style="color: red; background-color: white;">
+        <h2>Dit is tekst in H2</h2>
+        <p>Deze <span style="color: blue; background-color: white;">tekst</span> is ingesloten 	door het P element.</P>
+    </div>
+    <div style="color: green; background-color: yellow;">
+        <h3>Dit is tekst in H3</h3>
+        <p>Deze <span style="color: red; background-color: black;">tekst</span> is ingesloten 	door het P element.</P>
+    </div>
+</body>
 ```
 
 ![Divs en Spans](imgs/div_span.png)
 
-!!! info "Een vreemd voorbeeld?"
+!!! question "Een vreemd voorbeeld?"
     Het ziet er in eerste instantie misschien wat weird uit, deze kleurencombinatie, maar dit voorbeeld is bedoeld om aan te geven op welke wijze in de volgende paragrafen CSS en Bootstrap de opmaak van verschillende divisies op een webpagina invullen.
 
 ## De `Anchor`-tag
 
 Het World Wide Web dankt zijn spinachtige naam aan de overvloedige verbindingen die websites met één muisklik met elkaar verbinden. Dit maakt internet zo bijzonder. Links zijn te vinden in bijna alle webpagina's. Gebruikers kunnen op links klikken en hun weg vinden van pagina naar pagina. Er kunnen links ingebouwd worden naar andere websites, maar ook naar een andere pagina binnen dezelfde website of zelfs naar een andere plek op dezelfde pagina. Links worden aangebracht de ankertags `<a>` en `</a>` en hun attributen.
 
-```
+```html
 <a href="URL">Link tekst</a>
 ```
 
@@ -125,10 +125,10 @@ De bestemming van de link wordt gedefinieerd in het `href`-attribuut (van *hyper
 
 De pagina waar meer informatie te vinden is over de bijzondere vijf dorpen is bijvoorbeeld te vinden op het adres `https://www.cinqueterre.eu.com/nl/`. Ingevuld wordt dat dan:
 
-```
-<body> 
-        <a href="https://www.cinqueterre.eu.com/nl/">Informatie over de Cinque Terre</a>
-</body> 
+```html
+<body>
+    <a href="https://www.cinqueterre.eu.com/nl/">Informatie over de Cinque Terre</a>
+</body>
 ```
 
 ![Een pagina met een link](imgs/link.png)
@@ -139,19 +139,19 @@ Wanneer de bezoeker dan op de tekst "Informatie over de Cinque Terre" klikt, wor
 
 De link in het vorige voorbeeld is een zogenaamd *volledig pad*: er zit een volledige url achter de link. Je kunt ook gebruik maken van de locatie van het bestand waar de link zelf inzit, en het pad naar de gewenste pagina hier vanuit bepalen. Dat is een zogenaamd *relatief pad* (namelijk relatief ten opzichte van de huidige pagina).
 
-```
+```html
 <!-- bestand pagina1.html -->
-<body> 
+<body>
     Naar de <a href="pagina2.html">tweede</a> pagina
-</body> 
+</body>
 ```
 
-```
+```html
 <!-- bestand pagina2.html -->
 <!-- dit zit in dezelfde directory als bestand pagina1.html -->
-<body> 
+<body>
     Terug naar de <a href="1.html">eerste</a> pagina
-</body> 
+</body>
 ```
 
 !!! info "Commentaar in html"

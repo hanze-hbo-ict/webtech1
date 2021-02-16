@@ -7,17 +7,15 @@
 </head>
 
 <div class="container">
-
-    {% for mess in get_flashed_messages()  %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <button type="button" data-dismiss="alert" aria-label="Close" class="fade close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        {{mess}}
-    </div>
-    {% endfor %}
+    <!-- Zorg hier voor een flashed-message -->
 
     <form method="POST">
-        <!-- voeg hier de html toe om het formulier weer te geven -->
+        {{ form.hidden_tag() }}
+        <br>
+        {{ form.voornaam.label }} {{ form.voornaam() }}
+        <br>
+        {{ form.achternaam.label }} {{ form.achternaam() }}
+        <br>
+        {{ form.submit() }}
     </form>
 </div>

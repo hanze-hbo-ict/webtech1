@@ -4,14 +4,14 @@ In deze paragraaf wordt het werken met een database even losgelaten en worden de
 
 Er zijn twee verschillende soorten fouten die gevonden kunnen worden bij de uitvoering van een programma. De eerste soort is al meerdere keren naar voren gekomen, namelijk fouten in de code. Deze fouten kunnen opgelost worden door verbeteringen aan te brengen in de code. In het volgende voorbeeld is per ongelijk een is-gelijk-teken (`=`) gebruikt in plaats van een min-teken (`-`): één toets te ver. Bij het runnen wordt geconstateerd dat er een fout in de code zit en er verschijnt een foutmelding met een aanwijzing naar de fout.
 
-```iphython
+```ipython
 In [1]: x = 8 = 5
   File "<ipython-input-1-6ddc385bfffb>", line 1
     x = 8 = 5
        ^
 SyntaxError: can't assign to literal
 
-In [2]: 
+In [2]:
 ```
 
 Andere onverwachte fouten, bijvoorbeeld problemen in de flow, of het willen aanmaken van een database terwijl de beschikbare ruimte op is, leveren meestal een crash van het programma op. Het doel van exceptions is dit in goede banen te leiden.
@@ -40,12 +40,12 @@ Een interessante exception is de `RecursionError`. Recursie is natuurlijk al uit
 
 ```ipython
 In [1]: def factorial(n):
-   ...: #     n! kan gelezen worden als n*(n-1)!
+   ...:     # n! kan gelezen worden als n * (n - 1)!
    ...:     if n <= 1:
    ...:         return 1
    ...:     else:
-   ...:         return n * factorial(n-1)
-   ...: 
+   ...:         return n * factorial(n - 1)
+   ...:
 ```
 
 
@@ -76,12 +76,11 @@ In [7]: try:
    ...:     print(factorial(10_000))
    ...: except RecursionError:
    ...:     print("Dit programma kan zulke grote getallen niet handelen.")
-   ...: 
+   ...:
    ...: print("Programma beëindigd!")
-   ...: 
+   ...:
 Dit programma kan zulke grote getallen niet handelen.
 Programma beëindigd!
-
 ```
 
 Het codeblok wat vermeld staat onder `try` wordt normaal gesproken uitgevoerd. Op het moment dat er wordt waargenomen dat er een fout is ontstaan, wordt er automatisch gesprongen naar het codeblok onder `except`. De mededeling wordt getoond en het programma gestopt.
@@ -90,13 +89,13 @@ In de foutafwikkeling van dit programma  is ervan uitgegaan dat er slechts één
 
 ```ipython
 In [1]: def factorial(n):
-   ...: #     n! kan gelezen worden als n*(n-1)!
+   ...:     # n! kan gelezen worden als n * (n - 1)!
    ...:     if n <= 1:
    ...:         return 1
    ...:     else:
    ...:         print(n / 0)
-   ...:         return n * factorial(n-1)
-   ...: 
+   ...:         return n * factorial(n - 1)
+   ...:
 ```
 
 Als we deze code runnen, krijgen we natuurlijk dezelfde foutmelding als in het voorbeeld hierboven te zien:
@@ -119,16 +118,16 @@ ZeroDivisionError: division by zero
 
 Om dit op te vangen, kunnen we de *call* wat uitbreiden met een extra exceptie:
 
-```iphython hl_lines="5 6"
+```ipython hl_lines="5 6"
 In [3]: try:
    ...:     print(factorial(800))
    ...: except RecursionError:
    ...:     print("Dit programma kan zulke grote getallen niet handelen.")
    ...: except ZeroDivisionError:
    ...:     print("Delen door het getal nul (0) is niet mogelijk!")
-   ...: 
+   ...:
    ...: print("Programma beëindigd!")
-   ...: 
+   ...:
 
 Delen door het getal nul (0) is niet mogelijk!
 Programma beëindigd!
@@ -143,19 +142,7 @@ In [4]: try:
    ...:     print(factorial(1000))
    ...: except (RecursionError, OverflowError):
    ...:     print("Dit programma kan zulke grote getallen niet handelen.")
-   ...: 
+   ...:
 ```
 
 Op het moment dat één van beide uitzonderingen (`exceptions`)optreedt, verschijnt de melding die voor beide foutafhandelingen toepasselijk is. Deze methode is niet aan te bevelen voor de combinatie `RecursionError` en `ZeroDivisionError`, omdat beide een alternatieve foutmelding nodig hebben.
-
-
-
-
-
-
-
-
-
-
-
-

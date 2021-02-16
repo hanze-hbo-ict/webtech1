@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, session, flash
+
 # Zorg ook voor de juiste imports
 
 app = Flask(__name__)
@@ -7,9 +8,9 @@ app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 
 
 class InfoForm(FlaskForm):
-    voornaam = StringField('Wat is je voornaam?', validators=[DataRequired()])
-    achternaam = StringField('Wat is je achternaam?', validators=[DataRequired()])
-    submit = SubmitField('Verstuur')
+    pass
+    # Zorg hier voor een input-veld waarin de voor- en achternaam 
+    # ingevuld kunnen worden.
 
 
 @app.route('/', methods=['GET', 'POST'])

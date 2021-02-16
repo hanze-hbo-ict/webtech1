@@ -25,7 +25,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 ```
 
-Er worden een aantal extra elementen geïmporteerd van Flask, die zo nader uitgelegd worden. De velden die op het formulier voor gaan komen, worden als bekend verondersteld. 
+Er worden een aantal extra elementen geïmporteerd van Flask, die zo nader uitgelegd worden. De velden die op het formulier voor gaan komen, worden als bekend verondersteld.
 
 
 Van de validators wordt de klasse `DataRequired` opgehaald. Er zijn er nog veel meer, bijvoorbeeld email: een klasse die controleert of een ingevuld e-mailadres aan de eisen voldoet, met punt, extensie en @.
@@ -39,7 +39,7 @@ Volgende stap is weer het opzetten van het formulier:
 
 ```python
 class InfoForm(FlaskForm):
-    
+
     naam = StringField('Wat is je naam?',validators=[DataRequired()])
     vrouw  = BooleanField("Ben je een vrouw?")
     instrument = RadioField('Welk instrument wil je leren bespelen?', 	choices=[('ins_een','Gitaar'),('ins_twee','Drums')])
@@ -62,7 +62,7 @@ def index():
 
     form = InfoForm()
     if form.validate_on_submit():
-        
+
         session['naam'] = form.naam.data
         session['vrouw'] = form.vrouw.data
         session['instrument'] = form.instrument.data
@@ -76,11 +76,11 @@ def index():
 ```
 
 Een paar opmerkingen:
-Het lijkt erg veel op de code van de vorige paragraaf. Als eerste extra item wordt session gehanteerd. 
+Het lijkt erg veel op de code van de vorige paragraaf. Als eerste extra item wordt session gehanteerd.
 
 Een session-tabel is een kortstondige tijdelijke tabel waarin waarden bewaard kunnen worden om aan een andere pagina door te geven. Een mooi voorbeeld hiervan is een overzicht van bestellingen van artikelen op een website. Als een artikel in een winkelmandje beland is, kan het voorkomen dat er nog een artikel aangeschaft gaat worden. Wanneer naar de pagina gesprongen wordt om het tweede artikel nog een keer uitvoerig te bekijken, wordt wanneer er geen sessievariabelen benut worden, het mandje weer geleegd. De gegevens zijn dan niet ergens opgeslagen.
 
-Een tweede opvallend iets is dat er twee return-statements zijn aangewend. De laatste is nodig om de eerste keer een leeg formulier te tonen. 
+Een tweede opvallend iets is dat er twee return-statements zijn aangewend. De laatste is nodig om de eerste keer een leeg formulier te tonen.
 
 Het andere return-statement sluist de waarden gelijk door naar de viewfunctie met de naam ‘bedankt’. De ingevoerde gegevens zullen daar getoond worden. Dit is de volgende stap.
 
@@ -101,7 +101,7 @@ if __name__ == '__main__':
 ```
 
 ### HTML gedeelte
-Nu kunnen de HTML-formulieren ingevuld worden. 
+Nu kunnen de HTML-formulieren ingevuld worden.
 Als eerste `home1.html`:
 
 ```html
@@ -124,7 +124,7 @@ Als eerste `home1.html`:
 </form>
 ```
 Het lijkt weer veel op het de code van `home.html` uit de vorige pagina. Bovenaan een welkomsttekst, gevolgd door de openings-FORM-tag.
-Binnen het formulier is als eerste de geheime sleutel opgenomen waarna de diverse velden worden geïntroduceerd, zoals in de lijst die is vastgelegd in de Python-file 
+Binnen het formulier is als eerste de geheime sleutel opgenomen waarna de diverse velden worden geïntroduceerd, zoals in de lijst die is vastgelegd in de Python-file
 `bedankt.html`.
 
 #### bedankt.html
@@ -133,11 +133,11 @@ Als het formulier is ingevuld en er op de ‘Verzend’-knop is geklikt wordt de
 ```html
 <h1>Bedankt voor de moeite. <br>Dit zijn de ingevulde gegevens:</h1>
 <ul>
-    <li>Naam: {{session['naam']}}</li>
-    <li>Geslacht: {{session['geslacht']}}</li>
-    <li>Instrument: {{session['instrument']}}</li>
-    <li>Plaats: {{session['plaats']}}</li>
-    <li>Feedback: {{session['feedback']}}</li>
+    <li>Naam: {{ session['naam'] }}</li>
+    <li>Geslacht: {{ session['geslacht'] }}</li>
+    <li>Instrument: {{ session['instrument'] }}</li>
+    <li>Plaats: {{ session['plaats'] }}</li>
+    <li>Feedback: {{ session['feedback'] }}</li>
 </ul>
 ```
 
@@ -157,10 +157,10 @@ Na een klik op de button:
 Een paar opmerkingen tot slot van deze paragraaf:
 
 ### Lay-out
- De lay-out kan vele malen mooier door er CSS-stijlen aan toe te voegen. 
-Misschien ziet de output er wat vreemd uit, maar alles is precies volgens de opzet verlopen. Het `RadioField` en het `SelectField` zijn beide gevuld met tuples. De eerste waarde van iedere tuple wordt na selectie doorgegeven. 
+ De lay-out kan vele malen mooier door er CSS-stijlen aan toe te voegen.
+Misschien ziet de output er wat vreemd uit, maar alles is precies volgens de opzet verlopen. Het `RadioField` en het `SelectField` zijn beide gevuld met tuples. De eerste waarde van iedere tuple wordt na selectie doorgegeven.
 
-In de keuzelijst kan er bijvoorbeeld gekozen worden uit de zichtbare mogelijkheden, Assen, Drachten en Groningen. De corresponderende sleutelvelden zijn 'as', 'dr' en 'gr'. Deze waarden worden doorgeven naar `bedankt.html`. Dat is met opzet gebeurd om de werking te tonen. Om de gehele plaatsnaam te tonen zou twee keer dezelfde tekenrij in de tuple moeten worden ondergebracht. 
+In de keuzelijst kan er bijvoorbeeld gekozen worden uit de zichtbare mogelijkheden, Assen, Drachten en Groningen. De corresponderende sleutelvelden zijn 'as', 'dr' en 'gr'. Deze waarden worden doorgeven naar `bedankt.html`. Dat is met opzet gebeurd om de werking te tonen. Om de gehele plaatsnaam te tonen zou twee keer dezelfde tekenrij in de tuple moeten worden ondergebracht.
 
 ### Validator test
 Om de test op alle items te toetsen wordt nog een poging gedaan de gegevens te tonen, echter zonder een naam in te vullen. Kijken of de validator dit kan onderkennen:

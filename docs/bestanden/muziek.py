@@ -3,8 +3,10 @@ class Song:
 
     Attributen:
         title (str): De titel van de nummer.
-        artist (Artist): Een object uit de klasse artist die de componist van het nummer is.
-        duration (int): De duur van het nummer in seconden.  Waarde nul (0) is toegestaan.
+        artist (Artist): Een object uit de klasse artist die de componist van
+            het nummer is.
+        duration (int): De duur van het nummer in seconden.
+            Waarde nul (0) is toegestaan.
     """
 
     def __init__(self, title, artist, duration=0):
@@ -16,12 +18,13 @@ class Song:
 class Album:
     """ Klasse waarin Aibums vastgeleg worden, met gebruik making van de bijbehorende track-list
 
-   Attributen:
-       name (str): De naam van het album.
-       year (int): Het jaar waarin het album werd uitgebracht.
-       artist: (Artist): De artiest verbonden aan het album. Als er geen artiest bekend is, dan
-       krijgt de artist als defaultwaarde de naam "Various Artists".
-       tracks (List[Song]):  Een lijst met de nummers van het album.
+    Attributen:
+        name (str): De naam van het album.
+        year (int): Het jaar waarin het album werd uitgebracht.
+        artist: (Artist): De artiest verbonden aan het album. Als er geen
+        artiest bekend is, dan krijgt de artist als defaultwaarde de naam
+            "Various Artists".
+        tracks (List[Song]):  Een lijst met de nummers van het album.
 
    Methods:
        add_song: Deze methode voeft een nieuw nummer (song) toe aan de track-list.
@@ -42,8 +45,8 @@ class Album:
 
         Argumenten:
             song (Song): een nummer om toe te voegen.
-            position (Optioneel [int]): Indien opgegeven, wordt de song op die positie ingevoegd
-           in de tracklijst, anders wordt het nummer aan het einde van de lijst toegevoegd.
+            position (Optioneel [int]): Indien opgegeven, wordt de song op die
+                positie ingevoegd in de tracklijst, anders wordt het nummer aan het einde van de lijst toegevoegd.
         """
 
 
@@ -91,9 +94,13 @@ def load_data():
     with open("albums.txt", "r") as albums:
         for line in albums:
             # Getoond moeten worden (artist, album, year, song)
-            artist_field, album_field, year_field, song_field = tuple(line.strip('\n').split('\t'))
+            artist_field, album_field, year_field, song_field = tuple(
+                line.strip("\n").split("\t")
+            )
             year_field = int(year_field)
-            print("{}:{}:{}:{}".format(artist_field, album_field, year_field, song_field))
+            print(
+                "{}:{}:{}:{}".format(artist_field, album_field, year_field, song_field)
+            )
 
             if new_artist is None:
                 new_artist = Artist(artist_field)
@@ -130,15 +137,19 @@ def load_data():
 
 def create_checkfile(artist_list):
     """Creëer een checkfile om te kunnen vergelijken met het origineel"""
-    with open("checkfile.txt", 'w') as checkfile:
+    with open("checkfile.txt", "w") as checkfile:
         for new_artist in artist_list:
             for new_album in new_artist.albums:
                 for new_song in new_album.tracks:
-                    print("{0.name}\t{1.name}\t{1.year}\t{2.title}".format(new_artist, new_album, new_song),
-                          file=checkfile)
+                    print(
+                        "{0.name}\t{1.name}\t{1.year}\t{2.title}".format(
+                            new_artist, new_album, new_song
+                        ),
+                        file=checkfile,
+                    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     artists = load_data()
     print("There are {} artists".format(len(artists)))
 

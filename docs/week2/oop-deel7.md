@@ -2,13 +2,13 @@
 
 In deze laatste paragraaf aandacht voor nog OOP-techniek, compositie (*composition*) (*composition*). Compositie wil zeggen dat een object *samengesteld* wordt aan de hand van verschillende andere objecten. Het samengesteld object kan op die manier taken delegeren aan die samenstellende objecten. Op zich lijkt compositie wel wat op overerving, maar waar overerving *impliciet* is, is compositie *expliciet* (en daarmee ook schaalbaarder, testbaarder en overdraagbaarder).
 
-Compositie biedt een superieure manier om delegatie te beheren, aangezien het selectief de toegang kan delegeren, zelfs sommige attributen of methoden kan maskeren, terwijl overerving dat niet kan. 
+Compositie biedt een superieure manier om delegatie te beheren, aangezien het selectief de toegang kan delegeren, zelfs sommige attributen of methoden kan maskeren, terwijl overerving dat niet kan.
 
 Aan het eind van deze paragraaf maken we [oefening 3](oefeningen/oop-oefening3.md).
 
 ## Een gevleugeld voorbeeld
 
-Als voorbeeld wordt hier een klasse `Vleugel` toegevoegd aan de file met de eend en de pinguin. Deze klassee krijgt behalve de constructor (`__init__`) de methode `vliegen()`. Deze laatste krijgt als parameter `ratio` mee, die de verhouding tussen vleugels en lichaamsgewicht aangeeft. Deze verhouding bepaalt de wijze of een vogel al dan niet makkelijk kan opstijgen. 
+Als voorbeeld wordt hier een klasse `Vleugel` toegevoegd aan de file met de eend en de pinguin. Deze klassee krijgt behalve de constructor (`__init__`) de methode `vliegen()`. Deze laatste krijgt als parameter `ratio` mee, die de verhouding tussen vleugels en lichaamsgewicht aangeeft. Deze verhouding bepaalt de wijze of een vogel al dan niet makkelijk kan opstijgen.
 
 ```python
 class Vleugel:
@@ -17,12 +17,12 @@ class Vleugel:
         self.ratio = ratio
 
     def vliegen(self):
-          if self.ratio > 1:
-               print("Wauwwww, dit is fun")
-          elif self.ratio == 1:
-               print("Pff, hard werken, maar ik vlieg tenminste")
-          else:
-               print("Ik denk dat ik maar weer gewoon ga waggelen")
+        if self.ratio > 1:
+            print("Wauwwww, dit is fun")
+        elif self.ratio == 1:
+            print("Pff, hard werken, maar ik vlieg tenminste")
+        else:
+            print("Ik denk dat ik maar weer gewoon ga waggelen")
 ```
 
 De volgende stap is om de klasse `Duck` van een constructor te voorzien en bovendien een methode `vliegen()` toe te voegen die verwijst naar de klasse `Vleugel`.
@@ -32,7 +32,7 @@ class Duck:
 
     def __init__(self):
         self._vleugel = Vleugel(1.8)
-        
+
     def vliegen(self):
         self._vleugel.vliegen()
 ```
@@ -41,22 +41,22 @@ Eenden hebben nu een vleugel en een methode om te vliegen. Kijken of Donald de l
 
 ```python
 if __name__ == '__main__':
-   donald = Duck()
-   donald.vliegen()
+    donald = Duck()
+    donald.vliegen()
 ```
 
 Resultaat:
 
-```shell
+```console
 Wauwwww, dit is fun
 ```
 
-Wat is er nu gebeurd? In de klasse `Duck` is een nieuw object gecreëerd van de klasse `Vleugel`. Vervolgens is er een methode `vliegen()` aangemaakt, waarbij een object uit de klasse `Duck` gebruik maakt van zijn eigen instantie van de klasse `Vleugel` om de methode `vliegen()` daarop aan te roepen. 
+Wat is er nu gebeurd? In de klasse `Duck` is een nieuw object gecreëerd van de klasse `Vleugel`. Vervolgens is er een methode `vliegen()` aangemaakt, waarbij een object uit de klasse `Duck` gebruik maakt van zijn eigen instantie van de klasse `Vleugel` om de methode `vliegen()` daarop aan te roepen.
 
 De klasse `Duck` bestaat nu (voor het merendeel) uit eigen methoden, maar er wordt ook een deel van de functionaliteit gedelegeerd naar objecten van een ander type (namelijk `Vleugel`). De eend is dus een *samengestelde klasse* geworden.
 
 ## Een wat realistischer voorbeeld
-Daarom nu een meer realistisch voorbeeld. Basis hiervoor is een nieuwe Python-file, getiteld `html_doc.py`.
+Daarom nu een meer realistisch voorbeeld. Basis hiervoor is een nieuwe Python-file, getiteld [`html_doc.py`](../bestanden/html_doc.py).
 
 Een HTML-pagina moet minstens drie elementen bevatten:
 
@@ -74,10 +74,10 @@ Als opfrisser, een kort overzicht van de basisstructuur van een HTML-pagina.
 
 	<body>
 	</body>
-</html> 
+</html>
 ```
 
-HTML wordt voornamelijk opgebouwd door gebruik te maken van tags, dus als eerste wordt er een klasse `Tag` gecreëerd, met een constructor. 
+HTML wordt voornamelijk opgebouwd door gebruik te maken van tags, dus als eerste wordt er een klasse `Tag` gecreëerd, met een constructor.
 
 ```python
 class Tag:
@@ -88,7 +88,7 @@ class Tag:
         self.contents = contents
 ```
 
-De volgende stap is de tags en de inhoud naar het scherm te schrijven. Met inhoud wordt bedoeld de tekens die tussen de begin- en eind tag zijn opgenomen.
+De volgende stap is de tags en de inhoud naar het scherm te schrijven. Met 'inhoud' wordt hier bedoeld de tekens die tussen de begin- en eind tag zijn opgenomen.
 
 ```python
 def __str__(self):
@@ -100,11 +100,11 @@ def display(self, file=None):
 
 De basisstructuur laat zien dat er nog drie andere klassen nodig zijn. De eerste daarvan is `Doctype`. Hierin wordt vastgelegd met welke versie van HTML er gewerkt wordt. Daar wordt een nieuwe klasse voor ontwikkeld.
 
-```python 
+```python
 class DocType(Tag):
 
     def __init__(self):
-        super().__init__('!DOCTYPE HTML', '')
+        super().__init__('!DOCTYPE html', '')
         self.end_tag = ''   # DOCTYPE heeft geen endtag
 ```
 
@@ -116,7 +116,7 @@ De tweede is de klasse `Head`, de derde is de klasse `Body`:
 ```python
 class Head(Tag):
 
-  def __init__(self, title=None):
+    def __init__(self, title=None):
         super().__init__('head', '')
 
 class Body(Tag):
@@ -147,12 +147,12 @@ Alle klassen zijn nu aangemaakt en nu kan het daadwerkelijke document opgebouwd 
 Alle klassen zijn nu aangemaakt en nu kan het daadwerkelijke document opgebouwd worden.
 
 ```python
-class HtmlDoc(object):
+class HtmlDoc:
 
-      def __init__(self, title=None):
-           self._doc_type = DocType()
-           self._head = Head()
-           self._body = Body()
+    def __init__(self, title=None):
+        self._doc_type = DocType()
+        self._head = Head()
+        self._body = Body()
 ```
 
 Als eerste worden nieuwe objecten aangemaakt voor doctype, head en body. De klasse `HtmlDoc` is dus opgebouwd (*samengesteld*, *gecomponeerd*) vanuit drie andere klassen. Dit object kent geen attributen van zichzelf, maar wordt opgebouwd uit elementen van andere klassen.
@@ -187,7 +187,7 @@ if __name__ == '__main__':
     demo_page.display()
 ```
 
-Het resultaat is er, maar wordt niet echt flitsend afgebeeld. Is dat gewenst dat kan op de gebruikelijke manier weer de parameter `file=file` na de diverse display’s toegevoegd worden. 
+Het resultaat is er, maar wordt niet echt flitsend afgebeeld. Is dat gewenst dat kan op de gebruikelijke manier weer de parameter `file=file` na de diverse display’s toegevoegd worden.
 
 Het is momenteel gewenst dus een aantal kleine aanpassingen zijn gedaan. Nog een test om te kijken of een browserpagina geopend kan worden met de aangemaakte inhoud.
 
@@ -200,7 +200,7 @@ if __name__ == '__main__':
             my_page.display(file=test.html)
 ```
 
-Er is een bestand test.html zichtbaar in het rijtje bestanden dat behoort bij dit project. 
+Er is een bestand test.html zichtbaar in het rijtje bestanden dat behoort bij dit project.
 
 ![Directory listing met het html-bestand erbij](imgs/directory_listing.png)
 

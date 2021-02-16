@@ -12,17 +12,17 @@ Vooraf een waarschuwing. Niet ieder lettertype is niet voor iedere besturingssys
 
 Bekijk het onderstaande verse html-document
 
-```
+```html
 <body>
     <h2>The Kids Are On High Street</h2>
-    <p> In a wake of some change</br>
-        Stones in the pipeline</br>
-        Like some new mountain range</br>
+    <p> In a wake of some change<br>
+        Stones in the pipeline<br>
+        Like some new mountain range<br>
         We leave the lowlands behind</p>
-    <p id="two">(Chorus)</br>
-        They take your photograph</br>
-        You come into existence</br>
-        You realize it's your path</br>
+    <p id="two">(Chorus)<br>
+        They take your photograph<br>
+        You come into existence<br>
+        You realize it's your path<br>
         In this very instant</p>
   </body>
 ```
@@ -53,31 +53,30 @@ font-size    | in px    | exacte hoeveelheid pixels
 
 Stel nu dat we de bovenstaande html verfraaien met de volgende css:
 
-```
-h2{
+```css
+h2 {
     font-family: 'Impact';
-  }
-
-p{
-
-  font-family: 'Lucida Console';
 }
 
-body{
-  font-size: 20px;
+p {
+    font-family: 'Lucida Console';
 }
 
-p{
-  font-size: 10px;
+body {
+    font-size: 20px;
 }
 
-#two{
-  font-size: 2.0em;
+p {
+    font-size: 10px;
 }
 
-p{
-  font-style: italic;
-  font-weight: bold;
+#two {
+    font-size: 2.0em;
+}
+
+p {
+    font-style: italic;
+    font-weight: bold;
 }
 ```
 
@@ -85,19 +84,19 @@ Dat levert het volgende (niet per se heel fraaie) resultaat op:
 
 ![With fonts](imgs/with_fonts1.png)
 
-## Google fonts 
+## Google fonts
 
 Er zijn *erg veel* lettertypen beschikbaar (letterlijk duizenden) en het is onmogelijk de effecten van ieder font te kennen. Gelukkig heeft Google ook een fraai overzicht van een flink aantal fonts beschikbaar gesteld.
 
-Bekijk de site [https://fonts.google.com/](https://fonts.google.com/). Er wordt een site geopend waarin op dit moment 1003 font-family’s beschikbaar zijn. 
+Bekijk de site [https://fonts.google.com/](https://fonts.google.com/). Er wordt een site geopend waarin op dit moment 1003 font-family’s beschikbaar zijn.
 
 ![Google fonts](imgs/google_fonts.png)
- 
+
 Zoek bijvoorbeeld naar het font ‘Bungee’.
 
 ![Bungee](imgs/bungee_font.png)
 
-Onder het kopje *Styles* kan tekst aan de al bestaande regel worden toegevoegd. Het resultaat is onmiddellijk zichtbaar. 
+Onder het kopje *Styles* kan tekst aan de al bestaande regel worden toegevoegd. Het resultaat is onmiddellijk zichtbaar.
 
 ![font selectie](imgs/google_font_selectie.png)
 
@@ -107,16 +106,16 @@ Is alles naar wens, dan kies je voor *Select this style*, om de code te zien te 
 
 De twee links zijn belangrijk. De onderste link dient in het css-bestand opgenomen te worden bij het geschikte element en de bovenste link moet aan het html-document toegevoegd te worden in de sectie `<head>` onder de link naar het css-bestand.
 
-```
+```html
 <link rel="stylesheet" href="deel4.css">
-<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 ```
 
 Als we dan de `h2` in het css-bestand als volgt aanpassen:
 
-```
-h2{
-  font-family: 'Bungee', cursive;
+```css
+h2 {
+    font-family: 'Bungee', cursive;
 }
 ```
 
@@ -132,11 +131,11 @@ Het kan soms voorkomen dat je bij het surfen over het net een site voorbijkomt, 
 - Selecteer een onderdeel waarop die vormgeving duidelijk is te zien.
 - Geef een rechtermuisklik en kies voor ‘Inspecteren’.
 
-Hiermee open je de zogenaamde *inspector*. Hiermee kun je de code van zowel het html-document als van de bijbehorende css-file bekeken worden. Het is zelfs mogelijk ter plekke instellingen van een andere waarde te voorzien om het effect daarvan te kunnen bekijken. De wijzigingen worden alleen doorgevoerd op de geopende view. Andere gebruikers van deze pagina krijgen de aanpassing(en) natuurlijk niet te zien. 
+Hiermee open je de zogenaamde *inspector*. Hiermee kun je de code van zowel het html-document als van de bijbehorende css-file bekeken worden. Het is zelfs mogelijk ter plekke instellingen van een andere waarde te voorzien om het effect daarvan te kunnen bekijken. De wijzigingen worden alleen doorgevoerd op de geopende view. Andere gebruikers van deze pagina krijgen de aanpassing(en) natuurlijk niet te zien.
 
 ![De inspector](imgs/inspector.png)
 
-De html van het document zie je aan de linkerkant, de css aan de rechterkant. Door deze css te bestuderen, kun je achterhalen hoe het element dat je hebt geselecteerd is vormgegeven. 
+De html van het document zie je aan de linkerkant, de css aan de rechterkant. Door deze css te bestuderen, kun je achterhalen hoe het element dat je hebt geselecteerd is vormgegeven.
 
 Deze *inspector* is een heel belangrijk hulpmiddel voor al het front-end werk. We zullen hier dan ook later nog uitgebreid op terugkomen.
 
