@@ -1,13 +1,12 @@
 # Flask-applicaties - Refactored
 
-Aan het einde van de vorige paragraaf is de algemene structuur voor de applicatie waarmee het overzicht van de docenten die als mentor fungeren samen met de door hen begeleide studenten vastgelegd. Nu is het tijd om deze te implementeren!
+Aan het einde van de vorige paragraaf is de algemene structuur voor de applicatie waarmee het overzicht van de docenten die als mentor fungeren samen met de door hen begeleide studenten vastgelegd. Nu is het tijd om deze te implementeren.
 
 Omdat al veel van de code geschreven en besproken is in voorgaande delen, wordt hier grotendeels het principe copy en paste gehanteerd.
 
-`Flask` heeft een ingebouwde blueprints-mogelijkheid waarmee de modulaire componenten geregistreerd kunnen worden voor de Flask-app. Op deze manier kan op een eenvoudige wijze een view geraadpleegd worden voor ieder aspect van de applicatie.
+`Flask` heeft een ingebouwde blueprints-mogelijkheid waarmee de modulaire componenten voor de Flask-app geregistreerd kunnen worden. Op deze manier kan op een eenvoudige wijze een *view* geraadpleegd worden voor ieder aspect van de applicatie.
 
-Zo zijn er bijvoorbeeld een tweetal `views.py`-bestanden, één voor docenten en één voor studenten. En elk van deze `views.py` heeft zijn eigen `add-view`. Om ervoor te zorgen dat de Flask-applicatie niet in de war raakt door een `/add`-route, wordt het principe van blueprints benut.
-De blueprints registreren een `url_prefix` voor elk `views.py`-bestand:
+Zo zijn er bijvoorbeeld een tweetal `view.py`-bestanden, één voor docenten en één voor studenten. En elk van deze *views* heeft zijn eigen `add-view`. Om ervoor te zorgen dat de Flask-applicatie niet in de war raakt door een `/add`-route, wordt het principe van blueprints benut. De blueprints registreren een `url_prefix` voor elk `views.py`-bestand:
 
 - `/ docenten /add`
 - `/ studenten /add`
@@ -21,20 +20,24 @@ De voornaamste wijzigingen in de code zullen zijn:
 Nogmaals, in dit deel ligt de nadruk in het opzetten van een algemene structuur voor een applicatie. Daarom wordt er geen nieuwe applicatie vanaf scratch ontwikkeld maar wordt de inhoud van de vorige web-applicatie voornamelijk gekopieerd.
 
 ## Stap 1: Het aanmaken van de structuur van de folderset.
+
 Het aanmaken van de structuur zal in gedeelten besproken worden, zodat nog een keer duidelijk wordt hoe het opzetten van een uitgebreide applicatie het beste kan geschieden.
 
 ![De opzet van het project Refactor](imgs/structuur-Refactor.png)
-Ter herinnering, de applicatie is gemaakt in IntelliJ. Om alles bij elkaar te kunnen houden is er een nieuw project aangemaakt met de naam Refactor. Binnen het project zijn op het hoogste niveau een tweetal zaken nodig: een folder waarin de items van de applicatie worden ondergebracht, hier `mijnproject` en een Python-file, hier `app.py` genaamd. Deze file importeert enkele items en kent verder alleen een verwijzing naar de pagina `home.html`. Deze file wordt als allerlaatste gecodeerd.
 
-De folder templates bevat een tweetal HTML-bestanden, `base.html` met de linken naar Bootstrap, de titel, de navigatiebalk en een leeg blok. Het andere bestand, `home.html` bevat de inhoud van de homepagina. 
+Ter herinnering, de applicatie is gemaakt in IntelliJ. Om alles bij elkaar te kunnen houden is er een nieuw project aangemaakt met de naam 'Refactor'. Binnen het project zijn op het hoogste niveau een tweetal zaken nodig: een folder waarin de items van de applicatie worden ondergebracht, hier `mijnproject` en een Python-file, hier `app.py` genaamd. Deze file importeert enkele items en kent verder alleen een verwijzing naar de pagina `home.html`. Deze file wordt als allerlaatste gecodeerd.
+
+De folder `templates` bevat een tweetal HTML-bestanden. Allereerst het bestand `base.html` met de links naar Bootstrap, de titel, de navigatiebalk en een leeg blok. Het andere bestand, `home.html` bevat de inhoud van de homepagina. 
 
 In `__init__.py` worden weer de bekende aspecten van flask geïmporteerd, de database aangemaakt, de basisdirectory bepaald en de koppeling tussen applicatie en database ingesteld. Later worden hier nog de blueprints aan toegevoegd. 
 
 In `models.py` wordt de structuur van de database bepaald, zoals al een aantal keren aan bod is geweest.
 
 De structuur van de folder `mijnproject` is dan als volgt:
+
 ![de structuur van mijnproject](imgs/structuur-mijnproject.png)
-Zowel voor de docenten en studenten wordt een eigen directory ingericht. Hierin kunnen de onderdelen worden opgenomen die van toepassing zijn voor de verschillende onderwerpen. Voor beide directories zijn formulieren, views en templates ontwikkeld die nu keurig van elkaar gescheiden worden ondergebracht in de applicatie. Voor beide domeinen is een eigen folder gereserveerd (docenten en studenten) waarin de specifieke HTML-bestanden voor iedere doel komen te staan.
+
+Voor zowel de docenten als de studenten wordt een eigen directory ingericht. Hierin kunnen de onderdelen worden opgenomen die van toepassing zijn voor de verschillende onderwerpen. Voor beide directories zijn formulieren, views en templates ontwikkeld die nu keurig van elkaar gescheiden worden ondergebracht in de applicatie. Voor beide domeinen (docenten en studenten) is een eigen folder gereserveerd waarin de specifieke HTML-bestanden voor ieder doel komen te staan.
 
 
 ## Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn.
@@ -80,7 +83,7 @@ class Student(db.Model):
         return f"Deze student heet {self.name}"
 ```
 
-Uit het bestand `mentor_site.py` zijn de klassen Docent en Student overgenomen. Punt van aandacht is nog wel dat er nog een koppeling gemaakt moet worden naar de plek waar db wordt aangemaakt. Dat zal gebeuren in het bestand `__init__.py`. Het is alvast opgenomen als commentaarregel.
+Uit het bestand `mentor_site.py` zijn de klassen `Docent` en `Student` overgenomen. Punt van aandacht is nog wel dat er nog een koppeling gemaakt moet worden naar de plek waar db wordt aangemaakt. Dat zal gebeuren in het bestand `__init__.py`. Het is alvast opgenomen als commentaarregel.
 Als tweede wordt de folder templates gevuld met de bestanden `base.html` en `home.html`. 
 
 ### `base.html`
@@ -118,7 +121,7 @@ Als tweede wordt de folder templates gevuld met de bestanden `base.html` en `hom
 </html>
 ```
 
-Deze code zorgt voor het tweede aandachtspunt. De URL’s zullen aangepast moeten worden, omdat ze nu naar verschillende directories zullen verwijzen. Dat is ook één van de laatste aanpassingen die geregeld moeten worden.
+Deze code zorgt voor het tweede aandachtspunt: de URL’s zullen aangepast moeten worden, omdat ze nu naar verschillende directories verwijzen. Dat is ook één van de laatste aanpassingen die geregeld moeten worden.
 
 ### `home.html`
 
@@ -154,10 +157,9 @@ db = SQLAlchemy(app)
 Migrate(app,db)
 ```
 
-Ook hierbij is een gedeelte overgenomen uit het bestand `mentor_site.py` van de oefening. Maar het is niet integraal overgenomen. Er zijn een aantal regels weggelaten. De reden daarvoor is dat deze file geen code bevat die nodig is om views aan te maken. Dat wordt straks geregeld is de daarvoor beschikbare folders: `docenten` en `studenten`.
+Ook hierbij is een gedeelte overgenomen uit het bestand `mentor_site.py` van de oefening. Maar het is niet integraal overgenomen: er is een aantal regels weggelaten. De reden daarvoor is dat deze file geen code bevat die nodig is om views aan te maken. Dat wordt straks geregeld is de daarvoor beschikbare folders: `docenten` en `studenten`.
 
-Bovendien dienen er nog een aantal registraties voor de blueprints aan de code te worden toegevoegd. Dat is het derde aandachtspunt voor de volgende paragraaf:
-`forms.py` uit de folder `docenten`.
+Bovendien dienen er nog een aantal registraties voor de blueprints aan de code te worden toegevoegd. Dat is het derde aandachtspunt voor de volgende paragraaf.
 
 Alleen de gegevens die van toepassing zijn op docenten worden overgenomen uit `forms.py`. De namen van de formulieren zijn aangepast zodat het een meer gangbaar karakter krijgt. Bovendien kan nu steeds dezelfde naam gebruikt worden omdat de formulieren in verschillende directories zijn ondergebracht. Voor toevoegen wordt nu `Add` gebruikt, voor verwijderen `Del`.
 
@@ -191,7 +193,7 @@ class AddForm(FlaskForm):
 
 De formulieren zijn uit elkaar gehaald en in een passende folder ingevoegd. Beiden hebben nu een formulier met de naam `AddForm`. Dat gaat helemaal goed, omdat later met blueprints de juiste relaties gelegd zullen worden, zodat er geen verwarring kan ontstaan en de verkeerde formulieren getoond gaan worden.
 
-De nog resterende HTML-files kunnen nu op de juiste plaats gezet worden. Als eerste mogen er drie files aangemaakt worden in de folder `templates` -> `docenten`. Het zijn `add.html`, `delete.html` en `list.html`. De namen van de oefening worden vervangen door wat meer algemeen geldige namen.
+De nog resterende HTML-files kunnen nu op de juiste plaats gezet worden. Als eerste mogen er drie files aangemaakt worden in de folder `templates/docenten`. Het zijn `add.html`, `delete.html` en `list.html`. De namen van de oefening worden vervangen door wat meer algemeen geldige namen.
 
 ### `add.html`
 
@@ -271,6 +273,9 @@ Als laatste is er nog een view nodig om nieuwe studenten in de database te kunne
 ```
 
 Deze code is overgenomen uit `voegtoe_student.html`.
+
+## Conclusie
+
 De inspanningen in deze paragraaf hebben ertoe geleid dat de structuur die ontworpen is ook daadwerkelijk is aangemaakt. Grote delen van de code van de uitwerking van de oefenopdracht website zijn al op de juiste plaats neergezet.
 
 Er zijn nog een paar aandachtspunten overgebleven waar in de volgende paragraaf een vervolg aan moet worden gegeven.

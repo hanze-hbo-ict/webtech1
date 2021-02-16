@@ -1,6 +1,6 @@
 # Flask-applicaties - Blueprints
 
-Tot dusver hebben is de inhoud van de bestanden niet gewijzigd, ze zijn uit elkaar gehaald en opgenomen in afzonderlijke folders. Voor de `views.py`-bestanden moeten deze bestanden als blueprints toegevoegd worden om daarna geregistreerd te kunnen worden in het bestand  `__init__.py`.
+Tot dusver hebben is de inhoud van de bestanden niet gewijzigd. We hebben ze uit elkaar gehaald en opgenomen in afzonderlijke folders, maar verder niet aangepast. Voor de `views.py`-bestanden moeten deze bestanden als blueprints toegevoegd worden om daarna geregistreerd te kunnen worden in het bestand  `__init__.py`.
 
 Er zijn nog een aantal aandachtspunten van de vorige paragraaf blijven hangen waar ook nog een passende oplossing voor gecreëerd dient te worden:
 
@@ -12,9 +12,11 @@ Er zijn nog een aantal aandachtspunten van de vorige paragraaf blijven hangen wa
 - Het aanmaken van de database.
 - Als laatste weer het testen of de applicatie minstens zo goed werkt als de vorige versie.
 
+## De studenten-view
+
 De belangrijkste reden om blueprints te gebruiken is dat een gebruiker hiermee in staat wordt gesteld applicaties te organiseren door logica in submappen te groeperen.
 
-`views.py` (uit de folder `mijnproject` -> `studenten` -> `views.py`):
+`views.py` (uit de folder `mijnproject/studenten/views.py`):
 
 ```python hl_lines="1 6-8"
 from flask import Blueprint,render_template,redirect,url_for
@@ -46,11 +48,13 @@ Als eerste wordt hier weer het nodige geïmporteerd. Belangrijk hierbij is dat o
 
 Vervolgens wordt er een variabele aangemaakt `studenten_blueprint`. Deze variabele is een instantie van de klasse `Blueprint`. Er moeten een drietal kenmerken worden vastgelegd, een naam (hier `studenten`), de naam van de applicatie en de folder die verantwoordelijk is voor alle logica voor de studenten. 
 
-Daarna kan de decorator aangemaakt worden. Dit moet weer bekend voorkomen. Aangezien alle gegevens van studenten zijn samengebracht in de map `studenten` valt af te lezen dat het pad om de gegevens terug te kunnen vinden met `templates`->`studenten` heel logisch wordt. Dat pad wordt ook vastgelegd in `studenten_blueprint`.
+Daarna kan de decorator aangemaakt worden. Dit moet weer bekend voorkomen. Aangezien alle gegevens van studenten zijn samengebracht in de map `studenten` valt af te lezen dat het pad om de gegevens terug te kunnen vinden met `templates/studenten` heel logisch wordt. Dat pad wordt ook vastgelegd in `studenten_blueprint`.
 
-Vervolgens wordt de view gecodeerd (gekopieerd). Daarbij wordt als eerste het formulier gedefinieerd en vervolgens bepaalt wat er moet gebeuren als er nog niet op Submit geklikt is en wat wanneer het formulier al wel is ingevuld.
+Vervolgens wordt de view gecodeerd (gekopieerd). Daarbij wordt als eerste het formulier gedefinieerd en vervolgens bepaalt wat er moet gebeuren als er nog niet op *Submit* geklikt is en wat wanneer het formulier al wel is ingevuld.
 
-`views.py` (uit de folder `mijnproject` -> `docenten` -> `views.py`)
+## De docenten-view
+
+`views.py` (uit de folder `mijnproject/docenten/views.py`)
 
 ```python
 from flask import Blueprint,render_template,redirect,url_for
@@ -99,7 +103,9 @@ def delete():
 
 Meer van hetzelfde. Nu zijn er twee views die gemaakt moeten worden. De `blueprint` verwijst nu naar de folder waar de applicatie-onderdelen voor docenten gevonden kunnen worden.
 
-De blueprints moeten nu nog geregistreerd worden in de file `__init__.py`. De blueprints moeten worden opgenomen in de code nadat de db gedefinieerd is.
+## Registratie van de blueprints
+
+De blueprints moeten nu nog geregistreerd worden in de file `__init__.py`. De blueprints moeten worden opgenomen in de code *nadat* de db gedefinieerd is.
 
 Dat vastleggen gaat in een tweetal stappen. Als eerste moeten de blueprints opgehaald worden uit de folders waar ze zijn aangemaakt. Eenmaal geïmporteerd kunnen ze geregistreerd worden:
 
@@ -125,8 +131,9 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
-Om te beginnen worden er weer een tweetal items ingeladen. Op het eerste gezicht ziet `import app` er wat raar uit, maar er wordt gevraagd om de volgende regel: `app = Flask(__name__)` op te halen uit `__init__.py`. 
-Belangrijkste is dat vervolgens de homepagina geladen kan worden als aan de `if`-voorwaarde voldaan wordt.
+Om te beginnen worden er weer een tweetal items ingeladen. Op het eerste gezicht ziet `import app` er wat raar uit, maar er wordt gevraagd om de volgende regel: `app = Flask(__name__)` op te halen uit `__init__.py`. Belangrijk is dat vervolgens de homepagina geladen kan worden als aan de `if`-voorwaarde voldaan wordt.
+
+## Laatste loodjes
 
 Er staan nog drie (3) punten op het lijstje die nog gedaan moeten worden:
 - Aanpassen van de `url_for ()`-links in de navigatiebalk.
@@ -135,7 +142,7 @@ Er staan nog drie (3) punten op het lijstje die nog gedaan moeten worden:
 
 Het bestand `base.html` moet nog aangepast worden omdat de hyperlinks nu nog naar pagina’s verwijzen die niet meer bestaan. De aanpassingen staan hieronder vermeld, de links naar Bootstrap zijn weggelaten:
 
-```html
+```html hl_lines="5-8"
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
     <div class="navbar-nav">
