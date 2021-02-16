@@ -6,10 +6,13 @@ Flask-forms-deel3:
 Line 81: Op wat voor manier staan linkjes het mooist? Heb het nu met 'hier' gedaan
 Line 164: Hier nog een mooie afsluiting van dit gedeelte? Het eindigt nu zo abrupt.
 
+------------------------------------------------------------------------------
+
 Flask-forms-oefening1:
 
 Ik heb er maar wat random bestandsnamen ingegooid (oefening1.py en home3.html) maar heb daar verder nog geen link naartoe, want weet niet of die bestanden al bestaan. Maar het idee is duidelijk.
 
+--WEEK-6--
 Flask-views-deel1:
 
 Line 7-11 :Is deze tabel zo goed?
@@ -28,6 +31,38 @@ Flask-views-deel4:
 57: Hier was al over geappt (dingen werkten niet). Ik hoor het wel als ik hier nog iets aan toe moet voegen
 Algemeen: als stof af is dan nog onderverdelen in kopjes
 
-Flask-views-deel5:
+Flask-views-deel6:
+30: er bestaat al een bestand home.html. Toch een apart mapje of een andere naam?
 
+--WEEK-7--
+Flask-applicaties-deel1.md
+10: Er staat hier mentor_site.py, moet dat niet beheer_cursist.py zijn? Als die in flask-views-deel6?
+14: hier moet nog een link naar de blueprints bibliotheek
+22-46: moeten hier nog linkjes naar bestanden?
+
+Flask-applicaties-deel2.md
+42: Misschien hier een overzicht van de bestanden die in dit onderdeel voorbij komen?
+121: in de code hierboven misschien ff highlighten? Kan ff niet zo snel zien waar, ben beetje gaar.
+213: linkje naar voegtoe_docent.html?
+232: ook linkje?
+251: nog een linkje?
+273: link?
+afsluiting: ik vind het een beetje een vage en snelle afsluiting
+
+Flask-applicaties-deel3.md
+algemeen: moet het woord "blueprints" hier als in die code block dingetjes (` `)
+
+--WEEK-8--
+User-authentication-deel1.md
+21/22: linkjes naar de juiste libraries
+26: heb hier linkje naar week5: basis flask formulier ingezet omdat daar wordt uitgelegd hoe je packages kan installeren.
+
+User-authentication-deel2.md:
+106: Is dit Nederlands??
+
+User-authentication-deel3.md
+48: weer een ontzettend lelijke zin
+
+User-authentication-deel4.md
+136: Dit is toch de afsluiting van al het materiaal? Misschien nog een algemene recap of zoiets? Ik vind dit zo'n abrupt einde.
 
