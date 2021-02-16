@@ -1,31 +1,36 @@
 # User authentication - Hashing
 
-De titel van dit deel is User authentication. Gelijk weer een omschrijving in het Engels. Vertaald naar eenvoudig Nederlands levert dat het begrip gebruikersverificatie op. Hiermee wordt bedoeld dat voordat een gebruiker toegang wordt verleend op een aanvraag er een procedure wordt opgestart om te bepalen of het een rechtmatige aanvraag betreft.
+## Inleiding
+
+De titel van dit deel is *User Authentication*. Gelijk weer een omschrijving in het Engels. Vertaald naar normaal Nederlands levert dat het begrip gebruikersverificatie op. Hiermee wordt bedoeld dat voordat een gebruiker toegang wordt verleend op een aanvraag er een procedure wordt opgestart om te bepalen of het een rechtmatige aanvraag betreft.
 
 Kortweg, het draait om het inloggen.
-Tot nu toe heeft iedereen toegang gehad tot elke pagina van de ontwikkelde webapplicaties. Vaak is het wenselijk de toegang te beperken tot alleen geregistreerde gebruikers. Het gaat in dit deel om de autorisatie en authenticatie van de gebruikers.
+
+Tot nu toe heeft iedereen toegang tot elke pagina van de ontwikkelde webapplicaties. Vaak is het wenselijk de toegang te beperken tot alleen geregistreerde gebruikers. Het gaat in dit deel om de autorisatie en authenticatie van de gebruikers.
 
 De onderwerpen die we gaan behandelen zijn:
 
-- Password hashing;
-- `Flask-Login` library
+- Password hashing
+- De `Flask-Login` library
 
-Als een website gebruikersverificatie kent, zijn wachtwoorden en gebruikersnamen opgeslagen in een database. Om veiligheidsredenen zal nooit de letterlijke inhoud van het wachtwoord worden opgeslagen. Dat is te gemakkelijk te achterhalen voor hackers.
+## Password hashing
+
+Als een website gebruikersverificatie kent, zijn wachtwoorden en gebruikersnamen opgeslagen in een database. Om veiligheidsredenen zal nooit de letterlijke inhoud van het wachtwoord worden opgeslagen. Dat zou te gemakkelijk te achterhalen zijn voor hackers, en bovendien is het niet netjes wanneer een database-administrator gewoon beschikking zou hebben over wachtwoorden.
 
 Een hashfunctie brengt hierbij uitkomst. Het is een algoritme dat een wachtwoord kan omtoveren naar een veilig alternatief. En met veilig wordt bedoeld dat een buitenstaander uit de hash niet kan achterhalen wat het originele wachtwoord is.
 
-In de praktijk werkt dat als volgt: als een gebruiker een wachtwoord invoert, kan dit eenvoudig vergeleken worden met de opgeslagen hash.
+In de praktijk werkt dat als volgt: als een gebruiker een wachtwoord invoert, kan dit eenvoudig vergeleken worden met de opgeslagen hash. De hash is het enige wat opgeslagen wordt, en het is niet mogelijk (of in ieder geval erg moeilijk) om het wachtwoord te reconstrueren op basis van die hash.
 
-Hier kan uit een tweetal beschikbare handige bibliotheken gekozen worden:
+Voor het werken met die hashes kan uit een tweetal beschikbare bibliotheken gekozen worden:
 
-- [`Bcrypt`]()
-- [`Werkzeug`]()
+- [`Bcrypt`](https://flask-bcrypt.readthedocs.io/en/latest/)
+- [`Werkzeug`](https://techmonger.github.io/4/secure-passwords-werkzeug/)
   
 Beiden kunnen zeer goed gebruikt worden in een Flask-applicatie om te kunnen achterhalen of er een juist wachtwoord is ingevoerd. Van beide pakketten wordt een voorbeeld gegeven hoe het gebruikt kan worden. 
 
 `Bcrypt` en `Werkzeug` komen vaak mee als `Flask` geïnstalleerd wordt. Is dat niet het geval kunnen de pakketten [op de bekende wijze](../week5/flask-forms-deel1.md) opgehaald worden.
 
-## Bcrypt
+### Bcrypt
 
 Is Bcrypt aanwezig, is de eerste actie het importeren ervan:
 
@@ -39,8 +44,7 @@ De tweede actie is om een object van de klasse aan te maken:
 bcrypt = Bcrypt()
 ```
 
-Het opslaan van het wachtwoord in een hash-vorm gebeurt als volgt.
-Als wachtwoord wordt `supergeheimwachtwoord` gebruikt.
+Het opslaan van het wachtwoord in een hash-vorm gebeurt als volgt (als wachtwoord wordt `supergeheimwachtwoord` gebruikt):
 
 ```python
 hashed_pass = bcrypt.generate_password_hash('supergeheimwachtwoord')
@@ -51,7 +55,7 @@ Het wachtwoord wordt gehashed en bewaard in de variabele `hashed_pass`. Nadat he
 
 ![de waarde van de variabele hashed_pass](imgs/hashed-pass.png)
 
-Wordt het runnen herhaald, verschijnt een er andere hash.
+Wordt het runnen herhaald, verschijnt er een andere hash.
 
 Uiteraard nu weer een test naar de werking.
 
@@ -68,7 +72,7 @@ Het effect:
 
 Precies in de lijn der verwachting.
 
-## Werkzeug
+### Werkzeug
 
 Dit kan een stuk sneller gedaan worden. Het is weer meer van hetzelfde.
 

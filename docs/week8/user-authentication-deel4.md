@@ -45,6 +45,7 @@ De body vereist een kleine uitleg:
   </body>
 </html>
 ```
+
 De inhoud van de navigatiebalk, het menu wat de gebruiker te zien krijgt, wordt bepaald door de voorwaarde `if current_user.is_authenticated`. 
 
 Is de gebruiker door de selectie gekomen dan heeft hij de mogelijkheid te kunnen uitloggen, en zo niet, dan kan een gebruiker zich laten registreren of inloggen.
@@ -64,6 +65,7 @@ Is de gebruiker door de selectie gekomen dan heeft hij de mogelijkheid te kunnen
 
 {% endblock %}
 ```
+
 Als de homepagina wordt aangeroepen door een ingelogde gebruiker verschijnt de tekst ‘Hallo‘ + de naam. Is de gebruiker niet ingelogd, dan verschijnt er een aansporing om in te loggen of te registreren.
 
 ## `welkom.html`
@@ -112,13 +114,14 @@ Wanneer de view `register` wordt opgeroepen, wordt het registratieformulier geto
 Ook hier is een formulier nodig om een gebruiker toestemming te verlenen de pagina’s van de site te kunnen inspecteren.
 
 ## Testen
+
 Tot zover alle code die nodig is om een inlogsysteem op te zetten. Nu komt weer het spannendste deel, het testen.
 
 Na het runnen van `app.py`:
 
 ![home pagina vóór het inloggen](imgs/eerste-pagina.png)
 
-Registreren (joyce@sessions.com en het wachtwoord geheim):
+Registreren ('joyce@sessions.com' en het wachtwoord 'geheim'):
 
 ![De registreer pagina](imgs/registreren.png)
 
