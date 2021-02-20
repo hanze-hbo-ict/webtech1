@@ -131,7 +131,7 @@ with open("albums.txt", "r") as albums:
         # data row should consist of (artist, album, year, song)
         artist_field, album_field, year_field, song_field = tuple(line.strip('\n').split('\t'))
         year_field = int(year_field)
-        print("{}:{}:{}:{}".format(artist_field, album_field, year_field, song_field))
+        print(f"{artist_field}:{album_field}:{year_field}:{song_field}")
 ```
 
 Van iedere regel uit het bestand `albums.txt` wordt de artiest, album, jaar en song getoond.

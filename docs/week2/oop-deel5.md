@@ -52,7 +52,7 @@ def schade(self,geraakt):
     punten_over = self._hit_points - geraakt
     if punten_over >= 0:
         self._hit_points = punten_over
-        print("Je bent {} keer geraakt en hebt nog {} hit points over".format(geraakt, self._hit_points))
+        print(f"Je bent {geraakt} keer geraakt en hebt nog {self._hit_points} hit points over")
     else:
         self._levens -= 1
 ```
@@ -61,7 +61,7 @@ Voor de mooi nog even de `__str__()`-methode.
 
 ```python
 def __str__(self):
-    return "Naam: {0._naam}, Levens: {0._lives}, Hit points: {0._hit_points}".format(self)
+    return f"Naam: {self._naam}, Levens: {self._lives}, Hit points: {self._hit_points}"
 ```
 
 Om te testen vullen we de onderstaande code in in `main.py`:
@@ -126,7 +126,7 @@ Er wordt een tweede object uit de klasse `Ork` aangemaakt, Gorbag, nu wel met de
 
 ```python
 gorbag = Ork("Gorbag", 18, 1)
-print("Gorbag - {}".format(gorbag))
+print(f"Gorbag - {gorbag}")
 ```
 
 De volgorde van de parameters klopt niet helemaal, maar Python snapt de bedoeling.
@@ -165,7 +165,7 @@ Het is ook mogelijk extra eigenschappen bij een subklasse in te bouwen. Als voor
 
 ```python
 def slaan(self):
-    print("Me {0._naam}. {0._naam} stomp you".format(self))
+    print(f"Me {self._naam}. {self._naam} stomp you")
 ```
 
 Als we deze methode aan `main.py` toevoegen, krijgen we het resultaat dat eronder staat:

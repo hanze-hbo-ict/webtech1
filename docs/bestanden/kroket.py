@@ -17,9 +17,7 @@ print(kwek.prijs)
 
 dob = Kroket("Van Dobben", 2.35)
 
-print("Fabrikanten: {} = {}, {} = {}".format(kwek.leverancier, kwek.prijs, dob.leverancier, dob.prijs))
-
-print("Fabrikanten: {0.leverancier} = {0.prijs}, {1.leverancier} = {1.prijs}".format(kwek, dob))
+print(f"Fabrikanten: {kwek.leverancier} = {kwek.prijs}, {dob.leverancier} = {dob.prijs}")
 
 print(dob.trek)
 dob.in_frituur()

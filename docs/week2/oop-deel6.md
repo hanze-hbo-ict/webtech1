@@ -9,7 +9,7 @@ In de klasse `Uruk_Hai` (een subklasse van `Ork`) wordt een tweede methode opgez
 ```python
 def dodges(self):
     if random.randint(1, 3) == 3:
-        print("***** {0.name} dodges *****".format(self))
+        print(f"***** {self.name} dodges *****")
         return True
     else:
         return False

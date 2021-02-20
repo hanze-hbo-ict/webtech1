@@ -14,23 +14,19 @@ class Aardman:
         if punten_over >= 0:
             self._hit_points = punten_over
             print(
-                "Je bent {} keer geraakt en hebt nog {} hit points over".format(
-                    geraakt, self._hit_points
-                )
+                f"Je bent {geraakt} keer geraakt en hebt nog {self._hit_points} hit points over"
             )
         else:
             self._levens -= 1
             self._hit_points = 12
             if self._levens > 0:
-                print("{0._naam} heeft een leven verloren".format(self))
+                print(f"{self._naam} heeft een leven verloren")
             else:
-                print("{0._naam} is dood".format(self))
+                print(f"{self._naam} is dood")
                 self._levend = False
 
     def __str__(self):
-        return "Naam: {0._naam}, Levens: {0._levens}, Hit points: {0._hit_points}".format(
-            self
-        )
+        return f"Naam: {self._naam}, Levens: {self._levens}, Hit points: {self._hit_points}"
 
 
 class Ork(Aardman):
@@ -41,7 +37,7 @@ class Ork(Aardman):
         super().__init__(naam=naam, levens=1, hit_points=23)
 
     def slaan(self):
-        print("Me {0._naam}. {0._naam} stomp you!".format(self))
+        print(f"Me {self._naam}. {self._naam} stomp you!")
 
 
 class Mordor(Ork):

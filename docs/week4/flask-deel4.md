@@ -12,7 +12,7 @@ Voor het voorbeeld wordt er een afbeelding ‘drums.jpg’ in de folder `static`
 
 ![Directory listing van het eerste voorbeeld](imgs/directory_listing1.png)
 
-De template met de naam `Basic.html` heeft de onderstaande inhoud. Deze code moet geen verrassing meer zijn. Deze code vormt onze eerste template.
+De template met de naam `basic.html` heeft de onderstaande inhoud. Deze code moet geen verrassing meer zijn. Deze code vormt onze eerste template.
 
 ```html
 <!DOCTYPE html>
@@ -42,9 +42,9 @@ app = Flask(__name__)
 Om de template te renderen maken we gebruik van dezelfde constructie als in de vorige paragraaf. Omdat de functies die worden gedecoreerd met een route feitelijk niets bijzonders zijn, kunnen we hierin alles doen wat we normaal ook met Python-functies kunnen doen. Dus ook de functie `render_template()` aanroepen.
 
 ```python
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('Basic.html')
+    return render_template("basic.html")
 ```
 
 ![Het resultaat van een gerenderde template](imgs/drumstel.png)
@@ -77,9 +77,9 @@ De syntax voor het invoegen van een variabele is `{{ variabele }}`. Bekijk de on
 Om deze template te renderen, passen we in onze server de functie `cursists()` aan, en wel op zo'n manier dat de *naam* die door de route hieraan wordt meegegeven wordt doorgestuurd aan de template.
 
 ```python hl_lines="3"
-@app.route('/cursist/<naam>')
+@app.route("/cursist/<naam>")
 def cursist(naam):
-    return render_template('welkom.html', naam=naam)
+    return render_template("welkom.html", naam=naam)
 ```
 
 Dit alles levert het onderstaande resultaat op:
@@ -97,15 +97,15 @@ De parameters kunnen vervolgens (naar keuze) ingesteld worden in de `render_temp
 Nu als eerste de aanpassingen in onze server:
 
 ```python
-@app.route('/demo')
+@app.route("/demo")
 def demo():
     naam ="Joyce"
     letters = list(naam)
-    cur_dictionary = {'1234': "Sietse"}
+    cur_dictionary = {"1234": "Sietse"}
 
     # voor de duidelijkheid zetten we hier de verschillende variabelen onder elkaar
     # dat hoeft natuurlijk niet per se...
-    return render_template('voorbeeld01.html',
+    return render_template("voorbeeld01.html",
                             naam=naam,
                             letters=letters,
                             cur_dictionary=cur_dictionary)
@@ -154,10 +154,10 @@ De code even kort besproken. Er wordt een ongeordende lijst (met bullets) aangem
 Een voorbeeld. Een opsomming van een drietal cursisten. Joyce en Sietze zijn al genoemd, daar komt nu ook nog Carla bij. Onze server krijgt hiervoor een nieuwe route, `cursisten`:
 
 ```python
-@app.route('cursisten')
+@app.route("/cursisten")
 def cursisten():
-    cursisten = ['Joyce','Sietze','Carla']
-    return render_template('cursisten_template.html',
+    cursisten = ["Joyce", "Sietze", "Carla"]
+    return render_template("cursisten_template.html",
                            cursisten=cursisten)
 ```
 

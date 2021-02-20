@@ -9,8 +9,7 @@ Dat zou er zo uit kunnen zien:
 ```ipython
 In [1]: new_email = 'anotherupdate@update.com'
 In [2]: phone = 1234567
-In [3]: update_sql = "UPDATE contacts SET email = '{}'
-...: WHERE phone = {}".format(new_email, phone)
+In [3]: update_sql = f"UPDATE contacts SET email = '{new_email}' WHERE phone = {phone}"
 ```
 
 Dit werkt allemaal prima, zoals we hiervoor al gezien hebben. Maar wat gebeurt er nu als we een gebruiker in staat stellen zelf zijn telefoonnummer in te toetsen?
@@ -19,8 +18,8 @@ Dit werkt allemaal prima, zoals we hiervoor al gezien hebben. Maar wat gebeurt e
 In [4]: phone = input('Voer uw nummer in ')
 Voer uw nummer in 123456
 
-In [5]: update_sql = "UPDATE contacts SET email = '{}'
-...: WHERE phone = {}".format(new_email, phone)
+In [5]: update_sql = f"UPDATE contacts SET email = '{new_email}'
+...: WHERE phone = {phone}"
 
 In [6]: update_sql
 Out[6]: "UPDATE contacts SET email = 'anotherupdate@update.com' WHERE phone =  123456"
@@ -38,8 +37,7 @@ In [8]: phone = input("Please enter your phone number")
 
 Please enter your phone number 12345; drop table contacts;
 
-In [9]: update_sql = "UPDATE contacts SET email = '{}'
-...: WHERE phone = {}".format(new_email, phone)
+In [9]: update_sql = f"UPDATE contacts SET email = '{new_email}' WHERE phone = {phone}"
 
 In [10]: update_sql
 Out[10]: "UPDATE contacts SET email = 'newemail@update.com'
@@ -72,14 +70,14 @@ In [2]: phone = input("Voer uw nummer in: ")
 
 Voer uw nummer in: 1234; drop table contacts;
 
-In [3]: update_sql = "UPDATE contacts SET email = '{}' WHERE phone = {}".format(new_email, phone)
+In [3]: update_sql = f"UPDATE contacts SET email = '{new_email}' WHERE phone = {phone}"
 In [4]: update_cursor = db.cursor()
 In [5]: update_cursor.execute(update_sql)
 
 ---------------------------------------------------------------------------
 Warning                                   Traceback (most recent call last)
 <ipython-input-4-9d2f5feb0b58> in <module>
-      1 update_sql = "UPDATE contacts SET email = '{}' WHERE phone = {}".format(new_email, phone)
+      1 update_sql = f"UPDATE contacts SET email = '{new_email}' WHERE phone = {phone}"
       2 update_cursor = db.cursor()
 ----> 3 update_cursor.execute(update_sql)
 
@@ -107,7 +105,7 @@ Out[9]: 'UPDATE contacts SET email = ? WHERE phone = ?'
 
 In [10]: update_cursor = db.cursor()
 In [11]: update_cursor.execute(update_sql, (new_email, phone))
-In [12]: print("{} rows updated".format(update_cursor.rowcount))
+In [12]: print(f"{update_cursor.rowcount} rows updated")
 
 0 rows updated
 ```

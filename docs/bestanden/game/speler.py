@@ -38,6 +38,4 @@ class Speler:
         self._score = score
 
     def __str__(self):
-        return "Name: {0.naam}, Levens: {0.levens}, Level: {0.level}, Score {0.score}".format(
-            self
-        )
+        return f"Name: {self.naam}, Levens: {self.levens}, Level: {self.level}, Score {self.score}"

@@ -112,7 +112,7 @@ Als laatste wordt er nog een format ingesteld voor iedere printopdracht in dit s
 
 ```python
 def __str__(self):
-    return "Name: {0.naam}, Levens: {0._    _levens}, Level: {0.level}, Score {0.score}".format(self)
+    return f"Name: {self.naam}, Levens: {self.__levens}, Level: {self.level}, Score {self.score}"
 ```
 
 !!! Info "`__str__` en `__repr__`"

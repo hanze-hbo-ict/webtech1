@@ -24,12 +24,12 @@ https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#adding-line-n
 -->
 
 ```python linenums="1"
-@app.route('/')
+@app.route("/")
 def index():
     # render de template Basic.html
-    return '<h1>Welkom bij muziekschool Session</h1>'
+    return "<h1>Welkom bij muziekschool Session</h1>"
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
 ```
 
@@ -69,9 +69,9 @@ De crux hiervoor is de decorator `@app.route()`. De toegevoegde stringparameter 
 Momenteel wordt onze homepage lokaal weergegeven als `http://127.0.0.1:5000/`. Er worden decorators gebruikt die hieraan toegevoegd worden zoals bijvoorbeeld `@app.route("/some_page")`, waardoor de URL `http://127.0.0.1:5000/some_page` wordt. We breiden het script van hierboven uit met een volgende route:
 
 ```python
-@app.route('/informatie')	#127.0.0.1:5000/informatie
+@app.route("/informatie")	#127.0.0.1:5000/informatie
 def info():
-    return '<h1>Dit hebben we jou te bieden:</h1>'
+    return "<h1>Dit hebben we jou te bieden:</h1>"
 ```
 
 Wanneer we nu met de browser naar `http://127.0.0.1:5000/informatie` gaan, krijgen we het onderstaande resultaat:
@@ -100,17 +100,17 @@ Om dit effect te bereiken, zijn dynamische routes ontwikkeld. Dynamische routes 
 Hieronder staat een algemeen voorbeeld van de werking van een dynamische route. De gebruiker geeft zijn naam op en wordt doorverbonden naar zijn profielpagina:
 
 ```python hl_lines="1"
-@app.route('/zomaar_een_pagina/<naam>')
+@app.route("/zomaar_een_pagina/<naam>")
 def andere_pagina(naam):
-    return 'Gebruiker: {}'.format(naam)
+    return f"Gebruiker: {naam}"
 ```
 
 Met deze kennis krijgt de applicatie weer een extra dimensie. De muziekschool heeft vele cursisten en iedereen heeft de mogelijkheid een eigen pagina in te richten. We voeren hierom de onderstaande route toe aan onze server:
 
 ```python
-@app.route('/cursist/<naam>')
+@app.route("/cursist/<naam>")
 def cursist(naam):
-    return '<h1>Dit is de pagina van {}<h1>'.format(naam)
+    return f"<h1>Dit is de pagina van {naam}<h1>"
 ```
 
 Uiteraard weer een testje. De applicatie wordt gerund en URL van de pagina van een cursist wordt ingegeven. We gaan hiervoor naar de url `http://localhost:5000/cursist/Henk`: let op dat de de string *na* `cursist` (`Henk` in dit geval) wordt opgevangen door de parameter `naam` in de functie `cursist`.
@@ -128,9 +128,9 @@ Werkend met Flask zal het ongetwijfeld voorkomen dat er fouten sluipen in de cod
 Om dit te kunnen demonstreren wordt er een fout ingebouwd in de code. Van elke naam wordt nu gevraagd de twintigste letter af te beelden. In het geval dat de naam Joyce luidt, zal dat een foutmelding opleveren, aangezien de naam maar uit vijf (5) tekens bestaat.
 
 ```python
-@app.route('/lengte/<naam>')
+@app.route("/lengte/<naam>")
 def lengte(naam):
-    return 'De twintigste letter van de naam {} is {}'.format(naam, naam[20])
+    return f"De twintigste letter van de naam {naam} is {naam[20]}"
 ```
 
 Als we deze pagina oproepen met een naam die korter is dan twintig letters en we hebben de debug-modus *niet* aanstaan (`app.run()`), krijgen we het onderstaande te zien:
