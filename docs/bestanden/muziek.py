@@ -98,9 +98,7 @@ def load_data():
                 line.strip("\n").split("\t")
             )
             year_field = int(year_field)
-            print(
-                "{}:{}:{}:{}".format(artist_field, album_field, year_field, song_field)
-            )
+            print(f"{artist_field}:{album_field}:{year_field}:{song_field}")
 
             if new_artist is None:
                 new_artist = Artist(artist_field)
@@ -142,15 +140,13 @@ def create_checkfile(artist_list):
             for new_album in new_artist.albums:
                 for new_song in new_album.tracks:
                     print(
-                        "{0.name}\t{1.name}\t{1.year}\t{2.title}".format(
-                            new_artist, new_album, new_song
-                        ),
+                        f"{new_artist.name}\t{new_album.name}\t{new_album.year}\t{new_song.title}",
                         file=checkfile,
                     )
 
 
 if __name__ == "__main__":
     artists = load_data()
-    print("There are {} artists".format(len(artists)))
+    print(f"There are {len(artists)} artists")
 
     create_checkfile(artists)

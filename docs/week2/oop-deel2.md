@@ -30,7 +30,7 @@ Stap 3: een functie om het tijdstip van de transactie vast te leggen.
 ```python
 def current_time():
     now = datetime.datetime.now()
-    return (now.strftime("%Y-%m-%d %H:%M:%S"))
+    return f"{now: %Y-%m-%d %H:%M:%S}"
 ```
 
 De functie `current_time()` retourneert het tijdstip van storten in het opgegeven formaat, tot op de seconde nauwkeurig.
@@ -44,7 +44,7 @@ def __init__(self, naam, saldo):
     self._name = naam
     self.__saldo = saldo
     self._transactie_overzicht = []
-    print("Bankrekening aangemaakt voor " + self._name)
+    print(f"Bankrekening aangemaakt voor {self._name}")
 ```
 
 ## Storten en opnemen
@@ -82,7 +82,7 @@ Stap 7: de methode `toon_saldo()`
 
 ```python
 def toon_saldo(self):
-    print("Saldo bedraagt {}".format(self.__saldo))
+    print(f"Saldo bedraagt {self.__saldo}")
 ```
 
 ## Transactie-overzicht
@@ -97,7 +97,7 @@ def toon_transacties(self):
         else:
             trans_type = "opgenomen"
             bedrag *= -1
-        print("{} {} op {}".format(bedrag, trans_type, (Bankrekening._current_time())))
+        print(f"{bedrag} {trans_type} op {Bankrekening._current_time()}")
 ```
 
 Belangrijk is na te gaan of het bedrag gestort dan wel opgenomen is. Omdat een bedrag altijd groter is dan nul (0), dient dit bedrag bij opnemen met de factor -1 vermenigvuldigd te worden om het saldo te kunnen verlagen. De printopdracht toont alle transacties.

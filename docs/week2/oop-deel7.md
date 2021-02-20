@@ -83,8 +83,8 @@ HTML wordt voornamelijk opgebouwd door gebruik te maken van tags, dus als eerste
 class Tag:
 
     def __init__(self, name, contents):
-        self.start_tag = '<{}>'.format(name)
-        self.end_tag = '</{}>'.format(name)
+        self.start_tag = f"<{name}>"
+        self.end_tag = f"</{name}>"
         self.contents = contents
 ```
 
@@ -92,7 +92,7 @@ De volgende stap is de tags en de inhoud naar het scherm te schrijven. Met 'inho
 
 ```python
 def __str__(self):
-    return "{0.start_tag}{0.contents}{0.end_tag}".format(self)
+    return f"{self.start_tag}{self.contents}{self.end_tag}"
 
 def display(self, file=None):
     print(self, file=file)

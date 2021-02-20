@@ -28,11 +28,12 @@
 # print(bram)
 
 from aardman import Aardman, Ork, Uruk_Hai, Mordor
+
 # shagrat = Ork()
 # print(shagrat)
 
 # gorbag = Ork("Gorbag")
-# print("Gorbag - {}".format(gorbag))
+# print(f"Gorbag - {gorbag}")
 #
 # duergar = Aardman("Duergar", 23)
 # print(duergar)

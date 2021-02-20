@@ -71,8 +71,7 @@ In [6]: dob = Kroket("Van Dobben", 2.35)
 De gegevens van beide objecten kunnen ook gecombineerd worden getoond.
 
 ```ipython
-In [7]: print("Fabrikanten: {} = {}, {} = {}"
-   ...:     .format(kwek.leverancier, kwek.prijs, dob.leverancier, dob.prijs))
+In [7]: print(f"Fabrikanten: {kwek.leverancier} = {kwek.prijs}, {dob.leverancier} = {dob.prijs}")
 Fabrikanten: Kwekkeboom = 2.5, Van Dobben = 2.35
 
 In [8]:
