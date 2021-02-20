@@ -4,7 +4,7 @@ import datetime
 class Bankrekening:
     def _current_time():
         now = datetime.datetime.now()
-        return now.strftime("%Y-%m-%d %H:%M:%S")
+        return f"{now:%Y-%m-%d %H:%M:%S}"
 
     def __init__(self, naam, saldo):
         self._name = naam
