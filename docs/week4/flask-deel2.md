@@ -102,7 +102,7 @@ Er is een virtuele omgeving aangemaakt met de naam `webtech` en in die directory
     └── python3 -> /usr/bin/python3
     ```
 
-Als je verder gaat rondkijken zal je zien dat een virtuele omgeving eigenlijk een een mini-Python installatie is. Het is een flink rijtje bestanden, maar ongelukkigerwijze ontbreekt Flask nog. Om dat te kunnen installeren moeten we eerst onze nieuwe virtuele omgeving activeren en daar gaan we de scripts in de subirectory `Scripts` of `bin` voor gebruiken.
+Als je verder gaat rondkijken zal je zien dat een virtuele omgeving eigenlijk een mini-Python installatie is. Het is een flink rijtje bestanden, maar ongelukkigerwijze ontbreekt Flask nog. Om dat te kunnen installeren moeten we eerst onze nieuwe virtuele omgeving activeren en daar gaan we de scripts in de subirectory `Scripts` of `bin` voor gebruiken.
 
 ### Stap 4: het activeren van de virtuele omgeving.
 
