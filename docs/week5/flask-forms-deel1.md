@@ -1,6 +1,6 @@
 # Flask en Forms - een basis Flask formulier
 
-In dit deel ligt de focus op de pakketten [flask_wtf](https://flask-wtf.readthedocs.io/en/stable/) en [wtform](https://wtforms.readthedocs.io/en/2.3.x/) en op welke wijze waarop deze gebruikt kunnen worden om snel formulieren te maken op basis van de Flask-Python-scripts.
+In dit deel ligt de focus op de modules [Flask-WTF](https://flask-wtf.readthedocs.io/en/stable/) en [WTForms](https://wtforms.readthedocs.io/en/2.3.x/) en op welke wijze waarop deze gebruikt kunnen worden om snel formulieren te maken op basis van de Flask-Python-scripts.
 
 ## Componenten
 Maar als eerste een bespreking van de belangrijkste componenten voor het maken van een formulier.
@@ -30,15 +30,50 @@ app = Flask(__name__)
 
 Even een korte uitleg. `FlaskForm` is een klasse waarvan overerft wordt om onze eigen formulieren te kunnen maken. De daaropvolgende regel geeft aan welke velden er gebruikt worden op de formulieren. Voor het basisformulier wordt hier aangegeven dat er Stringfields en SubmitFields gebruik gaan worden. De laatste regel zorgt er weer voor dat de applicatie gecreëerd wordt.
 
-### Installatie van flask.wtf en wtforms
+### Installatie van Flask-WTF en WTForms
 
-Het kan zijn dat de pakketten `flask_wtf `en `wtforms` nog niet geïnstalleerd zijn. Dat kan snel verholpen worden. Hier wordt het gedaan met IntelliJ, maar de procedure is in VSCode vergelijkbaar. Navigeer dan naar File | Project Structure. Selecteer SDKs onder het kopje Platform Settings en klik op de tab Packages.
+Het kan zijn dat de modules `flask_wtf` (Flask-WTF) en `wtforms` (WTForms) nog niet geïnstalleerd zijn. Let natuurlijk op dat de Python virtuele omgeving is geactiveerd en controleer met `pip` welke modules al geïnstalleerd zijn:
 
-![SDKs packages installeren](imgs/SDKs-packages.png)
+```console
+(webtech)~ $> pip list
+Package      Version
+------------ -------
+click        7.1.2
+Flask        1.1.2
+itsdangerous 1.1.0
+Jinja2       2.11.3
+MarkupSafe   1.1.1
+pip          21.0.1
+setuptools   47.1.0
+Werkzeug     1.0.1
+```
 
-Uit dit overzicht kan afgelezen worden dat de gevraagde pakketten al geïnstalleerd zijn. Komen ze nog niet in het rijtje voor, klik op het plus-teken. Er verschijnt een enorme lijst met beschikbare packages. Kies de juiste eruit en klik op ‘Install Package’.
+Helaas, geen Flask-WTF of WTForms... Dat kan snel worden verholpen, op dezelfde manier zoals je eerder Flask hebt geïnstalleerd:
 
-![Flask_wtf package installeren](imgs/install-Flask-WTF-package.png)
+```console
+(webtech)~ $> pip install Flask-WTF
+```
+
+Als je nu nogmaals `pip` een overzicht van modules vraagt zal je zien dat ze nu geïnstalleerd zijn:
+
+```console hl_lines="6 13"
+(webtech)~ $> pip list
+Package      Version
+------------ -------
+click        7.1.2
+Flask        1.1.2
+Flask-WTF    0.14.3
+itsdangerous 1.1.0
+Jinja2       2.11.3
+MarkupSafe   1.1.1
+pip          21.0.1
+setuptools   47.1.0
+Werkzeug     1.0.1
+WTForms      2.3.3
+```
+
+!!! notice "Afhankelijkheden"
+    Met `pip install Flask-WTF` is tegelijkertijd ook WTForms geïnstalleerd zonder dat je dit hebt opgegeven! Dit komt omdat Flask-WTF aangeeft dat het afhankelijk is van WTForms en `pip` slim genoeg is om vervolgens ook deze module direct op te halen en te installeren.
 
 #### De geheime sleutel
 Nadat de installatie van de applicatie is afgerond is de volgende stap het configureren van een geheime `SECRET_KEY`. Hier is het ter demonstratie, maar later wordt er echt veel meer aandacht aan besteed en zullen er betere manieren aangeleerd worden om dit te doen.
@@ -80,10 +115,10 @@ instrument = False
 form = InfoForm()
 # Als het formulier valide is
 if form.validate_on_submit():
-        # Haal de data voor instrument op uit het formulier.
-        instrument = form.instrument.data
-        # Zet de waarde voor de variabele instrument op het formulier weer op False
-        form.instrument.data = ''
+    # Haal de data voor instrument op uit het formulier.
+    instrument = form.instrument.data
+    # Zet de waarde voor de variabele instrument op het formulier weer op False
+    form.instrument.data = ''
     return render_template('home.html', form=form, instrument=instrument)
 ```
 Op het valide zijn wordt nog nader ingegaan.

@@ -43,6 +43,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
+  - pymdownx.tabbed
 
 extra_javascript:
   - js/imgs.js

@@ -6,7 +6,7 @@ Aan het eind van deze tekst maken we [oefening 1](oefeningen/flask-oefening1.md)
 
 ## Een voorbeeld
 
-We maken die duidelijk aan de hand van een voorbeeld. We maken een scriptje `server.py`, waarin we allereerst de klasse `Flask` importeren en daar vervolgens een instantie van aanmaken.
+We maken die duidelijk aan de hand van een voorbeeld. We maken een scriptje `app.py`, waarin we allereerst de klasse `Flask` importeren en daar vervolgens een instantie van aanmaken.
 
 ```python
 from flask import Flask
