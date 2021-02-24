@@ -144,7 +144,7 @@ en roep vervolgens `pip` aan om Flask als volgt te installeren:
 (webtech)~ $> pip install flask
 ```
 
-Er wordt weer hard gewerkt achter de schermen en het eindresultaat mag er weer zijn. Controleer nu de inhoud van de directory `venvs/webtech/Scripts` (Windows) of `venv/webtech/bin` (macOS / Linux) en he zult zien dat een nieuw script is toegevoegd
+Er wordt weer hard gewerkt achter de schermen en het eindresultaat mag er weer zijn. Controleer nu de inhoud van de directory `venvs/webtech/Scripts` (Windows) of `venv/webtech/bin` (macOS / Linux) en je zult zien dat een nieuw script is toegevoegd
 
 === "Windows"
 
