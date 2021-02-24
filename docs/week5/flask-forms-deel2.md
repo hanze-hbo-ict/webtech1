@@ -8,7 +8,7 @@ In een volgende deel wordt aandacht besteed hoe de gegevens in een SQL-database 
 
 ## Voorbeeld
 We gaan weer verder met een voorbeeld.
-Voor het volgende uitgewerkte voorbeeld zijn drie bestanden nodig, een Python-file: [`Form-Fields.py`](../bestanden/Form-Fields.py) en twee HTML-bestanden, [`home1.html`](../bestanden/home1.html) en [`bedankt.html`](../bestanden/home2.html).
+Voor het volgende uitgewerkte voorbeeld zijn drie bestanden nodig, een Python-file: [`form_fields.py`](../bestanden/form_fields.py) en twee HTML-bestanden, [`home1.html`](../bestanden/home1.html) en [`bedankt.html`](../bestanden/home2.html).
 
 ### Python gedeelte
 Uiteraard wordt begonnen met de Python-file. Het begin is weer meer van hetzelfde, nu alleen met wat uitbreidingen.

@@ -3,7 +3,7 @@
 # Dit is slechts een overzicht, later wordt het script automatisch uitgevoerd
 # Het is de bedoeling een ieder vertrouwd te maken met CRUD-commando's
 
-from BasicModelApp import db,Cursist
+from basic_model_app import db,Cursist
 
 ###########################
 ###### CREATE ############

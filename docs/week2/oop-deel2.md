@@ -9,7 +9,7 @@ Inkapseling is één van de fundamenten van object-georiënteerd programmeren. H
 
 Als voorbeeld hier een bank, waarbij het mogelijk is een rekening te openen, geld te storten en op te nemen en een overzicht van alle gedane transacties op te vragen, waarbij tevens het tijdstip van de transactie getoond wordt. Uiteraard is de opzet erg beperkt.
 
-De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand [`Bankrekening.py`](../bestanden/Bankrekening.py).
+De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand [`bankrekening.py`](../bestanden/bankrekening.py).
 
 ## Klasse en methoden
 
@@ -104,10 +104,10 @@ Belangrijk is na te gaan of het bedrag gestort dan wel opgenomen is. Omdat een b
 
 ## Interactieve test
 
-Nu gaan we kijken of het werkt. Dit doen we weer in onze interactieve shell, waar we eerst het bestand `Bankrekening.py` inladen
+Nu gaan we kijken of het werkt. Dit doen we weer in onze interactieve shell, waar we eerst het bestand `bankrekening.py` inladen
 
 ```ipython
-In [1]: run "Bankrekening"
+In [1]: run "bankrekening"
 
 In [2]: angela = Bankrekening("Angela", 0)
 Bankrekening aangemaakt voor Angela
@@ -141,7 +141,7 @@ Maak nu [oefening 1](oefeningen/oop-oefening1.md)
 Het idee is gewekt dat alles nu in kannen en kruiken geregeld is. Helaas, er zijn toch nog een aantal onvolkomenheden die aanpassing behoeven. Kijk eens naar het volgende scenario, waarbij een min of meer criminele activiteit is aangegeven:
 
 ```ipython hl_lines="9"
-In [1]: run "Bankrekening"
+In [1]: run "bankrekening"
 
 In [2]: britt = Bankrekening("Britt", 800)
 Bankrekening aangemaakt voor Britt

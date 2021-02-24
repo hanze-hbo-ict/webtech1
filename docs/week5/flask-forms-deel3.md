@@ -8,7 +8,7 @@ Aan het eind van deze tekst maken we [oefening 1](oefeningen/flask-forms-oefenin
 
 ## Voorbeeld
 Flask kan dat op een gemakkelijke manier voor elkaar krijgen.
-Dit wordt nu weer besproken aan de hand van een voorbeeld. In dit voorbeeld zijn twee bestanden nodig, [`home2.html`](../bestanden/home2.html) en [`Flashing-Messages.py`](../bestanden/Flashing-Messages.py).
+Dit wordt nu weer besproken aan de hand van een voorbeeld. In dit voorbeeld zijn twee bestanden nodig, [`home2.html`](../bestanden/home2.html) en [`flashing_messages.py`](../bestanden/flashing_messages.py).
 
 ### Python gedeelte
 Zoals gebruikelijk als eerste de Python-file. Het begin moet geen vragen meer oproepen.

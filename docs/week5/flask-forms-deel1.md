@@ -15,7 +15,7 @@ Dat zijn de volgende onderdelen:
     - Verwerk het formulier.
 
 ## Voorbeeld
-Om deze materie te kunnen begrijpen volgt nu een uitgebreid voorbeeld. Dit voorbeeld bestaat uit een Python-file ([`Basis-Flask-form.py`](../bestanden/Basis-Flask-form.py)) en een enkele HTML-bestand, getiteld [`home.html`](../bestanden/home.html). Dit HTML-bestand wordt weer opgenomen in de folder ‘templates’.
+Om deze materie te kunnen begrijpen volgt nu een uitgebreid voorbeeld. Dit voorbeeld bestaat uit een Python-file ([`basis_flask_form.py`](../bestanden/basis_flask_form.py)) en een enkele HTML-bestand, getiteld [`home.html`](../bestanden/home.html). Dit HTML-bestand wordt weer opgenomen in de folder ‘templates’.
 
 ### Python gedeelte
 Als eerste de Python-file. Er moeten nu meerdere zaken worden geïmporteerd, zie onderstaand kader.

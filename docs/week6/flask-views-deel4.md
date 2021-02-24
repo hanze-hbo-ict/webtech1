@@ -26,7 +26,7 @@ You did not provide the FLASK_APP environment variable.
 
 Vaak is dit pakket nog niet geïnstalleerd. Dat kan verholpen worden door op de bekende wijze dit pakket toe te voegen.
 
-Nu weer de praktijk. Wat te doen om het geheel werkend te krijgen zodat migraties kunnen worden doorgevoerd? Op de eerste plaats dienen er een tweetal wijzigingen te worden aangebracht in de file [`BasicModelApp.py`](../bestanden/crud/BasicModelApp.py):
+Nu weer de praktijk. Wat te doen om het geheel werkend te krijgen zodat migraties kunnen worden doorgevoerd? Op de eerste plaats dienen er een tweetal wijzigingen te worden aangebracht in de file [`basic_model_app.py`](../bestanden/crud/basic_model_app.py):
 
 ```python hl_lines="4"
 import os

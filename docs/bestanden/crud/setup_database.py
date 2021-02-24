@@ -1,7 +1,7 @@
 # Dit is een heel eenvoudig script om te laten zien hoe een database in te stellen
 
 # Importeer database info
-from BasicModelApp import db, Cursist
+from basic_model_app import db, Cursist
 
 # Maak de tabel(len) aan in de database
 db.create_all()

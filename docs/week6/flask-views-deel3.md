@@ -1,14 +1,14 @@
 # Flask en SQL - CRUD
 
-## 3. `BasisCrud.py`
+## 3. `basic_CRUD.py`
 
 Nu bekend is hoe een database opgezet kan een beetje gestoeid worden door een aantal basishandelingen uit te voeren.
 
-Denk erom, vaak worden de scripts op een andere wijze uitgevoerd. Het doel is hier om te laten zien op welke wijze CRUD-commando’s uitgevoerd worden. De Python-file die daarvoor gebruikt wordt, is het bestand [`BasisCRUD.py`](../bestanden/crud/BasicCRUD.py). Iedere basishandeling komt even voorbij. De opbouw geschiedt in een vijftal stappen:
+Denk erom, vaak worden de scripts op een andere wijze uitgevoerd. Het doel is hier om te laten zien op welke wijze CRUD-commando’s uitgevoerd worden. De Python-file die daarvoor gebruikt wordt, is het bestand [`basic_CRUD.py`](../bestanden/crud/basic_CRUD.py). Iedere basishandeling komt even voorbij. De opbouw geschiedt in een vijftal stappen:
 
 ### Stap 1: Importeren
 ```python
-from BasicModelApp import db, Cursist
+from basic_model_app import db, Cursist
 ```
 
 ### Stap 2: CREATE

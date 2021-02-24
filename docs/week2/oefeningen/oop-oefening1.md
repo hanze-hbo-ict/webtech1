@@ -3,7 +3,7 @@
 Het programma is toch nog niet helemaal perfect. Kijk naar de volgende coderegels van een tweede klant, Britt:
 
 ```ipython
-In [1]: run "Bankrekening"
+In [1]: run "bankrekening"
 
 In [2]: britt = Bankrekening("Britt", 800)
 Bankrekening aangemaakt voor Britt
