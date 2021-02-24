@@ -25,7 +25,7 @@ Het aanmaken van de structuur zal in gedeelten besproken worden, zodat nog een k
 
 ![De opzet van het project Refactor](imgs/structuur-Refactor.png)
 
-Ter herinnering, de applicatie is gemaakt in IntelliJ. Om alles bij elkaar te kunnen houden is er een nieuw project aangemaakt met de naam 'Refactor'. Binnen het project zijn op het hoogste niveau een tweetal zaken nodig: een folder waarin de items van de applicatie worden ondergebracht, hier `mijnproject` en een Python-file, hier `app.py` genaamd. Deze file importeert enkele items en kent verder alleen een verwijzing naar de pagina `home.html`. Deze file wordt als allerlaatste gecodeerd.
+Om alles uit elkaar te kunnen houden hebben we een nieuw project aangemaakt met de naam 'Refactor'. Binnen het project zijn op het hoogste niveau een tweetal zaken nodig: een folder waarin de items van de applicatie worden ondergebracht, hier `mijnproject` en een Python-file, hier `app.py` genaamd. Deze file importeert enkele items en kent verder alleen een verwijzing naar de pagina `home.html`. Deze file wordt als allerlaatste gecodeerd.
 
 De folder `templates` bevat een tweetal HTML-bestanden. Allereerst het bestand `base.html` met de links naar Bootstrap, de titel, de navigatiebalk en een leeg blok. Het andere bestand, `home.html` bevat de inhoud van de homepagina. 
 

@@ -80,7 +80,7 @@ Het lijkt erg veel op de code van de vorige paragraaf. Als eerste extra item wor
 
 Een session-tabel is een kortstondige tijdelijke tabel waarin waarden bewaard kunnen worden om aan een andere pagina door te geven. Een mooi voorbeeld hiervan is een overzicht van bestellingen van artikelen op een website. Als een artikel in een winkelmandje beland is, kan het voorkomen dat er nog een artikel aangeschaft gaat worden. Wanneer naar de pagina gesprongen wordt om het tweede artikel nog een keer uitvoerig te bekijken, wordt wanneer er geen sessievariabelen benut worden, het mandje weer geleegd. De gegevens zijn dan niet ergens opgeslagen.
 
-Een tweede opvallend iets is dat er twee return-statements zijn aangewend. De laatste is nodig om de eerste keer een leeg formulier te tonen.
+Een tweede opvallend iets is dat er twee return-statements zijn gebruikt. De laatste is nodig om de eerste keer een leeg formulier te tonen.
 
 Het andere return-statement sluist de waarden gelijk door naar de viewfunctie met de naam ‘bedankt’. De ingevoerde gegevens zullen daar getoond worden. Dit is de volgende stap.
 

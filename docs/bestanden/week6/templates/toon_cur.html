@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Dit zijn de momenteel ingeschreven cursisten.</h1>
+    <ul>
+        {% for cur in cursisten  %}
+        <li>{{cur}}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}
+

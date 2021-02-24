@@ -6,9 +6,9 @@ Tot nu toe zijn alle coderegels in één `app.py`-bestand ondergebracht. Voor gr
 
 Voor nog grotere toepassingen begint het logisch te worden om de bestanden te herstructureren en componenten te scheiden zoals forms, views en templates voor elke belangrijke component.
 
-Bij de vorige oefening waren alle formulieren, views en templates in een enkel bestand of directory opgenomen. In dit deel hebben we aandacht voor de wijze waarop de ontwikkelde applicatie van [oefening 1](../week6/oefeningen/flask-views-oefening1.md) *gerefactored* kan worden.
+In dit deel hebben we aandacht voor de wijze waarop de ontwikkelde applicatie van [oefening 1](../week6/oefeningen/flask-views-oefening1.md) *gerefactored* kan worden. Bij die oefening waren alle formulieren, views en templates in een enkel bestand of directory opgenomen. Zo maakte je een bestand `mentor_site.py`, waarin zowel het model als de verschillende routes waren opgenomen, en had je ook een bestand `forms.py`, waarin je de verschillende formulier-klassen had aangebracht. 
 
-Refactoren is een andere structuur aan code (of eigenlijk een hele *code-base*) geven. Daarvoor wordt de file [`mentor_site.py`](../bestanden/mentor_site.py) opgesplitst in afzonderlijke componenten voor de hierboven genoemde aspecten. In plaats van `mentor_site.py` wordt vanaf nu `app.py ` gehanteerd.
+Refactoren is een andere structuur aan code (of eigenlijk een hele *code-base*) geven. Daarvoor wordt het bestand `mentor_site.py` (dat je bij de vorige oefening hebt gemaakt) opgesplitst in afzonderlijke componenten voor de hierboven genoemde aspecten. In plaats van `mentor_site.py` wordt vanaf nu `app.py ` gehanteerd.
 
 ![mentor_site.py opgesplitst tot twee componenten](imgs/structuur-flask-app.png)
 
@@ -51,7 +51,7 @@ Het is een best lang overzicht:
 
 
 !!! info "requirements.txt"
-    In Python projecten zal je vaak een `requirements.txt` bestand zien dit is een bestand waar de afhankelijkheden (de gebruikte modules) van de applicatie zijn beschreven. Je kan met `pip` de geïnstalleerde modules als volgt naar dit bestand laten schrijven:
+    In Python projecten zal je vaak een `requirements.txt` bestand zien. Dit is een bestand waar de afhankelijkheden (de gebruikte modules) van de applicatie zijn beschreven. Je kan met `pip` de geïnstalleerde modules als volgt naar dit bestand laten schrijven:
 
     ```console
     pip freeze > requirements.txt
@@ -63,6 +63,6 @@ Het is een best lang overzicht:
     pip install -r requirements.txt
     ```
 
-    Het vastzetten van modules en bijbehorende versienummers is een manier om een repliceerbare omgeving voor een applicatie te gegaranderen, bijvoorbeeld als het live op een server moet draaien of zelfs als jij met andere mensen gaat samenwerken aan een project.
+    Het vastzetten van modules en bijbehorende versienummers is een manier om een repliceerbare omgeving voor een applicatie te gegaranderen, bijvoorbeeld als het live op een server moet draaien of wanneer je met andere mensen aan een project gaat samenwerken.
 
 In de volgende paragraaf wordt een applicatie omgeschreven naar een meer overzichtelijke vorm. Als voorbeeld gebruiken we de applicatie van de oefening uit het deel waarin voor het eerst een website gebouwd is.
