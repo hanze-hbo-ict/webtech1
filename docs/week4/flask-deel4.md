@@ -10,7 +10,14 @@ Voordat de code besproken kan worden, dient er een tweetal folders aangemaakt te
 
 Voor het voorbeeld wordt er een afbeelding ‘drums.jpg’ in de folder `static` geplaatst en een HTML-file aangemaakt in de folder `templates`. De totale directory-listing ziet er dan als volgt uit:
 
-![Directory listing van het eerste voorbeeld](imgs/directory_listing1.png)
+```text
+.
+├── app.py
+├── static
+│   └── drums.jpg
+└── templates
+    └── basic.html
+```
 
 De template met de naam `basic.html` heeft de onderstaande inhoud. Deze code moet geen verrassing meer zijn. Deze code vormt onze eerste template.
 
