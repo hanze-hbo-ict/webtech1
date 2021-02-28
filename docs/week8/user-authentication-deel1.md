@@ -25,8 +25,8 @@ Voor het werken met die hashes kan uit een tweetal beschikbare bibliotheken geko
 
 - [`Bcrypt`](https://flask-bcrypt.readthedocs.io/en/latest/)
 - [`Werkzeug`](https://techmonger.github.io/4/secure-passwords-werkzeug/)
-  
-Beiden kunnen zeer goed gebruikt worden in een Flask-applicatie om te kunnen achterhalen of er een juist wachtwoord is ingevoerd. Van beide pakketten wordt een voorbeeld gegeven hoe het gebruikt kan worden. 
+
+Beiden kunnen zeer goed gebruikt worden in een Flask-applicatie om te kunnen achterhalen of er een juist wachtwoord is ingevoerd. Van beide pakketten wordt een voorbeeld gegeven hoe het gebruikt kan worden.
 
 `Bcrypt` en `Werkzeug` komen vaak mee als `Flask` geïnstalleerd wordt. Is dat niet het geval kunnen de pakketten [op de bekende wijze](../week5/flask-forms-deel1.md) opgehaald worden.
 
@@ -53,7 +53,9 @@ print(hashed_pass)
 
 Het wachtwoord wordt gehashed en bewaard in de variabele `hashed_pass`. Nadat het geprint is, is het echt niet meer te herleiden naar het origineel:
 
-![de waarde van de variabele hashed_pass](imgs/hashed-pass.png)
+```console
+b'$2b$12$iVZrY/N1cevcKrwWdJocUue875rR5MEeu8lgNzf9h0JmU6QLjaDQC'
+```
 
 Wordt het runnen herhaald, verschijnt er een andere hash.
 
@@ -68,7 +70,10 @@ print(goed_check)
 
 Het effect:
 
-![de uitkomst van de hash test](imgs/hash-test-bcrypt.png)
+```console
+False
+True
+```
 
 Precies in de lijn der verwachting.
 
@@ -87,11 +92,13 @@ goed_check = check_password_hash(hashed_pass,'supergeheimwachtwoord')
 print(goed_check)
 ```
 
-
 En het effect:
 
-
-![de output van bovenstaande code](imgs/werkzeug-hash-test.png)
+```console
+pbkdf2:sha256:150000$bdSmANbT$12bfd9cb7837a6a9e1f4b588b1ca70f76c4bb26ace357bfe7a0da00bf64d6bc0
+False
+True
+```
 
 Het verschil tussen beiden is dat bij Werkzeug exact de juiste methoden binnengehaald worden en bij Bcrypt moet er soms een beetje over nagedacht worden. De keuze tussen deze pakketten is vrij aan de ontwikkelaar.
 

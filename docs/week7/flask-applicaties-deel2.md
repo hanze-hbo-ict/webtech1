@@ -23,19 +23,45 @@ Nogmaals, in dit deel ligt de nadruk in het opzetten van een algemene structuur 
 
 Het aanmaken van de structuur zal in gedeelten besproken worden, zodat nog een keer duidelijk wordt hoe het opzetten van een uitgebreide applicatie het beste kan geschieden.
 
-![De opzet van het project Refactor](imgs/structuur-Refactor.png)
+```text
+.
+├── mijnproject
+│   ├── docenten
+│   ├── studenten
+│   ├── templates
+│   ├── __init__.py
+│   └── models.py
+└── app.py
+```
 
 Om alles uit elkaar te kunnen houden hebben we een nieuw project aangemaakt met de naam 'Refactor'. Binnen het project zijn op het hoogste niveau een tweetal zaken nodig: een folder waarin de items van de applicatie worden ondergebracht, hier `mijnproject` en een Python-file, hier `app.py` genaamd. Deze file importeert enkele items en kent verder alleen een verwijzing naar de pagina `home.html`. Deze file wordt als allerlaatste gecodeerd.
 
-De folder `templates` bevat een tweetal HTML-bestanden. Allereerst het bestand `base.html` met de links naar Bootstrap, de titel, de navigatiebalk en een leeg blok. Het andere bestand, `home.html` bevat de inhoud van de homepagina. 
+De folder `templates` bevat een tweetal HTML-bestanden. Allereerst het bestand `base.html` met de links naar Bootstrap, de titel, de navigatiebalk en een leeg blok. Het andere bestand, `home.html` bevat de inhoud van de homepagina.
 
-In `__init__.py` worden weer de bekende aspecten van flask geïmporteerd, de database aangemaakt, de basisdirectory bepaald en de koppeling tussen applicatie en database ingesteld. Later worden hier nog de blueprints aan toegevoegd. 
+In `__init__.py` worden weer de bekende aspecten van flask geïmporteerd, de database aangemaakt, de basisdirectory bepaald en de koppeling tussen applicatie en database ingesteld. Later worden hier nog de blueprints aan toegevoegd.
 
 In `models.py` wordt de structuur van de database bepaald, zoals al een aantal keren aan bod is geweest.
 
 De structuur van de folder `mijnproject` is dan als volgt:
 
-![de structuur van mijnproject](imgs/structuur-mijnproject.png)
+```text
+.
+├── mijnproject
+│   ├── docenten
+│   │   ├── templates
+│   │   │   └── docenten
+│   │   ├── forms.py
+│   │   └── views.py
+│   ├── studenten
+│   │   ├── templates
+│   │   │   └── studenten
+│   │   ├── forms.py
+│   │   └── views.py
+│   ├── templates
+│   ├── __init__.py
+│   └── models.py
+└── app.py
+```
 
 Voor zowel de docenten als de studenten wordt een eigen directory ingericht. Hierin kunnen de onderdelen worden opgenomen die van toepassing zijn voor de verschillende onderwerpen. Voor beide directories zijn formulieren, views en templates ontwikkeld die nu keurig van elkaar gescheiden worden ondergebracht in de applicatie. Voor beide domeinen (docenten en studenten) is een eigen folder gereserveerd waarin de specifieke HTML-bestanden voor ieder doel komen te staan.
 
@@ -84,7 +110,7 @@ class Student(db.Model):
 ```
 
 Uit het bestand `mentor_site.py` zijn de klassen `Docent` en `Student` overgenomen. Punt van aandacht is nog wel dat er nog een koppeling gemaakt moet worden naar de plek waar db wordt aangemaakt. Dat zal gebeuren in het bestand `__init__.py`. Het is alvast opgenomen als commentaarregel.
-Als tweede wordt de folder templates gevuld met de bestanden `base.html` en `home.html`. 
+Als tweede wordt de folder templates gevuld met de bestanden `base.html` en `home.html`.
 
 ### `base.html`
 
@@ -282,4 +308,27 @@ Er zijn nog een paar aandachtspunten overgebleven waar in de volgende paragraaf 
 
 Bovendien worden er de nodige blueprints in de code opgenomen. Tot slot van deze paragraaf een overzicht van wat allemaal al klaar is:
 
-![](imgs/overzicht-gedaan.png)
+```text
+.
+├── mijnproject
+│   ├── docenten
+│   │   ├── templates
+│   │   │   └── docenten
+│   │   │       ├── add.html
+│   │   │       ├── delete.html
+│   │   │       └── list.html
+│   │   ├── forms.py
+│   │   └── views.py
+│   ├── studenten
+│   │   ├── templates
+│   │   │   └── studenten
+│   │   │       └── add.html
+│   │   ├── forms.py
+│   │   └── views.py
+│   ├── templates
+│   │   ├── base.html
+│   │   └── home.html
+│   ├── __init__.py
+│   └── models.py
+└── app.py
+```

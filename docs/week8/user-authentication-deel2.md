@@ -4,7 +4,20 @@ De `Flask-login` bibliotheek maakt het heel eenvoudig om gebruikersauthenticatie
 
 De structuur van de inlogprocedure heeft de volgende vorm:
 
-![de structuur van de inlogprocedure](imgs/structuur-inlog.png)
+```text
+.
+├── app.py
+└── mijnproject
+    ├── forms.py
+    ├── __init__.py
+    ├── models.py
+    └── templates
+        ├── base.html
+        ├── home.html
+        ├── login.html
+        ├── register.html
+        └── welkom.html
+```
 
 Dit zijn alle files die nodig zijn bij dit project, met de naam `mijnproject`; [download hier de bestanden](../bestanden/login.zip). Technisch gezien is de applicatie te klein om uit te kunnen splitsen in aparte onderdelen, zoals in het vorige deel beschreven is. Maar dezelfde opzet is wel aangehouden.
 
@@ -79,11 +92,12 @@ from flask_login import UserMixin
 In de eerste coderegel wordt vastgelegd dat uit `__init__.py`, `db` en `login_manager` nodig zijn voor een juiste werking. De tweede regel is bekend en de derde coderegel zorgt voor enige luxe. `UserMixin` wordt als superklasse gebruikt en dat betekent dat er toegang verkregen wordt tot veel ingebouwde functies. Het is dan niet meer nodig als ontwikkelaar deze zelf aan te maken. Ze kunnen gewoon aangeroepen worden.
 
 Bijvoorbeeld:
+
 - `is_authenticated()`
 - `is active()`
 - `is_anonymous()`
 - `get_id()`
-  
+
 Nu kan de gebruikersklasse aangemaakt worden. De naam van de klasse wordt `User`, dat is hier een gangbaardere term dan `Gebruiker`. Voor iedere gebruiker wordt het ID, de gebruikersnaam, een wachtwoord en het e-mailadres vastgelegd.
 
 De klasse `User()` erft eigenschappen van `dbModel` en `UserMixin`:
@@ -106,9 +120,9 @@ Nu is het weer de beurt aan `__init__()`. De volgorde waarin de coderegels worde
 
 ```python
 def __init__(self, email, username, password):
-        self.email = email
-        self.username = username
-        self.password_hash = generate_password_hash(password)
+    self.email = email
+    self.username = username
+    self.password_hash = generate_password_hash(password)
 ```
 
 Voor iedere nieuwe gebruiker wordt gevraagd om een gebruikersnaam, een e-mailadres en een wachtwoord. Van het opgegeven wachtwoord wordt onmiddellijk een hash-versie geproduceerd.
@@ -117,7 +131,7 @@ Verder is er nog een methode nodig, die gaat controleren of het ingevoerde wacht
 
 ```python
 def check_password(self, password):
-       return check_password_hash(self.password_hash, password)
+    return check_password_hash(self.password_hash, password)
 ```
 
 Er wordt gecontroleerd of het opgegeven password voldoet aan de hash-versie. Er wordt `True` of `False` als uitkomst geretourneerd.
@@ -135,7 +149,7 @@ De `user_loader` decorator geeft `Flask-login` toestemming om de gegevens van de
 
 ## `forms.py`
 
-In dit bestand worden de formulieren opgesteld. Bij het inloggen vinden er een aantal controles plaats, dus naast het importeren van de formulieropties, moeten ook de voorgeprogrammeerde validaties beschikbaar komen om die controles te kunnen uitvoeren zonder dat de ontwikkelaar ze zelf weer hoeft uit te programmeren. 
+In dit bestand worden de formulieren opgesteld. Bij het inloggen vinden er een aantal controles plaats, dus naast het importeren van de formulieropties, moeten ook de voorgeprogrammeerde validaties beschikbaar komen om die controles te kunnen uitvoeren zonder dat de ontwikkelaar ze zelf weer hoeft uit te programmeren.
 
 ```python
 from flask_wtf import FlaskForm
@@ -162,7 +176,7 @@ Voor de variabele `email` zijn twee (2) validators opgenomen: `DataRequired` en 
 
 De variabele `password` verdient ook de nodige aandacht te krijgen. Deze is van het type `PasswordField`, wat wil zeggen dat de inhoud op het scherm niet door anderen kan worden afgelezen. Het is in ieder geval een verplicht veld op het formulier. Op de tweede validator-optie komen we zo terug.
 
-Bij een registratie is het heel gebruikelijk te vragen om het wachtwoord nog een keer op te voeren om na te kunnen gaan of de gebruiker geen typo heeft gemaakt. Zo ook hier. De user voert een tweede keer het wachtwoord in dat wordt opgeslagen in de variabele `pass_confirm`. 
+Bij een registratie is het heel gebruikelijk te vragen om het wachtwoord nog een keer op te voeren om na te kunnen gaan of de gebruiker geen typo heeft gemaakt. Zo ook hier. De user voert een tweede keer het wachtwoord in dat wordt opgeslagen in de variabele `pass_confirm`.
 
 Nu weer terug naar het veld waar voor de eerste keer het wachtwoord wordt ingevuld. De tweede validator hier is `EqualTo`. Hierbij wordt nu vergeleken of de beide opgegeven wachtwoorden aan elkaar gelijk zijn.
 
