@@ -2,7 +2,7 @@
 
 Hoewel SQL uitvoerig besproken is in het eerste kwartaal, kan het absoluut geen kwaad de belangrijkste statements nog even voor het voetlicht te halen en dan voor  SQLite3. Bovendien is dit een handige manier om SQLite3 te leren kennen.
 
-Alles begint met het aanmaken van een database, dus ook hier. De database krijgt de passende naam ’test.db’. Om de database aan te maken moet er in de command-line ingetoetst worden: `SQLite 3 test.db`. Hiermee wordt de interactive shell geopend met de database `test`:
+Alles begint met het aanmaken van een database, dus ook hier. De database krijgt de passende naam ’test.db’. Om de database aan te maken moet er in de command-line ingetoetst worden: `sqlite3 test.db`. Hiermee wordt de interactive shell geopend met de database `test`:
 
 ```console
 hostname:user$ sqlite3 test.db
