@@ -16,7 +16,7 @@ Nieuwe bezoekers, dus zij die zich nog niet geregistreerd hebben, kunnen vanzelf
 
 ## Gevraagd
 
-Maak de website waarbij deze gegevens kunnen worden geraadpleegd en bewerkt. Het is een DUO-opdracht. 
+Maak een sterk vereenvoudige webapplicatie waarbij deze gegevens kunnen worden geraadpleegd en bewerkt. Het is een DUO-opdracht. 
 
 ## Tips
 

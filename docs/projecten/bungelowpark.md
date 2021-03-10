@@ -8,7 +8,7 @@ Gasten kunnen op de site inloggen om hun reservering te bekijken en eventueel aa
 
 ## Gevraagd
 
-Maak een webapplicatie, om de gegevens bij te houden van gasten en boekingen zoals hierboven beschreven. Het is een DUO-opdracht.
+Maak een sterk vereenvoudige webapplicatie om de gegevens bij te houden van gasten en boekingen zoals hierboven beschreven. Het is een DUO-opdracht.
 
 ## Tips
 

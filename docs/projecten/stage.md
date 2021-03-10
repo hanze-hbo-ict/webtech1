@@ -18,7 +18,7 @@ Er zijn twee typen geregistreerde bezoekers van deze site. Allereerst studenten,
 
 ## Gevraagd
 
-Maak de website waarbij deze gegevens kunnen worden geraadpleegd en bewerkt. Het is een DUO-opdracht. 
+Maak een sterk vereenvoudige webapplicatie waarbij deze gegevens kunnen worden geraadpleegd en bewerkt. Het is een DUO-opdracht. 
 
 ## Tips
 

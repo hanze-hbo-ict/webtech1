@@ -13,7 +13,7 @@ In de tabel rol worden een viertal attributen opgegeven, id, id van de acteur, i
 Het is mogelijk om bij deze site een account aan te maken. Ingelogde bezoekers kunnen gegevens van films aanpassen of aanvullen. Ook kunnen ze bijvoorbeeld mooie citaten uit de film aan de betreffende pagina toevoegen of onvolledigheden  of incorrectheden toevoegen (bijvoorbeeld spijkerbroeken in een film die speelt in de Romeinse tijd).
 
 ## Gevraagd
-Maak deze webapplicatie om de gegevens bij te houden van acteurs, films en de gespeelde rollen. Het is een DUO-opdracht.
+ Maak een sterk vereenvoudige webapplicatie om de gegevens bij te houden van acteurs, films en de gespeelde rollen. Het is een DUO-opdracht.
 
 ## Tips
 
