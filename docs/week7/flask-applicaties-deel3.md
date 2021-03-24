@@ -26,7 +26,7 @@ from mijnproject.studenten.forms import AddForm
 
 studenten_blueprint = Blueprint('studenten',
                              __name__,
-                             template_folder='templates/studenten')
+                             template_folder='templates')
 
 @studenten_blueprint.route('/add', methods=['GET', 'POST'])
 def add():
@@ -41,14 +41,14 @@ def add():
         db.session.commit()
 
         return redirect(url_for('docenten.list'))
-    return render_template('add.html',form=form)
+    return render_template('studenten/add.html',form=form)
 ```
 
 Als eerste wordt hier weer het nodige geïmporteerd. Belangrijk hierbij is dat ook `Blueprint` wordt meegenomen uit het pakket `flask`. Verder zijn nodig de database (db) uit `mijnproject`, de tabel `Student` en het formulier waarmee een nieuwe student ingevoerd kan worden. 
 
 Vervolgens wordt er een variabele aangemaakt `studenten_blueprint`. Deze variabele is een instantie van de klasse `Blueprint`. Er moeten een drietal kenmerken worden vastgelegd, een naam (hier `studenten`), de naam van de applicatie en de folder die verantwoordelijk is voor alle logica voor de studenten. 
 
-Daarna kan de decorator aangemaakt worden. Dit moet weer bekend voorkomen. Aangezien alle gegevens van studenten zijn samengebracht in de map `studenten` valt af te lezen dat het pad om de gegevens terug te kunnen vinden met `templates/studenten` heel logisch wordt. Dat pad wordt ook vastgelegd in `studenten_blueprint`.
+Daarna kan de decorator aangemaakt worden. Dit moet weer bekend voorkomen. Aangezien alle gegevens van studenten zijn samengebracht in de map `studenten` valt af te lezen dat het pad om de gegevens terug te kunnen vinden binnen `templates/` heel logisch wordt. Dat pad wordt ook vastgelegd in `studenten_blueprint`. Voor het pad binnen render-templates voegen we dan nog de directory toe waar het te gebruiken template staat `studenten/add.html`.
 
 Vervolgens wordt de view gecodeerd (gekopieerd). Daarbij wordt als eerste het formulier gedefinieerd en vervolgens bepaalt wat er moet gebeuren als er nog niet op *Submit* geklikt is en wat wanneer het formulier al wel is ingevuld.
 
@@ -64,7 +64,7 @@ from mijnproject.models import Docent
 
 docenten_blueprint = Blueprint('docenten',
                               __name__,
-                              template_folder='templates/docenten')
+                              template_folder='templates')
 
 @docenten_blueprint.route('/add', methods=['GET', 'POST'])
 def add():
@@ -79,12 +79,12 @@ def add():
 
         return redirect(url_for('docenten.list'))
 
-    return render_template('add.html',form=form)
+    return render_template('docenten/add.html',form=form)
 
 @docenten_blueprint.route('/list')
 def list():
     docenten = Docent.query.all()
-    return render_template('list.html', docenten=docenten)
+    return render_template('docenten/list.html', docenten=docenten)
 
 @docenten_blueprint.route('/delete', methods=['GET', 'POST'])
 def delete():
@@ -98,7 +98,7 @@ def delete():
         db.session.commit()
 
         return redirect(url_for('docenten.list'))
-    return render_template('delete.html',form=form)
+    return render_template('docenten/delete.html',form=form)
 ```
 
 Meer van hetzelfde. Nu zijn er twee views die gemaakt moeten worden. De `blueprint` verwijst nu naar de folder waar de applicatie-onderdelen voor docenten gevonden kunnen worden.
