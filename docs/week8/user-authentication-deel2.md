@@ -183,7 +183,7 @@ Nu weer terug naar het veld waar voor de eerste keer het wachtwoord wordt ingevu
 Aan dit formulier worden nog een tweetal methoden verbonden:
 
 ```python
-def check_email(self, field):
+def validate_email(self, field):
     if User.query.filter_by(email=field.data).first():
         raise ValidationError('Dit e-mailadres staat al geregistreerd!')
 ```
@@ -192,7 +192,7 @@ De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt geco
 De tweede methode is nagenoeg gelijk aan de eerste. Alleen moet er nu nagegaan worden of de gebruikersnaam al in de database voorkomt.
 
 ```python
-def check_username(self, field):
+def validate_username(self, field):
     if User.query.filter_by(username=field.data).first():
         raise ValidationError('Deze gebruikersnaam is al vergeven, probeer een ander naam!')
 ```
