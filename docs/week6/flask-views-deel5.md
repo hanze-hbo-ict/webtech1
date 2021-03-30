@@ -90,7 +90,7 @@ Nu het uitgangspunt is dat er tussen docent en cursist een één-op-één relati
 De klasse `Cursist` krijgt ook nog de beschikking over de volgende methoden:
 
 ```python
-def __init__(self,naam):
+    def __init__(self,naam):
         self.naam = naam
 
     def __repr__(self):
@@ -134,7 +134,7 @@ class Docent(db.Model):
 
     id = db.Column(db.Integer,primary_key= True)
     naam = db.Column(db.Text)
-   cursist_id = db.Column(db.Integer,db.ForeignKey('cursisten.id'))
+    cursist_id = db.Column(db.Integer,db.ForeignKey('cursisten.id'))
 
     def __init__(self,naam,cursist_id):
         self.naam = naam

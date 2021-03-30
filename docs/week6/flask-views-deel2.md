@@ -111,7 +111,7 @@ Voor de tweede stap maken we gebruik van het bestand [`setup_database.py`](../be
 Ook voor deze file zal de opbouw van de code stap voor stap beschreven worden. In de eerste plaats worden er een aantal elementen uit de file `basic_model_app.py` geïmporteerd:
 
 ```python
-from BasicModelApp import db, Cursist
+from basic_model_app import db, Cursist
 ```
 
 De database en de tabel Cursist zijn ingeladen en nu moet de database en het bestand worden aangemaakt. Daarvoor is onderstaand commando beschikbaar:

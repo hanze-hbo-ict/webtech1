@@ -293,8 +293,8 @@ Voordat er getest kan worden moet het migratiepad nogmaals worden aangebracht. D
 De stappen:
 
 - Stel de omgevingsvariabele FLASK_APP in
-    - Voor een MacOS / Linux-machine is dat export FLASK_APP = beheer_cursist.py
-    - Voor een Windows-machine set FLASK_APP = beheer_cursist.py
+    - Voor een MacOS / Linux-machine is dat `export FLASK_APP=beheer_cursist.py`
+    - Voor een Windows-machine `set FLASK_APP=beheer_cursist.py`
 - flask db init  
 - flask db migrate -m "zomaar eenbericht"  
 - flask db upgrade 

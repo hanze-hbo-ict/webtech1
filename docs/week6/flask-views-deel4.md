@@ -11,8 +11,8 @@ Flask-Migraties worden gebruikt om versies van het database-model bij te houden.
 Er zijn vier belangrijke commando’s hierbij die op de command-line worden gebruikt:
 
 - Stel de omgevingsvariabele FLASK_APP in
-    - Voor een MacOS / Linux-machine is dat `export FLASK_APP = myapp.py`
-    - Voor een Windows-machine `set FLASK_APP = myapp.py`
+    - Voor een MacOS / Linux-machine is dat `export FLASK_APP=myapp.py`
+    - Voor een Windows-machine `set FLASK_APP=myapp.py`
 - `flask db init`  stelt de migratie directory in
 - `flask db migrate -m "zomaar een bericht"`  stelt het migratiebestand in
 - `flask db upgrade` verwerkt de aanpassing in de database
