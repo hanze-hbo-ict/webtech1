@@ -2,7 +2,7 @@
 
 Cascading Style Sheets (CSS) is de code die wordt gebruikt om webpagina’s van een stijl te voorzien. Net zoals HTML is CSS  niet echt een programmeertaal, maar het is ook niet echt een opmaaktaal zoals html. Je zou kunnnen zeggen dat het een *stijltaal* is: het stelt een ontwerper in staat om diverse stijlen en stijlvormen op geselecteerde elementen in een HTML-document toe te passen.
 
-Hieronder zie je een stukje css. Deze code zorg ervoor dat de tekst van alle paragrafen (alles met het element `<p>`) *rood* wordt weergegeven.
+Hieronder zie je een stukje CSS. Deze code zorg ervoor dat de tekst van alle paragrafen (alles met het element `<p>`) *rood* wordt weergegeven.
 
 ```css
 p {
@@ -13,8 +13,7 @@ p {
 !!! Info "Bestanden downloaden"
     Ook de bestanden die we hier bespreken kun je downloaden. Volg daarvoor [deze link](../../bestanden/css.zip).
 
-Je kunt css in het html-bestand zelf schrijven, maar je kunt het ook in een separaat bestand opslaan. Die laatste methode is wel makkelijker, omdat je op die manier dezelfde *stylesheet* in verschillende hmlt-bestanden kunt gebruiken. Om ervoor te zorgen dat een html-bestand gebruik kan maken van een css-bestand, moet je een koppeling tussen deze twee aanbrengen. Dat doe je in de `header` van het html-bestand (dus tussen `<head>` en `</head>`).
-
+Je kunt CSS in het html-bestand zelf schrijven, maar je kunt het ook in een separaat bestand opslaan. Die laatste methode is wel makkelijker, omdat je op die manier dezelfde *stylesheet* in verschillende HTML-bestanden kunt gebruiken. Om ervoor te zorgen dat een html-bestand gebruik kan maken van een css-bestand, moet je een koppeling tussen deze twee aanbrengen. Dat doe je in de `header` van het html-bestand (dus tussen `<head>` en `</head>`). Zie het onderstaande voorbeeld:
 
 ```html
 <!DOCTYPE html>
@@ -38,7 +37,7 @@ Je kunt css in het html-bestand zelf schrijven, maar je kunt het ook in een sepa
 Alle tekst opgenomen binnen een paragraaf heeft daadwerkelijk een rode kleur gekregen.
 
 !!! info "External, Internal en Inline"
-    Je kunt de style van html op drie plekken neerzetten: *external*, *internal* of *inline*. Alles stijl die je definieert in een extern bestand (een ander bestand dan het html-bestand waar het betrekking op heeft) is *external*. Stijl die je definieert in het html-bestand zelf (tussen `<style>` en `</style` in de `header`) is *internal*. Verder kun je ook stijl aangeven in het `style`-attribuut van een html-tag: dit zijn zogenaamde *inline* styles.
+    Je kunt de style van html op drie plekken neerzetten: *external*, *internal* of *inline*. Alle stijl die je definieert in een extern bestand (een ander bestand dan het html-bestand waar het betrekking op heeft) is *external*. Stijl die je definieert in het html-bestand zelf (tussen `<style>` en `</style` in de `header`) is *internal*. Verder kun je ook stijl aangeven in het `style`-attribuut van een html-tag: dit zijn zogenaamde *inline* styles.
 
     Waar je je css neerzet heeft repercussies voor hoe *sterk* de verschillende regels zijn. De *inline* styles zijn het sterkst, terwijl interne en externe stylesheets prioriteit krijgen op basis van welke het eerst door de browser zijn ingeladen. Dat betekent dat als een element door meerdere regels wordt gestyled, dat de inline-regels het altijd winnen.
 
@@ -100,9 +99,9 @@ Er zijn *heel veel* (letterlijk honderden) attributen die je door middel van css
 
 Zoals je ziet kun je in css gewoon de naam van een kleur opgeven. Dit betreft zogenaamde *color keywords*: min of meer arbitraire namen van bepaalde kleuren. Een volledig overzicht is (opnieuw) [te vinden op MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#Color_keywords).
 
-De tweede manier van kleurtoewijzing, die je in het voorbeeld hierboven bij `li` ziet toegepast, is met de `rgb()`-methode. Door aan virtuele knoppen te draaien kunnen de waarden voor rood (r), groen (g) en blauw (b) aangepast worden, net zo lang tot de gewenste kleur gevonden is.
+De tweede manier van kleurtoewijzing, die je in het voorbeeld hierboven bij `li` ziet toegepast, is met de `rgb()`-methode. Door aan virtuele knoppen te draaien kunnen de waarden voor rood \(r), groen (g) en blauw (b) aangepast worden, net zo lang tot de gewenste kleur gevonden is.
 
-Als het lastig is om een geschikte kleur te vinden kan Google uitkomst brengen. Door de zoekterm “hex color” in te geven, wordt een tool geopend waar de gewenste kleur gekozen en gekopieerd kan worden naar de CSS-file.
+Als het lastig is om een geschikte kleur te vinden kan Google uitkomst brengen. Door de zoekterm “hex color” in te geven, wordt een tool geopend waar de gewenste kleur gekozen en gekopieerd kan worden naar het CSS-bestand.
 
 ![Color picker](imgs/colorpicker.png)
 

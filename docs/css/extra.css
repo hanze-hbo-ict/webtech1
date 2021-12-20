@@ -1,12 +1,13 @@
 body { color:#007575;}
 
 .md-typeset a { color:blueviolet; }
-div.admonition { font-size:small; border:solid gray 1px; width:75%; margin:auto !important; margin-bottom:2vh; }
+div.admonition { border:solid gray 1px; width:75%; margin:auto !important; margin-bottom:2vh; }
 img { display:block; margin:auto; width:55%; border:solid gray 1px;cursor:pointer; }
 img:hover{opacity:0.7}
 h2 { font-size:1.5rem; }
 h3 { font-size:1.2rem; font-weight:700; }
 #modal-image { cursor:default; opacity:1;}
+
 
 /* from https://www.w3schools.com/howto/howto_css_modal_images.asp */
 

@@ -10,7 +10,8 @@ Voordelen van Bootstrap:
 - Responsieve functies: de responsieve CSS van Bootstrap past zich aan telefoons, tablets en desktops.
 - Mobiel-eerst benadering: in Bootstrap maken de mobile-first-stijlen deel uit van het kernraamwerk.
 - Compatibiliteit met browsers: Bootstrap 4 is compatibel met alle moderne browsers.
-- 
+
+ 
 Er zijn twee manieren om Bootstrap 4 te gebruiken voor een eigen website. 
 
 1.	Maak gebruik van een CDN.
@@ -23,9 +24,9 @@ Er zijn twee manieren om Bootstrap 4 te gebruiken voor een eigen website.
 
 Open de pagina [GetBootstrap.com](https://getbootstrap.com/). Een klik op de button met de tekst ‘Download’ zorgt ervoor dat de complete software gedownload wordt. Wanneer er een stukje naar beneden gescrold wordt, zie je wat je moet doen om gebruik te maken van een CDN.
 
-![GetBootstrap](imgs/get_boootstrap.png)
+![GetBootstrap met download op je eigen filesystem](imgs/get_boootstrap.png)
 
-![Boostrap CDN](imgs/get_boootstrap_cdn.png)
+![GetBootstrap via een CDN](imgs/get_boootstrap_cdn.png)
 
 Als je gebruik wilt maken van een CDN, moet je de beide regels aan de rechterkant van het scherm opnemen in je html-document. In het beginscherm zijn een tweetal buttons rood omkaderd. Het kan erg nuttig zijn, zeker voor gebruikers die nog niet heel bedreven zijn in het werken met dit pakket, de onderliggende documentatie te bestuderen.
 
@@ -45,7 +46,7 @@ Hieronder nog eeen voorbeeld van een schermontwerp gemaakt met Bootstrap dat bed
 
 ![Pricing](imgs/pricing.png)
 
-Er is, kortom, heel veel mogelijk met Bootstrap. Bestudeer de voorbeelden en de achterliggende html en css om een beeld te krijgen van hoe één en ander in z'n werk gaat.
+Er is, kortom, heel veel mogelijk met Bootstrap. Bestudeer de voorbeelden en de achterliggende HTML en CSS om een beeld te krijgen van hoe één en ander in z'n werk gaat.
 
 
 

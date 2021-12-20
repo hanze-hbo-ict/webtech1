@@ -1,12 +1,12 @@
 # Bootstrap – Navigatiebalk
 
-Een navigatiebalk is een navigatieheader die bovenaan de pagina wordt geplaatst. Met Bootstrap kan een navigatiebalk worden uitgebreid of samengevouwen, afhankelijk van de schermgrootte.
+Een navigatiebalk is een header die bovenaan de pagina wordt geplaatst. Met Bootstrap kan een navigatiebalk worden uitgebreid of samengevouwen, afhankelijk van de schermgrootte.
 
 Een standaard navigatiebalk wordt gemaakt met de `.navbar-klasse`, gevolgd door een responsive  samenvouwklasse: `.navbar-expand-xl`. Om hiervan en van keuzelijsten gebruik van te kunnen maken is de javascript-library jQuery nodig in combinatie met Bootstrap. We komen later nog uitgebreider terug op JavaScript; voor nu volstaat het te weten dat dit een programmeertaal die in de web-browser draait. Hiermee kun je functionaliteit en logica toevoegen aan je website.
 
 Ga eventueel naar [de site van jQuery](https://code.jquery.com/) om een beeld te krijgen van hoe één en ander werkt. Om gebruik te kunnen maken van deze library, moet je de volgende regels toevoegen aan de `head`-sectie van je html-document:
 
-```
+```html
 <script
   src="http://code.jquery.com/jquery-3.1.1.js"
   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
@@ -32,7 +32,7 @@ Component-classe  |  Uitleg
 
 Als voorbeeld nu een responsieve navigatiebalk die alle bovengenoemde elementen bevat. Let op: we tonen *alleen* de `body`; jQuery en Bootstrap is al in de `head` ingeladen.
 
-```
+```html
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">BRAND</a>
@@ -84,7 +84,7 @@ Een keuze voor `Navbar` kent een tweetal voordelen:
 
 Dat tweede punt vraagt misschien om toelichting. Als de schermgrootte te klein is om de inhoud van de webpagina te tonen, zorgt de `<div>` met de klassen `collapse navbar-collapse` ervoor dat het linker scherm in zicht is. Door een klik op de ‘hamburger’ verschijnt de navigatiebalk, nu verticaal opgebouwd. 
 
-```
+```html
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 ```
 
@@ -92,7 +92,7 @@ Dat tweede punt vraagt misschien om toelichting. Als de schermgrootte te klein i
 
 Dat er nog wat op het scherm te zien is komt doordat de volgende snippet buiten de `<div>` gehouden is en ook niet verdwijnt bij het collapsen. 
 
-```
+```html
 <button class="navbar-toggler" 
 	type="button" data-toggle="collapse" 
 	data-target="#navbarSupportedContent" 
@@ -108,7 +108,7 @@ Dat er nog wat op het scherm te zien is komt doordat de volgende snippet buiten 
 
 Het is natuurlijk ook mogelijk de navigatiebalk uit te breiden met een extra link. Het kan een link zijn of een drop down-menu; het gaat op vergelijkbare wijze. Als demo wordt een ‘NewLink’ aan de navigatie toegevoegd:
 
-```
+```html
 <li class="nav-item active">
         <a class="nav-link" href="#">Sessions</a>
 </li>
@@ -122,12 +122,13 @@ In de code die Bootstrap ons ter beschikking heeft gesteld is ook een drop down-
 
 Het is mogelijk meerdere divisies aan te brengen in een keuzemenu. De klasse `.dropdown-divider` helpt daarbij.
 
-```
+```html
 <a class="dropdown-item" href="#">Another action</a>
 <div class="dropdown-divider"></div>
 <a class="dropdown-item" href="#">Something else here</a>
 ```
 
+## Tot slot
 Tot zover alle basisvaardigheden voor Bootstrap. Het is niet nodig zelf alle acties en instellingen uit het hoofd te leren. Het is veel belangrijker te oefenen de juiste componenten te selecteren, daarbinnen de juiste attributen op te zoeken en de bijbehorende code te implementeren in de webpagina om vervolgens nog de nodige aanpassingen door te voeren.
 
 

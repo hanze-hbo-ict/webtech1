@@ -70,7 +70,7 @@ Door het gebruik van een database voor het opslaan en terughalen van inhoud kan 
 
 De instructie om gegevens uit een database op te halen, wordt een *databasequery* genoemd. Zo'n query bestaat uit zoekcriteria die worden uitgedrukt in een databasetaal die SQL (Structured Query Language) wordt genoemd. De SQL-query wordt geschreven in scripts of tags op de server van de pagina.
 
-Een toepassingsserver kan niet rechtstreeks met een database communiceren, omdat de typische indeling van de database de gegevens onleesbaar weergeeft (net zoals een Microsoft Word-document onleesbaar is wanneer het in Kladblok wordt geopend ). De toepassingsserver kan uitsluitend met de database communiceren met behulp van een databasestuurprogramma: software die als een vertaler tussen de toepassingsserver en de database fungeert.
+Een toepassingsserver kan niet rechtstreeks met een database communiceren, omdat de typische indeling van de database de gegevens onleesbaar weergeeft (net zoals een Microsoft Word-document onleesbaar is wanneer het in Kladblok wordt geopend). De toepassingsserver kan uitsluitend met de database communiceren met behulp van een databasestuurprogramma: software die als een vertaler tussen de toepassingsserver en de database fungeert.
 
 Nadat het stuurprogramma de communicatie tot stand heeft gebracht, wordt de query voor de database uitgevoerd en wordt een recordset gemaakt. Een recordset is een reeks gegevens die uit één of meer tabellen in een database zijn gehaald. De recordset wordt geretourneerd aan de toepassingsserver, die de gegevens gebruikt om de pagina te voltooien.
 

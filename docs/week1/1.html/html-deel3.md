@@ -6,9 +6,9 @@ Aan het eind van deze tekst maken we [oefening nummer 1](../oefeningen/wk1oefeni
 
 Veel webinhoud bestaat uit lijsten en om die reden heeft HTML daar speciale elementen voor. De gebruikelijkste lijsttypes zijn *geordend* en *ongeordend* lijsten:
 
-1.	Ongeordende lijsten zijn lijsten waarbij de volgorde van de artikelen in de lijst er niet toe doet, zoals een boodschappenlijst. Deze worden ingesloten in een `<ul>`-element. Standaard worden de items voorafgegaan door een bullet.
+1. **Ongeordende lijsten** zijn lijsten waarbij de volgorde van de artikelen in de lijst er niet toe doet, zoals een boodschappenlijst. Deze worden ingesloten in een `<ul>`-element. Standaard worden de items voorafgegaan door een bullet.
 
-2.	Geordende lijsten zijn lijsten waarbij de volgorde van de artikelen of onderwerpen in de lijst er wel degelijk toe doet, zoals een recept. Deze worden ingesloten door een `<ol>`-element. Standaard worden de items binnen zo’n lijst voorafgegaan door een cijfer, maar je kunt ook andere vormen kiezen..
+2. **Geordende lijsten** zijn lijsten waarbij de volgorde van de artikelen of onderwerpen in de lijst er wel degelijk toe doet, zoals een recept. Deze worden ingesloten door een `<ol>`-element. Standaard worden de items binnen zo’n lijst voorafgegaan door een cijfer, maar je kunt ook andere vormen kiezen.
 
 Elk element binnen een lijst wordt ingebed door middel van een `<li>`-tag (van *list item*).
 
@@ -64,7 +64,7 @@ De algemene vorm van een attribuut is `name="value"`. In het geval van onze `<im
 
 Behalve de url van het plaatje voegen we in de regel ook nog een `alt`-attribuut toe (`alt` = alternative, alternatief in het Nederlands). Met dit attribuut kan een beschrijving aan de afbeelding gekoppeld worden voor het geval bezoekers zijn niet in staat de afbeelding te bekijken.
 
-In de folder waar verder alle html-voorbeelden bewaard zijn, zijn ook afbeeldingen ondergebracht, onder meer `venazza.jpeg`, wat aan een webpagina wordt toegevoegd. De totale html wordt dan als volgt:
+In [de folder waar verder alle html-voorbeelden bewaard zijn](../../bestanden/html.zip), zijn ook afbeeldingen ondergebracht, onder meer `venazza.jpeg`, wat aan een webpagina wordt toegevoegd. De totale html wordt dan als volgt:
 
 ```html
 <body>

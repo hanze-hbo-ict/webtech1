@@ -25,7 +25,7 @@ __Stap 1:__ html-document zonder koppeling naar Bootstrap.
 
 __Stap 2:__ Toevoegen links van Bootstrap.
 
-Ieder html-document dat gebruik wil maken van de faciliteiten die door Bootstrap aangeboden worden, dient de benodigde links in de `<head>`-sectie op te nemen. Deze links kunnen gekopieerd worden van de site https://getbootstrap.com/, zoals hierboven al beschreven is.
+Ieder html-document dat gebruik wil maken van de faciliteiten die door Bootstrap aangeboden worden, dient de benodigde links in de `<head>`-sectie op te nemen. Deze links kunnen gekopieerd worden van de site https://getbootstrap.com/, [zoals we al besproken hebben](bootstrap-deel1.md).
 
 ```html
 <!DOCTYPE html>
@@ -74,7 +74,7 @@ Bootstrap vereist een omvattend element om de inhoud van de site in te pakken. H
 
 __Stap 4:__ Jumbotron.
 
-Een jumbotron zorgt voor een groot grijs vak, om speciale inhoud of informatie te accentueren. In een jumbotron kan nagenoeg elke geldige html geplaatst worden, inclusief andere Bootstrap-elementen of -klassen.
+Een jumbotron zorgt voor een groot grijs vak, om speciale inhoud of informatie te accentueren. In een jumbotron kan nagenoeg elke geldige HTML geplaatst worden, inclusief andere Bootstrap-elementen of -klassen.
 
 Om een jumbotron aan te maken, is een `<div>`-element nodig met klasse `jumbotron`.
 
@@ -96,9 +96,9 @@ Om een jumbotron aan te maken, is een `<div>`-element nodig met klasse `jumbotro
 
 __Stap 5:__ Knoppen toevoegen.
 
-Bootstrap kent ook verschillende typen knoppen. Eén van de voordelen hiervan, is dat door het algemene gebruik van Bootstrap de meeste mensen bekend zijn met de betekenis van de specifieke vorm van de knoppen, en de interactie met je site dus soepeler gaat lopen.
+Bootstrap kent ook verschillende typen knoppen. Eén van de voordelen hiervan is dat door het algemene gebruik van Bootstrap de meeste mensen bekend zijn met de betekenis van de specifieke vorm van de knoppen, en de interactie met je site dus soepeler gaat lopen.
 
-We gaan nu ook knoppen aan ons voorbeeld toevoegen. Als je de component *Buttons* [op de site van Bootstrap](https://getbootstrap.com/docs/5.0/components/buttons/) selecteert, krijg je te zien welke buttons er allemaal bestaan. Zie het voorbeeld hieronder (om het geheel overzichtelijk te houden wordt de container met de jumbotron onzichtbaar gemaakt).
+We gaan nu ook knoppen aan ons voorbeeld toevoegen. Als je de component *Buttons* [op de site van Bootstrap](https://getbootstrap.com/docs/5.0/components/buttons/) selecteert, krijg je te zien welke buttons er allemaal bestaan. Zie het voorbeeld hieronder (om het geheel overzichtelijk laten we de container met de jumbotron achterwege).
 
 ```html
 <div class="container">
@@ -113,7 +113,7 @@ We gaan nu ook knoppen aan ons voorbeeld toevoegen. Als je de component *Buttons
 
 ![Knoppen 1](imgs/bootstrap5.png)
 
-Met de beschikbare informatie wordt een nog een tweede knop in de container opgenomen met de kenmerken, extra groot en niet actief (let op de waarden van het 'class`-attribuut):
+Met de beschikbare informatie wordt een nog een tweede knop in de container opgenomen met de kenmerken, extra groot en niet actief (let op de waarden van het `class`-attribuut van deze tweede knop):
 
 ```html
 <div class="container">

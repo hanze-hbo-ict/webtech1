@@ -15,11 +15,11 @@ HTML is in het begin van de jaren negentig van de vorige eeuw ontwikkeld door [T
 
 ## Tags
 
-Het is niet mogelijk zomaar een paragraaf tekst te typen en dan hopen dat de browser snapt dat het een paragraaf is. Voor de browser zijn paragrafen niets meer dan alleen maar een rij letters! De paragraaftekst moet in de HTML-opmaak staan. Daarvoor is het element `<p>` beschikbaar.
+HTML is opgebouwd uit elementen (*tags*) die elk hun eigen betekenis hebben. Ieder element heeft een opening (het begin) en een sluiting (het einde). De inhoud van elk element staat tussen de opening- en sluitingstag. De open- en sluit tags voor elk element worden geschreven tussen zogenoemde *vishaken* (`<` en `>`). De sluitingstag kent ook een forwardslash (`/`). Binnen tags kun je weer andere tags introduceren, zodat je uiteindelijk een boomstructuur krijgt.
 
-HTML is opgebouwd uit elementen (*tags*) die elk hun eigen betekenis hebben. Ieder element heeft een opening (het begin) en een sluiting (het einde). De inhoud van elk element staat tussen de opening- en sluitingstag. De open- en sluit tags voor elk element worden geschreven tussen haken (`<` en `>`). De sluitingstag kent ook een forwardslash (`/`). Binnen tags kun je weer andere tags introduceren, zodat je uiteindelijk een boomstructuur krijgt.
+Het is bijvoorbeeld niet mogelijk zomaar een paragraaf tekst te typen en dan hopen dat de browser snapt dat het een paragraaf is. Voor de browser zijn paragrafen niets meer dan alleen maar een rij letters. De paragraaftekst moet in de HTML-opmaak staan. Daarvoor is het element `<p>` beschikbaar.
 
-De algemene vorm van een element is dus als volgt:
+De algemene vorm van een element is als volgt:
 
 ```html
 <tag>
@@ -34,8 +34,11 @@ De algemene vorm van een element is dus als volgt:
     - `<img>`
     - `<input>`
 
-    Met `<br>` (een nieuwe regel, of *line break*) zal je snel kennismaken, `<img>` (voor het plaatsen van afbeeldingen) en  `<input>` (voor het verzamelen van input door de gebruiker in formulieren) zullen later volgen.
-    Zie MDN voor een volledig overzicht van [lege elementen](https://developer.mozilla.org/en-US/docs/Glossary/Empty_element).
+    Met `<br>` (een nieuwe regel, of *line break*) zal je snel kennismaken, `<img>` (voor het plaatsen van afbeeldingen) en  `<input>` (voor het verzamelen van input door de gebruiker in formulieren) zullen later volgen. Zie MDN voor een volledig overzicht van [lege elementen](https://developer.mozilla.org/en-US/docs/Glossary/Empty_element).
+
+    Vaak zie je een dergelijk *void-element* afgesloten worden met een backslash ("/"), zoals `<img src="" ... />`. Deze slash binnen de tag zelf [is optioneel](https://html.spec.whatwg.org/multipage/syntax.html#start-tags).
+
+
 
 ### Een voorbeeld
 
@@ -75,7 +78,7 @@ De `<head>`-tag bevat de headerinformatie over de pagina. Hierin is bijna altijd
 
 De echte inhoud van elk HTML-document zit in de *body* (let op de corresponderende tag: `<body>`). Dit is waar de structuur van het document beschreven wordt.
 
-Er is een groot aantal tags voorhanden (bekijk [de referentie op MDN voor een volledig overzicht](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)) die gebruikt kunnen worden om onder meer plaatjes en/of hyperlinks toe te voegen. In de volgende paragraaf bespreken we eenn aantal basistags.
+Er is een groot aantal tags voorhanden (bekijk [de referentie op MDN voor een volledig overzicht](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)) die gebruikt kunnen worden om onder meer plaatjes en/of hyperlinks toe te voegen. In de volgende paragraaf bespreken we een aantal basistags.
 
 ## Een paar belangrijke tags
 
@@ -120,7 +123,7 @@ Koppen zijn belangrijke elementen op een pagina. Koppen trekken de attentie van 
 
 ### blok-elementen
 
-Ter vergelijk een opbouw van een HTML-pagina zonder opmaak (vanaf nu worden alleen de regels binnen de `body`-tag in het kader opgenomen).
+Ter vergelijk een opbouw van een HTML-pagina zonder opmaak (vanaf nu worden alleen de regels binnen de `body`-tag in de kaders opgenomen).
 
 ```html
 <body>
@@ -132,13 +135,13 @@ Ter vergelijk een opbouw van een HTML-pagina zonder opmaak (vanaf nu worden alle
 
 ![Geen blokken](imgs/geen_blokken.png)
 
-De browser heeft er geen weet van dat het de bedoeling is geweest om de drie stukken tekst op de wijze te tonen zoals is vormgeven in het kader. Zonder opmaakelementen worden alle teksten dus na elkaar naar het scherm geschreven.
+De browser heeft er geen weet van dat het de bedoeling is geweest om de drie regels tekst onder elkaar te zetten, dus wordt het gerenderd zoals alles achter elkaar staat: **nieuwe regels in de HTML betekenen niets voor de rendering**. Zonder opmaakelementen worden alle teksten dus na elkaar naar het scherm geschreven.
 
 Het gewenste resultaat kan natuurlijk wel gecreëerd worden. Daarbij worden de elementen paragraaf `<p>` en line-break `<br>` gebruikt.
 
-Het `<p>` element is één van de meest gebruikte bouwstenen in HTML. Deze tag definieert een alineascheiding in gewone tekst. Na deze tag creëert de browser automatisch wat ruimte boven en onder de inhoud. Deze ruimte wordt toegepast door de ingebouwde stylesheets van de browser.
+Het `<p>` element is één van de meest gebruikte bouwstenen in HTML. Deze tag definieert een alineascheiding in gewone tekst. Na deze tag creëert de browser automatisch wat ruimte boven en onder de inhoud. Deze ruimte wordt bepaald door de ingebouwde stylesheets van de browser.
 
-Het `<br>` element (line break) begint een nieuwe regel. Dit element is nuttig wanneer de tekst op een bepaalde plaats afgebroken moet worden. Je kunt de `<br>` tag ook binnen een paragraaf gebruiken.
+Het `<br>` element (*line break*) begint een nieuwe regel. Dit element is nuttig wanneer de tekst op een bepaalde plaats afgebroken moet worden. Je kunt de `<br>` tag ook binnen een paragraaf gebruiken.
 
 ```html
 <body>
@@ -150,7 +153,7 @@ Het `<br>` element (line break) begint een nieuwe regel. Dit element is nuttig w
 
 ![HTML met blokken](imgs/blokken.png)
 
-Wat opvalt is dat de line-break geen begintag nodig heeft. Voor enkele HTML-elementen geldt dat ze correct kunnen worden weergegeven zelfs zonder beide tags op te voeren.
+Wat opvalt is dat de line-break geen begintag nodig heeft. Dit is zo'n *void-element* waar we het hierboven over hebben gehad. Voor dergelijke HTML-elementen geldt dat ze correct kunnen worden weergegeven zelfs zonder beide tags op te voeren.
 
 Het is ook mogelijk binnen tags andere tags in te voegen. Dit wordt *nesten* genoemd. In het voorbeeld hieronder gebruiken we bijvoorbeeld het element `<strong>` om duidelijk te maken dat muziek maken echt een heel leuke hobby is.
 

@@ -2,7 +2,7 @@
 
 Aan het eind van deze pagina maken we [oefening 4](../oefeningen/wk1oefening4.md).
 
-Na de kleur is het lettertype vermoedelijk de meest elementaire eigenschap van een pagina. Het is mogelijk de gewenste lettertypen voor de tekst op de website toe te passen door de lettertype-eigenschappen in het css-bestand te gebruiken. Ook is het mogelijk om Google Fonts API te gebruiken om gewenste lettertypen toe te voegen.
+Na de kleur is het lettertype vermoedelijk de meest elementaire eigenschap van een pagina. Het is mogelijk de gewenste lettertypen voor de tekst op de website toe te passen door de lettertype-eigenschappen in het css-bestand te gebruiken. Ook is het mogelijk om [Google Fonts API](https://developers.google.com/fonts/docs/getting_started) te gebruiken om gewenste lettertypen toe te voegen.
 
 Vooraf een waarschuwing. Niet ieder lettertype is niet voor iedere besturingssysteem beschikbaar. Onderstaande links laten zien welke er voor Windows en macOS beschikbaar zijn.
 
@@ -33,7 +33,7 @@ Zonder ondersteuning van een CSS-bestand, wordt de inhoud op de volgende manier 
 
 ## Font-eigenschappen
 
-Je kunt het lettertype van de verschillende onderdelen van het html-document styleren door middel van de font-eigenschappen die je met css kunt instellen. Er zijn ook weer *heel veel* van dergelijke eigenschappen met mogelijke waarden. We geven hieronder de belangrijkste, voor een volledig overzicht [verwijzen we weer naar MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family):
+Je kunt het lettertype van de verschillende onderdelen van het html-document styleren door middel van de font-eigenschappen die je met CSS kunt instellen. Er zijn ook weer *heel veel* van dergelijke eigenschappen met mogelijke waarden. We geven hieronder de belangrijkste, voor een volledig overzicht [verwijzen we weer naar MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family):
 
 Eigenschap   | Waarden | Betekenis
 -------------|---------|--------------
@@ -135,8 +135,8 @@ Hiermee open je de zogenaamde *inspector*. Hiermee kun je de code van zowel het 
 
 ![De inspector](imgs/inspector.png)
 
-De html van het document zie je aan de linkerkant, de css aan de rechterkant. Door deze css te bestuderen, kun je achterhalen hoe het element dat je hebt geselecteerd is vormgegeven.
+De HTML van het document zie je aan de linkerkant, de CSS aan de rechterkant. Door deze CSSS te bestuderen, kun je achterhalen hoe het element dat je hebt geselecteerd is vormgegeven.
 
-Deze *inspector* is een heel belangrijk hulpmiddel voor al het front-end werk. We zullen hier dan ook later nog uitgebreid op terugkomen.
+Deze *inspector* is een heel belangrijk hulpmiddel voor al het front-end werk. We zullen hier dan ook in webtechnologie 3 nog uitgebreid op terugkomen.
 
 Maak nu [oefening 4](../oefeningen/wk1oefening4.md).

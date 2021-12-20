@@ -45,7 +45,7 @@ input type | omschrijving
 `number`     | mag alleen getallen bevatten
 `email`      | controleert of het e-mailadres geldig is
 `password`   | vervangt de invoer door asterisk of bolletjes
-`hidden`     | niet zichtbaar, wordt vaak gebruikt om gegeven in op te slaan die onnodig tot fouten kunnen leiden, bijv. huidige datum bij een order.
+`hidden`     | niet zichtbaar, wordt vaak gebruikt om gegeven in op te slaan die onnodig tot fouten kunnen leiden, bijvoorbeeld huidige datum bij een order
 `color`      | opent een color-picker
 `button`     | toont een knop
 `submit`     | knop die de inhoud van het formulier doorstuurt naar de server
@@ -53,6 +53,18 @@ input type | omschrijving
 Bekijk [de documentatie op MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) voor een volledig overzicht van de `<input>`-tag en de bijhorende attributen.
 
 Een eenvoudig inlogformulier zou door de volgende HTML-regels gebouwd kunnen worden. Het ziet er niet echt fraai uit, maar daar wordt in de volgende paragrafen uitgebreid aandacht aan besteed.
+
+```html
+<body>
+    <form method="get" action="pagina1.html"> 
+        <h1>Inloggen</h1>
+        <h2>Vul e-mail en wachtwoord in</h2>
+        <input type="text" size="30">
+        <input type="password" size="30">
+        <input type="submit" value="Verstuur">
+    </form>
+</body>
+```
 
 ![Een eenvoudig html-formulier](imgs/simpel_form.png)
 
@@ -71,20 +83,20 @@ Met een `<label>` kan aangegeven worden welk element van het formulier een toege
     >
     > [W3C - Accessibility](https://www.w3.org/standards/webdesign/accessibility)
 
-    `<label>` en daarmee ook het `<input>` veld waar het naar verwijst is een voorbeeld van extra betekenis geven aan elementen in jouw pagina. Een goede reden waarom je dit zou willen doen is om de toegankelijkheid ("accessibility") van jouw pagina's te vergroten, bijvoorbeeld voor mensen die visueel beperkt zijn. `<label>` elementen worden in screenreaders ("voorleessoftware") gebruikt om veldnamen in formulieren *auditief* te koppelen aan handelingen (het invullen van bijbehorende `<inut>` velden).
+    `<label>` en daarmee ook het `<input>` veld waar het naar verwijst is een voorbeeld van extra betekenis geven aan elementen in je pagina. Een goede reden waarom je dit zou willen doen is om de toegankelijkheid ("accessibility") van deze pagina's te vergroten, bijvoorbeeld voor mensen die visueel beperkt zijn. Het `<label>`-element wordt bijvoorbeeld in screenreaders ("voorleessoftware") gebruikt om veldnamen in formulieren *auditief* te koppelen aan handelingen (het invullen van bijbehorende `<inut>` velden).
 
-    Probeer altijd in gedachten te houden dat jouw pagina's voor een zo breed mogelijk publiek toegankelijk moet zijn en vaak is het zelfs een wettelijke verplichting, bijvoorbeeld bij overheden!
+    Probeer altijd in gedachten te houden dat je pagina's voor een zo breed mogelijk publiek toegankelijk moet zijn en vaak is het zelfs een wettelijke verplichting, bijvoorbeeld bij overheden.
 
-    Technieken voor het verbeteren van toegankelijkheid vallen onder de noemer **A11y**, zie verder de [MDN *accessibility* pagina](https://developer.mozilla.org/en-US/docs/Web/Accessibility) voor een overzicht waarom dit belangrijk is en hoe je het kan toespassen in jouw werk.
+    Technieken voor het verbeteren van toegankelijkheid vallen onder de noemer **A11y**, zie verder de [MDN *accessibility* pagina](https://developer.mozilla.org/en-US/docs/Web/Accessibility) voor een overzicht waarom dit belangrijk is en hoe je het kan toepassen in je werk.
 
 Met deze aanpassingen komt de html van de pagina hierboven er als volgt uit te zien:
 
 ```html
 <form method="get" action="pagina1.html">
-    <label for="email">E-mailadres :</label>
+    <label for="email">E-mailadres:</label>
     <input type="email" id="email" name="email" placeholder="e-mailadres">
 
-    <label for="password">Wachtwoord :</label>
+    <label for="password">Wachtwoord:</label>
     <input type="password" id="password" name="password" placeholder="wachtwoord">
 
     <input type="submit" value="Verstuur">
@@ -111,7 +123,7 @@ De gegevens worden in de URL opgenomen en doorgestuurd naar de ontvanger. Duidel
 
 ### Radio-buttons
 
-Wanneer je wilt dat een bezoeker een keuze maakt uit verschillende opties, kun je gebruik maken van zogenaamde *radio-buttons*. De bezoeker krijgt dan een aantal opties voorgeschoteld met open bolletjes ervoor, en door op zo'n bolletje te klikken selecteert -ie één van deze opties.
+Wanneer je wilt dat een bezoeker een keuze maakt uit verschillende opties, kun je gebruik maken van zogenaamde *radio-buttons*. De bezoeker krijgt dan een aantal opties voorgeschoteld met open bolletjes ervoor, en door op zo'n bolletje te klikken wordt de betreffende optie geselecteerd.
 
 ```html
 <form>
@@ -158,7 +170,7 @@ Een andere vorm van selectie zijn de zogenaamde *selectboxes*. Deze lijken erg o
 
 Een laatste mogelijkheid voor keuzelijsten die we bespreken is het *drop-down menu*. Het voordeel hiervan ten opzichte van keuzerondjes is dat het minder ruimte in beslag neemt. Maar dat is ook een nadeel, omdat gebruikers niet meteen alle opties kunnen zien.
 
-Iedere keuzelijst heeft twee elementen nodig: `select` en `option`. De eerste om aan te geven dat het om een keuzelijst handelt en met met de tweede geven we de verschillende opties van deze keuzelijst aan.
+Zo'n keuzelijst maak je met de tag `select`; de opties die in die lijst moeten komen geef je aan met de `option`-tag. 
 
 ```html
 <form>
