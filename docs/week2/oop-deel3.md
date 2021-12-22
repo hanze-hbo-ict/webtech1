@@ -1,6 +1,6 @@
 # OOP Python - Meerdere klassen
 
-Het is belangrijk om commentaar op te nemen binnen codeblokken. Het is dan voor iemand die de code niet ontwikkeld heeft en deze moet refactoren, duidelijk wat de bedoeling is. Gaan we hier ook doen.
+Het is belangrijk om commentaar op te nemen binnen codeblokken. Het is dan voor iemand die de code niet ontwikkeld heeft, maar deze wel moet refactoren, duidelijk wat de bedoeling is. Dat gaan we hier ook doen.
 
 ## De klasse `Song`
 
@@ -114,7 +114,7 @@ Qua ontwerp is het allemaal nog niet zo optimaal, maar daar kijken we later wel 
 
 ## Het tonen van gegevens
 
-Tijd om gegevens te tonen. Het is niet de bedoeling ongelofelijk veel typewerk te verrichten, maar er wordt gebruik gemaakt van de file `albums.txt`. De gegevens worden met behulp van een methode weer ingeladen.
+Tijd om gegevens te tonen. Het is niet de bedoeling ongelofelijk veel typewerk te verrichten, maar er wordt gebruik gemaakt van [het bestand `albums.txt`](../bestanden/albums.txt). De gegevens worden met behulp van een methode weer ingeladen.
 
 ```python
 def load_data():

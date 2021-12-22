@@ -54,7 +54,7 @@ Uitkomst:
 Voor veel programmeurs is dit een gruwel: van buiten de klasse kunnen attributen zomaar aangeroepen en gewijzigd worden. Om te voorkomen dat dit kan, kunnen we in Python de attributen voorzien van een dubbele underscore aan het begin (`__`, een soort halve *dunder*). We illustreren dat aan de hand van de onderstaande klasse:
 
 ```python hl_lines="5"
-# klasse Foo in bestand Foo.py
+# klasse Foo in bestand foo.py
 
 class Foo:
     def __init__(self, var):
@@ -116,7 +116,7 @@ def __str__(self):
 ```
 
 !!! Info "`__str__` en `__repr__`"
-    In het vorige blok hebben we gewerkt met de methode `__repr__`, die eveneens aangroepen worden wanneer je een string-representatie van een object wilt hebben. Dit zijn twee methoden die toch min of meer hetzelfde doen. [Lees deze blog](https://pythonprogramming.net/__str__-__repr__-intermediate-python-tutorial/) om een beeld te krijgen van de overeenkomsten en de verschillen tussen deze methoden.
+    In het vorige blok hebben we gewerkt met de methode `__repr__`, die eveneens aangroepen worden wanneer je een string-representatie van een object wilt hebben. Dit zijn twee methoden die toch min of meer hetzelfde doen. [Lees deze blog](https://www.bartbarnard.nl/blog/python-string-representaties/) om een beeld te krijgen van de overeenkomsten en de verschillen tussen deze methoden.
 
 ## Een interactieve test
 
@@ -144,7 +144,7 @@ Out[7]: Name: bram, Levens: 0, Level: 1, Score 0
 In [8]:
 ```
 
-De eerste keer wordt rechtstreeks de inhoud van het object opgevraagd, terwijl als het gevraagde attribuut wordt weggelaten automatisch de property’s worden getoond. Iets soortgelijks kan gedaan worden met `level` om de setter-constructie duidelijk te maken.
+De eerste keer wordt rechtstreeks de inhoud van het object opgevraagd, terwijl als het gevraagde attribuut wordt weggelaten automatisch de properties worden getoond. Iets soortgelijks kan gedaan worden met `level` om de setter-constructie duidelijk te maken.
 
 ```python hl_lines="4"
 def __init__(self, naam):

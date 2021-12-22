@@ -16,7 +16,7 @@ class Song:
 
 
 class Album:
-    """ Klasse waarin Aibums vastgeleg worden, met gebruik making van de bijbehorende track-list
+    """ Klasse waarin Aibums vastgelegd worden, met gebruik making van de bijbehorende track-list
 
     Attributen:
         name (str): De naam van het album.

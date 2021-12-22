@@ -41,7 +41,7 @@ Lurtz heeft een leven verloren
 Lurtz is dood
 ```
 
-De eerste aanval kan Lurtz nog ontwijken. Random zou deze Uruk_Hai één van de drie pogingen moeten kunnen ontwijken. Maar verder zijn er nog zaken die niet optimaal functioneren. Onder meer worden de hit points niet bijgewerkt als er een leven verloren is gegaan. Dan zou verholpen kunnen worden in de methode `schade()` uit de klasse `Aardman`.
+De eerste aanval kan Lurtz nog ontwijken. Random zou deze Uruk_Hai één van de drie pogingen moeten kunnen ontwijken, maar verder zijn er nog zaken die niet optimaal functioneren. Onder meer worden de hit points niet bijgewerkt als er een leven verloren is gegaan. Dat zou verholpen kunnen worden in de methode `schade()` uit de klasse `Aardman`.
 
 Nu wordt er een tweede methode `schade()` gebouwd en toegevoegd aan de klasse `Uruk_Hai`.
 
@@ -51,7 +51,7 @@ def schade(self, geraakt):
         super().schade(geraakt=geraakt)
 ```
 
-Wanneer de testset na deze aanpassing nogmaals wordt uitgevoerd, wordt eerst gekeken of de methode voorkomt in de klasse `Uruk_Hai` en zo niet in de klasse erboven, en dat is de klasse `Aardman`. Lurtz krijgt als er een leven verloren is, weer 12 hit points uitgereikt.
+Wanneer de testset na deze aanpassing nogmaals wordt uitgevoerd, wordt eerst gekeken of de methode voorkomt in de klasse `Uruk_Hai` en zo niet in de klasse erboven (in de klasse `Aardman`). Lurtz krijgt als er een leven verloren is, weer 12 hitpoints uitgereikt.
 
 ```console
 Naam: Lurtz, Levens: 3, Hit points: 12
@@ -77,7 +77,7 @@ Het woord *polymorfisme* is samengesteld uit twee Griekse woorden: *polus* (πο
 Een tweetal voorbeelden. Bekijk onderstaande code:
 
 ```python
-a =3
+a = 3
 b = "tim"
 c = 1, 2, 3
 

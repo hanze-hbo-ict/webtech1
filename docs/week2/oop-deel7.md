@@ -1,14 +1,14 @@
 # OOP Python – Compositie
 
-In deze laatste paragraaf aandacht voor nog OOP-techniek, compositie (*composition*) (*composition*). Compositie wil zeggen dat een object *samengesteld* wordt aan de hand van verschillende andere objecten. Het samengesteld object kan op die manier taken delegeren aan die samenstellende objecten. Op zich lijkt compositie wel wat op overerving, maar waar overerving *impliciet* is, is compositie *expliciet* (en daarmee ook schaalbaarder, testbaarder en overdraagbaarder).
+In deze laatste paragraaf aandacht voor nog OOP-techniek, compositie (*composition*). Compositie wil zeggen dat een object *samengesteld* wordt aan de hand van verschillende andere objecten. Het samengesteld object kan op die manier taken delegeren aan die samenstellende objecten. Op zich lijkt compositie wel wat op overerving, maar waar overerving *impliciet* is, is compositie *expliciet* (en daarmee ook schaalbaarder, testbaarder en overdraagbaarder).
 
-Compositie biedt een superieure manier om delegatie te beheren, aangezien het selectief de toegang kan delegeren, zelfs sommige attributen of methoden kan maskeren, terwijl overerving dat niet kan.
+Compositie biedt een superieure manier om delegatie te beheren, aangezien het selectief de toegang kan delegeren, zelfs sommige attributen of methoden kan maskeren, terwijl overerving dit alles moet ontberen.
 
 Aan het eind van deze paragraaf maken we [oefening 3](oefeningen/oop-oefening3.md).
 
 ## Een gevleugeld voorbeeld
 
-Als voorbeeld wordt hier een klasse `Vleugel` toegevoegd aan de file met de eend en de pinguin. Deze klassee krijgt behalve de constructor (`__init__`) de methode `vliegen()`. Deze laatste krijgt als parameter `ratio` mee, die de verhouding tussen vleugels en lichaamsgewicht aangeeft. Deze verhouding bepaalt de wijze of een vogel al dan niet makkelijk kan opstijgen.
+Als voorbeeld wordt hier een klasse `Vleugel` toegevoegd aan het bestand met de eend en de pinguin. Deze klasse krijgt behalve de constructor (`__init__`) de methode `vliegen()`. Deze laatste krijgt als parameter `ratio` mee, die de verhouding tussen vleugels en lichaamsgewicht aangeeft. Deze verhouding bepaalt de wijze of een vogel al dan niet makkelijk kan opstijgen.
 
 ```python
 class Vleugel:
@@ -136,7 +136,7 @@ class Body(Tag):
         super().display(file=file)
 ```
 
-De methode `__init__()` plaatst de begintag op de juiste plaats. De inhoud van de body is nog leeg. Dat is echter wel de plek waarop de inhoud van HTML-document getoond wordt. De methode `add_tag()` bouwt de inhoud langzaam op en de methode `display()` laat de inhoud verschijnen.
+De constructor (`__init__()`) plaatst de begintag op de juiste plaats. De inhoud van de body is nog leeg. Dat is echter wel de plek waarop de inhoud van HTML-document getoond wordt. De methode `add_tag()` bouwt de inhoud langzaam op en de methode `display()` laat de inhoud verschijnen.
 
 Uiteraard had dezelfde inhoud ook bij de klasse `Head` ondergebracht kunnen worden omdat daar ook de nodige tags aan toegevoegd zouden kunnen worden. Het is hier een voorbeeld en niet het bouwen van een professionele site, dus een versimpeling van de werkelijkheid.
 
@@ -174,7 +174,7 @@ def display(self, file=None):
     print('</html>', file=file)
 ```
 
-Het enige werk dat de methode zelf moet uitvoeren is het aanmaken van de begin- en eind tag `html` en drie keer een methode van een andere klasse aanroepen.
+Het enige werk dat de methode zelf moet uitvoeren is het aanmaken van de begin- en eindtag `html` en drie keer een methode van een andere klasse aanroepen.
 
 Tijd voor een test!
 
@@ -208,7 +208,7 @@ Activeer `test.html` en open dit bestand in een zelfgekozen browser. Geef daarvo
 
 ![Het resultaat van het script](imgs/test.png)
 
-Wat is nu het belangrijkste verschil tussen overerving en compositie? Een overerving kent een *is-een* relatie (*is-a relationship*): iedere subklasse heeft de kenmerken van de superklasse en is er een uitbreiding op. Compositie kent een *heeft-een* relatie (*has-a relationship*: een klasse is samengesteld uit meerdere klassen.
+Wat is nu het belangrijkste verschil tussen overerving en compositie? Een overerving kent een *is-een* relatie (*is-a relationship*): iedere subklasse heeft de kenmerken van de superklasse en is er een uitbreiding op. Compositie kent een *heeft-een* relatie (*has-a relationship*): een klasse is samengesteld uit meerdere andere klassen.
 
 Maak nu [oefening 3](oefeningen/oop-oefening3.md).
 

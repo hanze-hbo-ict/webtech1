@@ -1,6 +1,6 @@
 # OOP Python – Methoden
 
-Inkapseling is één van de fundamenten van object-georiënteerd programmeren. Het wordt gebruikt om onbevoegden niet de gelegenheid te bieden de kenmerken van een object aan te passen. Als dat mogelijk moet zijn dan dienen zij toegang te krijgen tot de zogenaamde `getters` en `setters`, waarover zo dadelijk meer.
+Inkapseling (Engels: *encapsulation*) is één van de fundamenten van object-georiënteerd programmeren. Het wordt gebruikt om onbevoegden niet de gelegenheid te bieden de kenmerken van een object aan te passen. Als dat mogelijk moet zijn dan dienen zij toegang te krijgen tot de zogenaamde `getters` en `setters`, waarover zo dadelijk meer.
 
 !!! Info "zichtbaarheid"
     Python wijkt nadrukkelijk af van het idee van inkapseling zoals het bijvoorbeeld gedaan wordt bij Java. Python gebruikt niet de sleutel-woorden `private` of `protected` om de zichtbaarheid van een methode aan te geven.
@@ -126,8 +126,8 @@ Het bedrag dient groter dan nul (0) en maximaal gelijk aan het saldo te zijn
 Saldo bedraagt 500
 
 In [8]: angela.toon_transacties()
-1000 gestort op 2021-01-10 13:47:46
-500 opgenomen op 2021-01-10 13:47:46
+1000 gestort op 2022-01-10 13:47:46
+500 opgenomen op 2022-01-10 13:47:46
 
 In [9]:
 ```
@@ -155,8 +155,8 @@ In [5]: britt.opnemen(200)
 Saldo bedraagt 700
 
 In [6]: britt.toon_transacties()
-100 gestort op 2021-01-10 14:09:06
-200 opgenomen op 2021-01-10 14:09:06
+100 gestort op 2022-01-10 14:09:06
+200 opgenomen op 2022-01-10 14:09:06
 
 In [7]: britt.toon_saldo()
 Saldo bedraagt 700

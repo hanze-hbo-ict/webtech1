@@ -1,6 +1,6 @@
 # OOP Python – Overerving
 
-Overerving is een mechanisme waarmee het probleem van gedupliceerde code opgelost kan worden. Het concept is eenvoudig. Stel je voor dat we een model willen maken van verschillende typen volgens. Dan kun je je voorstellen dat dat model er bijvoorbeeld als volgt uit zou komen te zien:
+Overerving is een mechanisme waarmee het probleem van gedupliceerde code opgelost kan worden. Het concept is eenvoudig. Stel je voor dat we een model willen maken van verschillende typen vogels. Dan kun je je voorstellen dat dat model er bijvoorbeeld als volgt uit zou komen te zien:
 
 Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/oop-oefening2.md)
 
@@ -104,7 +104,7 @@ class Ork(Aardman):
 
 Een beetje apart om een commando op te nemen in de definitie van een klasse dat niets doet. Het commando `pass` heeft tot doel invulling te zijn op het moment dat er een actie gevraagd wordt, maar er eigenlijk geen reden toe is een actie in de code op te nemen.
 
-Het kenmerkende voor de klasse `Aardman` wordt nu dat het de algemene kenmerken voor alle groepen vijanden als basiscode herbergt, zodat die code niet bij iedere subklasse (iedere tegenstander) hoeft te worden opgenomen. Daarom kunnen de testgegevens voor de klasse `Aardman` verwijderd worden uit `main.py` en vervangen worden door gegevens die naar vijandgroepen verwijzen. Vandaaruit kunnen de benodigde gegevens uit de superklasse aangeroepen worden. Een bekende ork is Shagrat. Dat wordt het eerste object uit de klasse `Ork`.
+Het kenmerkende voor de klasse `Aardman` wordt nu dat het de algemene kenmerken voor alle groepen vijanden als basiscode herbergt, zodat die code niet bij iedere subklasse (iedere tegenstander) hoeft te worden opgenomen. Daarom kunnen de testgegevens voor de klasse `Aardman` verwijderd worden uit `main.py` en vervangen worden door gegevens die naar vijandgroepen verwijzen. Van daaruit kunnen de benodigde gegevens uit de superklasse aangeroepen worden. Een bekende ork is Shagrat. Dat wordt het eerste object uit de klasse `Ork`.
 
 ```python
 from aardman import Aardman, Ork
@@ -150,14 +150,14 @@ Naam: Duergar, Levens: 1, Hit points: 23
 
 Er worden een tweetal parameters meegegeven en de derde wordt opgehaald uit de superklasse, vandaar dat ‘Levens: 1’ ook in beeld verschijnt.
 
-Het is niet handig dit allemaal te regelen via de `__init__()` van de superklasse. De klasse `Ork` zou zelf ook een `__init__` moeten hebben. Dat om iedere groep tegenstanders een ander aantal levens en een ander aantal hit points te mee te geven aan het begin.  We passen de klasse `Ork` dus aan met de volgende constructor:
+Het is niet handig dit allemaal te regelen via de `__init__()` van de superklasse. De klasse `Ork` zou zelf ook een `__init__` moeten hebben. Dat om iedere groep tegenstanders een ander aantal levens en een ander aantal hitpoints te mee te geven aan het begin. We passen de klasse `Ork` dus aan met de volgende constructor:
 
 ```python
 def __init__(self, naam):
     super().__init__(naam=naam, levens=1, hit_points=23)
 ```
 
-Iedere object van de klasse `Ork` krijgt nu de attributen mee die meegegeven zijn in de `__init__`. De enige parameter die gevuld moet zijn is de naam, de rest wordt automatisch toegekend. De aanroep `super().__init__()` zorgt ervoor dat er een actie wordt uitgevoerd, waarbij de methode `__init__` uit de klasse `Aardman` wordt aangeroepen. De gegevens worden dan vastgelegd in de attributen, waarna de methode `__str__()` uitgevoerd wordt.
+Iedere object van de klasse `Ork` krijgt nu de attributen mee die meegegeven zijn in de `__init__`. De enige parameter die gevuld moet zijn is de naam, de rest wordt automatisch toegekend. De aanroep `super().__init__()` zorgt ervoor dat er een actie wordt uitgevoerd, waarbij de methode `__init__` uit de klasse `Aardman` (de superklasse) wordt aangeroepen. De gegevens worden dan vastgelegd in de attributen, waarna de methode `__str__()` uitgevoerd wordt.
 
 ## Extra eigenschappen in de subklasse
 

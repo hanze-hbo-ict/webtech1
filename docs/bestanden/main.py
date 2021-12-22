@@ -1,7 +1,6 @@
-a =3
-b = "tim"
-c = 1, 2, 3
+from speler import Speler
 
-print(a)
-print(b)
-print(c)
+bram = Speler("Bram")
+
+print(bram.naam)
+print(bram.levens)

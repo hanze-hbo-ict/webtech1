@@ -3,11 +3,11 @@
 Tot nu toe hebben we ons gericht op vormgeving van teksten en dergelijke aan de *client-kant* van onze webapplicatie. Om hier *functionaliteit* aan toe te voegen, kunnen we twee dingen doen:
 
 - met behulp van JavaScript programmacode aan de *client-kant* zelf toevoegen, of
-- met behulp van een programmeertaal functionaliteit aan de *server-kant* toevoegen en het resultaat daarvan terugsturen naar de client.
+- met behulp van een zogenaamde backend-programmeertaal functionaliteit aan de *server-kant* toevoegen en het resultaat daarvan terugsturen naar de client.
 
 Om dit wat nader toe te lichten, herhalen we hier het plaatje uit week 1; bekijk eventueel [de beschrijving daarbij op de betreffende pagina](../week1/1.html/html-deel1.md):
 
-![hr](../week1/1.html/imgs/database-site.png)
+![Een site met een database](../week1/1.html/imgs/database-site.png)
 
 Voor deze module hebben we voor de tweede optie gekozen. JavaScript en front-end development komen uitgebreid aan bod in het tweede jaar.
 
@@ -17,7 +17,7 @@ We beginnen met een stukje herhaling over het object-georiënteerde programmeerp
 
 Tot nu toe is er geprogrammeerd volgens het imperatieve paradigma. Een programma gemaakt volgens dit principe bestaat uit een groot aantal coderegels die in een bepaalde volgorde geplaatst zijn en waarop de computer verteld wordt hoe deze regels uit te voeren.
 
-OOP (*Object Oriented Programming*) is een programmeerstijl (of *paradigma*) waarbij logische objecten gemaakt worden die methodes (functies, acties of gebeurtenissen) en eigenschappen (waarden) hebben. De bedoeling is dat dit leidt tot meer leesbare en herbruikbare code. Conceptueel bestaat een programma uit objecten die aangemaakt worden en met elkaar interacteren.
+OOP (*Object Oriented Programming*) is een programmeerstijl (of *paradigma*) waarbij logische objecten gemaakt worden die methodes (functies, acties of gebeurtenissen) en eigenschappen (waarden) hebben. De bedoeling is dat dit leidt tot herbruikbare en beter leesbare programmacode. Conceptueel bestaat een programma uit objecten die aangemaakt worden en met elkaar interacteren.
 
 Het is niet zo dat beide stijlen onafhankelijk van elkaar functioneren. Binnen OOP wordt gebruikt gemaakt van de imperatieve coderingswijze en bij het imperatieve paradigma komen objecten regelmatig voor, zonder dat een gebruiker er vaak weet van heeft.
 
@@ -32,10 +32,10 @@ In [1]: class Kroket:
 
 Een klasse wordt gedefinieerd door het woord `class`, gevolgd door de naam van de klasse, beginnend met een hoofdletter. De klassedefinitie wordt afgesloten met een dubbele punt (`:`).
 
-Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze class bestaat.
+Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze class bestaat. Dit geven we mee aan de methode die aangeroepen wordt wanneer er een object van een klasse wordt aangemaakt: de zogenaamde *constructor*. In Python is deze methode `__init__` (we komen daar zo wat uitgebreider op terug):
 
 ```ipython
-   ...:     def __init__(self, leverancier, prijs):
+   ...:     def __init__(self, leverancier, prijs, trek=True):
    ...:         self.leverancier = leverancier
    ...:         self.prijs = prijs
    ...:         self.trek = False
