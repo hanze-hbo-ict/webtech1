@@ -57,7 +57,7 @@ sqlite>
 
 De records worden standaard gerangschikt op index; hier is dat op de kolom `_id`. Dat kan wel aangepast worden. Dit is het commando om de rijen uit de tabel `artists` te sorteren op naam in omgekeerde volgorde:
 
-```console
+```console 
 sqlite> SELECT * FROM artists
    ...> ORDER BY name desc;
 _id|name
@@ -67,7 +67,7 @@ _id|name
 ... (202 regels in totaal)
 ```
 
-Dit is allemaal nog niet zo spectaculair en een beetje onoverzichtelijk. Om de albums te tonen met de naam van de artist zijn meerdere query’s nodig om het resultaat te kunnen achterhalen. Dat kan handiger. Uit de lessen ‘Databases 1’ uit periode 1 moet zijn blijven hangen dat er dan met één of meerdere joins gewerkt moet worden.
+Dit is allemaal nog niet zo spectaculair en een beetje onoverzichtelijk. Om de albums te tonen met de naam van de artist zijn meerdere query’s nodig om het resultaat te kunnen achterhalen. Dat kan handiger. Uit de lessen ‘Databases 1’ uit periode 1 is hopelijk blijven hangen dat er dan met één of meerdere *joins* gewerkt moet worden.
 
 Als eerste voorbeeld het SQL-statement dat de tracks en titels van de songs laat zien met daarachter de naam van het album waarop de song voorkomt.
 
@@ -87,7 +87,7 @@ track|title|name
 
 Volgende vraag: een overzicht van de artiesten met hun albums alfabetisch gerangschikt op de naam van de artiest.
 
-```console
+```console hl_lines="3"
 sqlite> SELECT ar.name, al.name
 ...> FROM artists ar JOIN albums al ON ar._id = al.artist
 ...> ORDER BY ar.name;
@@ -120,7 +120,7 @@ name|name|track|title
     Het is best een uitgebreid SQL-statement dat is ingevoerd bij SQLite. De kans op fouten is daarbij erg groot, met als gevolg dat het commando opnieuw ingetoetst moet worden. De code kan ook in een teksteditor (bijvoorbeeld Notepad++ of VS Code) getypt worden en later gekopieerd worden naar SQLite om uitgevoerd te worden. Scheelt vaak een hoop tijd en ergernis.
 
 
-Gevraagd: een overzicht met de naam van de artiest, de naam van de albums, en van de songs de track en de titel, alleen nu met de voorwaarde erbij dat het woord doctor in de titel van de song moet voorkomen.
+Gevraagd: een overzicht met de naam van de artiest, de naam van de albums, en van de songs de track en de titel, alleen nu met de voorwaarde erbij dat het woord 'doctor' in de titel van de song moet voorkomen.
 
 
 ```console
@@ -140,7 +140,7 @@ Hawkwind|25 Years On|5|Flying Doctor
 
 ## Views
 
-Het laatste onderwerp voordat SQLite gekoppeld gaat worden met Python zijn de views. Een view is niets meer dan een virtuele tabel, waarin gegevens afgeschermd kunnen worden voor buitenstaanders. Stel er is een tabel `medewerkers`. Niet iedereen hoeft alle gegevens van iedere werknemer te kunnen bekijken. Een kolom als `salaris` zou niet beschikbaar moeten zijn. Daarom kan er een view aangemaakt worden die gevoelige informatie verbergt voor onbevoegden.
+Het laatste onderwerp voordat SQLite gekoppeld gaat worden met Python zijn de views. Een view is niets meer dan een virtuele tabel, waarin gegevens afgeschermd kunnen worden voor buitenstaanders. Stel er is een tabel `medewerkers`. Niet iedereen hoeft alle gegevens van iedere werknemer te kunnen bekijken. Een kolom als `salaris` zou niet zonder meer beschikbaar moeten zijn. Daarom kan er een view aangemaakt worden die gevoelige informatie verbergt voor onbevoegden.
 
 Om de werking van een view te demonstreren wordt nu van het laatst besproken SQL-statement een view aangemaakt, zonder de `WHERE`-clausule, met de naam `vArtistList`. De kleine letter `v` aan het begin van de naam van de view is een prefix om aan te geven dat het hier een view betreft.
 
