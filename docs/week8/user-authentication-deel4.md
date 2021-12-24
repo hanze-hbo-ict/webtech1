@@ -23,7 +23,7 @@ Dit gedeelte is bekend en in de code zijn de benodigde linken naar Bootstrap opg
 
 De body vereist een kleine uitleg:
 
-```html hl_lines="7"
+```html hl_lines="7 9 12"
  <body>
   <ul class="nav">
 

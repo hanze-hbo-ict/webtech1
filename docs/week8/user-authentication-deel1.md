@@ -2,7 +2,7 @@
 
 ## Inleiding
 
-De titel van dit deel is *User Authentication*. Gelijk weer een omschrijving in het Engels. Vertaald naar normaal Nederlands levert dat het begrip gebruikersverificatie op. Hiermee wordt bedoeld dat voordat een gebruiker toegang wordt verleend op een aanvraag er een procedure wordt opgestart om te bepalen of het een rechtmatige aanvraag betreft.
+De titel van dit deel is *User Authentication*. Gelijk weer een omschrijving in het Engels... Vertaald naar normaal Nederlands levert dat het begrip gebruikersauthenticatie op. Hiermee wordt bedoeld dat voordat een gebruiker toegang wordt verleend op een aanvraag er een procedure wordt opgestart om te bepalen of het een rechtmatige aanvraag betreft.
 
 Kortweg, het draait om het inloggen.
 
@@ -32,75 +32,58 @@ Beiden kunnen zeer goed gebruikt worden in een Flask-applicatie om te kunnen ach
 
 ### Bcrypt
 
-Is Bcrypt aanwezig, is de eerste actie het importeren ervan:
+Is Bcrypt aanwezig, is de eerste actie het importeren ervan. Daarna maken we een object aan van het type `BCrypt()` en gebruiken dat object om het wachtwoord te hashen:
 
-```python
-from flask_bcrypt import Bcrypt
-```
 
-De tweede actie is om een object van de klasse aan te maken:
+```ipython
 
-```python
-bcrypt = Bcrypt()
-```
+In [1]: from flask_bcrypt import Bcrypt
 
-Het opslaan van het wachtwoord in een hash-vorm gebeurt als volgt (als wachtwoord wordt `supergeheimwachtwoord` gebruikt):
+In [2]: bcrypt = Bcrypt()
 
-```python
-hashed_pass = bcrypt.generate_password_hash('supergeheimwachtwoord')
-print(hashed_pass)
+In [3]: hashed_pass = bcrypt.generate_password_hash('supergeheimwachtwoord')
 ```
 
 Het wachtwoord wordt gehashed en bewaard in de variabele `hashed_pass`. Nadat het geprint is, is het echt niet meer te herleiden naar het origineel:
 
-```console
-b'$2b$12$iVZrY/N1cevcKrwWdJocUue875rR5MEeu8lgNzf9h0JmU6QLjaDQC'
+```ipython
+In [4]: print(hashed_pass)
+b'$2b$12$rFOT5/VUiUpjODpcCn/0UONrhkQ2h224c7Srz3jk2qJOAUw2.xvyG'
 ```
 
 Wordt het runnen herhaald, verschijnt er een andere hash.
 
 Uiteraard nu weer een test naar de werking.
 
-```python
-fout_check = bcrypt.check_password_hash(hashed_pass, 'verkeerdwachtwoord')
-print(fout_check)
-goed_check = bcrypt.check_password_hash(hashed_pass, 'supergeheimwachtwoord')
-print(goed_check)
+```ipython
+In [5]: bcrypt.check_password_hash(hashed_pass, 'verkeerdwachtwoord')
+Out[5]: False
+
+In [6]: bcrypt.check_password_hash(hashed_pass, 'supergeheimwachtwoord')
+Out[6]: True
 ```
-
-Het effect:
-
-```console
-False
-True
-```
-
 Precies in de lijn der verwachting.
 
 ### Werkzeug
 
-Dit kan een stuk sneller gedaan worden. Het is weer meer van hetzelfde.
+Je kunt hetzelfde bereiken met Werkzeug, waarbij de syntax en de check zelfs nog iets simpeler is:
 
-```python
-from werkzeug.security import generate_password_hash,check_password_hash
+```ipython
+In [1]: from werkzeug.security import generate_password_hash,check_password_hash
 
-hashed_pass = generate_password_hash('supergeheimwachtwoord')
-print(hashed_pass)
-fout_check = check_password_hash(hashed_pass,'verkeerdwachtwoord')
-print(fout_check)
-goed_check = check_password_hash(hashed_pass,'supergeheimwachtwoord')
-print(goed_check)
+In [2]: hashed_pass = generate_password_hash('supergeheimwachtwoord')
+
+In [3]: print (hashed_pass)
+pbkdf2:sha256:150000$hUiH149n$af71be7ff46588f9c5d93b4ec9f46ef1a64801d02434ee2057ca81b8bb2939cb
+
+In [4]: check_password_hash(hashed_pass,'verkeerdwachtwoord')
+Out[4]: False
+
+In [5]: check_password_hash(hashed_pass,'supergeheimwachtwoord')
+Out[5]: True
 ```
 
-En het effect:
-
-```console
-pbkdf2:sha256:150000$bdSmANbT$12bfd9cb7837a6a9e1f4b588b1ca70f76c4bb26ace357bfe7a0da00bf64d6bc0
-False
-True
-```
-
-Het verschil tussen beiden is dat bij Werkzeug exact de juiste methoden binnengehaald worden en bij Bcrypt moet er soms een beetje over nagedacht worden. De keuze tussen deze pakketten is vrij aan de ontwikkelaar.
+Het verschil tussen beiden is dat bij Werkzeug exact de juiste methoden binnengehaald worden en bij Bcrypt moet er soms een beetje over nagedacht worden. De keuze tussen deze pakketten is vrij arbitrair en ligt een beetje aan de voorkeuren van de ontwikkelaar.
 
 
 

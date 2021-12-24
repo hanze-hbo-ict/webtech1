@@ -1,8 +1,8 @@
 # User authentication - Flask_login deel II
 
-`app.py` heeft verreweg de meeste aandacht nodig. Daarom is hier een aparte paragraaf voor. Er zijn een aantal zaken die voor het eerst voorbijkomen en een aantal dingen waar een duidelijke uitleg bij vereist is.
+Het bestand `app.py` heeft verreweg de meeste aandacht nodig. Daarom is hier een aparte paragraaf voor. Er zijn een aantal zaken die voor het eerst voorbijkomen en een aantal dingen waar een duidelijke uitleg bij vereist is.
 
-In dit bestand worden de views vastgelegd die nodig zijn om het loginsysteem naar verwachting te laten verlopen. Anders gezegd: De functies die de formulieren en de HTML-bestanden uit de folder templates met elkaar zullen gaan verbinden worden ontworpen en gecodeerd.
+In dit bestand worden de views vastgelegd die nodig zijn om het loginsysteem naar verwachting te laten verlopen. Anders gezegd: de functies die de formulieren en de HTML-bestanden uit de directory `templates` met elkaar zullen gaan verbinden worden ontworpen en gecodeerd.
 
 ## Eerste opzet
 

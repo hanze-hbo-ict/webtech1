@@ -33,7 +33,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 ```
 
-De onderste coderegel is nieuw. In verreweg de meeste gevallen is het nodig om dit pakket te installeren voordat het gebruikt kan worden.
+De onderste coderegel is nieuw. Waarschijnlijk zul je deze module separaat installeren door middel van `pip`.
 
 `Flask-login` biedt gebruikerssessiebeheer voor `Flask`. Het voert de algemene taken uit van inloggen, uitloggen en het onthouden van de sessies van de gebruikers gedurende langere perioden. Hieronder staat een opsomming.
 
@@ -45,17 +45,9 @@ De onderste coderegel is nieuw. In verreweg de meeste gevallen is het nodig om d
 
 Er zijn ook een aantal zaken die niet geregeld worden door de `Loginmanager`, maar daar wordt een oplossing voor geregeld tijdens het coderen.
 
+Zie de onderstaande code-listing voor een uitgewerkt voorbeeld:
 
-Vervolgens wordt een object van de klasse `Loginmanager() ` aangemaakt:
-
-```python
-login_manager = LoginManager()
-```
-
-
-Wat nu komt is weer vertrouwd:
-
-```python
+```python hl_lines="10 11 12"
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'mijngeheimesleutel'
@@ -64,20 +56,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'da
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-Migrate(app,db)
-```
 
-
-De laatste twee coderegels zijn nieuw:
-
-
-```python
+login_manager = LoginManager()
 login_manager.init_app(app)
-
 login_manager.login_view = "login"
 ```
 
-De eerste coderegel zorgt ervoor dat de app bekend is bij de `login_manager` en met de tweede regel wordt de plek doorgegeven waar gebruikers kunnen inloggen.
+De tweede gearceerde coderegel zorgt ervoor dat de app bekend is bij de `login_manager` en met de laatste regel wordt de plek doorgegeven waar gebruikers kunnen inloggen.
 
 ## `models.py`
 
@@ -127,7 +112,7 @@ def __init__(self, email, username, password):
 
 Voor iedere nieuwe gebruiker wordt gevraagd om een gebruikersnaam, een e-mailadres en een wachtwoord. Van het opgegeven wachtwoord wordt onmiddellijk een hash-versie geproduceerd.
 
-Verder is er nog een methode nodig, die gaat controleren of het ingevoerde wachtwoord het juiste is. In de vorige paragraaf is deze methode uitgebreid besproken:
+Verder is er nog een methode nodig die gaat controleren of het ingevoerde wachtwoord het juiste is. In de vorige paragraaf is deze methode uitgebreid besproken:
 
 ```python
 def check_password(self, password):
