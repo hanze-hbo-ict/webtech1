@@ -4,12 +4,12 @@ Aan het einde van de vorige paragraaf is de algemene structuur voor de applicati
 
 Omdat al veel van de code geschreven en besproken is in voorgaande delen, wordt hier grotendeels het principe copy en paste gehanteerd.
 
-`Flask` heeft een ingebouwde blueprints-mogelijkheid waarmee de modulaire componenten voor de Flask-app geregistreerd kunnen worden. Op deze manier kan op een eenvoudige wijze een *view* geraadpleegd worden voor ieder aspect van de applicatie.
+`Flask` heeft een ingebouwde mogelijkheid waarmee de modulaire componenten voor de Flask-app geregistreerd kunnen worden: [*blueprints*](https://flask.palletsprojects.com/en/1.1.x/blueprints/). Hiermee kan op een eenvoudige wijze een *view* geraadpleegd worden voor ieder aspect van de applicatie.
 
-Zo zijn er bijvoorbeeld een tweetal `view.py`-bestanden, één voor docenten en één voor studenten. En elk van deze *views* heeft zijn eigen `add-view`. Om ervoor te zorgen dat de Flask-applicatie niet in de war raakt door een `/add`-route, wordt het principe van blueprints benut. De blueprints registreren een `url_prefix` voor elk `views.py`-bestand:
+Zo zijn er bijvoorbeeld een tweetal `view.py`-bestanden: één voor docenten en één voor studenten. En elk van deze *views* heeft zijn eigen `add`-view. Om ervoor te zorgen dat de Flask-applicatie niet in de war raakt door een `/add`-route, maken we gebruik van blueprints. De blueprints registreren een `url_prefix` voor elk `views.py`-bestand:
 
-- `/ docenten /add`
-- `/ studenten /add`
+- `/docenten/add`
+- `/studenten/add`
 
 De voornaamste wijzigingen in de code zullen zijn:
 
@@ -219,7 +219,7 @@ class AddForm(FlaskForm):
 
 De formulieren zijn uit elkaar gehaald en in een passende folder ingevoegd. Beiden hebben nu een formulier met de naam `AddForm`. Dat gaat helemaal goed, omdat later met blueprints de juiste relaties gelegd zullen worden, zodat er geen verwarring kan ontstaan en de verkeerde formulieren getoond gaan worden.
 
-De nog resterende HTML-files kunnen nu op de juiste plaats gezet worden. Als eerste mogen er drie files aangemaakt worden in de folder `templates/docenten`. Het zijn `add.html`, `delete.html` en `list.html`. De namen van de oefening worden vervangen door wat meer algemeen geldige namen.
+De nog resterende HTML-files kunnen nu op de juiste plaats gezet worden. Als eerste moeten er drie bestanden in de folder `templates/docenten` aangemaakt worden: `add.html`, `delete.html` en `list.html`. De namen van de oefening worden vervangen door wat meer algemeen geldige namen.
 
 ### `add.html`
 
@@ -306,7 +306,7 @@ De inspanningen in deze paragraaf hebben ertoe geleid dat de structuur die ontwo
 
 Er zijn nog een paar aandachtspunten overgebleven waar in de volgende paragraaf een vervolg aan moet worden gegeven.
 
-Bovendien worden er de nodige blueprints in de code opgenomen. Tot slot van deze paragraaf een overzicht van wat allemaal al klaar is:
+Bovendien worden er de nodige blueprints in de code opgenomen. Tot slot van deze paragraaf een complete directory-listing na onze majeure refactoring:
 
 ```text
 .

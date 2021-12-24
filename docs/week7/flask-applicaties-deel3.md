@@ -14,7 +14,7 @@ Er zijn nog een aantal aandachtspunten van de vorige paragraaf blijven hangen wa
 
 ## De studenten-view
 
-De belangrijkste reden om blueprints te gebruiken is dat een gebruiker hiermee in staat wordt gesteld applicaties te organiseren door logica in submappen te groeperen.
+De belangrijkste reden om blueprints te gebruiken is dat we hiermee onnze applicatie kunnen organiseren door logica in submappen te groeperen.
 
 `views.py` (uit de folder `mijnproject/studenten/views.py`):
 
@@ -46,7 +46,7 @@ def add():
 
 Als eerste wordt hier weer het nodige geïmporteerd. Belangrijk hierbij is dat ook `Blueprint` wordt meegenomen uit het pakket `flask`. Verder zijn nodig de database (db) uit `mijnproject`, de tabel `Student` en het formulier waarmee een nieuwe student ingevoerd kan worden. 
 
-Vervolgens wordt er een variabele aangemaakt `studenten_blueprint`. Deze variabele is een instantie van de klasse `Blueprint`. Er moeten een drietal kenmerken worden vastgelegd, een naam (hier `studenten`), de naam van de applicatie en de folder die verantwoordelijk is voor alle logica voor de studenten. 
+Vervolgens wordt er een variabele aangemaakt `studenten_blueprint`. Deze variabele is een instantie van de klasse `Blueprint`. Er moeten een drietal kenmerken worden vastgelegd: een naam (hier `studenten`), de naam van de applicatie, en de folder die verantwoordelijk is voor alle logica voor de studenten. 
 
 Daarna kan de decorator aangemaakt worden. Dit moet weer bekend voorkomen. Aangezien alle gegevens van studenten zijn samengebracht in de map `studenten` valt af te lezen dat het pad om de gegevens terug te kunnen vinden binnen `templates/` heel logisch wordt. Dat pad wordt ook vastgelegd in `studenten_blueprint`. Voor het pad binnen render-templates voegen we dan nog de directory toe waar het te gebruiken template staat `studenten/add.html`.
 
@@ -135,9 +135,12 @@ Om te beginnen worden er weer een tweetal items ingeladen. Op het eerste gezicht
 
 ## Laatste loodjes
 
-Er staan nog drie (3) punten op het lijstje die nog gedaan moeten worden:
+Er staan nog drie punten op het lijstje die nog gedaan moeten worden:
+
 - Aanpassen van de `url_for ()`-links in de navigatiebalk.
+
 - Het aanmaken van de database.
+
 - het testen.
 
 Het bestand `base.html` moet nog aangepast worden omdat de hyperlinks nu nog naar pagina’s verwijzen die niet meer bestaan. De aanpassingen staan hieronder vermeld, de links naar Bootstrap zijn weggelaten:
@@ -162,8 +165,6 @@ Voordat er getest kan worden dient de database aangemaakt te worden. Daarvoor zi
     - Voor een MacOS / Linux-machine is dat `export FLASK_APP = app.py`
     - Voor een Windows-machine `set FLASK_APP = app.py`
 2. `flask db init ` 
-3. `flask db migrate -m "zomaar eenbericht" ` 
-4. `flask db upgrade`
 
 ## Resultaat
 
