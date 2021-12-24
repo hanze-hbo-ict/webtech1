@@ -6,4 +6,4 @@ De cursist geeft zijn eigen naam op. Eindigt deze naam op de letter `s` dan moet
 
 `Truus` wordt dan `TRUUSSY` en de artiestennaam van `Rob` is `ROBTEZY`. 
 
-Geef de pagina een passende naam en zorgt voor een passende tekst.
+Maak een template waarin een meegegeven naar op deze manier wordt aangepast. Geef de pagina een passende naam en zorgt voor een passende tekst. Zorg ervoor dat de pagina bereikt wordt via `http://localhost:8000/artiestennaam`.

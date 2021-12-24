@@ -6,7 +6,7 @@ Sjablonen kunnen eenvoudig worden weergeven door de functie `render_template` ui
 
 ## Tijd voor een voorbeeld
 
-Voordat de code besproken kan worden, dient er een tweetal folders aangemaakt te worden. Zoals vermeld gaat Flask op zoek naar de map `templates`, waar de templates ondergebracht gaan worden. Die map is er nog niet. Ten tweede een folder om plaatjes in op te bergen om de sites op te leuken (deze directory noemen we `static`). De folders dienen op dezelfde hoogte in de directory te staan als de Python-files.
+Voordat de code besproken kan worden, dient er een tweetal directories aangemaakt te worden. Zoals vermeld gaat Flask op zoek naar de map `templates`, waar de templates ondergebracht gaan worden. Die map is er nog niet. Ten tweede een folder om plaatjes in op te bergen om de sites op te leuken (deze directory noemen we `static`). De folders dienen op dezelfde hoogte in de directory te staan als de Python-files.
 
 Voor het voorbeeld wordt er een afbeelding ‘drums.jpg’ in de folder `static` geplaatst en een HTML-file aangemaakt in de folder `templates`. De totale directory-listing ziet er dan als volgt uit:
 

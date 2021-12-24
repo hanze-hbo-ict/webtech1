@@ -6,7 +6,7 @@ Aan het eind van deze tekst maken we [oefening 1](oefeningen/flask-oefening1.md)
 
 ## Een voorbeeld
 
-We maken die duidelijk aan de hand van een voorbeeld. We maken een scriptje `app.py`, waarin we allereerst de klasse `Flask` importeren en daar vervolgens een instantie van aanmaken.
+We maken dit duidelijk aan de hand van een voorbeeld. We maken een scriptje `app.py`, waarin we allereerst de klasse `Flask` importeren en daar vervolgens een instantie van aanmaken.
 
 ```python
 from flask import Flask
@@ -23,7 +23,7 @@ HOEM: dit kan met mkdocs (nadeel, niet overdraagbaar naar andere omgevingen)
 https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#adding-line-numbers
 -->
 
-```python linenums="1"
+```python hl_lines="1" linenums="1"
 @app.route("/")
 def index():
     # render de template Basic.html
@@ -41,7 +41,7 @@ We bespreken deze code regel voor regel:
 4. Hier wordt de string `<h1>Welkom bij muziekschool Session</h1>` aan de client (de browser) geretourneerd.
 5. lege regel voor de duidelijkheid.
 6. Deze regel is bedoeld om te checken of dit script direct wordt uitgevoerd en niet wordt geïmporteerd vanuit een ander script of een andere module; zie eventueel [deze blog op medium.com](https://medium.com/python-features/understanding-if-name-main-in-python-a37a3d4ab0c3) voor een complete uitleg.
-7. Hier wordt de methode `run` aangeroepen op onze instantie van de `Flask` klasse. Deze start een ontwikkelserver op en gaat luisteren naar requests van clients. Standaard luistert deze server naar poort 500, maar dat kun je zelf ook installen.
+7. Hier wordt de methode `run` aangeroepen op onze instantie van de `Flask` klasse. Deze start een ontwikkelserver op en gaat luisteren naar requests van clients. Standaard luistert deze server naar poort 5000, maar dat kun je zelf ook installen.
 
 Als we deze code runnen, gebeurt er het volgende:
 
@@ -92,9 +92,10 @@ Wanneer er een verkeerd adres wordt opgegeven om wat voor reden dan ook, verschi
 
 Het kan zijn dat de website vele gebruikers heeft die allen een eigen profielpagina hebben. Deze profielpagina moet voor iedere gebruiker natuurlijk uniek zijn. Het moet niet kunnen dat meerdere gebruikers dezelfde URL gaan gebruiken. Dat zou in de volgende vorm `www.site.com/gebruiker/unieke_gebruikers_pagina` geregeld kunnen worden.
 
-Om dit effect te bereiken, zijn dynamische routes ontwikkeld. Dynamische routes kennen twee belangrijke aspecten:
+Om dit effect te bereiken, zijn *dynamische routes* ontwikkeld. Dynamische routes kennen twee belangrijke aspecten:
 
 •	Er moet een variabele in de route zijn opgenomen `<variabele>`;
+
 •	De waarde van die variabele moet doorgegeven worden aan de methode.
 
 Hieronder staat een algemeen voorbeeld van de werking van een dynamische route. De gebruiker geeft zijn naam op en wordt doorverbonden naar zijn profielpagina:

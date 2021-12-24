@@ -2,7 +2,7 @@
 
 ## Wat is Flask?
 
-Flask is een webframework, het is een Python-module waarmee op eenvoudige wijze webapplicaties ontwikkeld kunnen worden. Het heeft een kleine en gemakkelijk uit te breiden kern: het is een microframework dat geen ORM (Object Relational Manager) of dergelijke functies bevat. Het heeft veel coole functies, zoals url-routing, template-engine. Het is een WSGI-webapp-framework.
+Flask is een webframework, het is een Python-module waarmee op eenvoudige wijze webapplicaties ontwikkeld kunnen worden. Het heeft een kleine en gemakkelijk uit te breiden kern: het is een microframework dat geen ORM (Object Relational Manager) of dergelijke functies bevat. Het heeft wel veel coole functies, zoals url-routing en een template-engine. Het is een WSGI-webapp-framework.
 
 Een Web Application Framework of gewoon een Web Framework vertegenwoordigt een verzameling bibliotheken en modules waarmee ontwikkelaars webtoepassingen kunnen schrijven zonder zich zorgen te hoeven maken over details op laag niveau, zoals protocol en threadbeheer.
 
@@ -27,7 +27,7 @@ Een voorbeeld:
 </html>
 ```
 
-Uit een database kunnen titel en gebruikersnaam opgevraagd worden en worden ingevoegd in een template. Deze waarden worden op het moment dat de pagina wordt opgevraagd door de template-engine gezet op de plaats van de corresponderende waarde tussen de accolades (`{` en `}`).
+Uit een database kunnen titel en gebruikersnaam opgevraagd worden en worden ingevoegd in een template. Deze waarden worden op het moment dat de pagina wordt opgevraagd door de template-engine gezet op de plaats van de corresponderende waarde tussen de dubbele accolades (`{` en `}`).
 
 Flask wordt dus een microframework genoemd. Het is ontworpen om de kern van de applicatie eenvoudig en schaalbaar te houden. In plaats van een abstractielaag voor database-ondersteuning, ondersteunt Flask uitbreidingen om dergelijke mogelijkheden aan de applicatie toe te voegen.
 
