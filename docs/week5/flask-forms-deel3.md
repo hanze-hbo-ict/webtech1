@@ -77,7 +77,7 @@ Als er elementen van Bootstrap gebruikt gaan worden in een HTML-file is het nodi
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 ```
 
-Deze code is overgenomen uit het HTML-bestand met daarin oplossing van oefening 5 uit het onderdeel HTML/CSS/Bootstrap. Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Dat gedeelte kan [hier gevonden worden](https://getbootstrap.com/docs/4.0/components/alerts/).
+Deze code is overgenomen uit [het HTML-bestand met daarin oplossing van oefening 5](../week1/oefeningen/wk1oefening5.md) uit het onderdeel HTML/CSS/Bootstrap. Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Dat gedeelte kan [hier gevonden worden](https://getbootstrap.com/docs/4.0/components/alerts/).
 
 Voor de melding wordt als component `Alert` geselecteerd. Hiermee kunnen feedbackberichten als reactie op gebruikersacties aangemaakt worden. Van de beschikbare opties is hier gekozen voor `dismissing`.
 Het onderstaande plaatje is rechtstreeks overgenomen van de Bootstrap-site.

@@ -4,7 +4,7 @@
 Het mooie aan het werken met formulieren is hier dat voor elk mogelijk HTML-formulierveld  een bijbehorende `wtforms`-klasse bestaat die geïmporteerd kan worden. Deze klasse heeft ook validators die op gemakkelijke wijze ingevoegd kunnen worden. Validators kunnen ingezet worden om controles uitvoeren op de formuliergegevens, zoals bijvoorbeeld een controle of een verplicht veld inderdaad een waarde gekregen heeft.
 
 In deze paragraaf is er ook aandacht voor de wijze waarop een sessieobject van Flask ingeschakeld kan worden om de informatie in het formulier op te halen en door te geven aan een template.
-In een volgende deel wordt aandacht besteed hoe de gegevens in een SQL-database opgeslagen kunnen worden.
+In een volgende deel wordt aandacht besteed hoe de gegevens in een database opgeslagen kunnen worden.
 
 ## Voorbeeld
 We gaan weer verder met een voorbeeld.

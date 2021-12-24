@@ -1,6 +1,6 @@
 # Flask en Forms - een basis Flask formulier
 
-In dit deel ligt de focus op de modules [Flask-WTF](https://flask-wtf.readthedocs.io/en/stable/) en [WTForms](https://wtforms.readthedocs.io/en/2.3.x/) en op welke wijze waarop deze gebruikt kunnen worden om snel formulieren te maken op basis van de Flask-Python-scripts.
+Flask biedt ook de mogelijkheid om eenvoudig HTML-formulieren te genereren. In dit deel ligt de focus op de modules [Flask-WTF](https://flask-wtf.readthedocs.io/en/stable/) en [WTForms](https://wtforms.readthedocs.io/en/2.3.x/) en op welke wijze waarop deze gebruikt kunnen worden om snel formulieren te maken op basis van de Flask-Python-scripts.
 
 ## Componenten
 Maar als eerste een bespreking van de belangrijkste componenten voor het maken van een formulier.
@@ -10,12 +10,12 @@ Dat zijn de volgende onderdelen:
 - Maak een WTForm-klasse aan.
     - Ontwerp velden voor alle onderdelen op het formulier.
 - Stel een View Function in (weergavefunctie).
-    - Voeg methoden toe = [`GET`, `POST`].
+    - Voeg methoden toe ([`GET`, `POST`]).
     - Maak een instantie van Form Class aan.
     - Verwerk het formulier.
 
 ## Voorbeeld
-Om deze materie te kunnen begrijpen volgt nu een uitgebreid voorbeeld. Dit voorbeeld bestaat uit een Python-file ([`basis_flask_form.py`](../bestanden/basis_flask_form.py)) en een enkele HTML-bestand, getiteld [`home.html`](../bestanden/home.html). Dit HTML-bestand wordt weer opgenomen in de folder ‘templates’.
+Om deze materie te kunnen begrijpen volgt nu een uitgebreid voorbeeld. Dit voorbeeld bestaat uit een Python-file ([`basis_flask_form.py`](../bestanden/basis_flask_form.py)) en een enkel HTML-bestand, getiteld [`home.html`](../bestanden/home.html). Dit HTML-bestand wordt weer opgenomen in de folder ‘templates’.
 
 ### Python gedeelte
 Als eerste de Python-file. Er moeten nu meerdere zaken worden geïmporteerd, zie onderstaand kader.
