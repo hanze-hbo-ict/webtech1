@@ -18,7 +18,7 @@ Ingevuld met een aantal cursisten van de muziekschool ziet het er als volgt uit.
 2	|Timo |Bijl	|Drachten
 3|	Fred|	Timmer|	Assen
 
-Het verzamelen van gegevens uit een database of een tabel gaat doorgaans met het commando:
+Zoals we weten gaat het verzamelen van gegevens uit een database of een tabel doorgaans met het commando `select`:
 
 ```sql
 SELECT (één of meer velden)
@@ -37,7 +37,8 @@ We kunnen ons architectuurplaatje uit de eerste week nu als volgt uitbreiden:
 
 ![Complete architectuur van de webapp](imgs/architectuur.png)
 
-Het kan zijn dat Flask-SQLAlchemy nog niet geïnstalleerd is. Op de gebruikelijke wijze kan dit pakket weer toegevoegd worden voor een vlekkeloze werking van de volgende voorbeelden.
+Het kan zijn dat Flask-SQLAlchemy nog niet geïnstalleerd is. Op de gebruikelijke wijze kan dit pakket met behulp van `pip` weer toegevoegd worden voor een vlekkeloze werking van de volgende voorbeelden.
+
 
 ## Acties
 Om op een nette wijze met databases te kunnen werken dienen de volgende acties uitgevoerd te worden:
@@ -48,7 +49,7 @@ Om op een nette wijze met databases te kunnen werken dienen de volgende acties u
 
 Deze handelingen staan hieronder uitgebreid beschreven.
    
-### Installeer een SQLite-database in een Flask-app
+### 1. Installeer een SQLite-database in een Flask-app
 Voor de eerste stap zijn de volgende acties vereist:
 
 1. Maak een Flask-app aan op de gebruikelijke wijze.
@@ -57,7 +58,7 @@ Voor de eerste stap zijn de volgende acties vereist:
    
 Deze acties hoeven maar één keer geprogrammeerd te worden. Maar iedere keer dat er een nieuwe database moet worden opgezet, zijn dezelfde regels nodig.
 
-### Een tabel (model) aanmaken in de Flask-app
+### 2. Een tabel (model) aanmaken in de Flask-app
 Bij de tweede stap zijn de volgende meldingen van belang:
 
 - Modellen linken rechtstreeks naar een tabel in een SQL-database.
@@ -66,12 +67,12 @@ Bij de tweede stap zijn de volgende meldingen van belang:
 Het creëren van een model in Flask is vergelijkbaar met het maken van een FlaskForm. De stappen zijn:
 
 1. Maak een modelklasse.
-2. Zorg dat dit een subklasse is van db.Model.
+2. Zorg dat dit een subklasse is van `db.Model`.
 3. Geef optioneel een tabelnaam op.
 4. Voeg tabelkolommen toe als attributen.
 5. Voeg methoden toe voor `__init__` en `__repr__`.
 
-### CRUD
+### 3. CRUD
 Voor de volledigheid nog een keer een korte omschrijving van de basishandelingen CRUD.
 
 operatie | Beschrijving

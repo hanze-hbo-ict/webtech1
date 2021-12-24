@@ -1,55 +1,64 @@
-# Flask en SQL - Relaties
+# Flask en SQL - Website
 
-Bij grotere projecten zijn altijd meerdere modellen (tabellen) beschikbaar. Die modellen hebben een relatie met elkaar. Tot nu toe is er gewerkt met `Cursist` als model. Daarnaast bestaat er ook een model `Instrument`, waar de gegevens van de instrumenten beheerd worden, waarin de muziekschool lesgeeft. Een derde model wat erg voor de hand ligt is `Docent`. Docenten geven les aan cursisten om hen een instrument te leren bespelen.
+Alle inspanningen in de vorige paragrafen zijn niet voor niets geweest. Er is op dit moment  voldoende kennis en informatie aangereikt om nu eindelijk een ‘echte’ website te bouwen! Alle opgedane kennis wordt in deze paragraaf met elkaar verbonden.
 
-In deze demonstratie is het uitgangspunt dat cursisten meerdere instrumenten kunnen leren bespelen en dat de lessen door een enkele docent gegeven worden. Om de boel op dit moment niet nodeloos complex te maken, stellen we even dat een instrument maar door één cursist kan woorden bespeelt. Het strokendiagram van de database wordt dan als volgt:
+De belangrijkste kenmerken die in deze paragraaf besproken zullen worden zijn:
 
-![Strokendiagram van de database](imgs/strokendiagram.png)
+- Het werken met templates;
+- Gebruikersinformatie via formulieren ophalen;
+- De aangeleverde informatie opslaan in de database;
+- Overzichten maken van de opgeslagen informatie;
 
-### Sleutels
+Dit wordt allemaal toegepast op een beheersite voor de gegevens van de cursisten met onder meer:
 
-Om relaties te kunnen begrijpen is het nodig nog even kort aandacht te besteden aan een tweetal belangrijke termen, de primaire sleutel (__primary key__) en de refererende sleutel (__foreign key__).
+- Een formulier waarmee nieuwe cursisten toegevoegd kunnen worden;
+- Een formulier om cursisten uit de database te verwijderen;
+- De mogelijkheid tot het maken van een overzicht van alle cursisten;
 
-De modellen (tabellen) krijgen de volgende structuur:
+Er wordt vanaf scratch begonnen om meer inzicht te krijgen in de wijze waarop een website opgebouwd wordt. Daarbij wordt een stappenplan aangehouden.
 
-`Cursist`:
+## Stap 1: Inventarisatie
+Er moeten verschillende componenten geconstrueerd worden om de eerste website werkend te krijgen: 
 
-- id (primaire sleutel, type integer)
-- naam (type text)
+Twee Python-files:
 
-`Instrument`:
+- [`beheer_cursist.py`](../bestanden/week6/beheer_cursist.py)
+- [`forms.py`](../bestanden/week6/forms.py)
+  
+Een directory Templates met een vijftal HTML-bestanden:
 
-- id (primaire sleutel, type integer)
-- naam (type text)
+- [`base.html`](../bestanden/week6/templates/base.html)
+- [`home.html`](../bestanden/week6/templates/home.html)
+- [`voegtoe_cur.html`](../bestanden/week6/templates/voegtoe_cur.html)
+- [`toon_cur.html`](../bestanden/week6/templates/toon_cur.html)
+- [`verwijder_cur.html`](../bestanden/week6/templates/verwijder_cur.html)
+  
+Het einde van stap 1 bestaat eruit alle bestanden aan te maken. Dat levert het volgende plaatje op:
 
-`Docent`:
+![het overzicht van de bestanden](imgs/5-bestanden.png)
 
-- id (primaire sleutel, type integer)
-- naam (type text)
+## Stap 2: Begin met het opzetten van de file waarin de structuur wordt bepaald.
 
-Een primair sleutelveld zorgt ervoor dat elke rij uit het model uniek is. Een primaire sleutel mag bij geen enkel model een dubbele waarde krijgen. Omdat er een index als primair sleutelveld gebruikt wordt hoeven we ons daar geen zorgen om te maken.
+In dit geval is dat [`beheer_cursist.py`](../bestanden/week6/beheer_cursist.py). De eerste regels van dit bestand zijn moeten nu bekend voorkomen.
+`VoegtoeForm` en `VerwijderForm` worden nog niet herkend, omdat ze pas later worden aangemaakt. 
 
-Telkens wanneer er een nieuw object van de klasse `Instrument` wordt aangemaakt, kunnen we aangeven welke cursist dat instrument gaat bespelen. Hetzelfde geldt voor ieder nieuw object uit de klasse `Docent` – ook hiervan kunnen we aangeven welk instrument die docent gaat doceren. Het 'strokendiagram' van deze database ziet er dan als volgt uit:
-
-
-
-Er wordt dan gevraagd welke cursist door deze docent begeleid gaat worden. En daarbij komen dan de refererende sleutels om de hoek kijken. Er moet een relatie worden geïntroduceerd tussen cursist en instrument en tussen cursist en docent. Bij het opzetten van de file `models.py` komt dit nog uitgebreid ter sprake.
-
-## `models.py`
-De opzet van deze applicatie wordt gedaan door eerst weer een nieuw project op te starten met de naam ‘Relaties’. Daarom is het nodig als eerste een opzet van de database aan te maken. Daarvoor wordt de file [`models.py`](../bestanden/relaties/models.py) in het leven geroepen.
-
-Als eerste moeten natuurlijk weer de gebruikelijke zaken geïmporteerd worden. Daarna wordt aangegeven op welke plaats zich de basis directory bevindt. De actie wordt gevolgd door het aanmaken van de applicatie en de bijbehorende acties met `SQLALCHEMY`. Aan het einde van dit eerste blok worden applicatie en database weer aan elkaar gekoppeld en wordt het migratiepad ingericht.
+Het werken met Forms vereist dat er een geheime sleutel moet worden ingegeven. De naam maakt niet uit, als er maar een sleutelwaarde wordt ingesteld. Het weglaten van deze regel levert een foutmelding op.
 
 ```python
 import os
-from flask import Flask
+from forms import  VoegtoeForm, VerwijderForm
+from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-
 app = Flask(__name__)
-# Koppelt de Flask-applicatie met de database
+# Omdat er formulieren gebruikt worden is een geheime sleutel nodig!
+app.config['SECRET_KEY'] = 'mijngeheimesleutel'
+```
+Het tweede gedeelte bestaat uit het opzetten van de koppeling tussen applicatie en database:
+
+```python
+#SQL database opzet
+basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -57,155 +66,274 @@ db = SQLAlchemy(app)
 Migrate(app,db)
 ```
 
-Het model `Cursist`:
+Tot dusver niets bijzonders. Het volgende gedeelte levert vast ook geen problemen op. De tabel (het model) voor de cursist wordt nu aangemaakt. Om het een klein project te laten blijven, en om de opbouw op een eenduidige wijze te kunnen beschrijven, blijft het bij een enkel model, dat ook nog eens geen relaties kent naar andere modellen:
 
 ```python
 class Cursist(db.Model):
 
     __tablename__ = 'cursisten'
-
     id = db.Column(db.Integer,primary_key = True)
     naam = db.Column(db.Text)
-    # cursist heeft een één-op-veel relatie met instrument
-    instrumenten = db.relationship('Instrument',backref='cursist',lazy='dynamic')
-    # cursist heeft een één-op-een relatie met docent
-    docent = db.relationship('Docent',backref='cursist',uselist=False)
-```
 
-Er wordt wat nader ingegaan op de relatie-aspecten. Aangegeven is dat de relatie tussen cursisten en instrumenten, een één-op-een relatie is. De coderegel nader uitgelegd:
-
-```python
-instrumenten = db.relationship('Instrument',backref='cursist',lazy='dynamic')
-```
-
-In de variabele `instrumenten` wordt vastgelegd dat binnen deze database er een relatie bestaat naar `Instrument` toe en dat er voor de methode `lazy=’dynamic’` gekozen is.
-
-De lazy-parameter bepaalt hoe de gerelateerde objecten worden geladen bij het doorzoeken van relaties. Er kan uit vier (4) verschillende opties gekozen worden. In de meeste gevallen wordt er een keuze voor `‘dynamic’` gemaakt. De andere drie mogelijke parameterinvullingen zijn:
-
-- `select` (of `True`)
-- `joined` (of `False`)
-- `subquery`
-
-Nu het uitgangspunt is dat er tussen docent en cursist een één-op-één relatie bestaat, moet hier nu ingevuld worden `uselist=False`. Een cursist kan niet meer dan één docent als leraar hebben en een docent maar één cursist.
-De klasse `Cursist` krijgt ook nog de beschikking over de volgende methoden:
-
-```python
     def __init__(self,naam):
         self.naam = naam
 
     def __repr__(self):
-        if self.docent:
-            return f"Cursist {self.naam} heeft {self.docent.naam} als docent"
-        else:
-            return f"Cursist {self.naam} heeft nog geen docent toegewezen gekregen"
-
-    def overzicht_instrumenten(self):
-        print("Mijn instrumenten:")
-        for instr in self.instrumenten:
-            print(instr.naam)
+        return f"Naam van de cursist: {self.naam}"
 ```
 
-De methode `overzicht_instrumenten` toont de instrumenten waar een cursist momenteel les in volgt.
+## Stap 3: Aanmaken van de views-functies met de formulieren.
 
-Het model `Instrument`:
+Voor het gemak zijn de Engelse termen aangehouden zoals *add*, *delete* en *list*.
+
+### index
 
 ```python
-class Instrument(db.Model):
-
-    __tablename__ = 'instrumenten'
-
-    id = db.Column(db.Integer,primary_key = True)
-    naam = db.Column(db.Text)
-    # Er wordt cursisten.id ingevuld vanwege de tabelnaam ='cursisten'
-    cursist_id = db.Column(db.Integer,db.ForeignKey('cursisten.id'))
-
-    def __init__(self,naam,cursist_id):
-        self.naam = naam
-        self.cursist_id = cursist_id
+@app.route('/')
+def index():
+    return render_template('home.html')
 ```
 
+Wanneer de index wordt opgevraagd wordt er doorgeschakeld naar de pagina [`home.html`](../bestanden/week6/templates/home.html).
 
-Het model `Docent`:
+### add
 
 ```python
-class Docent(db.Model):
+@app.route('/add', methods=['GET', 'POST'])
+def add_cur():
+    form = VoegtoeForm()
 
-    __tablename__ = 'docenten'
+    if form.validate_on_submit():
+        naam = form.naam.data
 
-    id = db.Column(db.Integer,primary_key= True)
-    naam = db.Column(db.Text)
-    cursist_id = db.Column(db.Integer,db.ForeignKey('cursisten.id'))
+        # Voeg een nieuwe cursist toe aan de database
+        new_cur = Cursist(naam)
+        db.session.add(new_cur)
+        db.session.commit()
 
-    def __init__(self,naam,cursist_id):
-        self.naam = naam
-        self.cursist_id = cursist_id
+        return redirect(url_for('toon_cur'))
+
+    return render_template('voegtoe_cur.html',form=form)
 ```
 
-Tot zover de code van de file `models.py`. Om de database aan te maken en om de wijzigingen door te voeren dienen nu de vier stappen van de vorige paragraaf uitgevoerd te worden:
-- Stel de omgevingsvariabele FLASK_APP in
-    - Voor een MacOS / Linux-machine is dat `export FLASK_APP = models.py`
-    - Voor een Windows-machine `set FLASK_APP = models.py`
-- `flask db init`
-- `flask db migrate -m "zomaar een bericht"`
-- `flask db upgrade`
+Op het moment dat deze view wordt aangeroepen wordt er doorgeschakeld naar [`voegtoe_cur.html`](../bestanden/week6/templates/voegtoe_cur.html). Daar wordt een leeg formulier getoond met een passende tekst. Als de naam van een nieuwe cursist is ingevuld en bevestigd, wordt [`toon_cur.html`](../bestanden/week6/templates/toon_cur.html) geopend en verschijnt de lijst met alle aanwezige cursisten in beeld. In dit voorbeeld zal deze lijst zeer beperkt blijven.
 
-## Demonstratie
-Nu de tabel is aangemaakt kunnen er gegevens ingebracht worden. Voor deze demonstratie gebruiken we de file [`populate_database.py`](../bestanden/relaties/populate_database.py):
+### list
 
 ```python
-from models import db,Cursist,Instrument,Docent
-
-# Maak twee cursisten aan
-joyce = Cursist("Joyce")
-bram = Cursist("Bram")
-
-# Voeg de cursisten toe aan de database en leg ze vast
-db.session.add_all([joyce,bram])
-db.session.commit()
-
-# Ter controle een print van alle cursisten, met de teksten van __repr__ uit Cursist
-print(Cursist.query.all())
-
-# Vind alle cursisten met de naam “Joyce",
-# worden er meerdere gevonden in de lijst , dan alleen de eerste daarom index [0]
-# Kan ook gevonden worden door .first() te gebruiken i plaats van  .all()[0]
-joyce = Cursist.query.filter_by(naam='Joyce').all()[0]
-
-# Maak een docent aan voor Joyce
-david = Docent("David", joyce.id)
-
-# De instrumenten waar Joyce les in heeft
-instr1 = Instrument('Drums', joyce.id)
-instr2 = Instrument("Piano", joyce.id)
-
-# Leg de aanpassingen vast in de database
-# Merk op dat het om verschillende objecten gaat
-db.session.add_all([david, instr1, instr2])
-db.session.commit()
-
-# Nagaan wat de veranderingen voor Joyce hebben opgeleverd.
-joyce = Cursist.query.filter_by(naam='Joyce').first()
-print(joyce)
-
-# Een overzicht van de instrumenten waar Joyce les in heeft
-print(joyce.overzicht_instrumenten())
-
-# Het is ook mogelijk zaken te verwijderen uit de database:
-# find_cur = Cursist.query.get(1)
-# db.session.delete(find_cur)
-# db.session.commit()
+@app.route('/list')
+def list_cur():
+    # Maak een lijst van alle aanwezige cursisten in de database.
+    cursisten = Cursist.query.all()
+    return render_template('toon_cur.html', cursisten=cursisten)
 ```
 
-Na het runnen is dit het resultaat:
+In deze view wordt een lijst aangemaakt van alle cursisten en die lijst wordt doorgegeven naar [`toon_cur.html`](../bestanden/week6/templates/toon_cur.html), die de deelnemers laat zien.
 
-```console
-[Cursist Joyce heeft nog geen docent toegewezen gekregen, Cursist Bram heeft nog geen docent toegewezen gekregen]
-Cursist Joyce heeft David als docent
-Mijn instrumenten:
-Drums
-Piano
+### delete
+
+```python
+@app.route('/delete', methods=['GET', 'POST'])
+def del_cur():
+    form = VerwijderForm()
+
+    if form.validate_on_submit():
+        id = form.id.data
+        cur = Cursist.query.get(id)
+        db.session.delete(cur)
+        db.session.commit()
+
+        return redirect(url_for('toon_cur'))
+    return render_template('verwijder_cur.html',form=form)
 ```
 
-Bovendien kan nagegaan worden hoe de structuur van de database is opgebouwd:
+Weer meer van hetzelfde. Als het de bedoeling is een cursist te verwijderen dan wordt deze view opgestart. Omdat er nog niet op een button geklikt is, wordt gelinkt naar [`verwijder_cur.html`](../bestanden/week6/templates/verwijder_cur.html) en zal er een leeg scherm te zien zijn met weer een passende tekst. Na invulling van het id van de cursist en een bevestiging daarvan door op de knop te drukken, zal het record verwijderd worden waarna [`toon_cur.html`](../bestanden/week6/templates/toon_cur.html) aangeroepen wordt waardoor de aangepast lijst zichtbaar is.
 
-![De structuur van de database](imgs/structuur-database.png)
+Ter afsluiting:
+
+```python
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+## Stap 4: Het ontwerpen van de formulieren 
+
+Hier worden de formulieren in [`forms.py`](../bestanden/week6/forms.py) ontworpen.
+Er is al uitvoerig aandacht besteed aan het opzetten van formulieren met `Flask`. Ook deze twee formulieren `VoegtoeForm` en `VerwijderForm` zullen vast geen vragen meer oproepen:
+
+```python
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField, SubmitField
+
+class VoegtoeForm(FlaskForm):
+
+    naam = StringField('Vul de naam van de nieuwe cursist in:')
+    submit = SubmitField('Voeg toe')
+
+class VerwijderForm(FlaskForm):
+
+    id = IntegerField('Vul het ID van de cursist die verwijderd gaat worden in:')
+    submit = SubmitField('Verwijder')
+```
+
+Het formulier om een cursist toe te voegen kent een veld waarin een naam kan worden ingegeven en een knop om te bevestigen. Voor het verwijderen van een cursist is een veld nodig om het `id` in te geven en weer een knop om te bevestigen.
+
+## Stap 5: Het vullen van de HTML-bestanden.
+
+### `base.html`
+In dit bestand wordt de structuur van de website grotendeels vastgelegd. In ieder geval wordt de connectie naar Bootstrap hier vastgelegd en wordt er ook een navigatiebalk opgemaakt. Het is de bedoeling dat alle overige webpagina’s van dit sjabloon gebruik gaan maken. Die pagina’s kunnen hun eigen specifieke inhoud opnemen in het block-vak.
+
+```html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 	integrity="sha384-	Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 	crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-	KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 	crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 	integrity="sha384-	ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 	crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 	integrity="sha384-	JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 	crossorigin="anonymous"></script>
+
+    <title>Beheer cursisten</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="{{ url_for('index') }}">Home</a>
+        <a class="nav-item nav-link" href="{{ url_for('add_cur') }}">Voeg cursist toe</a>
+        <a class="nav-item nav-link" href="{{ url_for('list_cur') }}">Toon cursisten</a>
+        <a class="nav-item nav-link" href="{{ url_for('del_cur') }}">Verwijder cursist</a>
+    </div>
+</nav>
+
+{% block content %}
+
+{% endblock %}
+</body>
+</html>
+```
+
+Als eerste dus de gekopieerde linken, vervolgens de navigatiebalk en tenslotte de plek waar ruimte is voor de andere pagina’s om hun inhoud te tonen.
+
+### `home.html`
+
+Een heel eenvoudige pagina om mee te starten:
+
+```html
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Welkom bij de beheersite van onze cursisten</h1>
+    <p>Om te beginnen, selecteer een item uit de navigatiebalk.</p>
+</div>
+{% endblock %}
+```
+
+De code van `base.html` wordt als eerste ingeladen. In het block worden de inleidende teksten vermeld en er is als accent gekozen om het ‘`jumbotron`’-effect te selecteren.
+
+### `voegtoe_cur.html`
+
+```html
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Heeft zich een nieuwe cursist aangemeld?</h1>
+    <p>Vul de naam in en klik op Voeg toe:</p>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.naam.label }} {{ form.naam() }}
+        {{ form.submit() }}
+    </form>
+</div>
+{% endblock %}
+```
+
+Niets nieuws onder de zon. Alleen hier nog even aandacht voor de geheime tag die moet worden opgenomen wanneer er met een formulier wordt gewerkt.
+
+### `toon_cur.html`
+
+```html
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Dit zijn de momenteel ingeschreven cursisten.</h1>
+    <ul>
+        {% for cur in cursisten  %}
+        <li>{{cur}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+```
+
+Een koptekst plus een lijst met cursisten. De `FOR`-loop haalt de cursisten één voor éen op uit de tabel cursisten.
+
+### `verwijder_cur.html`
+
+```html
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Afmelding binnen gekomen?</h1>
+    <p>Vul het ID van de cursist in en klik op Verwijder.</p>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.id.label }} {{ form.id() }}
+        {{ form.submit() }}
+    </form>
+</div>
+{% endblock %}
+```
+
+Ook hier weer de geheime controletag omdat het een formulier betreft.
+
+## Stap 6: Testen
+
+Eerste test is het runnen van `beheer_cursist.py`:
+
+![het resultaat van het runnen van beheer_cursist.py](imgs/beheer_cursist.py.png)
+
+Tabel `Cursist` bestaat nu ook:
+
+![De Tabel Cursist](imgs/tabel_cursist.png)
+
+Nu ‘Voeg cursist toe’:
+
+![voeg een nieuwe cursist toe](imgs/voeg-cursist-toe.png)
+Joyce is de eerste:
+
+![Joyce wordt toegevoegd als nieuwe cursist](imgs/joyce-als-eerste.png)
+
+Na een klik op ‘Voeg toe’:
+
+![Momenteel ingeschreven cursisten: alleen Joyce](imgs/joyce-toegevoegd.png)
+
+Vervolgens is Bram aan de beurt:
+
+![Bram wordt toegevoegd als cursist](imgs/bram-toevoegen.png)
+
+Na een klik op ‘voeg toe’:
+
+![overzicht van de momenteel ingeschreven cursisten: Joyce en Bram](imgs/ingeschreven-cursisten.png)
+
+Bram mag weer uit de Tabel verwijderd worden, zijn ID = 2, kan opgezocht worden:
+
+![De data die in de tabel staat](imgs/browse-data.png)
+
+![het afmelden van een cursist met id 2](imgs/afmelden.png)
+
+Na een klik op ‘Verwijder’:
+
+![overzicht van de momenteel ingeschreven cursisten: alleen Joyce](imgs/verwijderen.png)
+
+
+Terug naar Home:
+
+![home pagina](imgs/home.png)
+
+
+Als laatste nog een blik op de database:
+
+![De data die in de Tabel staat](imgs/database-huidig.png)
+
+Inderdaad nog maar één cursist aanwezig.
