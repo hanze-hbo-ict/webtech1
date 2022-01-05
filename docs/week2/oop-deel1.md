@@ -42,7 +42,7 @@ Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze cl
    In [2]:
 ```
 
-Het zijn er drie (3), `leverancier`, `prijs` en `trek`. Bij `trek = True` wordt de kroket ondergedompeld in het vet. De notatie `self` lijkt nu nog wat vreemd, maar dat went snel; zie eventueel [deze blogpost](https://www.geeksforgeeks.org/self-in-python-class/) voor meer informatie rondom `self`.
+Het zijn er drie (3), `leverancier`, `prijs` en `trek`. Bij `trek = True` wordt de kroket ondergedompeld in het vet. De notatie `self` lijkt nu nog wat vreemd, maar dat went snel; zie eventueel [deze blogpost](https://www.bartbarnard.nl/blog/python-zelf/) voor meer informatie rondom `self`.
 
 Nu de klasse is gedefinieerd kunnen we er objecten van maken – een ander woord voor hiervoor is *instantie*: we maken *instanties* van de klasse `Kroket`:
 
