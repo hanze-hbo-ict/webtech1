@@ -34,7 +34,7 @@ Telkens wanneer er een nieuw object van de klasse `Instrument` wordt aangemaakt,
 Er wordt dan gevraagd welke cursist door deze docent begeleid gaat worden. En daarbij komen dan de refererende sleutels om de hoek kijken. Er moet een relatie worden geïntroduceerd tussen cursist en instrument en tussen cursist en docent. Bij het opzetten van de file `models.py` komt dit nog uitgebreid ter sprake.
 
 ## `models.py`
-De opzet van deze applicatie wordt gedaan door eerst weer een nieuw project op te starten met de naam ‘Relaties’. Daarom is het nodig als eerste een opzet van de database aan te maken. Daarvoor wordt de file [`models.py`](../bestanden/relaties/models.py) in het leven geroepen.
+De opzet van deze applicatie wordt gedaan door eerst weer een nieuw project op te starten met de naam ‘Relaties’. Daarom is het nodig als eerste een opzet van de database aan te maken. Daarvoor wordt de file [`models.py`](bestanden/relaties/models.py) in het leven geroepen.
 
 Als eerste moeten natuurlijk weer de gebruikelijke zaken geïmporteerd worden. Daarna wordt aangegeven op welke plaats zich de basis directory bevindt. De actie wordt gevolgd door het aanmaken van de applicatie en de bijbehorende acties met `SQLALCHEMY`. Aan het einde van dit eerste blok worden applicatie en database weer aan elkaar gekoppeld en wordt het migratiepad ingericht.
 
@@ -151,7 +151,7 @@ Tot zover de code van de file `models.py`. Om de database aan te maken en om de 
 - `flask db upgrade`
 
 ## Demonstratie
-Nu de tabel is aangemaakt kunnen er gegevens ingebracht worden. Voor deze demonstratie gebruiken we de file [`populate_database.py`](../bestanden/relaties/populate_database.py):
+Nu de tabel is aangemaakt kunnen er gegevens ingebracht worden. Voor deze demonstratie gebruiken we de file [`populate_database.py`](bestanden/relaties/populate_database.py):
 
 ```python
 from models import db,Cursist,Instrument,Docent

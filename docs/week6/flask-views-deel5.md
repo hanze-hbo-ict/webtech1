@@ -22,16 +22,16 @@ Er moeten verschillende componenten geconstrueerd worden om de eerste website we
 
 Twee Python-files:
 
-- [`beheer_cursist.py`](../bestanden/week6/beheer_cursist.py)
-- [`forms.py`](../bestanden/week6/forms.py)
+- [`beheer_cursist.py`](bestanden/relaties/beheer_cursist.py)
+- [`forms.py`](bestanden/forms.py)
   
 Een directory Templates met een vijftal HTML-bestanden:
 
-- [`base.html`](../bestanden/week6/templates/base.html)
-- [`home.html`](../bestanden/week6/templates/home.html)
-- [`voegtoe_cur.html`](../bestanden/week6/templates/voegtoe_cur.html)
-- [`toon_cur.html`](../bestanden/week6/templates/toon_cur.html)
-- [`verwijder_cur.html`](../bestanden/week6/templates/verwijder_cur.html)
+- [`base.html`](bestanden/templates/base.html)
+- [`home.html`](bestanden/templates/home.html)
+- [`voegtoe_cur.html`](bestanden/templates/voegtoe_cur.html)
+- [`toon_cur.html`](bestanden/templates/toon_cur.html)
+- [`verwijder_cur.html`](bestanden/templates/verwijder_cur.html)
   
 Het einde van stap 1 bestaat eruit alle bestanden aan te maken. Dat levert het volgende plaatje op:
 
@@ -39,7 +39,7 @@ Het einde van stap 1 bestaat eruit alle bestanden aan te maken. Dat levert het v
 
 ## Stap 2: Begin met het opzetten van de file waarin de structuur wordt bepaald.
 
-In dit geval is dat [`beheer_cursist.py`](../bestanden/week6/beheer_cursist.py). De eerste regels van dit bestand zijn moeten nu bekend voorkomen.
+In dit geval is dat [`beheer_cursist.py`](bestanden/relaties/beheer_cursist.py). De eerste regels van dit bestand zijn moeten nu bekend voorkomen.
 `VoegtoeForm` en `VerwijderForm` worden nog niet herkend, omdat ze pas later worden aangemaakt. 
 
 Het werken met Forms vereist dat er een geheime sleutel moet worden ingegeven. De naam maakt niet uit, als er maar een sleutelwaarde wordt ingesteld. Het weglaten van deze regel levert een foutmelding op.
@@ -94,7 +94,7 @@ def index():
     return render_template('home.html')
 ```
 
-Wanneer de index wordt opgevraagd wordt er doorgeschakeld naar de pagina [`home.html`](../bestanden/week6/templates/home.html).
+Wanneer de index wordt opgevraagd wordt er doorgeschakeld naar de pagina [`home.html`](bestanden/templates/home.html).
 
 ### add
 
@@ -116,7 +116,7 @@ def add_cur():
     return render_template('voegtoe_cur.html',form=form)
 ```
 
-Op het moment dat deze view wordt aangeroepen wordt er doorgeschakeld naar [`voegtoe_cur.html`](../bestanden/week6/templates/voegtoe_cur.html). Daar wordt een leeg formulier getoond met een passende tekst. Als de naam van een nieuwe cursist is ingevuld en bevestigd, wordt [`toon_cur.html`](../bestanden/week6/templates/toon_cur.html) geopend en verschijnt de lijst met alle aanwezige cursisten in beeld. In dit voorbeeld zal deze lijst zeer beperkt blijven.
+Op het moment dat deze view wordt aangeroepen wordt er doorgeschakeld naar [`voegtoe_cur.html`](bestanden/templates/voegtoe_cur.html). Daar wordt een leeg formulier getoond met een passende tekst. Als de naam van een nieuwe cursist is ingevuld en bevestigd, wordt [`toon_cur.html`](bestanden/templates/toon_cur.html) geopend en verschijnt de lijst met alle aanwezige cursisten in beeld. In dit voorbeeld zal deze lijst zeer beperkt blijven.
 
 ### list
 
@@ -128,7 +128,7 @@ def list_cur():
     return render_template('toon_cur.html', cursisten=cursisten)
 ```
 
-In deze view wordt een lijst aangemaakt van alle cursisten en die lijst wordt doorgegeven naar [`toon_cur.html`](../bestanden/week6/templates/toon_cur.html), die de deelnemers laat zien.
+In deze view wordt een lijst aangemaakt van alle cursisten en die lijst wordt doorgegeven naar [`toon_cur.html`](bestanden/templates/toon_cur.html), die de deelnemers laat zien.
 
 ### delete
 
@@ -147,7 +147,7 @@ def del_cur():
     return render_template('verwijder_cur.html',form=form)
 ```
 
-Weer meer van hetzelfde. Als het de bedoeling is een cursist te verwijderen dan wordt deze view opgestart. Omdat er nog niet op een button geklikt is, wordt gelinkt naar [`verwijder_cur.html`](../bestanden/week6/templates/verwijder_cur.html) en zal er een leeg scherm te zien zijn met weer een passende tekst. Na invulling van het id van de cursist en een bevestiging daarvan door op de knop te drukken, zal het record verwijderd worden waarna [`toon_cur.html`](../bestanden/week6/templates/toon_cur.html) aangeroepen wordt waardoor de aangepast lijst zichtbaar is.
+Weer meer van hetzelfde. Als het de bedoeling is een cursist te verwijderen dan wordt deze view opgestart. Omdat er nog niet op een button geklikt is, wordt gelinkt naar [`verwijder_cur.html`](bestanden/templates/verwijder_cur.html) en zal er een leeg scherm te zien zijn met weer een passende tekst. Na invulling van het id van de cursist en een bevestiging daarvan door op de knop te drukken, zal het record verwijderd worden waarna [`toon_cur.html`](bestanden/templates/toon_cur.html) aangeroepen wordt waardoor de aangepast lijst zichtbaar is.
 
 Ter afsluiting:
 
@@ -158,7 +158,7 @@ if __name__ == '__main__':
 
 ## Stap 4: Het ontwerpen van de formulieren 
 
-Hier worden de formulieren in [`forms.py`](../bestanden/week6/forms.py) ontworpen.
+Hier worden de formulieren in [`forms.py`](bestanden/forms.py) ontworpen.
 Er is al uitvoerig aandacht besteed aan het opzetten van formulieren met `Flask`. Ook deze twee formulieren `VoegtoeForm` en `VerwijderForm` zullen vast geen vragen meer oproepen:
 
 ```python

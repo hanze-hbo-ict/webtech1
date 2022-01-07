@@ -4,7 +4,7 @@
 
 Nu bekend is hoe een database opgezet kan een beetje gestoeid worden door een aantal basishandelingen uit te voeren.
 
-Denk erom, vaak worden de scripts op een andere wijze uitgevoerd. Het doel is hier om te laten zien op welke wijze CRUD-commando’s uitgevoerd worden. De Python-file die daarvoor gebruikt wordt, is het bestand [`basic_CRUD.py`](../bestanden/crud/basic_CRUD.py). Iedere basishandeling komt even voorbij. De opbouw geschiedt in een vijftal stappen:
+Denk erom, vaak worden de scripts op een andere wijze uitgevoerd. Het doel is hier om te laten zien op welke wijze CRUD-commando’s uitgevoerd worden. De Python-file die daarvoor gebruikt wordt, is het bestand [`basic_CRUD.py`](bestanden/crud/basic_CRUD.py). Iedere basishandeling komt even voorbij. De opbouw geschiedt in een vijftal stappen:
 
 ### Stap 1: Importeren
 ```python

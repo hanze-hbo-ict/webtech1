@@ -6,7 +6,7 @@ Getters en setters zijn niet van essentieel belang voor het werken met Python, m
 
 In dit voorbeeld maken we gebruik van twee python-bestanden. Het kan ook in één bestand ondergebracht worden, maar hier worden er twee voor gebruikt om onnodig scrollen te voorkomen en om nog een andere wijze van importeren te showen.
 
-De files zijn [`main.py`](../bestanden/main.py) en [`speler.py`](../bestanden/speler.py). Als eerste bespreken we de file `speler.py`:
+De files zijn [`main.py`](bestanden/game/main.py) en [`speler.py`](bestanden/game/speler.py). Als eerste bespreken we de file `speler.py`:
 
 ```python
 class Speler:

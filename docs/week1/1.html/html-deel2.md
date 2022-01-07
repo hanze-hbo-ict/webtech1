@@ -45,7 +45,7 @@ De algemene vorm van een element is als volgt:
 Hieronder staat een voorbeeld van een eenvoudige HTML-pagina. Dit voorbeeld laat de algemene structuur van een webpagina zien.
 
 !!! Info "Download de bestanden"
-    Alle voorbeelden die we in dit onderdeel laten zien, kun je [hier downloaden](../../bestanden/html.zip).
+    Alle voorbeelden die we in dit onderdeel laten zien, kun je [hier downloaden](../bestanden/html.zip).
 
 ```html
 <!DOCTYPE html>

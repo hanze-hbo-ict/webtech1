@@ -56,7 +56,7 @@ OperationalError: no such table: contacts
 
 ```
 
-Omdat de methode `executescript()` een gebruiker dus in staat stelt meerdere SQL-statements uit de laten voeren is het mogelijk een dusdanig commando op te geven dat de hele tabel is verdwenen. En dat kan heel vervelende consequenties hebben voor een organisatie, bijvoorbeeld wanneer de gehele orderportefeuille gewist wordt. Gelukkig bestaat de file `contacts.py` nog en kan de tabel zonder al te veel moeite weer in ere hersteld worden.
+Omdat de methode `executescript()` een gebruiker dus in staat stelt meerdere SQL-statements uit de laten voeren is het mogelijk een dusdanig commando op te geven dat de hele tabel is verdwenen. En dat kan heel vervelende consequenties hebben voor een organisatie, bijvoorbeeld wanneer de gehele orderportefeuille gewist wordt. Gelukkig bestaat de file [`contacts.py`](bestanden/contacts.py) nog en kan de tabel zonder al te veel moeite weer in ere hersteld worden.
 
 Wat er nu net gedemonstreerd is, staat bekend als een *SQL-injectie* aanval. Een aanvaller injecteert dan een statement in de ‘gewone’ SQL-code. Vroeger was het zo eenvoudig als hier net getoond is, maar tegenwoordig moet er meer moeite voor gedaan worden.
 

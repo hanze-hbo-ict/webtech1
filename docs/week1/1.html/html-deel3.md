@@ -64,7 +64,7 @@ De algemene vorm van een attribuut is `name="value"`. In het geval van onze `<im
 
 Behalve de url van het plaatje voegen we in de regel ook nog een `alt`-attribuut toe (`alt` = alternative, alternatief in het Nederlands). Met dit attribuut kan een beschrijving aan de afbeelding gekoppeld worden voor het geval bezoekers zijn niet in staat de afbeelding te bekijken.
 
-In [de folder waar verder alle html-voorbeelden bewaard zijn](../../bestanden/html.zip), zijn ook afbeeldingen ondergebracht, onder meer `venazza.jpeg`, wat aan een webpagina wordt toegevoegd. De totale html wordt dan als volgt:
+In [de folder waar verder alle html-voorbeelden bewaard zijn](../bestanden/html.zip), zijn ook afbeeldingen ondergebracht, onder meer `venazza.jpeg`, wat aan een webpagina wordt toegevoegd. De totale html wordt dan als volgt:
 
 ```html
 <body>

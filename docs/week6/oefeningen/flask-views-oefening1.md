@@ -1,6 +1,6 @@
 # Flask en SQL - Oefening 1
 
-In deze oefening wordt gevraagd de theorie van de laatste twee paragrafen te combineren. Dat zijn het [werken met meerdere tabellen](../flask-views-deel5.md) en [het opzetten van een website](../flask-views-deel6.md).
+In deze oefening wordt gevraagd de theorie van de laatste twee paragrafen te combineren. Dat zijn het [werken met meerdere tabellen](../flask-views-deel4.md) en [het opzetten van een website](../flask-views-deel5.md).
 
 Op de Hanzehogeschool krijgt iedere student een mentor mee. Het is de bedoeling een site te bouwen waarin dit op een zeer eenvoudige wijze geregeld gaat worden. Maak daarbij heel erg gebruik van code die je al in bezit hebt.
 

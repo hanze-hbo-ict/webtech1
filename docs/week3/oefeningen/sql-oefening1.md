@@ -1,6 +1,6 @@
 # Oefening 1
 
-Maak gebruik van de [*muziek-database*](../../bestanden/music.sqlite) en geef queries om de onderstaande vragen te beantwoorden:
+Maak gebruik van de [*muziek-database*](../bestanden/music.sqlite) en geef queries om de onderstaande vragen te beantwoorden:
 
 1. Toon alle songs van het album ‘Forbidden’.
 2. Zelfde vraag, alleen nu op volgorde van tracknummer.

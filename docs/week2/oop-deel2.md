@@ -9,7 +9,7 @@ Inkapseling (Engels: *encapsulation*) is één van de fundamenten van object-geo
 
 Als voorbeeld hier een bank, waarbij het mogelijk is een rekening te openen, geld te storten en op te nemen en een overzicht van alle gedane transacties op te vragen, waarbij tevens het tijdstip van de transactie getoond wordt. Uiteraard is de opzet erg beperkt.
 
-De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand [`bankrekening.py`](../bestanden/bankrekening.py).
+De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand [`bankrekening.py`](bestanden/bankrekening.py).
 
 ## Klasse en methoden
 

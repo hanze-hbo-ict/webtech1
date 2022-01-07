@@ -1,12 +1,12 @@
 # De muziek databases
 
-Het werken met een database die bestaat uit een enkele tabel met 3 of 4 records is niet heel erg zinvol. Het gaat dan sneller om een gegeven op te zoeken dan door er een query aan te wijden. Daarom maken we vanaf nu gebruik van een andere database [`music.sqlite`](../bestanden/music.sqlite). Deze database bevat een aantal bekende tabellen die ook bij het werken met OOP aan bod zijn gekomen: artists, albums en songs. Alleen bevat deze database nog veel meer data.
+Het werken met een database die bestaat uit een enkele tabel met 3 of 4 records is niet heel erg zinvol. Het gaat dan sneller om een gegeven op te zoeken dan door er een query aan te wijden. Daarom maken we vanaf nu gebruik van een andere database [`music.sqlite`](bestanden/music.sqlite). Deze database bevat een aantal bekende tabellen die ook bij het werken met OOP aan bod zijn gekomen: artists, albums en songs. Alleen bevat deze database nog veel meer data.
 
 Aan het eind van dit document maken we [oefening 1](oefeningen/sql-oefening1.md).
 
 ## kennismaken een aardigheidje
 
-De database is te vinden [via deze link](../bestanden/music.sqlite). Neem de database over en bewaar deze op je laptop. Het simpelst is om deze database een plekje te geven in de directory waarin ook SQLite3 te vinden is. De database kan dan automatisch geopend worden zonder dat de directory gewijzigd hoeft te worden.
+De database is te vinden [via deze link](bestanden/music.sqlite). Neem de database over en bewaar deze op je laptop. Het simpelst is om deze database een plekje te geven in de directory waarin ook SQLite3 te vinden is. De database kan dan automatisch geopend worden zonder dat de directory gewijzigd hoeft te worden.
 
 ```console
 hostname:user$ sqlite3 music.sqlite

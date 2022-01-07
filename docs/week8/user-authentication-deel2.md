@@ -19,7 +19,7 @@ De structuur van de inlogprocedure heeft de volgende vorm:
         └── welkom.html
 ```
 
-Dit zijn alle files die nodig zijn bij dit project, met de naam `mijnproject`; [download hier de bestanden](../bestanden/login.zip). Technisch gezien is de applicatie te klein om uit te kunnen splitsen in aparte onderdelen, zoals in het vorige deel beschreven is. Maar dezelfde opzet is wel aangehouden.
+Dit zijn alle files die nodig zijn bij dit project, met de naam `mijnproject`; [download hier de bestanden](bestanden/login.zip). Technisch gezien is de applicatie te klein om uit te kunnen splitsen in aparte onderdelen, zoals in het vorige deel beschreven is. Maar dezelfde opzet is wel aangehouden.
 
 ## `__init__.py`
 

@@ -11,7 +11,7 @@ p {
 ```
 
 !!! Info "Bestanden downloaden"
-    Ook de bestanden die we hier bespreken kun je downloaden. Volg daarvoor [deze link](../../bestanden/css.zip).
+    Ook de bestanden die we hier bespreken kun je downloaden. Volg daarvoor [deze link](../bestanden/css.zip).
 
 Je kunt CSS in het html-bestand zelf schrijven, maar je kunt het ook in een separaat bestand opslaan. Die laatste methode is wel makkelijker, omdat je op die manier dezelfde *stylesheet* in verschillende HTML-bestanden kunt gebruiken. Om ervoor te zorgen dat een html-bestand gebruik kan maken van een css-bestand, moet je een koppeling tussen deze twee aanbrengen. Dat doe je in de `header` van het html-bestand (dus tussen `<head>` en `</head>`). Zie het onderstaande voorbeeld:
 

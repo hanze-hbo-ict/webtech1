@@ -12,7 +12,7 @@ In [1]: import sqlite3
 In [2]: db = sqlite3.connect("contacts.sqlite")
 ```
 
-Met dit commando wordt de database aangemaakt (als je op je filesystem kijkt, zie je dat het bestand `contacts.sqlite` is aangemaakt). Omdat de database nog geen tabellen heeft, moeten we deze eerst aanmaken. Om sql in Python uit te voeren, maken we gebruik van het commando `execute`.
+Met dit commando wordt de database aangemaakt (als je op je filesystem kijkt, zie je dat het bestand [`contacts.sqlite`](bestanden/contacts.sqlite) is aangemaakt). Omdat de database nog geen tabellen heeft, moeten we deze eerst aanmaken. Om sql in Python uit te voeren, maken we gebruik van het commando `execute`.
 
 ```ipython
 In [3]: db.execute("CREATE TABLE IF NOT EXISTS contacts(name text, phone integer, email text)")
