@@ -21,15 +21,14 @@ Weeknummer | Onderwerpen
 
 ## Toetsing
 
-Gedurende de module werken studenten aan één van [de vier voorgestelde projecten](projecten/index.md). Op gezette tijden gedurende het kwartaal wordt de voortgang van dit project beoordeeld en het eindcijfer is het gemiddelde van deze beoordelingen. Hieronder staat de planning van deze toetsmomenten en de eisen waar het project op dat moment aan moet voldoen.
+Vanaf week vijf werken studenten in duo's aan één van [de vier voorgestelde projecten](projecten/index.md). Beoordeling van dit project het gekozen project gebeurt door de begeleidende practicumdocent en vindt plaats aan het eind van het project op basis van [de beoordelings-rubric](rubrics_webtech.html). Grofweg moet de site voldoen aan de onderstaande criteria, maar het staat studenten vrij om hun eigen creativiteit (technische) kennis op het project te botvieren.
 
-weeknummer | onderdelen van de website
----|---
-3 | Website heeft vormgeving en een koppeling met een database
-5 | Op de site ingevulde data komt terecht in een sqlite-database
-6 | Website maakt gebruik van verschillende views
-8 | Geregistreerde bezoekers kunnen op de site inloggen
+- Website heeft vormgeving en een koppeling met een database
+- Op de site ingevulde data komt door sqlalchemy terecht in een sqlite-database
+- Website maakt gebruik van verschillende views
+- Geregistreerde bezoekers kunnen op de site inloggen
 
+Mocht het project aan het eind van het blok nog onvoldoende blijken te zijn, dan worden door de betreffende practicumdocent individuele reparatie-afspraken (inclusief deadlines) gemaakt. In dat geval wordt de onvoldoende wel in Osiris geregistreerd en gelden de herstelwerkzaamheden als herkansing.
 
 ## Bron
 

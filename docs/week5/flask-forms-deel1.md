@@ -1,3 +1,10 @@
+!!! Warning "Begin met één van de projecten"
+
+    Vanaf deze week moet je als duo aan [één van de vier voorgestelde projecten](../projecten/) gaan werken. Tijdens de practica heb je gelegenheid om hierover vragen te stellen aan je practicumdocent, maar hou er rekening mee dat het practicum daar niet per se voor bedoeld is. In principe zou je in staat moeten zijn op basis van de oefeningen en de theorielessen het project zelfstandig uit te voeren.
+
+    Bekijk [de omschrijving de beoordeling](../index.md#toetsing) om je een goed beeld te vormen van het hoe of wat van deze projecten en de daarbij horende beoordeling.
+
+
 # Flask en Forms - een basis Flask formulier
 
 Flask biedt ook de mogelijkheid om eenvoudig HTML-formulieren te genereren. In dit deel ligt de focus op de modules [Flask-WTF](https://flask-wtf.readthedocs.io/en/stable/) en [WTForms](https://wtforms.readthedocs.io/en/2.3.x/) en op welke wijze waarop deze gebruikt kunnen worden om snel formulieren te maken op basis van de Flask-Python-scripts.
