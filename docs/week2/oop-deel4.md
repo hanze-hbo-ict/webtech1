@@ -116,7 +116,7 @@ def __str__(self):
 ```
 
 !!! Info "`__str__` en `__repr__`"
-    In het vorige blok hebben we gewerkt met de methode `__repr__`, die eveneens aangroepen worden wanneer je een string-representatie van een object wilt hebben. Dit zijn twee methoden die toch min of meer hetzelfde doen. [Lees deze blog](https://www.bartbarnard.nl/blog/python-string-representaties/) om een beeld te krijgen van de overeenkomsten en de verschillen tussen deze methoden.
+    In het vorige blok hebben we gewerkt met de methode `__repr__`, die eveneens aangroepen worden wanneer je een string-representatie van een object wilt hebben. Dit zijn twee methoden die toch min of meer hetzelfde doen. [Lees deze blog](https://www.bartbarnard.nl/programmeerblogs/python/strings.html) om een beeld te krijgen van de overeenkomsten en de verschillen tussen deze methoden.
 
 ## Een interactieve test
 
