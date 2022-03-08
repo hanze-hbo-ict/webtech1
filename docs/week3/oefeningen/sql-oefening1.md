@@ -1,14 +1,44 @@
 # Oefening 1
 
-Maak gebruik van de [*muziek-database*](../bestanden/music.sqlite) en geef queries om de onderstaande vragen te beantwoorden:
+## opgave 1
+Zorg voor een koppeling tussen SQLite en de database `test.db`. Zorg voor een passende melding als het gelukt is.
 
-1. Toon alle songs van het album ‘Forbidden’.
-2. Zelfde vraag, alleen nu op volgorde van tracknummer.
-3. Toon alle songs van de band ‘Deep Purple’.
-4. Wijzig de naam van de band ‘Mehitabel’ in ‘One Kitten’.
-5. Toon alle songs van de band ‘Aerosmith’ in alfabetische volgorde. Alleen de titel is voldoende in de output. Elke titel mag maar één keer voorkomen.
-6. In plaats van de titel, nu het aantal songs van ‘Aerosmith’. Elke titel mag ook hier maar één keer worden geteld.
-7. Geef het aantal albums van ‘Aerosmith’. Dubbele tellen ook hier niet mee.
+## opgave 2
+Maak een tabel aan met naam `bedrijf`. Deze tabel moet de volgende attributen hebben:
+
+kolomnaam | eigenschappen 
+---- | ----
+`ID` | INT primaire sleutel	NOT NULL
+`Naam` | Text			NOT NULL
+`Plaats` | INT			NOT NULL
+`Salaris` | Real			NOT NULL
+
+Laat een melding zien als het aanmaken van de tabel gelukt is.
+
+## opgave 3
+Voeg de volgende gegevens toe:
+
+ID | Naam | Plaats | Salaris
+---|---|---|---
+1 | Aad | Amsterdam | 60000
+2 | Bea | Berlijn | 70000
+3 | Coen | Cairo | 65000
+4 | Daphne | Dortmund | 65000
+
+Als de gegevens ingevoerd zijn een melding dat het gelukt is.
+
+## Opgave 4
+
+Schrijf een functie die alle gegevens uit de tabel `bedrijf` afdrukt. Gebruik deze functie om telkens de gegevens uit de tabel af te drukken nadat je de volgende wijzigingen hebt doorgevoerd:
+
+- Wijzig het salaris van het record met ID 1. Het salaris wordt nu 90_000.
+- Verwijder het record met het nummer 2.
+- Wijzig de naam van record met ID 2 in 'Beatrix Ritzema.
+
+
+## Opgave 5
+
+Verbreek de connectie.
 
 
 
