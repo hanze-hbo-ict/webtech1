@@ -1,0 +1,2073 @@
+
+<!doctype html>
+<html lang="nl" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Onderwijsmateriaal voor de module Webtechnologie HBO-ICT jaar 1 semester 2">
+      
+      
+      
+        <link rel="canonical" href="https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html/week2/oop-deel1.html">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+    
+    
+      
+        <title>OOP Python – inleiding - Webtechnologie 1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.120efc48.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.9647289d.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+      <link rel="stylesheet" href="../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#oop-python-inleiding" class="md-skip">
+          Ga naar inhoud
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Webtechnologie 1" class="md-header__button md-logo" aria-label="Webtechnologie 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Webtechnologie 1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OOP Python – inleiding
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Webtechnologie 1" class="md-nav__button md-logo" aria-label="Webtechnologie 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Webtechnologie 1
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Webtechnologie 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Projecten
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projecten" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Projecten
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/index.html" class="md-nav__link">
+        Casuïsiek voor het project
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/bungelowpark.html" class="md-nav__link">
+        Bungelowpark
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/filmfan.html" class="md-nav__link">
+        Filmfan
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/programmeerles.html" class="md-nav__link">
+        Programmeerles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/stage.html" class="md-nav__link">
+        Stage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Week1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Week1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          1.html
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="1.html" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          1.html
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel1.html" class="md-nav__link">
+        HTML – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel2.html" class="md-nav__link">
+        HTML – tags
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel3.html" class="md-nav__link">
+        HTML – Lists, Divs en Spans
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel4.html" class="md-nav__link">
+        HTML – Formulieren
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          2.css
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2.css" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          2.css
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel1.html" class="md-nav__link">
+        CSS – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel2.html" class="md-nav__link">
+        CSS – selectors en matching-rules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel3.html" class="md-nav__link">
+        CSS – Fonts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          3.bootstrap
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="3.bootstrap" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          3.bootstrap
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel1.html" class="md-nav__link">
+        Bootstrap – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel2.html" class="md-nav__link">
+        Bootstrap – Voorbeeld
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel3.html" class="md-nav__link">
+        Bootstrap – Formulieren
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel4.html" class="md-nav__link">
+        Bootstrap – Navigatiebalk
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening1.html" class="md-nav__link">
+        Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening2.html" class="md-nav__link">
+        Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening3.html" class="md-nav__link">
+        Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening4.html" class="md-nav__link">
+        Oefening 4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening5.html" class="md-nav__link">
+        Oefening 5
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Week2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Week2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          OOP Python – inleiding
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="oop-deel1.html" class="md-nav__link md-nav__link--active">
+        OOP Python – inleiding
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhoudsopgave">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#wat-is-oop" class="md-nav__link">
+    Wat is OOP?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#klasse-definitie" class="md-nav__link">
+    Klasse-definitie
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kroketten-in-het-vet" class="md-nav__link">
+    Kroketten in het vet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructors" class="md-nav__link">
+    Constructors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#klasse-attributen" class="md-nav__link">
+    Klasse-attributen
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oop-deel2.html" class="md-nav__link">
+        OOP Python – Methoden
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oop-deel3.html" class="md-nav__link">
+        OOP Python - Meerdere klassen
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oop-deel4.html" class="md-nav__link">
+        OOP Python – Getters en Setters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oop-deel5.html" class="md-nav__link">
+        OOP Python – Overerving
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oop-deel6.html" class="md-nav__link">
+        OOP Python – Overriding en polymorfisme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oop-deel7.html" class="md-nav__link">
+        OOP Python – Compositie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oefeningen/oop-oefening1.html" class="md-nav__link">
+        OOP Python – Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oefeningen/oop-oefening2.html" class="md-nav__link">
+        OOP Python – Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oefeningen/oop-oefening3.html" class="md-nav__link">
+        OOP Python – Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Week3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week3" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Week3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel1.html" class="md-nav__link">
+        Databasebeheer in Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel2.html" class="md-nav__link">
+        SQLite, basisvaardigheden
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel3.html" class="md-nav__link">
+        De muziek databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel4.html" class="md-nav__link">
+        SQL in Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel5.html" class="md-nav__link">
+        SQL-injectie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel6.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_7" type="checkbox" id="__nav_5_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_7">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_7">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening1.html" class="md-nav__link">
+        Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening2.html" class="md-nav__link">
+        Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening3.html" class="md-nav__link">
+        Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening4.html" class="md-nav__link">
+        Oefening 4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Week4
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week4" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Week4
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/flask-deel1.html" class="md-nav__link">
+        Flask – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/flask-deel2.html" class="md-nav__link">
+        Flask – Installatie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/flask-deel3.html" class="md-nav__link">
+        Flask – basale werking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/flask-deel4.html" class="md-nav__link">
+        Flask – Templates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_5" type="checkbox" id="__nav_6_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_5">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_5">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/oefeningen/flask-oefening1.html" class="md-nav__link">
+        Flask – Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Week5
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week5" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Week5
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel1.html" class="md-nav__link">
+        Flask forms deel1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel2.html" class="md-nav__link">
+        Flask en Forms - Form Fields
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel3.html" class="md-nav__link">
+        Flask en Forms - Flash-berichten
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/oefeningen/flask-forms-oefening1.html" class="md-nav__link">
+        Flask en forms - Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Week6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week6" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Week6
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel1.html" class="md-nav__link">
+        Flask en SQL - Theorie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel2.html" class="md-nav__link">
+        Flask en SQL - het opzetten van een database
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel3.html" class="md-nav__link">
+        Flask en SQL - CRUD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel4.html" class="md-nav__link">
+        Flask en SQL - Relaties
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel5.html" class="md-nav__link">
+        Flask en SQL - Website
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_6" type="checkbox" id="__nav_8_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_6">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_6">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/oefeningen/flask-views-oefening1.html" class="md-nav__link">
+        Flask en SQL - Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Week7
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week7" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Week7
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel1.html" class="md-nav__link">
+        Flask-applicaties - Structuur
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel2.html" class="md-nav__link">
+        Flask-applicaties - Refactored
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel3.html" class="md-nav__link">
+        Flask-applicaties - Blueprints
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Week8
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week8" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Week8
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week8/user-authentication-deel1.html" class="md-nav__link">
+        User authentication - Hashing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week8/user-authentication-deel2.html" class="md-nav__link">
+        User authentication - Flask_login deel I
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week8/user-authentication-deel3.html" class="md-nav__link">
+        User authentication - Flask_login deel II
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week8/user-authentication-deel4.html" class="md-nav__link">
+        User authentication - Flask_login deel III
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhoudsopgave">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#wat-is-oop" class="md-nav__link">
+    Wat is OOP?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#klasse-definitie" class="md-nav__link">
+    Klasse-definitie
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kroketten-in-het-vet" class="md-nav__link">
+    Kroketten in het vet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructors" class="md-nav__link">
+    Constructors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#klasse-attributen" class="md-nav__link">
+    Klasse-attributen
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="oop-python-inleiding">OOP Python – inleiding<a class="headerlink" href="#oop-python-inleiding" title="Permanent link">&para;</a></h1>
+<p>Tot nu toe hebben we ons gericht op vormgeving van teksten en dergelijke aan de <em>client-kant</em> van onze webapplicatie. Om hier <em>functionaliteit</em> aan toe te voegen, kunnen we twee dingen doen:</p>
+<ul>
+<li>met behulp van JavaScript programmacode aan de <em>client-kant</em> zelf toevoegen, of</li>
+<li>met behulp van een zogenaamde backend-programmeertaal functionaliteit aan de <em>server-kant</em> toevoegen en het resultaat daarvan terugsturen naar de client.</li>
+</ul>
+<p>Om dit wat nader toe te lichten, herhalen we hier het plaatje uit week 1; bekijk eventueel <a href="../week1/1.html/html-deel1.html">de beschrijving daarbij op de betreffende pagina</a>:</p>
+<p><img alt="Een site met een database" src="../week1/1.html/imgs/database-site.png" /></p>
+<p>Voor deze module hebben we voor de tweede optie gekozen. JavaScript en front-end development komen uitgebreid aan bod in het tweede jaar.</p>
+<p>We beginnen met een stukje herhaling over het object-georiënteerde programmeerparadigma in Python.</p>
+<h2 id="wat-is-oop">Wat is OOP?<a class="headerlink" href="#wat-is-oop" title="Permanent link">&para;</a></h2>
+<p>Tot nu toe is er geprogrammeerd volgens het imperatieve paradigma. Een programma gemaakt volgens dit principe bestaat uit een groot aantal coderegels die in een bepaalde volgorde geplaatst zijn en waarop de computer verteld wordt hoe deze regels uit te voeren.</p>
+<p>OOP (<em>Object Oriented Programming</em>) is een programmeerstijl (of <em>paradigma</em>) waarbij logische objecten gemaakt worden die methodes (functies, acties of gebeurtenissen) en eigenschappen (waarden) hebben. De bedoeling is dat dit leidt tot herbruikbare en beter leesbare programmacode. Conceptueel bestaat een programma uit objecten die aangemaakt worden en met elkaar interacteren.</p>
+<p>Het is niet zo dat beide stijlen onafhankelijk van elkaar functioneren. Binnen OOP wordt gebruikt gemaakt van de imperatieve coderingswijze en bij het imperatieve paradigma komen objecten regelmatig voor, zonder dat een gebruiker er vaak weet van heeft.</p>
+<h2 id="klasse-definitie">Klasse-definitie<a class="headerlink" href="#klasse-definitie" title="Permanent link">&para;</a></h2>
+<p>Om te beginnen een simpel voorbeeld om het principe van klassen en methoden uit te leggen. Het draait om kroketten (Kwekkeboom en Van Dobben) en het aanzetten van de frituur (Bekijk het bestand <a href="bestanden/kroket.py"><code>kroket.py</code></a>).</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">class</span> <span class="nc">Kroket</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>
+</code></pre></div>
+<p>Een klasse wordt gedefinieerd door het woord <code>class</code>, gevolgd door de naam van de klasse, beginnend met een hoofdletter. De klassedefinitie wordt afgesloten met een dubbele punt (<code>:</code>).</p>
+<p>Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze class bestaat. Dit geven we mee aan de methode die aangeroepen wordt wanneer er een object van een klasse wordt aangemaakt: de zogenaamde <em>constructor</em>. In Python is deze methode <code>__init__</code> (we komen daar zo wat uitgebreider op terug):</p>
+<div class="highlight"><pre><span></span><code>   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">leverancier</span><span class="p">,</span> <span class="n">prijs</span><span class="p">,</span> <span class="n">trek</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="bp">self</span><span class="o">.</span><span class="n">leverancier</span> <span class="o">=</span> <span class="n">leverancier</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="bp">self</span><span class="o">.</span><span class="n">prijs</span> <span class="o">=</span> <span class="n">prijs</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="bp">self</span><span class="o">.</span><span class="n">trek</span> <span class="o">=</span> <span class="kc">False</span>
+   <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+</code></pre></div>
+<p>Het zijn er drie (3), <code>leverancier</code>, <code>prijs</code> en <code>trek</code>. Bij <code>trek = True</code> wordt de kroket ondergedompeld in het vet. De notatie <code>self</code> lijkt nu nog wat vreemd, maar dat went snel; zie eventueel <a href="https://www.bartbarnard.nl/programmeerblogs/python/self.html">deze blogpost</a> voor meer informatie rondom <code>self</code>.</p>
+<p>Nu de klasse is gedefinieerd kunnen we er objecten van maken – een ander woord voor hiervoor is <em>instantie</em>: we maken <em>instanties</em> van de klasse <code>Kroket</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">kwek</span> <span class="o">=</span> <span class="n">Kroket</span><span class="p">(</span><span class="s2">&quot;Kwekkeboom&quot;</span><span class="p">,</span> <span class="mf">2.50</span><span class="p">)</span>
+</code></pre></div>
+<p>Er is een object aangemaakt met de naam <code>kwek</code>. Bij het aanmaken van deze nieuwe instantie is de invulling van twee eigenschappen verplicht. In de definitie van de klasse wordt gevraagd om <code>leverancier</code> en <code>prijs</code>, dus deze twee waarden moeten opgegeven worden. Gebeurt dat niet, verschijnt er een foutmelding. Dus deze coderegel wil zeggen dat er een instantie (<code>kwek</code>) is aangemaakt voor de klasse (<code>Kroket</code>) waarbij leverancier (<code>Kwekkeboom</code>) en prijs (<code>2.50</code>) als verplichte waarden worden meegegeven. De inhoud van de waarden van de velden van de instantie <code>kwek</code> kunnen ook getoond worden:</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">kwek</span><span class="o">.</span><span class="n">leverancier</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="s1">&#39;Kwekkeboom&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">kwek</span><span class="o">.</span><span class="n">prijs</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="mf">2.5</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span>
+</code></pre></div>
+<p>Uiteraard kunnen er meerdere objecten bij deze klasse worden aangemaakt. Een tweede firma die kroketten verkoopt is Van Dobben.</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">dob</span> <span class="o">=</span> <span class="n">Kroket</span><span class="p">(</span><span class="s2">&quot;Van Dobben&quot;</span><span class="p">,</span> <span class="mf">2.35</span><span class="p">)</span>
+</code></pre></div>
+<p>De gegevens van beide objecten kunnen ook gecombineerd worden getoond.</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fabrikanten: </span><span class="si">{</span><span class="n">kwek</span><span class="o">.</span><span class="n">leverancier</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">kwek</span><span class="o">.</span><span class="n">prijs</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">dob</span><span class="o">.</span><span class="n">leverancier</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">dob</span><span class="o">.</span><span class="n">prijs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">Fabrikanten</span><span class="p">:</span> <span class="n">Kwekkeboom</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">Van</span> <span class="n">Dobben</span> <span class="o">=</span> <span class="mf">2.35</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span>
+</code></pre></div>
+<p>Voor de overzichtelijkheid eerst een aantal beschrijvingen:</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Omschrijving</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Klasse</td>
+<td>template, sjabloon voor het maken van objecten; alle objecten die met dezelfde klasse zijn gemaakt, hebben dezelfde kenmerken.</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>een instantie van een klasse.</td>
+</tr>
+<tr>
+<td>Initialisatie</td>
+<td>een nieuw object van een klasse.</td>
+</tr>
+<tr>
+<td>Methode</td>
+<td>een functie gedefinieerd in een klasse.</td>
+</tr>
+<tr>
+<td>Attribuut</td>
+<td>een variabele die is gebonden aan een object van een klasse.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="kroketten-in-het-vet">Kroketten in het vet<a class="headerlink" href="#kroketten-in-het-vet" title="Permanent link">&para;</a></h2>
+<p>We breiden de definitie van <code>Kroket</code> uit met een tweede methode <code>in_frituur()</code>. Het woord <code>self</code> moet je altijd aan een methode-definitie toevoegen, zelfs wanneer de methode zelf verder helemaal geen parameters heeft.</p>
+<p>Deze methode laat de frituur weten dat er moet gebakken worden. De waarde van trek wijzigt naar <code>True</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">in_frituur</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">trek</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Klasse-definitie</p>
+<p>Vanaf nu laten we alleen de <em>wijzigingen</em> aan de klasse-definitie zien. Als je dit zelf wilt meetypen, is het het handigste om de python-code in een separaat bestand op te slaan, bijvoorbeeld <code>Kroket.py</code>. Deze kun je dan steeds na het doorvoeren van een wijziging opnieuw in je interactieve shell laden door middel van <code>run 'Kroket'</code>.</p>
+</div>
+<p>Een testje voor de Van Dobben kroket’:</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">run</span> <span class="s1">&#39;Kroket&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">dob</span> <span class="o">=</span> <span class="n">Kroket</span><span class="p">(</span><span class="s2">&quot;Van Dobben&quot;</span><span class="p">,</span> <span class="mf">2.35</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">dob</span><span class="o">.</span><span class="n">trek</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="kc">False</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">dob</span><span class="o">.</span><span class="n">in_frituur</span><span class="p">()</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">dob</span><span class="o">.</span><span class="n">trek</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="kc">True</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span>
+</code></pre></div>
+<p>Bij het aanmaken van het object <code>dob</code> is de status <code>False</code> meegegeven. Het aanroepen van de methode <code>in_frituur()</code> zorgt er voor dat trek de status <code>True</code> krijgt.</p>
+<p>Vaak zijn er meerdere opties het gewenste resultaat te bereiken. Ook hier, alleen nu voor het object <code>kwek</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Kroket</span><span class="o">.</span><span class="n">in_frituur</span><span class="p">(</span><span class="n">kwek</span><span class="p">)</span>  <span class="c1"># optie 1</span>
+<span class="n">kwek</span><span class="o">.</span><span class="n">in_frituur</span><span class="p">()</span>        <span class="c1"># optie 2</span>
+</code></pre></div>
+<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
+<p>Nog een belangrijk begrip bij het werken met OOP betreft de <code>constructor</code>. Deze worden gebruikt om een object op de juiste manier in te stellen wanneer het wordt aangemaakt.</p>
+<p>In Python heeft een constructor altijd de vorm <code>__init__(self)</code>. Eventueel kun je ook meerdere parameters aan de constructor meegeven; die geef je dan aan achter de standaard-parameter <code>self</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Dunder-methoden</p>
+<p>Zoals je ziet heeft de <code>constructor</code> een opvallende vorm; hij wordt omgeven door twee liggende streepjes, <code>__</code>. Python kent meer van dergelijke methoden, zoals <code>__repr__</code>, <code>__len__</code>, enzovoort. Dit zijn methoden die op specifieke momenten dooor Python worden aangeroepen; bijvoorbeeld wanneer je een object <em>aannmaakt</em> (<code>__init__</code>), een object wilt <em>uitprinten</em> (<code>__repr__</code>), of de <em>lengte</em> van een object wilt weten (<code>__len__</code>).</p>
+<p>Dergelijke methoden worden <em>dunder-methods</em> genoemd – van <em>double underscore</em>.</p>
+</div>
+<p>Het is ook mogelijk om <em>object</em> extra eigenschappen mee te geven nadat deze is geïnitialiseerd. Dit kun je doen door gewoon een eigenschap te definiëren en daar een waarde aan toe te kennen. Dit is dan wel een eigenschap die <em>alleen</em> voor het specifieke object geldt en niet wordt doorgegeven aan andere objecten van dezelfde klasse.</p>
+<p>Als voorbeeld geven we hieronder een extra attribuut <code>waardering</code> aan het object <code>kwek</code>. Je zult zien dat deze eigenschap niet eveneens beschikbaar is bij het object <code>dob</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">kwek</span><span class="o">.</span><span class="n">waardering</span> <span class="o">=</span> <span class="mf">6.5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kwek</span><span class="o">.</span><span class="n">waardering</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dob</span><span class="o">.</span><span class="n">waardering</span><span class="p">)</span>
+</code></pre></div>
+<p>Als je dit runt, krijg je eerst 6.5 te zien – de waardering die we zojuist hebben toegevoegd. Deze wordt onmiddellijk gevolgd door een foutmelding.</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">7</span><span class="p">]:</span> <span class="n">kwek</span><span class="o">.</span><span class="n">waardering</span> <span class="o">=</span> <span class="mf">6.5</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">kwek</span><span class="o">.</span><span class="n">waardering</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="mf">6.5</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">dob</span><span class="o">.</span><span class="n">waardering</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mi">20</span><span class="n">aa4a747a07</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">dob</span><span class="o">.</span><span class="n">waardering</span>
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Kroket&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;waardering&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span>
+</code></pre></div>
+<h2 id="klasse-attributen">Klasse-attributen<a class="headerlink" href="#klasse-attributen" title="Permanent link">&para;</a></h2>
+<p>Naast de attributen die meegegeven worden aan elke nieuwe instantie, is het ook mogelijk de klasse attributen mee te geven:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Kroket</span><span class="p">:</span>
+    <span class="n">soort</span> <span class="o">=</span> <span class="s2">&quot;rundvleeskroket&quot;</span>
+
+    <span class="c1">#rest van de definitie is weggelaten</span>
+</code></pre></div>
+<p>Met de <em>dunder</em> <code>__dict__</code> kan bekeken worden wat de specifieke inhoud is van elk object:</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">10</span><span class="p">]:</span> <span class="n">Kroket</span><span class="o">.</span><span class="vm">__dict__</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">10</span><span class="p">]:</span>
+<span class="n">mappingproxy</span><span class="p">({</span><span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="s1">&#39;__main__&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;soort&#39;</span><span class="p">:</span> <span class="s1">&#39;rundvleeskroket&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;__init__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">Kroket</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">leverancier</span><span class="p">,</span> <span class="n">prijs</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+              <span class="s1">&#39;in_frituur&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">__main__</span><span class="o">.</span><span class="n">Kroket</span><span class="o">.</span><span class="n">in_frituur</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+              <span class="s1">&#39;__dict__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="s1">&#39;__dict__&#39;</span> <span class="n">of</span> <span class="s1">&#39;Kroket&#39;</span> <span class="n">objects</span><span class="o">&gt;</span><span class="p">,</span>
+              <span class="s1">&#39;__weakref__&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="s1">&#39;__weakref__&#39;</span> <span class="n">of</span> <span class="s1">&#39;Kroket&#39;</span> <span class="n">objects</span><span class="o">&gt;</span><span class="p">,</span>
+              <span class="s1">&#39;__doc__&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">})</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">dob</span><span class="o">.</span><span class="vm">__dict__</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="p">{</span><span class="s1">&#39;leverancier&#39;</span><span class="p">:</span> <span class="s1">&#39;Van Dobben&#39;</span><span class="p">,</span> <span class="s1">&#39;prijs&#39;</span><span class="p">:</span> <span class="mf">2.35</span><span class="p">,</span> <span class="s1">&#39;trek&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">kwek</span><span class="o">.</span><span class="vm">__dict__</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="p">{</span><span class="s1">&#39;leverancier&#39;</span><span class="p">:</span> <span class="s1">&#39;Kwekkeboom&#39;</span><span class="p">,</span> <span class="s1">&#39;prijs&#39;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="s1">&#39;trek&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;waardering&#39;</span><span class="p">:</span> <span class="mf">6.5</span><span class="p">}</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span>
+</code></pre></div>
+<p>De klasse zelf bevat erg veel eigenschappen terwijl de beide objecten alleen de instantievariabelen laten zien, waarbij <code>kwek</code> er eentje meer toont, wat logisch is.</p>
+<p>Wat zal er gebeuren als de inhoud van het extra attribuut van de klasse zelf gewijzigd wordt?</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Wijzig rundvleeskroket naar groentekroket</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">Kroket</span><span class="o">.</span><span class="n">soort</span> <span class="o">=</span> <span class="s2">&quot;groentekroket&quot;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">Kroket</span><span class="o">.</span><span class="n">soort</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="s1">&#39;groentekroket&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">dob</span><span class="o">.</span><span class="n">soort</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="s1">&#39;groentekroket&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="n">kwek</span><span class="o">.</span><span class="n">soort</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">16</span><span class="p">]:</span> <span class="s1">&#39;groentekroket&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span>
+</code></pre></div>
+<p>Het resultaat is niet echt verrassend: de wijziging in de klasse vindt ook z'n weg naar de instanties die van deze klasse zijn gemaakt.</p>
+<p>Nog een laatste test. Is het ook mogelijk voor <code>kwek</code> de inhoud van het attribuut van de klasse te wijzigen?</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Kwekkeboom wordt nu garnalenkroket</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">17</span><span class="p">]:</span> <span class="n">kwek</span><span class="o">.</span><span class="n">soort</span> <span class="o">=</span> <span class="s2">&quot;Garnalenkroket&quot;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="n">kwek</span><span class="o">.</span><span class="n">soort</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">18</span><span class="p">]:</span> <span class="s1">&#39;Garnalenkroket&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="n">dob</span><span class="o">.</span><span class="n">soort</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">19</span><span class="p">]:</span> <span class="s1">&#39;groentekroket&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]:</span>
+</code></pre></div>
+<p>De uitkomst laat zien dat het specifieke klasse attribuut voor <code>kwek</code> is gewijzigd. Het waarom kan uitgelegd worden door te verwijzen naar de terminologie omtrent <code>global</code> en <code>local</code>. Het klasse-attribuut zal gelden voor <em>ieder object</em> tenzij er lokaal bij het object (de instantie) wijzigingen worden doorgevoerd. De werkwijze is altijd zo dat er eerst wordt gekeken welke eigenschappen met het object worden meegegeven en daarna of er ook nog eigenschappen gelden op een hoger niveau.</p>
+<p>De inhoud van de eigenschappen op 'lokaal' niveau hebben prioriteit boven de 'globaal' meegegeven attributen.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../week1/oefeningen/wk1oefening5.html" class="md-footer__link md-footer__link--prev" aria-label="Vorige: Oefening 5" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Vorige
+              </span>
+              Oefening 5
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="oop-deel2.html" class="md-footer__link md-footer__link--next" aria-label="Volgende: OOP Python – Methoden" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Volgende
+              </span>
+              OOP Python – Methoden
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Gekopieerd naar klembord", "clipboard.copy": "Kopi\u00ebren naar klembord", "search.config.lang": "nl", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Zoeken", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "Geen overeenkomende documenten", "search.result.one": "1 overeenkomende document", "search.result.other": "# overeenkomende documenten", "search.result.placeholder": "Typ om te beginnen met zoeken", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      
+        <script src="../js/imgs.js"></script>
+      
+    
+  </body>
+</html>

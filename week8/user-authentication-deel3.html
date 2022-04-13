@@ -1,0 +1,1960 @@
+
+<!doctype html>
+<html lang="nl" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Onderwijsmateriaal voor de module Webtechnologie HBO-ICT jaar 1 semester 2">
+      
+      
+      
+        <link rel="canonical" href="https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html/week8/user-authentication-deel3.html">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+    
+    
+      
+        <title>User authentication - Flask_login deel II - Webtechnologie 1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.120efc48.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.9647289d.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+      <link rel="stylesheet" href="../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#user-authentication-flask_login-deel-ii" class="md-skip">
+          Ga naar inhoud
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Webtechnologie 1" class="md-header__button md-logo" aria-label="Webtechnologie 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Webtechnologie 1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User authentication - Flask_login deel II
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Webtechnologie 1" class="md-nav__button md-logo" aria-label="Webtechnologie 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Webtechnologie 1
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Webtechnologie 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Projecten
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projecten" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Projecten
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/index.html" class="md-nav__link">
+        Casuïsiek voor het project
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/bungelowpark.html" class="md-nav__link">
+        Bungelowpark
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/filmfan.html" class="md-nav__link">
+        Filmfan
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/programmeerles.html" class="md-nav__link">
+        Programmeerles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/stage.html" class="md-nav__link">
+        Stage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Week1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Week1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          1.html
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="1.html" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          1.html
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel1.html" class="md-nav__link">
+        HTML – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel2.html" class="md-nav__link">
+        HTML – tags
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel3.html" class="md-nav__link">
+        HTML – Lists, Divs en Spans
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel4.html" class="md-nav__link">
+        HTML – Formulieren
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          2.css
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2.css" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          2.css
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel1.html" class="md-nav__link">
+        CSS – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel2.html" class="md-nav__link">
+        CSS – selectors en matching-rules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel3.html" class="md-nav__link">
+        CSS – Fonts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          3.bootstrap
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="3.bootstrap" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          3.bootstrap
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel1.html" class="md-nav__link">
+        Bootstrap – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel2.html" class="md-nav__link">
+        Bootstrap – Voorbeeld
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel3.html" class="md-nav__link">
+        Bootstrap – Formulieren
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel4.html" class="md-nav__link">
+        Bootstrap – Navigatiebalk
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening1.html" class="md-nav__link">
+        Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening2.html" class="md-nav__link">
+        Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening3.html" class="md-nav__link">
+        Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening4.html" class="md-nav__link">
+        Oefening 4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening5.html" class="md-nav__link">
+        Oefening 5
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Week2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Week2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel1.html" class="md-nav__link">
+        OOP Python – inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel2.html" class="md-nav__link">
+        OOP Python – Methoden
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel3.html" class="md-nav__link">
+        OOP Python - Meerdere klassen
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel4.html" class="md-nav__link">
+        OOP Python – Getters en Setters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel5.html" class="md-nav__link">
+        OOP Python – Overerving
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel6.html" class="md-nav__link">
+        OOP Python – Overriding en polymorfisme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel7.html" class="md-nav__link">
+        OOP Python – Compositie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oefeningen/oop-oefening1.html" class="md-nav__link">
+        OOP Python – Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oefeningen/oop-oefening2.html" class="md-nav__link">
+        OOP Python – Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oefeningen/oop-oefening3.html" class="md-nav__link">
+        OOP Python – Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Week3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week3" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Week3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel1.html" class="md-nav__link">
+        Databasebeheer in Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel2.html" class="md-nav__link">
+        SQLite, basisvaardigheden
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel3.html" class="md-nav__link">
+        De muziek databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel4.html" class="md-nav__link">
+        SQL in Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel5.html" class="md-nav__link">
+        SQL-injectie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel6.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_7" type="checkbox" id="__nav_5_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_7">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_7">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening1.html" class="md-nav__link">
+        Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening2.html" class="md-nav__link">
+        Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening3.html" class="md-nav__link">
+        Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening4.html" class="md-nav__link">
+        Oefening 4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Week4
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week4" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Week4
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/flask-deel1.html" class="md-nav__link">
+        Flask – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/flask-deel2.html" class="md-nav__link">
+        Flask – Installatie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/flask-deel3.html" class="md-nav__link">
+        Flask – basale werking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/flask-deel4.html" class="md-nav__link">
+        Flask – Templates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_5" type="checkbox" id="__nav_6_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_5">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_5">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/oefeningen/flask-oefening1.html" class="md-nav__link">
+        Flask – Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Week5
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week5" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Week5
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel1.html" class="md-nav__link">
+        Flask forms deel1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel2.html" class="md-nav__link">
+        Flask en Forms - Form Fields
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel3.html" class="md-nav__link">
+        Flask en Forms - Flash-berichten
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/oefeningen/flask-forms-oefening1.html" class="md-nav__link">
+        Flask en forms - Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Week6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week6" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Week6
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel1.html" class="md-nav__link">
+        Flask en SQL - Theorie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel2.html" class="md-nav__link">
+        Flask en SQL - het opzetten van een database
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel3.html" class="md-nav__link">
+        Flask en SQL - CRUD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel4.html" class="md-nav__link">
+        Flask en SQL - Relaties
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel5.html" class="md-nav__link">
+        Flask en SQL - Website
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_6" type="checkbox" id="__nav_8_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_6">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_6">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/oefeningen/flask-views-oefening1.html" class="md-nav__link">
+        Flask en SQL - Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Week7
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week7" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Week7
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel1.html" class="md-nav__link">
+        Flask-applicaties - Structuur
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel2.html" class="md-nav__link">
+        Flask-applicaties - Refactored
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel3.html" class="md-nav__link">
+        Flask-applicaties - Blueprints
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Week8
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week8" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Week8
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-authentication-deel1.html" class="md-nav__link">
+        User authentication - Hashing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-authentication-deel2.html" class="md-nav__link">
+        User authentication - Flask_login deel I
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          User authentication - Flask_login deel II
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="user-authentication-deel3.html" class="md-nav__link md-nav__link--active">
+        User authentication - Flask_login deel II
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhoudsopgave">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eerste-opzet" class="md-nav__link">
+    Eerste opzet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logout-view" class="md-nav__link">
+    Logout-view
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-proces" class="md-nav__link">
+    Login-proces
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registratie" class="md-nav__link">
+    Registratie
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-authentication-deel4.html" class="md-nav__link">
+        User authentication - Flask_login deel III
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhoudsopgave">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eerste-opzet" class="md-nav__link">
+    Eerste opzet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logout-view" class="md-nav__link">
+    Logout-view
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-proces" class="md-nav__link">
+    Login-proces
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registratie" class="md-nav__link">
+    Registratie
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="user-authentication-flask_login-deel-ii">User authentication - Flask_login deel II<a class="headerlink" href="#user-authentication-flask_login-deel-ii" title="Permanent link">&para;</a></h1>
+<p>Het bestand <code>app.py</code> heeft verreweg de meeste aandacht nodig. Daarom is hier een aparte paragraaf voor. Er zijn een aantal zaken die voor het eerst voorbijkomen en een aantal dingen waar een duidelijke uitleg bij vereist is.</p>
+<p>In dit bestand worden de views vastgelegd die nodig zijn om het loginsysteem naar verwachting te laten verlopen. Anders gezegd: de functies die de formulieren en de HTML-bestanden uit de directory <code>templates</code> met elkaar zullen gaan verbinden worden ontworpen en gecodeerd.</p>
+<h2 id="eerste-opzet">Eerste opzet<a class="headerlink" href="#eerste-opzet" title="Permanent link">&para;</a></h2>
+<p>Eerst worden alle imports opgegeven die nodig zijn om dit bestand goed te laten functioneren:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">mijnproject</span> <span class="kn">import</span> <span class="n">app</span><span class="p">,</span><span class="n">db</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">flash</span>
+<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_user</span><span class="p">,</span> <span class="n">login_required</span><span class="p">,</span> <span class="n">logout_user</span>
+<span class="kn">from</span> <span class="nn">mijnproject.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">mijnproject.forms</span> <span class="kn">import</span> <span class="n">LoginForm</span><span class="p">,</span> <span class="n">RegistrationForm</span>
+</code></pre></div>
+<p>De eerste regel laat de app en de database ophalen. Daarna worden van flask een aantal oude bekenden geïmporteerd.</p>
+<p>Vanaf de derde coderegel wordt het interessant. Deze regel zorgt ervoor dat de afwikkeling van het inloggen en uitloggen verzorgd worden zonder dat deze handelingen door de programmeur zelf geprogrammeerd hoeven te worden. </p>
+<p>Het tweede item wat wordt ingeladen is <code>login_required</code>. Hiermee kan de status van een gebruiker (<em>user</em>) achterhaald worden en op basis van die status de gepaste bijbehorende inhoud getoond worden. Is een gebruiker nog niet ingelogd dan zal hem de mogelijkheid geboden worden dit te doen. Is een gebruiker ingelogd en is het zijn wens de sessie te beëindigen moet deze mogelijkheid hem worden aangeboden. Hoe dat geregeld wordt, komt zo aan bod.</p>
+<p>Verder zijn hier de tabel <code>User</code> en de beide formulieren die in de vorige paragraaf ontworpen zijn nodig. Om er weer in te komen eerst de simpelste van de views, de <code>home-view</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Als eerste een decorator die verwijst naar de homepagina. Deze functie (<em>view</em>) krijgt de naam <code>home</code> zodat er straks met <code>url_for()</code> gemakkelijk naar verwezen kan worden. De laatste regel vertelt dat in dat geval de pagina <code>home.html</code> getoond wordt, die pas in de volgende paragraaf zijn inhoud zal krijgen.</p>
+<p>De tweede view betreft een view die verschijnt op het moment dat de gebruiker succesvol is ingelogd. Deze view laat een welkomst-bericht tevoorschijn getoverd worden:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/welkom&#39;</span><span class="p">)</span>
+<span class="nd">@login_required</span>
+<span class="k">def</span> <span class="nf">welkom</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;welkom.html&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Wat gelijk opvalt is dat er een tweetal decorators aan het begin van dit codeblok zijn opgenomen. De eerste geeft aan met welke route met het bestand <code>welkom.html</code> correspondeert. De tweede decorator controleert of de gebruiker van deze pagina daadwerkelijk is ingelogd. Is dat zo, wordt het welkomstbericht vrijgegeven. In het andere geval wordt er doorgeschakeld naar het loginformulier. </p>
+<p>Door deze acties te importeren van <code>Flask_login</code> wordt het de ontwikkelaar weer een stuk eenvoudiger gemaakt.</p>
+<h2 id="logout-view">Logout-view<a class="headerlink" href="#logout-view" title="Permanent link">&para;</a></h2>
+<p>Nog een redelijk eenvoudige view voordat er met het betere codeerwerk begonnen kan worden. Het wordt een view met de naam <code>logout</code>. Wat daar de bedoeling van is moge duidelijk zijn.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">)</span>
+<span class="nd">@login_required</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="n">logout_user</span><span class="p">()</span>
+    <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Je bent nu uitgelogd!&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">))</span>
+</code></pre></div>
+<p>De <code>logout</code> view bevindt zich op de route <code>/logout</code>. Deze mogelijkheid wordt alleen geboden indien de gebruiker daadwerkelijk is ingelogd. Daar zorgt de decorator <code>login_required</code> voor. Het zou raar zijn uit te kunnen loggen zonder ingelogd te zijn. </p>
+<p>Binnen de functie <code>logout()</code> zorgt de functie <code>logout_user()</code> voor de afwikkeling van het uitloggen. Ook deze functie is geïmporteerd om het leven zo aangenaam mogelijk te maken. Als er succesvol uitgelogd is verschijnt er een flitsbericht en wordt de gebruiker doorgestuurd naar de homepagina.</p>
+<h2 id="login-proces">Login-proces<a class="headerlink" href="#login-proces" title="Permanent link">&para;</a></h2>
+<p>Nu het moeilijkere gedeelte, te beginnen met <code>login</code>. De uitleg wordt in kleine stapjes gedaan om de denkwijze en uitvoer op een handiger manier duidelijk te maken.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</code></pre></div>
+<p>Er wordt begonnen met een decorator. En omdat er bij het inloggen een formulier nodig is, kan het niet achterwege gelaten worden de methoden <code>GET</code> en <code>POST</code> in deze coderegel op te nemen.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">LoginForm</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</code></pre></div>
+<p>De view krijgt de naam <code>login</code> mee. Als eerste wordt er een instantie aangemaakt van het <code>LoginForm()</code> dat ook meegeleverd is in het importblok.</p>
+<p>Als er in het formulier op de Submit-knop gedrukt is, wordt nagegaan of de gebruiker bekend is in de database. Uit het formulier wordt het e-mailadres opgehaald en vergeleken met de opgeslagen e-mailadressen. Omdat er gecontroleerd is dat er geen dubbele e-mailadressen zijn ingevoerd is het voldoende het eerste gevonden record te benutten. Dit wordt ondergebracht in de variabele <code>user</code>.</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="ow">and</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">login_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Succesvol ingelogd.&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Om succesvol te kunnen inloggen moet er aan twee condities voldaan worden. Het ingevulde wachtwoord van het formulier moet matchen met het corresponderende wachtwoord in de database. Dat regelt de functie <code>check_password()</code>. Bovendien wordt er gecontroleerd of de query wel een waarde heeft toegekend aan de variabele <code>user</code>. Is aan beide voorwaarden voldaan wordt de user automatisch ingelogd door de functie <code>login_user()</code> en verschijnt er een flitsbericht aan de bovenkant van het scherm. De functie <code>check_functie</code> komt mee met <code>User</code>.</p>
+<p>Nu nog wat bijzonders:</p>
+<div class="highlight"><pre><span></span><code>    <span class="nb">next</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;next&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">next</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;/&#39;</span><span class="p">:</span>
+        <span class="nb">next</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;welkom&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
+</code></pre></div>
+<p>Stel een gebruiker probeert een pagina te bezoeken waarvoor inloggen vereist is (zoals <code>welkom.html</code>). Dan slaat <code>Flask</code> die URL op in de variabele <code>next</code>. Vervolgens wordt de gebruiker doorgelinkt naar het inlogformulier. </p>
+<p>Indien er succesvol is ingelogd wordt er nagegaan of de variabele <code>next</code> een waarde heeft. Is dat niet het geval wordt het welkomstbericht getoond, anders verschijnt de pagina waar nu wel toestemming voor gegeven is.</p>
+<p>Tot slot moet van de inlogview worden bepaald wat in beeld verschijnt als de view wordt aangeroepen:</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login.html&#39;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
+</code></pre></div>
+<p>Het is natuurlijk duidelijk dat als de view <code>login</code> aangeroepen wordt, het inlogformulier getoond dient te worden.</p>
+<h2 id="registratie">Registratie<a class="headerlink" href="#registratie" title="Permanent link">&para;</a></h2>
+<p>Nog één view te gaan, het registreren van belangstellenden. Omdat er al veel Engelse termen gebruikt zijn krijgt deze view daarom de route <code>register</code> mee.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/register&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</code></pre></div>
+<p>Ook bij deze view wordt als eerste de route vastgesteld en zijn de methoden <code>GET</code> en <code>POST</code> noodzakelijk omdat gebruikers zich kunnen aanmelden door een formulier in te vullen.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">register</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">RegistrationForm</span><span class="p">()</span>
+</code></pre></div>
+<p>Bij het aanroepen van de view wordt een object van de klasse <code>RegistrationForm</code> aangemaakt. </p>
+<div class="highlight"><pre><span></span><code>    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                    <span class="n">username</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                    <span class="n">password</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Dank voor de registratie. Er kan nu ingelogd worden! &#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Indien het formulier met goed gevolg is ingevuld, waarbij onder meer de diverse checks zijn uitgevoerd, wordt er een nieuw object <code>user</code> aangemaakt met de ingevulde kenmerken e-mailadres, username en password.</p>
+<p>De gegevens worden toevertrouwd aan de database en bevestigd door het <code>commit()</code>-statement uit te voeren. Een succesvolle registratie verdient uiteraard weer een flitsbericht.</p>
+<div class="highlight"><pre><span></span><code>        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;register.html&#39;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
+</code></pre></div>
+<p>Wanneer de view wordt aangeroepen komt de inhoud van de pagina <code>register.html</code> in beeld en als het inloggen op een juiste wijze verlopen is wordt er doorgeschakeld naar de view login.</p>
+<p>Nog eentje te gaan. Dit is het bestand <code>app.py</code>, het bestand waarmee de applicatie gerund wordt. Dat betekent dat de volgende twee coderegels nog nodig zijn:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>Omdat er straks weer getest wordt, heeft debug de waarde <code>True</code> meegekregen zodat bij ieder foutje onmiddellijk in beeld verschijnt waar de fout gevonden kan worden. Werkt de applicatie feilloos en kan deze in productie genomen worden, mag debug zeker niet meer de status <code>True</code> hebben.</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="user-authentication-deel2.html" class="md-footer__link md-footer__link--prev" aria-label="Vorige: User authentication - Flask_login deel I" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Vorige
+              </span>
+              User authentication - Flask_login deel I
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="user-authentication-deel4.html" class="md-footer__link md-footer__link--next" aria-label="Volgende: User authentication - Flask_login deel III" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Volgende
+              </span>
+              User authentication - Flask_login deel III
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Gekopieerd naar klembord", "clipboard.copy": "Kopi\u00ebren naar klembord", "search.config.lang": "nl", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Zoeken", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "Geen overeenkomende documenten", "search.result.one": "1 overeenkomende document", "search.result.other": "# overeenkomende documenten", "search.result.placeholder": "Typ om te beginnen met zoeken", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      
+        <script src="../js/imgs.js"></script>
+      
+    
+  </body>
+</html>

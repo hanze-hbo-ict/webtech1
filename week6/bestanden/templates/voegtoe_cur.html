@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <h1>Heeft zich een nieuwe cursist aangemeld?</h1>
+    <p>Vul de naam in en klik op Voeg toe:</p>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.naam.label }} {{ form.naam() }}
+        {{ form.submit() }}
+    </form>
+</div>
+{% endblock %}

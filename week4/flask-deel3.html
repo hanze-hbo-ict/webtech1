@@ -1,0 +1,1979 @@
+
+<!doctype html>
+<html lang="nl" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Onderwijsmateriaal voor de module Webtechnologie HBO-ICT jaar 1 semester 2">
+      
+      
+      
+        <link rel="canonical" href="https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html/week4/flask-deel3.html">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+    
+    
+      
+        <title>Flask – basale werking - Webtechnologie 1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.120efc48.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.9647289d.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+      <link rel="stylesheet" href="../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#flask-basale-werking" class="md-skip">
+          Ga naar inhoud
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Webtechnologie 1" class="md-header__button md-logo" aria-label="Webtechnologie 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Webtechnologie 1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Flask – basale werking
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Webtechnologie 1" class="md-nav__button md-logo" aria-label="Webtechnologie 1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Webtechnologie 1
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Webtechnologie 1
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Projecten
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projecten" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Projecten
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/index.html" class="md-nav__link">
+        Casuïsiek voor het project
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/bungelowpark.html" class="md-nav__link">
+        Bungelowpark
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/filmfan.html" class="md-nav__link">
+        Filmfan
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/programmeerles.html" class="md-nav__link">
+        Programmeerles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projecten/stage.html" class="md-nav__link">
+        Stage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Week1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Week1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          1.html
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="1.html" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          1.html
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel1.html" class="md-nav__link">
+        HTML – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel2.html" class="md-nav__link">
+        HTML – tags
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel3.html" class="md-nav__link">
+        HTML – Lists, Divs en Spans
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/1.html/html-deel4.html" class="md-nav__link">
+        HTML – Formulieren
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          2.css
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2.css" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          2.css
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel1.html" class="md-nav__link">
+        CSS – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel2.html" class="md-nav__link">
+        CSS – selectors en matching-rules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/2.css/css-deel3.html" class="md-nav__link">
+        CSS – Fonts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          3.bootstrap
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="3.bootstrap" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          3.bootstrap
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel1.html" class="md-nav__link">
+        Bootstrap – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel2.html" class="md-nav__link">
+        Bootstrap – Voorbeeld
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel3.html" class="md-nav__link">
+        Bootstrap – Formulieren
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/3.bootstrap/bootstrap-deel4.html" class="md-nav__link">
+        Bootstrap – Navigatiebalk
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening1.html" class="md-nav__link">
+        Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening2.html" class="md-nav__link">
+        Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening3.html" class="md-nav__link">
+        Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening4.html" class="md-nav__link">
+        Oefening 4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/oefeningen/wk1oefening5.html" class="md-nav__link">
+        Oefening 5
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Week2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Week2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel1.html" class="md-nav__link">
+        OOP Python – inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel2.html" class="md-nav__link">
+        OOP Python – Methoden
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel3.html" class="md-nav__link">
+        OOP Python - Meerdere klassen
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel4.html" class="md-nav__link">
+        OOP Python – Getters en Setters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel5.html" class="md-nav__link">
+        OOP Python – Overerving
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel6.html" class="md-nav__link">
+        OOP Python – Overriding en polymorfisme
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oop-deel7.html" class="md-nav__link">
+        OOP Python – Compositie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oefeningen/oop-oefening1.html" class="md-nav__link">
+        OOP Python – Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oefeningen/oop-oefening2.html" class="md-nav__link">
+        OOP Python – Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/oefeningen/oop-oefening3.html" class="md-nav__link">
+        OOP Python – Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Week3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week3" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Week3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel1.html" class="md-nav__link">
+        Databasebeheer in Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel2.html" class="md-nav__link">
+        SQLite, basisvaardigheden
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel3.html" class="md-nav__link">
+        De muziek databases
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel4.html" class="md-nav__link">
+        SQL in Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel5.html" class="md-nav__link">
+        SQL-injectie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/sql-deel6.html" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_7" type="checkbox" id="__nav_5_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_7">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_7">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening1.html" class="md-nav__link">
+        Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening2.html" class="md-nav__link">
+        Oefening 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening3.html" class="md-nav__link">
+        Oefening 3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/oefeningen/sql-oefening4.html" class="md-nav__link">
+        Oefening 4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Week4
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week4" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Week4
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="flask-deel1.html" class="md-nav__link">
+        Flask – Inleiding
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="flask-deel2.html" class="md-nav__link">
+        Flask – Installatie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Flask – basale werking
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="flask-deel3.html" class="md-nav__link md-nav__link--active">
+        Flask – basale werking
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhoudsopgave">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#een-voorbeeld" class="md-nav__link">
+    Een voorbeeld
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#een-tweede-pagina" class="md-nav__link">
+    Een tweede pagina
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#404" class="md-nav__link">
+    404
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamische-routes" class="md-nav__link">
+    dynamische routes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foutmeldingen" class="md-nav__link">
+    Foutmeldingen
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="flask-deel4.html" class="md-nav__link">
+        Flask – Templates
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_5" type="checkbox" id="__nav_6_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_5">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_5">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oefeningen/flask-oefening1.html" class="md-nav__link">
+        Flask – Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Week5
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week5" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Week5
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel1.html" class="md-nav__link">
+        Flask forms deel1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel2.html" class="md-nav__link">
+        Flask en Forms - Form Fields
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/flask-forms-deel3.html" class="md-nav__link">
+        Flask en Forms - Flash-berichten
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7_4">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week5/oefeningen/flask-forms-oefening1.html" class="md-nav__link">
+        Flask en forms - Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Week6
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week6" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Week6
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel1.html" class="md-nav__link">
+        Flask en SQL - Theorie
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel2.html" class="md-nav__link">
+        Flask en SQL - het opzetten van een database
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel3.html" class="md-nav__link">
+        Flask en SQL - CRUD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel4.html" class="md-nav__link">
+        Flask en SQL - Relaties
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/flask-views-deel5.html" class="md-nav__link">
+        Flask en SQL - Website
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_6" type="checkbox" id="__nav_8_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_6">
+          Oefeningen
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Oefeningen" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_6">
+          <span class="md-nav__icon md-icon"></span>
+          Oefeningen
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week6/oefeningen/flask-views-oefening1.html" class="md-nav__link">
+        Flask en SQL - Oefening 1
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Week7
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week7" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Week7
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel1.html" class="md-nav__link">
+        Flask-applicaties - Structuur
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel2.html" class="md-nav__link">
+        Flask-applicaties - Refactored
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week7/flask-applicaties-deel3.html" class="md-nav__link">
+        Flask-applicaties - Blueprints
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Week8
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Week8" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Week8
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week8/user-authentication-deel1.html" class="md-nav__link">
+        User authentication - Hashing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week8/user-authentication-deel2.html" class="md-nav__link">
+        User authentication - Flask_login deel I
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week8/user-authentication-deel3.html" class="md-nav__link">
+        User authentication - Flask_login deel II
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week8/user-authentication-deel4.html" class="md-nav__link">
+        User authentication - Flask_login deel III
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhoudsopgave">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhoudsopgave
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#een-voorbeeld" class="md-nav__link">
+    Een voorbeeld
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#een-tweede-pagina" class="md-nav__link">
+    Een tweede pagina
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#404" class="md-nav__link">
+    404
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamische-routes" class="md-nav__link">
+    dynamische routes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foutmeldingen" class="md-nav__link">
+    Foutmeldingen
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="flask-basale-werking">Flask – basale werking<a class="headerlink" href="#flask-basale-werking" title="Permanent link">&para;</a></h1>
+<p>Vanuit vogelvluchtperspectief werkt Flask als volgt. Er komt een request binnen bij de server. De server checkt welke route er exact wordt opgevraagd en voert de daarmee corresponderende functie uit. Deze functie retourneert iets, in de regels een string, wat door de server weer wordt doorgestuurd aan de client.</p>
+<p>Aan het eind van deze tekst maken we <a href="oefeningen/flask-oefening1.html">oefening 1</a></p>
+<h2 id="een-voorbeeld">Een voorbeeld<a class="headerlink" href="#een-voorbeeld" title="Permanent link">&para;</a></h2>
+<p>We maken dit duidelijk aan de hand van een voorbeeld. We maken een scriptje <code>app.py</code>, waarin we allereerst de klasse <code>Flask</code> importeren en daar vervolgens een instantie van aanmaken.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</code></pre></div>
+<p>Om aan te geven dat we een bepaalde string willen retourneren bij bij een specifieke request, maken we gebruik van een zogenaamde <em>decorator</em>: een speciale constructie weermee je functionaliteit aan een functie kunt toevoegen. Door middel van de decorator <code>@app.route()</code> kunnen we aangeven dat de functie die daarmee gedecoreerd is moet worden uitgevoerd op het moment dat die specifiek request gevraagd wordt. Zie het onderstaande voorbeeld, waaraan we voor de duidelijkheid regelnummer hebben toegevoegd.</p>
+<!-- Ik dacht toch werkelijk dat je regelnummers in fenced code block aan kon zetten -->
+<!-- maar lijkt toch van niet. Dus maar met de hand -->
+<!-- https://stackoverflow.com/questions/55653184/enable-line-numbers-for-specific-markdown-code-listings-designated-with-backtick
+
+HOEM: dit kan met mkdocs (nadeel, niet overdraagbaar naar andere omgevingen)
+https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#adding-line-numbers
+-->
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+</span><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="c1"># render de template Basic.html</span>
+    <span class="k">return</span> <span class="s2">&quot;&lt;h1&gt;Welkom bij muziekschool Session&lt;/h1&gt;&quot;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p>We bespreken deze code regel voor regel:</p>
+<ol>
+<li>Door middel van deze decoratie geven we aan dat de methode die <em>hieronder</em> staat (de functie die met deze annotatie is gedecoreerd) moet worden uitgevoerd wanneer er een request wordt ontvangen die correspondeert met deze <em>route</em>. De route is de string-parameter (<code>/</code> in dit specifieke geval) die je ook terug ziet komen in de locatiebalk van de browser;</li>
+<li>Een standaard functie-definitie; in latere voorbeelden zullen we toelichten hoe hier parameters aan kunnen worden toegevoegd;</li>
+<li>commentaar;</li>
+<li>Hier wordt de string <code>&lt;h1&gt;Welkom bij muziekschool Session&lt;/h1&gt;</code> aan de client (de browser) geretourneerd.</li>
+<li>lege regel voor de duidelijkheid.</li>
+<li>Deze regel is bedoeld om te checken of dit script direct wordt uitgevoerd en niet wordt geïmporteerd vanuit een ander script of een andere module; zie eventueel <a href="https://medium.com/python-features/understanding-if-name-main-in-python-a37a3d4ab0c3">deze blog op medium.com</a> voor een complete uitleg.</li>
+<li>Hier wordt de methode <code>run</code> aangeroepen op onze instantie van de <code>Flask</code> klasse. Deze start een ontwikkelserver op en gaat luisteren naar requests van clients. Standaard luistert deze server naar poort 5000, maar dat kun je zelf ook installen.</li>
+</ol>
+<p>Als we deze code runnen, gebeurt er het volgende:</p>
+<div class="highlight"><pre><span></span><code><span class="go"> * Serving Flask app &quot;server1&quot; (lazy loading)</span>
+<span class="go"> * Environment: production</span>
+<span class="go">   WARNING: Do not use the development server in a production environment.</span>
+<span class="go">   Use a production WSGI server instead.</span>
+<span class="go"> * Debug mode: off</span>
+<span class="go"> * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</span>
+</code></pre></div>
+<p>Als we dan met een browser naar de gegeven url gaan (<code>http://127.0.0.1:5000/</code>) krijgen we het volgende te zien:</p>
+<p><img alt="De eerste flask pagina" src="imgs/index.png" /></p>
+<p>De eerste webpagina is aangemaakt, door het runnen van een Flask-applicatie!.</p>
+<h2 id="een-tweede-pagina">Een tweede pagina<a class="headerlink" href="#een-tweede-pagina" title="Permanent link">&para;</a></h2>
+<p>Een enkele webpagina is natuurlijk al mooi, maar een beetje zichzelf respecterende ontwerper laat het niet bij enkel een startpagina. De applicatie wordt nu uitgebreid door er een tweede pagina aan vast te koppelen. Vanuit de startpagina kan gesprongen worden naar de tweede pagina. Ook deze tweede pagina gaat alleen tekst bevatten.</p>
+<p>De crux hiervoor is de decorator <code>@app.route()</code>. De toegevoegde stringparameter die aan de decorator wordt doorgegeven, bepaalt de URL-extensie die naar de functie zal linken.</p>
+<p>Momenteel wordt onze homepage lokaal weergegeven als <code>http://127.0.0.1:5000/</code>. Er worden decorators gebruikt die hieraan toegevoegd worden zoals bijvoorbeeld <code>@app.route("/some_page")</code>, waardoor de URL <code>http://127.0.0.1:5000/some_page</code> wordt. We breiden het script van hierboven uit met een volgende route:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/informatie&quot;</span><span class="p">)</span>   <span class="c1">#127.0.0.1:5000/informatie</span>
+<span class="k">def</span> <span class="nf">info</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">&quot;&lt;h1&gt;Dit hebben we jou te bieden:&lt;/h1&gt;&quot;</span>
+</code></pre></div>
+<p>Wanneer we nu met de browser naar <code>http://127.0.0.1:5000/informatie</code> gaan, krijgen we het onderstaande resultaat:</p>
+<p><img alt="Een tweede pagina in Flask" src="imgs/informatie.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Herstarten van de server</p>
+<p>Om de tweede route te kunnen benaderen, moet je de server herstarten. Omdat dit gedoe is, is het dikwijls handiger om tijdens de ontwikkeling de server automatisch te herstarten wanneer de code hiervan wordt aangepast. Dat kun je doen door <code>debug=True</code> mee te geven bij het runnen, dus <code>app.run(debug=True)</code>.</p>
+</div>
+<h2 id="404">404<a class="headerlink" href="#404" title="Permanent link">&para;</a></h2>
+<p>Wanneer er een verkeerd adres wordt opgegeven om wat voor reden dan ook, verschijnt de volgende melding:</p>
+<p><img alt="Pagina die niet bestaat" src="imgs/bestaat-niet.png" /></p>
+<h2 id="dynamische-routes">dynamische routes<a class="headerlink" href="#dynamische-routes" title="Permanent link">&para;</a></h2>
+<p>Het kan zijn dat de website vele gebruikers heeft die allen een eigen profielpagina hebben. Deze profielpagina moet voor iedere gebruiker natuurlijk uniek zijn. Het moet niet kunnen dat meerdere gebruikers dezelfde URL gaan gebruiken. Dat zou in de volgende vorm <code>www.site.com/gebruiker/unieke_gebruikers_pagina</code> geregeld kunnen worden.</p>
+<p>Om dit effect te bereiken, zijn <em>dynamische routes</em> ontwikkeld. Dynamische routes kennen twee belangrijke aspecten:</p>
+<p>•   Er moet een variabele in de route zijn opgenomen <code>&lt;variabele&gt;</code>;</p>
+<p>•   De waarde van die variabele moet doorgegeven worden aan de methode.</p>
+<p>Hieronder staat een algemeen voorbeeld van de werking van een dynamische route. De gebruiker geeft zijn naam op en wordt doorverbonden naar zijn profielpagina:</p>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/zomaar_een_pagina/&lt;naam&gt;&quot;</span><span class="p">)</span>
+</span><span class="k">def</span> <span class="nf">andere_pagina</span><span class="p">(</span><span class="n">naam</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Gebruiker: </span><span class="si">{</span><span class="n">naam</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>Met deze kennis krijgt de applicatie weer een extra dimensie. De muziekschool heeft vele cursisten en iedereen heeft de mogelijkheid een eigen pagina in te richten. We voeren hierom de onderstaande route toe aan onze server:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/cursist/&lt;naam&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">cursist</span><span class="p">(</span><span class="n">naam</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Dit is de pagina van </span><span class="si">{</span><span class="n">naam</span><span class="si">}</span><span class="s2">&lt;h1&gt;&quot;</span>
+</code></pre></div>
+<p>Uiteraard weer een testje. De applicatie wordt gerund en URL van de pagina van een cursist wordt ingegeven. We gaan hiervoor naar de url <code>http://localhost:5000/cursist/Henk</code>: let op dat de de string <em>na</em> <code>cursist</code> (<code>Henk</code> in dit geval) wordt opgevangen door de parameter <code>naam</code> in de functie <code>cursist</code>.</p>
+<p><img alt="De pagina van Henk" src="imgs/cursist_Henk.png" /></p>
+<p>Als we bijvoorbeeld in plaats van 'Henk' 'Ralf' gebruiken, dus navigeren naar <code>http://localhost:5000/cursist/Ralf</code>, krijgen we de corresponderende pagina:</p>
+<p><img alt="De pagina van Ralf" src="imgs/cursist_Ralf.png" /></p>
+<h2 id="foutmeldingen">Foutmeldingen<a class="headerlink" href="#foutmeldingen" title="Permanent link">&para;</a></h2>
+<p>Werkend met Flask zal het ongetwijfeld voorkomen dat er fouten sluipen in de code. Zijn er fouten detecteert dan kan de optie <code>debug=True</code> ingeschakeld worden om te helpen de fouten op te sporen.</p>
+<p>Om dit te kunnen demonstreren wordt er een fout ingebouwd in de code. Van elke naam wordt nu gevraagd de twintigste letter af te beelden. In het geval dat de naam Joyce luidt, zal dat een foutmelding opleveren, aangezien de naam maar uit vijf (5) tekens bestaat.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/lengte/&lt;naam&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">lengte</span><span class="p">(</span><span class="n">naam</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;De twintigste letter van de naam </span><span class="si">{</span><span class="n">naam</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">naam</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>Als we deze pagina oproepen met een naam die korter is dan twintig letters en we hebben de debug-modus <em>niet</em> aanstaan (<code>app.run()</code>), krijgen we het onderstaande te zien:</p>
+<p><img alt="Een niet zo gek informatieve foutmelding" src="imgs/lengte_Karel.png" /></p>
+<p>Als we <code>debug=True</code> zetten, krijgen we een wat informatiever foutmelding:</p>
+<p><img alt="Een wat informatiever foutmelding" src="imgs/lengte_Joyce.png" /></p>
+<p>Dit geeft al een stuk meer informatie. Achter elke regel is een kleine console te vinden. En als daarop geklikt wordt, hier bij de regel waarop het fout gaat, verschijnt het volgende in beeld, er wordt gevraagd een pincode in te voeren. Als je die pincode hebt ingevoerd kan er naar de regel gesprongen worden die zorgt voor de foutmelding en gekeken worden wat er aan de hand is.</p>
+<p><img alt="Springen naar de regel die de foutmelding heeft opgeworpen" src="imgs/met_pincode.png" /></p>
+<p>Maak nu <a href="oefeningen/flask-oefening1.html">oefening 1</a></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="flask-deel2.html" class="md-footer__link md-footer__link--prev" aria-label="Vorige: Flask – Installatie" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Vorige
+              </span>
+              Flask – Installatie
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="flask-deel4.html" class="md-footer__link md-footer__link--next" aria-label="Volgende: Flask – Templates" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Volgende
+              </span>
+              Flask – Templates
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Gekopieerd naar klembord", "clipboard.copy": "Kopi\u00ebren naar klembord", "search.config.lang": "nl", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Zoeken", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "Geen overeenkomende documenten", "search.result.one": "1 overeenkomende document", "search.result.other": "# overeenkomende documenten", "search.result.placeholder": "Typ om te beginnen met zoeken", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      
+        <script src="../js/imgs.js"></script>
+      
+    
+  </body>
+</html>

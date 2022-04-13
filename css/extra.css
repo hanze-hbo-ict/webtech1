@@ -1,0 +1,21 @@
+body { color:#007575;}
+.md-typeset table:not([class]) { font-size:0.8rem; }
+
+
+.md-typeset a { color:blueviolet; }
+div.admonition { border:solid gray 1px; width:75%; margin:auto !important; margin-bottom:2vh; }
+img { display:block; margin:auto; width:55%; border:solid gray 1px;cursor:pointer; }
+img:hover{opacity:0.7}
+h2 { font-size:1.5rem; }
+h3 { font-size:1.2rem; font-weight:700; }
+#modal-image { cursor:default; opacity:1;}
+
+
+/* from https://www.w3schools.com/howto/howto_css_modal_images.asp */
+
+.modal{display:none;position:fixed;z-index:1;padding-top:100px;left:0;top:0;width:100vw;height:100vh;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.9)}
+.modal-content{margin:auto;display:block;width:80%;max-width:700px}
+#caption{margin:auto;display:block;width:80%;max-width:700px;text-align:center;color:#ccc;padding:10px 0;height:150px}
+#caption,.modal-content{animation-name:zoom;animation-duration:0.3s}
+
+@keyframes zoom{from{transform:scale(0)}to{transform:scale(1)}}.close{position:absolute;top:15px;right:35px;color:#f1f1f1;font-size:40px;font-weight:bold;transition:0.3s}.close:focus,.close:hover{color:#bbb;text-decoration:none;cursor:pointer}@media only screen and (max-width: 700px){.modal-content{width:100%}}
