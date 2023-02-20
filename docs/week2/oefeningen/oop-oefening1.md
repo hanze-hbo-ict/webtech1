@@ -1,6 +1,6 @@
 # OOP Python – Oefening 1
 
-Het programma is toch nog niet helemaal perfect. Kijk naar de volgende coderegels van een tweede klant, Britt:
+Bekijk nogmaals het bestand [`bankrekening.py`](../bestanden/bankrekening.py).  Het programma is nog niet helemaal perfect. Kijk naar de volgende coderegels van een tweede klant, Britt:
 
 ```ipython
 In [1]: run "bankrekening"
