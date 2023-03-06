@@ -1,9 +1,11 @@
 # Oefening 1
 
 ## opgave 1
-Zorg voor een koppeling tussen SQLite en de database `test.db`. Zorg voor een passende melding als het gelukt is.
+
+Maak gebruik van sqlite om de database `test.sqlite` te maken. 
 
 ## opgave 2
+
 Maak een tabel aan met naam `bedrijf`. Deze tabel moet de volgende attributen hebben:
 
 kolomnaam | eigenschappen 
@@ -13,9 +15,9 @@ kolomnaam | eigenschappen
 `Plaats` | INT			NOT NULL
 `Salaris` | Real			NOT NULL
 
-Laat een melding zien als het aanmaken van de tabel gelukt is.
 
 ## opgave 3
+
 Voeg de volgende gegevens toe:
 
 ID | Naam | Plaats | Salaris
@@ -25,11 +27,10 @@ ID | Naam | Plaats | Salaris
 3 | Coen | Cairo | 65000
 4 | Daphne | Dortmund | 65000
 
-Als de gegevens ingevoerd zijn een melding dat het gelukt is.
 
 ## Opgave 4
 
-Schrijf een functie die alle gegevens uit de tabel `bedrijf` afdrukt. Gebruik deze functie om telkens de gegevens uit de tabel af te drukken nadat je de volgende wijzigingen hebt doorgevoerd:
+Schrijf een query die alle gegevens uit de tabel `bedrijf` afdrukt. Gebruik deze query om telkens de gegevens uit de tabel af te drukken nadat je de volgende wijzigingen hebt doorgevoerd:
 
 - Wijzig het salaris van het record met ID 1. Het salaris wordt nu 90_000.
 - Verwijder het record met het nummer 2.
@@ -38,7 +39,6 @@ Schrijf een functie die alle gegevens uit de tabel `bedrijf` afdrukt. Gebruik de
 
 ## Opgave 5
 
-Verbreek de connectie.
-
+Sluit sqlite weer af. Merk op dat er nu een bestand `demo.sqlite` op je filesystem is aangemaakt.
 
 
