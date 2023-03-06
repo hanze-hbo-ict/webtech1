@@ -21,12 +21,16 @@ Weeknummer | Onderwerpen
 
 ## Toetsing
 
-Vanaf week vijf werken studenten in duo's aan één van [de vier voorgestelde projecten](projecten/index.md). Beoordeling van dit project het gekozen project gebeurt door de begeleidende practicumdocent en vindt plaats aan het eind van het project op basis van [de beoordelings-rubric](rubrics_webtech.html). Grofweg moet de site voldoen aan de onderstaande criteria, maar het staat studenten vrij om hun eigen creativiteit (technische) kennis op het project te botvieren.
+Vanaf week vijf werken studenten in duo's aan hun eigen project, waarbij de volgende onderdelen van belang zijn:
 
 - Website heeft vormgeving en een koppeling met een database
 - Op de site ingevulde data komt door sqlalchemy terecht in een sqlite-database
 - Website maakt gebruik van verschillende views
 - Geregistreerde bezoekers kunnen op de site inloggen
+
+Als studenten geen project hebben of kunnen bedenken, is het ook prima om één van [de vier voorgestelde projecten](projecten/index.md) uit te werken. 
+
+Beoordeling van dit project het project gebeurt door de begeleidende practicumdocent en vindt aan het eind van het kwartaal plaats op basis van [de beoordelings-rubric](rubrics_webtech.html).
 
 Mocht het project aan het eind van het blok nog onvoldoende blijken te zijn, dan worden door de betreffende practicumdocent individuele reparatie-afspraken (inclusief deadlines) gemaakt. In dat geval wordt de onvoldoende wel in Osiris geregistreerd en gelden de herstelwerkzaamheden als herkansing.
 
