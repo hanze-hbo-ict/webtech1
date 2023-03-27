@@ -148,6 +148,8 @@ Tot zover de code van de file `models.py`. Om de database aan te maken en om de 
 
 - `flask db init`
 
+- `flask db migrate`
+
 - `flask db upgrade`
 
 ## Demonstratie
