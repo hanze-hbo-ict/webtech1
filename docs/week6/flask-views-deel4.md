@@ -144,7 +144,7 @@ Tot zover de code van de file `models.py`. Om de database aan te maken en om de 
 
 - Stel de omgevingsvariabele FLASK_APP in
     - Voor een MacOS / Linux-machine is dat `export FLASK_APP = models.py`
-    - Voor een Windows-machine `set FLASK_APP = models.py`
+    - Voor een Windows-machine, met cmd: `set FLASK_APP = models.py`, met PowerShell: `$Env:FLASK_APP = "models.py"`
 
 - `flask db init`
 
