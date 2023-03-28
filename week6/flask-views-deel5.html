@@ -1538,18 +1538,25 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-4-het-ontwerpen-van-de-formulieren" class="md-nav__link">
-    Stap 4: Het ontwerpen van de formulieren
+  <a href="#stap-4-het-aanmaken-van-de-database-en-het-opstarten-van-de-applicatie" class="md-nav__link">
+    Stap 4: het aanmaken van de database en het opstarten van de applicatie
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-5-het-vullen-van-de-html-bestanden" class="md-nav__link">
-    Stap 5: Het vullen van de HTML-bestanden.
+  <a href="#stap-5-het-ontwerpen-van-de-formulieren" class="md-nav__link">
+    Stap 5: Het ontwerpen van de formulieren
   </a>
   
-    <nav class="md-nav" aria-label="Stap 5: Het vullen van de HTML-bestanden.">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stap-6-het-vullen-van-de-html-bestanden" class="md-nav__link">
+    Stap 6: Het vullen van de HTML-bestanden.
+  </a>
+  
+    <nav class="md-nav" aria-label="Stap 6: Het vullen van de HTML-bestanden.">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1912,18 +1919,25 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-4-het-ontwerpen-van-de-formulieren" class="md-nav__link">
-    Stap 4: Het ontwerpen van de formulieren
+  <a href="#stap-4-het-aanmaken-van-de-database-en-het-opstarten-van-de-applicatie" class="md-nav__link">
+    Stap 4: het aanmaken van de database en het opstarten van de applicatie
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-5-het-vullen-van-de-html-bestanden" class="md-nav__link">
-    Stap 5: Het vullen van de HTML-bestanden.
+  <a href="#stap-5-het-ontwerpen-van-de-formulieren" class="md-nav__link">
+    Stap 5: Het ontwerpen van de formulieren
   </a>
   
-    <nav class="md-nav" aria-label="Stap 5: Het vullen van de HTML-bestanden.">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stap-6-het-vullen-van-de-html-bestanden" class="md-nav__link">
+    Stap 6: Het vullen van de HTML-bestanden.
+  </a>
+  
+    <nav class="md-nav" aria-label="Stap 6: Het vullen van de HTML-bestanden.">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2105,11 +2119,20 @@ Het tweede gedeelte bestaat uit het opzetten van de koppeling tussen applicatie 
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;verwijder_cur.html&#39;</span><span class="p">,</span><span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
 </code></pre></div>
 <p>Weer meer van hetzelfde. Als het de bedoeling is een cursist te verwijderen dan wordt deze view opgestart. Omdat er nog niet op een button geklikt is, wordt gelinkt naar <a href="bestanden/templates/verwijder_cur.html"><code>verwijder_cur.html</code></a> en zal er een leeg scherm te zien zijn met weer een passende tekst. Na invulling van het id van de cursist en een bevestiging daarvan door op de knop te drukken, zal het record verwijderd worden waarna <a href="bestanden/templates/toon_cur.html"><code>toon_cur.html</code></a> aangeroepen wordt waardoor de aangepast lijst zichtbaar is.</p>
-<p>Ter afsluiting:</p>
+<h2 id="stap-4-het-aanmaken-van-de-database-en-het-opstarten-van-de-applicatie">Stap 4: het aanmaken van de database en het opstarten van de applicatie<a class="headerlink" href="#stap-4-het-aanmaken-van-de-database-en-het-opstarten-van-de-applicatie" title="Permanent link">&para;</a></h2>
+<p>De volgende (voorlaatste) regel betreft het daadwerkelijk aanmaken van de database. We zien hier de regel <code>db.create_all()</code>; dit houdt in dat we de database (het SQLAlchemy-object dat we hebben aangemaakt op regel 19) de opdracht geven alle model-klassen langs te lopen en de corresponderende (<em>gemapte</em>) database-tabellen aan te maken (op basis van de informatie die is ingegeven in die modelklassen).</p>
+<div class="admonition info">
+<p class="admonition-title">Verschillende versies van SQLAlchemy</p>
+<p>In nieuwere versies van SQLAlchemy is het creëren van de database zelf behoorlijk aangepast. In <a href="https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/api/#flask_sqlalchemy.SQLAlchemy.create_all">de documentatie staat</a> <em>This requires that a Flask application context is active</em>. Dit betekent dat je het statement binnen een <em>flask-context</em> moet uitvoeren:</p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>Tenslotte starten we de applicatie op, op de manier die we al gewend zijn.</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="stap-4-het-ontwerpen-van-de-formulieren">Stap 4: Het ontwerpen van de formulieren<a class="headerlink" href="#stap-4-het-ontwerpen-van-de-formulieren" title="Permanent link">&para;</a></h2>
+<h2 id="stap-5-het-ontwerpen-van-de-formulieren">Stap 5: Het ontwerpen van de formulieren<a class="headerlink" href="#stap-5-het-ontwerpen-van-de-formulieren" title="Permanent link">&para;</a></h2>
 <p>Hier worden de formulieren in <a href="bestanden/forms.py"><code>forms.py</code></a> ontworpen.
 Er is al uitvoerig aandacht besteed aan het opzetten van formulieren met <code>Flask</code>. Ook deze twee formulieren <code>VoegtoeForm</code> en <code>VerwijderForm</code> zullen vast geen vragen meer oproepen:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">FlaskForm</span>
@@ -2126,7 +2149,7 @@ Er is al uitvoerig aandacht besteed aan het opzetten van formulieren met <code>F
     <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Verwijder&#39;</span><span class="p">)</span>
 </code></pre></div>
 <p>Het formulier om een cursist toe te voegen kent een veld waarin een naam kan worden ingegeven en een knop om te bevestigen. Voor het verwijderen van een cursist is een veld nodig om het <code>id</code> in te geven en weer een knop om te bevestigen.</p>
-<h2 id="stap-5-het-vullen-van-de-html-bestanden">Stap 5: Het vullen van de HTML-bestanden.<a class="headerlink" href="#stap-5-het-vullen-van-de-html-bestanden" title="Permanent link">&para;</a></h2>
+<h2 id="stap-6-het-vullen-van-de-html-bestanden">Stap 6: Het vullen van de HTML-bestanden.<a class="headerlink" href="#stap-6-het-vullen-van-de-html-bestanden" title="Permanent link">&para;</a></h2>
 <h3 id="basehtml"><code>base.html</code><a class="headerlink" href="#basehtml" title="Permanent link">&para;</a></h3>
 <p>In dit bestand wordt de structuur van de website grotendeels vastgelegd. In ieder geval wordt de connectie naar Bootstrap hier vastgelegd en wordt er ook een navigatiebalk opgemaakt. Het is de bedoeling dat alle overige webpagina’s van dit sjabloon gebruik gaan maken. Die pagina’s kunnen hun eigen specifieke inhoud opnemen in het block-vak.</p>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
