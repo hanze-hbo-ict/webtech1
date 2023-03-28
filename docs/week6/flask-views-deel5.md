@@ -149,14 +149,26 @@ def del_cur():
 
 Weer meer van hetzelfde. Als het de bedoeling is een cursist te verwijderen dan wordt deze view opgestart. Omdat er nog niet op een button geklikt is, wordt gelinkt naar [`verwijder_cur.html`](bestanden/templates/verwijder_cur.html) en zal er een leeg scherm te zien zijn met weer een passende tekst. Na invulling van het id van de cursist en een bevestiging daarvan door op de knop te drukken, zal het record verwijderd worden waarna [`toon_cur.html`](bestanden/templates/toon_cur.html) aangeroepen wordt waardoor de aangepast lijst zichtbaar is.
 
-Ter afsluiting:
+## Stap 4: het aanmaken van de database en het opstarten van de applicatie
+
+De volgende (voorlaatste) regel betreft het daadwerkelijk aanmaken van de database. We zien hier de regel `db.create_all()`; dit houdt in dat we de database (het SQLAlchemy-object dat we hebben aangemaakt op regel 19) de opdracht geven alle model-klassen langs te lopen en de corresponderende (*gemapte*) database-tabellen aan te maken (op basis van de informatie die is ingegeven in die modelklassen).
+
+!!! Info "Verschillende versies van SQLAlchemy"
+    In nieuwere versies van SQLAlchemy is het creëren van de database zelf behoorlijk aangepast. In [de documentatie staat](https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/api/#flask_sqlalchemy.SQLAlchemy.create_all) *This requires that a Flask application context is active*. Dit betekent dat je het statement binnen een *flask-context* moet uitvoeren:
+
+    ```python
+    with app.app_context():
+        db.create_all()
+    ```
+
+Tenslotte starten we de applicatie op, op de manier die we al gewend zijn.
 
 ```python
 if __name__ == '__main__':
     app.run(debug=True)
 ```
 
-## Stap 4: Het ontwerpen van de formulieren 
+## Stap 5: Het ontwerpen van de formulieren 
 
 Hier worden de formulieren in [`forms.py`](bestanden/forms.py) ontworpen.
 Er is al uitvoerig aandacht besteed aan het opzetten van formulieren met `Flask`. Ook deze twee formulieren `VoegtoeForm` en `VerwijderForm` zullen vast geen vragen meer oproepen:
@@ -178,7 +190,7 @@ class VerwijderForm(FlaskForm):
 
 Het formulier om een cursist toe te voegen kent een veld waarin een naam kan worden ingegeven en een knop om te bevestigen. Voor het verwijderen van een cursist is een veld nodig om het `id` in te geven en weer een knop om te bevestigen.
 
-## Stap 5: Het vullen van de HTML-bestanden.
+## Stap 6: Het vullen van de HTML-bestanden.
 
 ### `base.html`
 In dit bestand wordt de structuur van de website grotendeels vastgelegd. In ieder geval wordt de connectie naar Bootstrap hier vastgelegd en wordt er ook een navigatiebalk opgemaakt. Het is de bedoeling dat alle overige webpagina’s van dit sjabloon gebruik gaan maken. Die pagina’s kunnen hun eigen specifieke inhoud opnemen in het block-vak.
