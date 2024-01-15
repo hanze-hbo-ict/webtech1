@@ -21,7 +21,7 @@ class Mordor(Ork):
         super().schade(geraakt // 4)    
 ```
 
-Een ork uit de Mordor-groep is ‘Gothmog’. Dat wordt het object uit deze klasse dat aangemaakt wordt.
+Een Ork uit de Mordor-groep is ‘Gothmog’. Dat wordt het object uit deze klasse dat aangemaakt wordt.
 
 ```python
 from aardman import Aardman, Ork, Uruk_Hai, Mordor
@@ -32,4 +32,4 @@ gothmog.schade(12)
 print(gothmog)
 ```
 
-
+Maak nu de klasse `Saruman` aan met zelfgekozen waardes en test deze door een instance aan te maken en deze verschillende hoeveelheden schade toe te brengen.
