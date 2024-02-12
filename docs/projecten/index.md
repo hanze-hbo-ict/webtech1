@@ -2,18 +2,18 @@
 
 Gedurende het blok werken studenten in duo's aan één van de vier onderstaande casus:
 
-1. [Bungelowpark Bos en Duin](bungelowpark.md)
+1. [Bungalowpark Bos en Duin](bungalowpark.md)
 2. [Website Filmfan](filmfan.md)
 3. [Programmeerles voor gepensioneerden](programmeerles.md)
 4. [Stage lopen](stage.md)
 
-Kies één van deze casus en laat aan je practicumdocent weten welke casus je gaat doen en met wie.In weken 3, 5, 6 en 8 zijn er toetsmomenten ingepland waarop je het werk tot dan toe aan de practicumdocent laat zien en toelicht. De algemene planning hiervoor is als volgt:
+Kies één van deze casus en laat aan je practicumdocent weten welke casus je gaat doen en met wie. In weken 3, 5, 6 en 8 zijn er toetsmomenten ingepland waarop je het werk tot dan toe aan de practicumdocent laat zien en toelicht. De algemene planning hiervoor is als volgt:
 
 weeknummer | onderdelen van de website
 ---|---
-3 | Website heeft vormgeving en een koppeling met een database
-5 | Op de site ingevulde data komt terecht in een sqlite-database
-6 | Website maakt gebruik van verschillende views
+3 | Website heeft vormgeving
+5 | Website biedt basale interactie
+6 | Website maakt gebruik van verschillende views en op de site ingevulde data komt terecht in een sqlite-database
 8 | Geregistreerde bezoekers kunnen op de site inloggen
 
 ## Uitgebreide planning
