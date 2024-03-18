@@ -1,6 +1,13 @@
 # Casuïsiek voor het project
 
-Gedurende het blok werken studenten in duo's aan één van de vier onderstaande casus:
+Vanaf week vijf werken studenten in duo's aan hun eigen project, waarbij de volgende onderdelen van belang zijn:
+
+- Website heeft vormgeving en een koppeling met een database
+- Op de site ingevulde data komt door sqlalchemy terecht in een sqlite-database
+- Website maakt gebruik van verschillende views
+- Geregistreerde bezoekers kunnen op de site inloggen
+
+Wanneer studenten zelf geen project kunnen bedenken, is het prima één van de onderstaande projecten uit te voeren:
 
 1. [Bungalowpark Bos en Duin](bungalowpark.md)
 2. [Website Filmfan](filmfan.md)
@@ -34,3 +41,5 @@ Maak ook in de folder templates aan met de specifiek voor dat model beschikbare 
 
 ### week 8
 Zorg voor een inlogsysteem en dat specifieke onderwerpen alleen voor ingelogde bezoekers beschikbaar is.
+
+## Requirements

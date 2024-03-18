@@ -1,10 +1,17 @@
 # Webtechnologie 1
 
-In deze module maken we kennis met webtechnologie. We bespreken html en css, en gebruiken uiteindelijk het [Bootstrap-framework](https://getbootstrap.com/) om de vormgeving van onze site eenvoudig professioneel te maken. Vervolgens gebruiken we de [python-library Flask](https://flask.palletsprojects.com/en/1.1.x/) om websites interactief te maken en aan te sluiten op een [sqlite-database](https://sqlite.org/index.html).
+In deze module maken we kennis met webtechnologie. We bespreken html en css, en gebruiken het [Bootstrap-framework](https://getbootstrap.com/) om de vormgeving van onze site eenvoudig professioneel te maken. Vervolgens gebruiken we de [python-library Flask](https://flask.palletsprojects.com/en/2.0.x/) om websites interactief te maken en aan te sluiten op een [sqlite-database](https://sqlite.org/index.html).
 
 Zoals altijd hebben we ook in deze module te maken met versies van de afhankelijkheden. Alle voorbeelden en opdrachten zijn getest en uitgewerkt met speciekeke versies, maar in de tussentijd kunnen deze natuurlijk zijn aangepast. [Download hier het requirements-bestand](bestanden/requirements.txt) om de exacte versies van deze *dependencies* te krijgen.
 
 De module is onderdeel van de propedeuse van de opleiding HBO-ICT en is daarom bewust breed van ondiep van opzet: we bespreken alle facetten en alle lagen waar webtechnologie mee te maken heeft, maar gaan nergens echt de diepte in. Het web is een complex apparaat waarin veel verschillende technieken samenwerken en het is binnen het tijdsbestek van tien weken niet mogelijk om die allemaal uit ten treure te behandelen. Voor deze propedeutische fase is het voldoende wanneer deelnemers aan het eind voldoende <i>working knowledge</i> van dit alles hebben. Bij de opleiding Software Engineering komt het web nog uitgebreid aan de orde in semester vier.
+
+
+## Opzet van het thema
+
+Elke week is er één centraal hoorcollege waarin de theorie die die week aan bod komt vanuit een theoretisch perspectief wordt toegelicht. Dit college wordt twee keer voor de helft van de populatie gegeven, dus deze zijn parallel te volgen (wanneer het bijvoorbeeld een keer niet uitkomt qua roostering).
+
+Elke klas heeft twee werkcolleges per week. Bij dit werkcollege wordt de theoretische opzet nog een keer praktisch uitgebreid toegelicht. Per week zijn er ook oefeningen gegeven waar studenten individueel of met hun projectduopartner aan kunnen werken. De werkcolleges zijn verder natuurlijk bedoeld om te werken aan het project; de practiumdocent is dan aanwezig om vragen te stellen of te beantwoorden.
 
 
 ## Weekplanning

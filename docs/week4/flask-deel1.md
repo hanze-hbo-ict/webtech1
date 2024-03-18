@@ -1,5 +1,7 @@
 # Flask – Inleiding
 
+Bestudeer ook [de presentatie over Flask en Jinja via deze link](https://video.hanze.nl/media/HC+webtech1%2C+deel+4A+Flask+en+Jinja/0_hl2ub9s2) (let op: je moet hiervoor wel inloggen in het Hanze-systeem)
+
 ## Wat is Flask?
 
 Flask is een webframework, het is een Python-module waarmee op eenvoudige wijze webapplicaties ontwikkeld kunnen worden. Het heeft een kleine en gemakkelijk uit te breiden kern: het is een microframework dat geen ORM (Object Relational Manager) of dergelijke functies bevat. Het heeft wel veel coole functies, zoals url-routing en een template-engine. Het is een WSGI-webapp-framework.

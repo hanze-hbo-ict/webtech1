@@ -4,7 +4,7 @@ Aan het eind van deze tekst maken we [oefening nummer 1](../oefeningen/wk1oefeni
 
 ## List
 
-Veel webinhoud bestaat uit lijsten en om die reden heeft HTML daar speciale elementen voor. De gebruikelijkste lijsttypes zijn *geordend* en *ongeordend* lijsten:
+Veel webinhoud bestaat uit lijsten (we durven de stelling wel aan dat de meeste websites en -applicaties bestaan uit zogenaamde *glorified lists*) en om die reden heeft HTML daar speciale elementen voor. De gebruikelijkste lijsttypes zijn *geordend* en *ongeordend* lijsten:
 
 1. **Ongeordende lijsten** zijn lijsten waarbij de volgorde van de artikelen in de lijst er niet toe doet, zoals een boodschappenlijst. Deze worden ingesloten in een `<ul>`-element. Standaard worden de items voorafgegaan door een bullet.
 
@@ -52,7 +52,7 @@ Ook binnen een lijst kun je elementen nesten; je kunt dus ook een *list* in een 
 
 ## Attributen
 
-Afbeeldingen zijn een belangrijk onderdeel van veel webpagina's. Om een afbeelding toe te voegen aan het HTML-document wordt de tag `<img>` gebruikt.
+Afbeeldingen zijn een ander belangrijk onderdeel van veel webpagina's. Om een afbeelding toe te voegen aan het HTML-document wordt de tag `<img>` gebruikt.
 
 ```html
 <img src="" alt="">
@@ -89,7 +89,8 @@ Het `alt`-attribuut is handig voor mensen met een visuele beperking: op deze man
 
 De elementen `<div>` en `<span>` gebruikt worden wanneer een stijl voor een deel van een document moet worden vastgelegd en dat deel niet tevens door een ander element ingesloten wordt.
 
-De `<div>`-tag wordt vaak gebruikt om een stijl voor een groter deel van een document vast te leggen. Het geeft aan dat bepaalde elementen van je pagina bij elkaar horen (`div` staat ook voor [Content Division](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)).
+!!! info "de `div`-tag"
+    De `<div>`-tag is bedoeld om duidelijk te maken dat bepaalde elementen van je pagina bij elkaar horen (`div` staat ook voor [Content Division](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)).
 
 De `<span>`-tag lijkt erg op de `<div>`-tag, maar heeft als belangrijk verschil dat deze tag *inline* gebruikt kan worden. Waar een `<div>` normaliter gepaard gaat met een nieuwe regel ervoor en erna, kun je de `<span>`-tag gebruiken om onderdelen van de *lopende tekst* te stylen.
 
@@ -157,7 +158,7 @@ De link in het vorige voorbeeld is een zogenaamd *volledig pad*: er zit een voll
 !!! info "Commentaar in html"
     Net als in programmeertalen kun je ook in html commentaar opnemen. Je ziet dit in het voorbeeld hierboven gebeuren. Commentaar staat tussen `<!--` en `-->`. Dat kan handig zijn, wanneer je heel complexe of uitgebreide html aan het typen bent, of wannneer je een stuk html even niet in de browser wil zien.
 
-Tenslotte kun je ook nog een link maken naar een element *binnen* dezelfde pagina. Kijk bijvoorbeeld eens in het menu van deze pagina. Hier zie je de inhoudsopgave staan; door op één van deze links te klikken, ga je direct naar het betreffende onderdeel op deze pagina zelf.
+Tenslotte kun je ook nog een link maken naar een element *binnen* dezelfde pagina. Kijk bijvoorbeeld eens in het menu hier rechts van deze pagina. Hier zie je de inhoudsopgave staan; door op één van deze links te klikken, ga je direct naar het betreffende onderdeel op deze pagina zelf.
 
 Als je met je muis over zo'n link heengaat, zie je hoe die link eruit ziet: er wordt gebruik gemaakt van een *hashtag* (`#`) gevolgd door een stukje tekst. Die tekst correspondeert dan weer met het `id`-attribuut van het element in kwestie. Daar komen we later op terug, wanneer we het gaan hebben over stylesheets.
 
