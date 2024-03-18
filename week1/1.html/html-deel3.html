@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.14">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.10ba22f1.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -2435,7 +2435,7 @@
 <h1 id="html-lists-divs-en-spans">HTML – Lists, Divs en Spans<a class="headerlink" href="#html-lists-divs-en-spans" title="Permanent link">&para;</a></h1>
 <p>Aan het eind van deze tekst maken we <a href="../oefeningen/wk1oefening1.html">oefening nummer 1</a>.</p>
 <h2 id="list">List<a class="headerlink" href="#list" title="Permanent link">&para;</a></h2>
-<p>Veel webinhoud bestaat uit lijsten en om die reden heeft HTML daar speciale elementen voor. De gebruikelijkste lijsttypes zijn <em>geordend</em> en <em>ongeordend</em> lijsten:</p>
+<p>Veel webinhoud bestaat uit lijsten (we durven de stelling wel aan dat de meeste websites en -applicaties bestaan uit zogenaamde <em>glorified lists</em>) en om die reden heeft HTML daar speciale elementen voor. De gebruikelijkste lijsttypes zijn <em>geordend</em> en <em>ongeordend</em> lijsten:</p>
 <ol>
 <li>
 <p><strong>Ongeordende lijsten</strong> zijn lijsten waarbij de volgorde van de artikelen in de lijst er niet toe doet, zoals een boodschappenlijst. Deze worden ingesloten in een <code>&lt;ul&gt;</code>-element. Standaard worden de items voorafgegaan door een bullet.</p>
@@ -2477,7 +2477,7 @@
 </code></pre></div>
 <p><img alt="Geneste lists" src="imgs/geneste_lists.png" /></p>
 <h2 id="attributen">Attributen<a class="headerlink" href="#attributen" title="Permanent link">&para;</a></h2>
-<p>Afbeeldingen zijn een belangrijk onderdeel van veel webpagina's. Om een afbeelding toe te voegen aan het HTML-document wordt de tag <code>&lt;img&gt;</code> gebruikt.</p>
+<p>Afbeeldingen zijn een ander belangrijk onderdeel van veel webpagina's. Om een afbeelding toe te voegen aan het HTML-document wordt de tag <code>&lt;img&gt;</code> gebruikt.</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>
 </code></pre></div>
 <p>Met dit element kan een afbeelding in een HTML-pagina ingebed worden. Om aan te geven wáár het betreffende plaatje gevonden kan worden, moeten we een zogenaamd <em>attribuut</em> aan de tag toevoegen. Door gebruik te maken van attributen kun je html-tags voorzien van speciale betekenis, zoals bijvoorbeeld de locatie (url) van een plaatje.</p>
@@ -2499,7 +2499,10 @@
 <p><img alt="Wanneer het plaatje niet gevonden kan worden" src="imgs/verkeerd_verbonden.png" /></p>
 <h2 id="div-en-span">Div en span<a class="headerlink" href="#div-en-span" title="Permanent link">&para;</a></h2>
 <p>De elementen <code>&lt;div&gt;</code> en <code>&lt;span&gt;</code> gebruikt worden wanneer een stijl voor een deel van een document moet worden vastgelegd en dat deel niet tevens door een ander element ingesloten wordt.</p>
-<p>De <code>&lt;div&gt;</code>-tag wordt vaak gebruikt om een stijl voor een groter deel van een document vast te leggen. Het geeft aan dat bepaalde elementen van je pagina bij elkaar horen (<code>div</code> staat ook voor <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div">Content Division</a>).</p>
+<div class="admonition info">
+<p class="admonition-title">de <code>div</code>-tag</p>
+<p>De <code>&lt;div&gt;</code>-tag is bedoeld om duidelijk te maken dat bepaalde elementen van je pagina bij elkaar horen (<code>div</code> staat ook voor <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div">Content Division</a>).</p>
+</div>
 <p>De <code>&lt;span&gt;</code>-tag lijkt erg op de <code>&lt;div&gt;</code>-tag, maar heeft als belangrijk verschil dat deze tag <em>inline</em> gebruikt kan worden. Waar een <code>&lt;div&gt;</code> normaliter gepaard gaat met een nieuwe regel ervoor en erna, kun je de <code>&lt;span&gt;</code>-tag gebruiken om onderdelen van de <em>lopende tekst</em> te stylen.</p>
 <p>Zowel een <code>&lt;div&gt;</code> als een <code>&lt;span&gt;</code> hebben vanuit zichzelf geen speciale style. Dit krijgen ze pas wanneer je deze style definieert, bijvoorbeeld met behulp van <em>stylesheets</em>, wat we volgende week zullen gaan doen. Je kunt ook gebruik maken van het <code>style</code>-attribuut. Zie het voorbeeld hieronder.</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
@@ -2547,7 +2550,7 @@
 <p class="admonition-title">Commentaar in html</p>
 <p>Net als in programmeertalen kun je ook in html commentaar opnemen. Je ziet dit in het voorbeeld hierboven gebeuren. Commentaar staat tussen <code>&lt;!--</code> en <code>--&gt;</code>. Dat kan handig zijn, wanneer je heel complexe of uitgebreide html aan het typen bent, of wannneer je een stuk html even niet in de browser wil zien.</p>
 </div>
-<p>Tenslotte kun je ook nog een link maken naar een element <em>binnen</em> dezelfde pagina. Kijk bijvoorbeeld eens in het menu van deze pagina. Hier zie je de inhoudsopgave staan; door op één van deze links te klikken, ga je direct naar het betreffende onderdeel op deze pagina zelf.</p>
+<p>Tenslotte kun je ook nog een link maken naar een element <em>binnen</em> dezelfde pagina. Kijk bijvoorbeeld eens in het menu hier rechts van deze pagina. Hier zie je de inhoudsopgave staan; door op één van deze links te klikken, ga je direct naar het betreffende onderdeel op deze pagina zelf.</p>
 <p>Als je met je muis over zo'n link heengaat, zie je hoe die link eruit ziet: er wordt gebruik gemaakt van een <em>hashtag</em> (<code>#</code>) gevolgd door een stukje tekst. Die tekst correspondeert dan weer met het <code>id</code>-attribuut van het element in kwestie. Daar komen we later op terug, wanneer we het gaan hebben over stylesheets.</p>
 <p>Maak nu <a href="../oefeningen/wk1oefening1.html">oefening nummer 1</a>.</p>
 
@@ -2599,7 +2602,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Gekopieerd naar klembord", "clipboard.copy": "Kopi\u00ebren naar klembord", "search.result.more.one": "1 extra overeenkomst op deze pagina", "search.result.more.other": "# extra overeenkomsten op deze pagina", "search.result.none": "Geen overeenkomende documenten", "search.result.one": "1 overeenkomende document", "search.result.other": "# overeenkomende documenten", "search.result.placeholder": "Typ om te beginnen met zoeken", "search.result.term.missing": "Ontbreekt", "select.version": "Selecteer versie"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>
       
         <script src="../../js/imgs.js"></script>
       
