@@ -9,7 +9,7 @@ De module is onderdeel van de propedeuse van de opleiding HBO-ICT en is daarom b
 
 ## Opzet van het thema
 
-Elke week is er één centraal hoorcollege waarin de theorie die die week aan bod komt vanuit een theoretisch perspectief wordt toegelicht. Dit college wordt twee keer voor de helft van de populatie gegeven, dus deze zijn parallel te volgen (wanneer het bijvoorbeeld een keer niet uitkomt qua roostering).
+Elke week staat een specifiek onderdeel van het web centraal. Dit onderwerp wordt ondersteund door een vooraf opgenomen theorieles die studenten in hun eigen tijd kunnen doornemen. Hiernaast zijn er werkcolleges, waarin studenten werken aan oefeningen die het onderwerp van die week via een meer praktische weg over het voetlicht brengen. Vanaf week vijf werken studenten in duo’s aan hun eigen project, op basis waarvan de beoordeling plaatsvindt.
 
 Elke klas heeft twee werkcolleges per week. Bij dit werkcollege wordt de theoretische opzet nog een keer praktisch uitgebreid toegelicht. Per week zijn er ook oefeningen gegeven waar studenten individueel of met hun projectduopartner aan kunnen werken. De werkcolleges zijn verder natuurlijk bedoeld om te werken aan het project; de practiumdocent is dan aanwezig om vragen te stellen of te beantwoorden.
 
