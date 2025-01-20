@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.14">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.10ba22f1.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -58,7 +58,7 @@
     
       <link rel="stylesheet" href="../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -101,12 +101,12 @@
     <a href="../index.html" title="Webtechnologie 1" class="md-header__button md-logo" aria-label="Webtechnologie 1" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -159,7 +159,7 @@
     <a href="../index.html" title="Webtechnologie 1" class="md-nav__button md-logo" aria-label="Webtechnologie 1" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     Webtechnologie 1
@@ -2449,11 +2449,11 @@
 <p>Dit zijn alle files die nodig zijn bij dit project, met de naam <code>mijnproject</code>; <a href="bestanden/login.zip">download hier de bestanden</a>. Technisch gezien is de applicatie te klein om uit te kunnen splitsen in aparte onderdelen, zoals in het vorige deel beschreven is. Maar dezelfde opzet is wel aangehouden.</p>
 <h2 id="__init__py"><code>__init__.py</code><a class="headerlink" href="#__init__py" title="Permanent link">&para;</a></h2>
 <p>De eerste actie is weer het importeren van de benodigde items:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
-<span class="kn">from</span> <span class="nn">flask_migrate</span> <span class="kn">import</span> <span class="n">Migrate</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">LoginManager</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask_sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask_migrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">Migrate</span>
+<span class="hll"><span class="kn">from</span><span class="w"> </span><span class="nn">flask_login</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoginManager</span>
 </span></code></pre></div>
 <p>De onderste coderegel is nieuw. Waarschijnlijk zul je deze module separaat installeren door middel van <code>pip</code>.</p>
 <p><code>Flask-login</code> biedt gebruikerssessiebeheer voor <code>Flask</code>. Het voert de algemene taken uit van inloggen, uitloggen en het onthouden van de sessies van de gebruikers gedurende langere perioden. Hieronder staat een opsomming.</p>
@@ -2481,9 +2481,9 @@
 <p>De tweede gearceerde coderegel zorgt ervoor dat de app bekend is bij de <code>login_manager</code> en met de laatste regel wordt de plek doorgegeven waar gebruikers kunnen inloggen.</p>
 <h2 id="modelspy"><code>models.py</code><a class="headerlink" href="#modelspy" title="Permanent link">&para;</a></h2>
 <p>Vervolgens weer de coderegels waarmee de benodigde items geïmporteerd worden. Ook hier is een nieuw item aanwezig. Verder is de keuze voor hashing gevallen op <code>Werkzeug</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">mijnproject</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">login_manager</span>
-<span class="kn">from</span> <span class="nn">werkzeug.security</span> <span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span><span class="n">check_password_hash</span>
-<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">UserMixin</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">mijnproject</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">login_manager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">werkzeug.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span><span class="n">check_password_hash</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask_login</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserMixin</span>
 </code></pre></div>
 <p>In de eerste coderegel wordt vastgelegd dat uit <code>__init__.py</code>, <code>db</code> en <code>login_manager</code> nodig zijn voor een juiste werking. De tweede regel is bekend en de derde coderegel zorgt voor enige luxe. <code>UserMixin</code> wordt als superklasse gebruikt en dat betekent dat er toegang verkregen wordt tot veel ingebouwde functies. Het is dan niet meer nodig als ontwikkelaar deze zelf aan te maken. Ze kunnen gewoon aangeroepen worden.</p>
 <p>Bijvoorbeeld:</p>
@@ -2495,7 +2495,7 @@
 </ul>
 <p>Nu kan de gebruikersklasse aangemaakt worden. De naam van de klasse wordt <code>User</code>, dat is hier een gangbaardere term dan <code>Gebruiker</code>. Voor iedere gebruiker wordt het ID, de gebruikersnaam, een wachtwoord en het e-mailadres vastgelegd.</p>
 <p>De klasse <code>User()</code> erft eigenschappen van <code>dbModel</code> en <code>UserMixin</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">UserMixin</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">UserMixin</span><span class="p">):</span>
 
      <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;users&#39;</span>
 
@@ -2506,34 +2506,34 @@
 </code></pre></div>
 <p>Achter de variabelen <code>email</code>, <code>username</code> en <code>password_hash</code> staat een getal genoteerd (64 of 128). Dat betreft het aantal posities dat voor die variabele beschikbaar is. Verder hebben <code>email</code> en <code>username</code> het kenmerk <code>unique</code> meegekregen. Op de primary key wordt automatisch gecontroleerd dat er geen dubbele waarden van voorkomen, maar het e-mailadres en de gebruikersnaam mogen natuurlijk ook maar één keer voorkomen in de database met inloggegevens.</p>
 <p>Nu is het weer de beurt aan <code>__init__()</code>. De volgorde waarin de coderegels worden opgenomen in de diverse bestanden heeft steeds eenzelfde stramien.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 </code></pre></div>
 <p>Voor iedere nieuwe gebruiker wordt gevraagd om een gebruikersnaam, een e-mailadres en een wachtwoord. Van het opgegeven wachtwoord wordt onmiddellijk een hash-versie geproduceerd.</p>
 <p>Verder is er nog een methode nodig die gaat controleren of het ingevoerde wachtwoord het juiste is. In de vorige paragraaf is deze methode uitgebreid besproken:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">check_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 </code></pre></div>
 <p>Er wordt gecontroleerd of het opgegeven password voldoet aan de hash-versie. Er wordt <code>True</code> of <code>False</code> als uitkomst geretourneerd.</p>
 <p>Als laatste nog een nieuwe vereiste methode. Deze nieuwe functie <code>load_user()</code> wordt in de code opgenomen net voor het definiëren van de klasse <code>User()</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@login_manager</span><span class="o">.</span><span class="n">user_loader</span>
-<span class="k">def</span> <span class="nf">load_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
 </code></pre></div>
 <p>De <code>user_loader</code> decorator geeft <code>Flask-login</code> toestemming om de gegevens van de huidige gebruiker te laden en het bijbehorende ID te gebruiken. Daarmee kan de gebruiker pagina’s bekijken die bij zijn profiel horen, zoals onder andere het beheren van de eigen gegevens en eigen blogberichten. En na een succesvolle aanmelding kan de naam van de gebruiker aan een welkomstwoord gekoppeld worden.</p>
 <h2 id="formspy"><code>forms.py</code><a class="headerlink" href="#formspy" title="Permanent link">&para;</a></h2>
 <p>In dit bestand worden de formulieren opgesteld. Bij het inloggen vinden er een aantal controles plaats, dus naast het importeren van de formulieropties, moeten ook de voorgeprogrammeerde validaties beschikbaar komen om die controles te kunnen uitvoeren zonder dat de ontwikkelaar ze zelf weer hoeft uit te programmeren.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">FlaskForm</span>
-<span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">PasswordField</span><span class="p">,</span> <span class="n">SubmitField</span>
-<span class="kn">from</span> <span class="nn">wtforms.validators</span> <span class="kn">import</span> <span class="n">DataRequired</span><span class="p">,</span> <span class="n">Email</span><span class="p">,</span> <span class="n">EqualTo</span>
-<span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">ValidationError</span>
-<span class="kn">from</span> <span class="nn">mijnproject.models</span> <span class="kn">import</span> <span class="n">User</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask_wtf</span><span class="w"> </span><span class="kn">import</span> <span class="n">FlaskForm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wtforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">PasswordField</span><span class="p">,</span> <span class="n">SubmitField</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wtforms.validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataRequired</span><span class="p">,</span> <span class="n">Email</span><span class="p">,</span> <span class="n">EqualTo</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">wtforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mijnproject.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
 </code></pre></div>
 <p>Er moet gecontroleerd worden of velden op een formulier voldoen aan de verplichting een waarde te krijgen. Verder vindt er toezicht plaats of het opgegeven e-mailadres aan de eisen voldoet – is er bijvoorbeeld een apenstaartje (<code>@</code>) meegestuurd en dergelijke. De validator <code>EqualTo</code> is uitgerust om twee waardes met elkaar te vergelijken. Mocht er iets niet in orde dan kan er met behulp van de <code>ValidationError</code> een passende melding getoond wordt.</p>
 <p>Nu kunnen de formulieren opgebouwd worden, te beginnen met het registratieformulier. Omdat er als veel vaker Engelse termen in de code zijn opgetekend, worden hier ook Engelse benamingen gehanteerd.</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">RegistrationForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RegistrationForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
     <span class="n">email</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Email&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(),</span><span class="n">Email</span><span class="p">()])</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Username&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">()])</span>
     <span class="n">password</span> <span class="o">=</span> <span class="n">PasswordField</span><span class="p">(</span><span class="s1">&#39;Password&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(),</span> <span class="n">EqualTo</span><span class="p">(</span><span class="s1">&#39;pass_confirm&#39;</span><span class="p">,</span>    <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Passwords Must Match!&#39;</span><span class="p">)])</span>
@@ -2545,19 +2545,19 @@
 <p>Bij een registratie is het heel gebruikelijk te vragen om het wachtwoord nog een keer op te voeren om na te kunnen gaan of de gebruiker geen typo heeft gemaakt. Zo ook hier. De user voert een tweede keer het wachtwoord in dat wordt opgeslagen in de variabele <code>pass_confirm</code>.</p>
 <p>Nu weer terug naar het veld waar voor de eerste keer het wachtwoord wordt ingevuld. De tweede validator hier is <code>EqualTo</code>. Hierbij wordt nu vergeleken of de beide opgegeven wachtwoorden aan elkaar gelijk zijn.</p>
 <p>Aan dit formulier worden nog een tweetal methoden verbonden:</p>
-<p><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+<p><div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">():</span>
         <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;Dit e-mailadres staat al geregistreerd!&#39;</span><span class="p">)</span>
 </code></pre></div>
 De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt gecontroleerd of het opgegeven e-mailadres gevonden kan worden door de waarde ervan op te geven in de <code>query.filter.by(waarde).first()</code>. Geeft dit resultaat <code>True</code>, dan is er al een e-mailadres met een gelijke inhoud in de database te vinden – en dat mag niet. Er moet dan een melding getoond worden, hetgeen hier dus via de <code>ValidationError</code> geregeld is.</p>
 <p>De tweede methode is nagenoeg gelijk aan de eerste. Alleen moet er nu nagegaan worden of de gebruikersnaam al in de database voorkomt.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">validate_username</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate_username</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">():</span>
         <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;Deze gebruikersnaam is al vergeven, probeer een ander naam!&#39;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="het-inlogformulier">Het inlogformulier<a class="headerlink" href="#het-inlogformulier" title="Permanent link">&para;</a></h2>
 <p>Nu het registratieformulier ontwikkeld is, is de volgende logische stap het aanmaken van een inlogformulier:</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">LoginForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">LoginForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
     <span class="n">email</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Email&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(),</span> <span class="n">Email</span><span class="p">()])</span>
     <span class="n">password</span> <span class="o">=</span> <span class="n">PasswordField</span><span class="p">(</span><span class="s1">&#39;Password&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">()])</span>
     <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Inloggen&#39;</span><span class="p">)</span>
@@ -2610,10 +2610,10 @@ De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt geco
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Gekopieerd naar klembord", "clipboard.copy": "Kopi\u00ebren naar klembord", "search.result.more.one": "1 extra overeenkomst op deze pagina", "search.result.more.other": "# extra overeenkomsten op deze pagina", "search.result.none": "Geen overeenkomende documenten", "search.result.one": "1 overeenkomende document", "search.result.other": "# overeenkomende documenten", "search.result.placeholder": "Typ om te beginnen met zoeken", "search.result.term.missing": "Ontbreekt", "select.version": "Selecteer versie"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Gekopieerd naar klembord", "clipboard.copy": "Kopi\u00ebren naar klembord", "search.result.more.one": "1 extra overeenkomst op deze pagina", "search.result.more.other": "# extra overeenkomsten op deze pagina", "search.result.none": "Geen overeenkomende documenten", "search.result.one": "1 overeenkomende document", "search.result.other": "# overeenkomende documenten", "search.result.placeholder": "Typ om te beginnen met zoeken", "search.result.term.missing": "Ontbreekt", "select.version": "Selecteer versie"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.bd41221c.min.js"></script>
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
       
         <script src="../js/imgs.js"></script>
       
