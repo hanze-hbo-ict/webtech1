@@ -17,7 +17,7 @@ De middelste coderegel is bekend, en de onderste regel zorgt ervoor dat het pakk
 De volgende actie is om het programma te vertellen wat de basis-directory is. Normaal gesproken zou een gebruiker dat zelf moeten opgeven, maar doordat `os` geïmporteerd is, kan dat geheel automatisch geregeld worden:
 
 ```python
-basedir = os.path.abspath(os.path.dirname(__file__)
+basedir = os.path.abspath(os.path.dirname(__file__))
 ```
 
 Er gebeurt hier het volgende:
