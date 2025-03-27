@@ -40,9 +40,9 @@ Vanaf week vijf werken studenten in duo's aan hun eigen project, waarbij de volg
 
 Als studenten geen project hebben of kunnen bedenken, is het ook prima om één van [de vier voorgestelde projecten](projecten/index.md) uit te werken. 
 
-Beoordeling van dit project het project gebeurt door de begeleidende practicumdocent en vindt aan het eind van het kwartaal plaats op basis van [de beoordelings-rubric](rubrics_webtech.html).
+Beoordeling van het project vindt plaats aan de hand van een criteriumgericht interview met de betreffende practicumdocent. Tijdens dit gesprek van zo'n twintig minuten laten de studenten hun uitwerking zien en worden ze bevraagd over de details van de technische en niet-technische aspecten van hun realisatie. Het gesprek wordt aan het eind van het kwartaal als één blok ingeroosterd - de docenten maken een separaat rooster voor de individuele duo's.
 
-Mocht het project aan het eind van het blok nog onvoldoende blijken te zijn, dan worden door de betreffende practicumdocent individuele reparatie-afspraken (inclusief deadlines) gemaakt. In dat geval wordt de onvoldoende wel in Osiris geregistreerd en gelden de herstelwerkzaamheden als herkansing.
+Basis voor de uiteindelijke beoordeling is [de beoordelings-rubric](rubrics_webtech.html).  Mocht het project aan het eind van het blok nog onvoldoende blijken te zijn, dan worden door de betreffende practicumdocent individuele reparatie-afspraken (inclusief deadlines) gemaakt. In dat geval wordt de onvoldoende wel in Osiris geregistreerd en gelden de herstelwerkzaamheden als herkansing.
 
 ## Bron
 
