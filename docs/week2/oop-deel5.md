@@ -8,7 +8,7 @@ Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/oop-oefening
 
 ## Het principe van overerving
 
-Deze afbeelding laat het principe van overerving duidelijk zijn. Op het plaatje zijn allemaal vogels te zien. Een kenmerk van alle vogels is dat zij allen een snavel hebben en vleugels. De kenmerken die voor alle vogels gelden, worden zoveel mogelijk centraal vastgelegd, hier dus in de klasse `VOGEL`.
+Deze afbeelding laat het principe van overerving duidelijk zien. Op het plaatje zijn allemaal vogels te zien. Een kenmerk van alle vogels is dat zij allen een snavel hebben en vleugels. De kenmerken die voor alle vogels gelden, worden zoveel mogelijk centraal vastgelegd, hier dus in de klasse `VOGEL`.
 
 Daarna is er een tweedeling te zien tussen vogels die kunnen vliegen en vogels die die capaciteit niet beheersen. Alle vogels die kunnen vliegen bezitten de methode `vlieg()`. Deze methode wordt zo hoog mogelijk in de hiërarchie opgeslagen, hier in `VLIEGEND`. De vogels die niet kunnen vliegen hebben blijkbaar geen gemeenschappelijke methode. De struisvogel kan hardlopen (`ren()`) en de pinguïn kan zwemmen (`zwem()`). Omdat er dus allemaal individuele methoden zijn worden ze in de klasse zelf opgeslagen.
 

@@ -138,7 +138,7 @@ Maak nu [oefening 1](oefeningen/oop-oefening1.md)
 
 ## Te veel mogelijkheden
 
-Het idee is gewekt dat alles nu in kannen en kruiken geregeld is. Helaas, er zijn toch nog een aantal onvolkomenheden die aanpassing behoeven. Kijk eens naar het volgende scenario, waarbij een min of meer criminele activiteit is aangegeven:
+Het idee is gewekt dat alles nu in kannen en kruiken is. Helaas, er zijn toch nog een aantal onvolkomenheden die aanpassing behoeven. Kijk eens naar het volgende scenario, waarbij een min of meer criminele activiteit is aangegeven:
 
 ```ipython hl_lines="9"
 In [1]: run "bankrekening"

@@ -8,7 +8,7 @@ Aan het eind van deze paragraaf maken we [oefening 3](oefeningen/oop-oefening3.m
 
 ## Een gevleugeld voorbeeld
 
-Als voorbeeld wordt hier een klasse `Vleugel` toegevoegd aan het bestand met de eend en de pinguin. Deze klasse krijgt behalve de constructor (`__init__`) de methode `vliegen()`. Deze laatste krijgt als parameter `ratio` mee, die de verhouding tussen vleugels en lichaamsgewicht aangeeft. Deze verhouding bepaalt de wijze of een vogel al dan niet makkelijk kan opstijgen.
+Als voorbeeld wordt hier een klasse `Vleugel` toegevoegd aan een bestand met o.a. een klasse voor een eend (`Duck`). Deze klasse krijgt behalve de constructor (`__init__`) de methode `vliegen()`. Deze laatste krijgt als parameter `ratio` mee, die de verhouding tussen vleugels en lichaamsgewicht aangeeft. Deze verhouding bepaalt de wijze of een vogel al dan niet makkelijk kan opstijgen.
 
 ```python
 class Vleugel:
