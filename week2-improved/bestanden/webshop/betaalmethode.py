@@ -1,4 +1,4 @@
-"""Betaalmethode klasse voor de webshop"""
+"""Betaalmethode-klasse voor de webshop"""
 
 
 class Betaalmethode:

@@ -4,7 +4,7 @@ import random
 class Product:
     """Basisklasse voor alle producten in de webshop"""
 
-    def __init__(self, naam="Product", prijs=0.0, voorraad=0):
+    def __init__(self, naam, prijs, voorraad):
         self._naam = naam
         self._prijs = prijs
         self._voorraad = voorraad

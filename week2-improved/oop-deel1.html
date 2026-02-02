@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html/week2-improved/oop-deel1.html">
       
       
-        <link rel="prev" href="index.html">
+        <link rel="prev" href="../week2/oefeningen/oop-oefening3.html">
       
       
         <link rel="next" href="oop-deel2.html">
@@ -1554,34 +1554,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="index.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Week 2 - Object Georiënteerd Programmeren (Verbeterd)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1902,10 +1874,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_8" >
         
           
-          <label class="md-nav__link" for="__nav_5_9" id="__nav_5_9_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5_8" id="__nav_5_8_label" tabindex="0">
             
   
   
@@ -1923,8 +1895,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_9">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -3603,7 +3575,7 @@
 </code></pre></div>
 <p>Een klasse wordt gedefinieerd door het woord <code>class</code>, gevolgd door de naam van de klasse, beginnend met een hoofdletter. De klassedefinitie wordt afgesloten met een dubbele punt (<code>:</code>).</p>
 <p>Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze class bestaat. Dit geven we mee aan de methode die aangeroepen wordt wanneer er een object van een klasse wordt aangemaakt: de zogenaamde <em>constructor</em>. In Python is deze methode <code>__init__</code> (we komen daar zo wat uitgebreider op terug):</p>
-<div class="highlight"><pre><span></span><code>   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="o">=</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span> <span class="n">prijs</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">voorraad</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code>   <span class="o">...</span><span class="p">:</span>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">,</span> <span class="n">prijs</span><span class="p">,</span> <span class="n">voorraad</span><span class="p">):</span>
    <span class="o">...</span><span class="p">:</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_naam</span> <span class="o">=</span> <span class="n">naam</span>
    <span class="o">...</span><span class="p">:</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_prijs</span> <span class="o">=</span> <span class="n">prijs</span>
    <span class="o">...</span><span class="p">:</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_voorraad</span> <span class="o">=</span> <span class="n">voorraad</span>
@@ -3680,7 +3652,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Basisklasse voor alle producten in de webshop&quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="o">=</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span> <span class="n">prijs</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">voorraad</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">,</span> <span class="n">prijs</span><span class="p">,</span> <span class="n">voorraad</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_naam</span> <span class="o">=</span> <span class="n">naam</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prijs</span> <span class="o">=</span> <span class="n">prijs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_voorraad</span> <span class="o">=</span> <span class="n">voorraad</span>
