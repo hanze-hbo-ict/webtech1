@@ -254,9 +254,9 @@ In dit deel hebben we geleerd over:
 Je hebt nu alle belangrijke OOP-concepten in Python gezien:
 
 1. **Klassen en objecten**: Het maken van sjablonen en instanties
-2. **Encapsulation**: Het afschermen van data met private attributen
-3. **Inheritance**: Het hergebruiken van code door overerving
-4. **Polymorphism**: Dezelfde interface, verschillende implementaties
-5. **Composition**: Het samenstellen van objecten uit andere objecten
+2. **Inkapseling**: Het afschermen van data met private attributen
+3. **Overerving**: Het hergebruiken van code door overerving
+4. **Polymorfisme**: Dezelfde interface, verschillende implementaties
+5. **Compositie**: Het samenstellen van objecten uit andere objecten
 
-Deze concepten vormen de basis voor het bouwen van complexe, onderhoudbare applicaties zoals webshops, games, en veel meer!
+Deze concepten vormen de basis voor het bouwen van complexe, onderhoudbare applicaties zoals webshops, games en nog veel meer!

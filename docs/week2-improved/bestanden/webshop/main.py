@@ -1,5 +1,5 @@
 """
-Hoofdbestand voor het testen van de webshop klassen
+Hoofdbestand voor het testen van de webshop-klassen
 """
 
 from product import Product, FysiekProduct

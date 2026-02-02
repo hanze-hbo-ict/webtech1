@@ -35,7 +35,7 @@ Een klasse wordt gedefinieerd door het woord `class`, gevolgd door de naam van d
 Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze class bestaat. Dit geven we mee aan de methode die aangeroepen wordt wanneer er een object van een klasse wordt aangemaakt: de zogenaamde *constructor*. In Python is deze methode `__init__` (we komen daar zo wat uitgebreider op terug):
 
 ```ipython
-   ...:     def __init__(self, naam="Product", prijs=0.0, voorraad=0):
+   ...:     def __init__(self, naam, prijs, voorraad):
    ...:         self._naam = naam
    ...:         self._prijs = prijs
    ...:         self._voorraad = voorraad
@@ -112,7 +112,7 @@ De volledige klasse ziet er nu als volgt uit:
 class Product:
     """Basisklasse voor alle producten in de webshop"""
 
-    def __init__(self, naam="Product", prijs=0.0, voorraad=0):
+    def __init__(self, naam, prijs, voorraad):
         self._naam = naam
         self._prijs = prijs
         self._voorraad = voorraad
