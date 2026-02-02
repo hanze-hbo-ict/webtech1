@@ -26,12 +26,11 @@ Weeknummer | Onderwerpen
 4 | [Flask en Jinja-templates](week4/flask-deel1.md)
 5 | [Flask en formulieren](week5/flask-forms-deel1.md)
 6 | [Flask en views](week6/flask-views-deel1.md)
-7 | [Refactoring en ORM](week7/flask-applicaties-deel1.md)
-8 | [Inloggen](week8/user-authentication-deel1.md)
+7 | [Inloggen](week8/user-authentication-deel1.md) en evt. [Refactoring en ORM](week7/flask-applicaties-deel1.md)
 
 ## Toetsing
 
-Vanaf week vijf werken studenten in duo's aan hun eigen project, waarbij de volgende onderdelen van belang zijn:
+Liefst zo snel mogelijk, in ieder geval vanaf week vijf, werken studenten in duo's aan hun eigen project, waarbij de volgende onderdelen van belang zijn:
 
 - Website heeft vormgeving en een koppeling met een database
 - Op de site ingevulde data komt door sqlalchemy terecht in een sqlite-database
@@ -40,9 +39,9 @@ Vanaf week vijf werken studenten in duo's aan hun eigen project, waarbij de volg
 
 Als studenten geen project hebben of kunnen bedenken, is het ook prima om één van [de vier voorgestelde projecten](projecten/index.md) uit te werken. 
 
-Beoordeling van het project vindt plaats aan de hand van een criteriumgericht interview met de betreffende practicumdocent. Tijdens dit gesprek van zo'n twintig minuten laten de studenten hun uitwerking zien en worden ze bevraagd over de details van de technische en niet-technische aspecten van hun realisatie. Het gesprek wordt aan het eind van het kwartaal als één blok ingeroosterd - de docenten maken een separaat rooster voor de individuele duo's.
+Beoordeling van het project vindt plaats aan de hand van een criteriumgericht interview met de betreffende practicumdocent. Tijdens dit gesprek van zo'n 10 minuten laten de studenten hun uitwerking zien en worden ze bevraagd over de details van de technische en niet-technische aspecten van hun realisatie. Het gesprek wordt aan het eind van het kwartaal als één blok ingeroosterd - de docenten maken een separaat rooster voor de individuele duo's.
 
-Basis voor de uiteindelijke beoordeling is [de beoordelings-rubric](rubrics_webtech.html).  Mocht het project aan het eind van het blok nog onvoldoende blijken te zijn, dan worden door de betreffende practicumdocent individuele reparatie-afspraken (inclusief deadlines) gemaakt. In dat geval wordt de onvoldoende wel in Osiris geregistreerd en gelden de herstelwerkzaamheden als herkansing.
+Basis voor de uiteindelijke beoordeling is [de beoordelings-rubric](rubrics_webtech.html). Mocht het project aan het eind van het blok nog onvoldoende blijken te zijn, dan worden door de betreffende practicumdocent individuele reparatie-afspraken (inclusief deadlines) gemaakt. In dat geval wordt de onvoldoende wel in Osiris geregistreerd en gelden de herstelwerkzaamheden als herkansing.
 
 ## Bron
 
