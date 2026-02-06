@@ -95,7 +95,7 @@ tim
 
 Python heeft er geen enkele moeite mee om meerdere verschillende typen objecten (hier: `int`, `string` en `tuple`) naar het scherm te schrijven. Dat komt omdat alle typen kunnen beschikken over de methode `__str__()`. Dat wil aangeven dat hier sprake is van polymorfisme. De functie `print()` kan in vele situaties succesvol toegepast worden.
 
-Een tweede en waarschijnlijk meer aansprekend voorbeeld. We gaan kijken naar verschillende betaalmethoden in een webshop. Bekijk het bestand [`betaalmethoden.py`](bestanden/webshop/betaalmethoden.py). (NB: er is ook een versimpelde versie hiervan die in `betaalmethoden.py` staat, dus met een 'n'erachter. Deze wordt in het volgende deel gebruikt.)
+Een tweede en waarschijnlijk meer aansprekend voorbeeld. We gaan kijken naar verschillende betaalmethoden in een webshop. Bekijk het bestand [`betaalmethoden.py`](bestanden/webshop/betaalmethoden.py). (NB: er is ook een versimpelde versie hiervan die `betaalmethode.py` heet, dus zonder 'n' erachter. Deze wordt in het volgende deel gebruikt.)
 
 De klasse `Creditcard` kent een drietal methoden.
 
