@@ -20,11 +20,4 @@ Mutatie-geschiedenis voor Draadloze muis:
   2026-01-31 14:23:15: 15 verkocht
 ```
 
-Er is iets duidelijk niet goed gegaan. De eerste mutatie, het beginvoorraad van 50 stuks, is niet in de mutatielijst te zien. Graag een oplossing hiervoor.
-
-**Tip:** Kijk naar de `__init__()` methode van de klasse `Voorraad`. Zou het niet logisch zijn om ook de beginvoorraad als een mutatie vast te leggen?
-
-**Extra uitdaging:** Voeg ook een methode `toon_huidige_voorraad()` toe die alleen de huidige voorraad toont zonder de geschiedenis, in het formaat:
-```
-Draadloze muis: 55 stuks op voorraad
-```
+Er is iets nog niet helemaal goed gegaan. De eerste mutatie, het beginvoorraad van 50 stuks, is niet in de mutatielijst te zien. Graag een oplossing hiervoor.

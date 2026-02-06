@@ -3,9 +3,9 @@ Hoofdbestand voor het testen van de webshop-klassen
 """
 
 from product import Product, FysiekProduct
-from klant import Klant
 
-# Test basis Product klasse
+
+# Test basis Product-klasse
 print("=== Test basis Product ===")
 basis_product = Product("Laptop", 799.99, 5)
 print(basis_product)
@@ -15,7 +15,7 @@ print(basis_product)
 
 print("\n" + "="*50 + "\n")
 
-# Test FysiekProduct klasse
+# Test FysiekProduct-klasse
 print("=== Test FysiekProduct ===")
 java_boek = FysiekProduct("Java voor beginners", 34.95, 12, 0.8)
 print(java_boek)
@@ -28,4 +28,4 @@ print("\n" + "="*50 + "\n")
 
 # Hier kun je tests toevoegen voor DigitaalProduct
 # Hier kun je tests toevoegen voor Boek
-# Hier kun je tests toevoegen voor Klant en winkelwagen
+# Hier kun je eventueel ook nog (extra) tests toevoegen voor Klant en Winkelwagen

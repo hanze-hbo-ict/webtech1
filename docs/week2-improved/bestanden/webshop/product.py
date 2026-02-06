@@ -43,5 +43,8 @@ class FysiekProduct(Product):
         return kosten
 
 
-# Hier kun je de klasse DigitaalProduct toevoegen tijdens de oefening
-# Hier kun je de klasse Boek toevoegen tijdens de oefening
+# Hier kun je de klasse DigitaalProduct toevoegen tijdens oefening 2
+
+# Hier kun je de klasse Boek toevoegen tijdens oefening 2
+
+# Hier kun je de klasse Software toevoegen tijdens oefening 2

@@ -4,7 +4,7 @@
 
 Binnen subklassen kunnen methodes ingebouwd worden die dezelfde naam hebben als methodes in hun super-klasse. Hun gedrag wordt hier nu onderzocht. Het komt al voor in de code (zie de methodes `verkoop()`) maar het kan geen kwaad nog een extra voorbeeld te tonen. En dan wordt de beginregel `import random` ook eindelijk benut.
 
-In de klasse `DigitaalProduct` (een subklasse van `Product`) wordt een tweede methode opgezet met de naam `check_licentie()`. Bij digitale producten moet er soms gecontroleerd worden of de licentie nog beschikbaar is voordat de verkoop doorgaat.
+In de klasse `DigitaalProduct` (een subklasse van `Product` die je in oefening 2 gemaakt hebt) wordt een methode opgezet met de naam `check_licentie()`. Bij digitale producten moet er soms gecontroleerd worden of de licentie nog beschikbaar is voordat de verkoop doorgaat.
 
 ```python
 import random
@@ -22,12 +22,10 @@ De test:
 ```python
 antivirus = DigitaalProduct("Antivirus Premium", 49.99, 10)
 print(antivirus)
-antivirus.verkoop(3)
-print(antivirus)
 
-while antivirus._beschikbaar and antivirus._voorraad > 0:
-    antivirus.verkoop(2)
-print(antivirus)
+while antivirus._voorraad > 0:
+    if antivirus.check_licentie():
+        antivirus.verkoop(2)
 ```
 
 Het resultaat hiervan:
@@ -35,7 +33,6 @@ Het resultaat hiervan:
 ```console
 Product: Antivirus Premium, Prijs: €49.99, Voorraad: 10
 ***** Licentie voor Antivirus Premium niet beschikbaar *****
-Product: Antivirus Premium, Prijs: €49.99, Voorraad: 10
 Verkocht: 2x Antivirus Premium. Nog 8 op voorraad
 Verkocht: 2x Antivirus Premium. Nog 6 op voorraad
 Verkocht: 2x Antivirus Premium. Nog 4 op voorraad
@@ -98,14 +95,14 @@ tim
 
 Python heeft er geen enkele moeite mee om meerdere verschillende typen objecten (hier: `int`, `string` en `tuple`) naar het scherm te schrijven. Dat komt omdat alle typen kunnen beschikken over de methode `__str__()`. Dat wil aangeven dat hier sprake is van polymorfisme. De functie `print()` kan in vele situaties succesvol toegepast worden.
 
-Een tweede en waarschijnlijk meer aansprekend voorbeeld. We gaan kijken naar verschillende betaalmethoden in een webshop. Bekijk het bestand [`betaalmethoden.py`](bestanden/webshop/betaalmethoden.py).
+Een tweede en waarschijnlijk meer aansprekend voorbeeld. We gaan kijken naar verschillende betaalmethoden in een webshop. Bekijk het bestand [`betaalmethoden.py`](bestanden/webshop/betaalmethoden.py). (NB: er is ook een versimpelde versie hiervan die in `betaalmethoden.py` staat, dus met een 'n'erachter. Deze wordt in het volgende deel gebruikt.)
 
 De klasse `Creditcard` kent een drietal methoden.
 
 ```python
 class Creditcard:
     def valideer(self):
-        print("Creditcard nummer wordt gevalideerd...")
+        print("Creditcardnummer wordt gevalideerd...")
 
     def verwerk_betaling(self, bedrag):
         print(f"€{bedrag:.2f} wordt afgeschreven van creditcard")

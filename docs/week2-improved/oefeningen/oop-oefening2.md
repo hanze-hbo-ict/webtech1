@@ -6,7 +6,7 @@ Digitale producten hebben geen verzendkosten maar wel een bestandsgrootte. Geef 
 
 Test de klasse door een tweetal instanties aan te maken en hun details te tonen. Goede voorbeelden zijn software zoals "Photoshop" en "Microsoft Office".
 
-Test verder of de methode `verkoop()` naar behoren werkt. Dat is ook nog niet getest voor de objecten uit de klasse `FysiekProduct`. Is hier een mooie gelegenheid voor. Mocht blijken dat de test nog een probleem laat zien, graag een oplossing ervoor.
+Test verder of de methode `verkoop()` naar behoren werkt. Dat is ook nog niet getest voor de objecten uit de klasse `FysiekProduct`. Nu is daar een mooie gelegenheid voor. Mocht blijken dat de test nog een probleem laat zien, graag een oplossing ervoor.
 
 Ook kunnen fysieke producten weer onderverdeeld worden. De bekendste groepen zijn *Boek* en *Elektronica*. Alleen de klasse `Boek` wordt hier aangemaakt als voorbeeld. Een boek heeft een naam, prijs en voorraad nodig, plus een aantal extra eigenschappen zoals auteur en ISBN. Boeken krijgen standaard 0.5 kg als gewicht.
 

@@ -6,20 +6,11 @@ In deze oefening gaan we de `Bestelling` klasse uit deel 7 verder uitbreiden.
 
 Pas de code van `bestelling.py` zodanig aan dat elke bestelling automatisch een uniek bestellingsnummer krijgt. Je kunt hiervoor een class-attribuut gebruiken dat bij elke nieuwe bestelling opgehoogd wordt.
 
-**Tip:** Een class-attribuut wordt gedefinieerd buiten de `__init__()` methode:
-
-```python
-class Bestelling:
-    _volgend_nummer = 1000  # Class attribuut
-
-    def __init__(self, ...):
-        self.nummer = Bestelling._volgend_nummer
-        Bestelling._volgend_nummer += 1
-```
+**Tip:** Een class-attribuut wordt gedefinieerd buiten de `__init__()` methode en wordt aangeroepen met de klassenaam ervoor, bijvoorbeeld: `Bestelling._volgend_nummer`.
 
 ## b. Verzendmethode toevoegen
 
-Er zijn verschillende verzendmethoden mogelijk: standaard verzending (2-3 werkdagen), express verzending (volgende werkdag), of afhalen in de winkel. Maak een nieuwe klasse `Verzendmethode` die de volgende eigenschappen heeft:
+Er zijn verschillende verzendmethoden mogelijk: standaard verzending (2-3 werkdagen), express verzending (volgende werkdag) of afhalen in de winkel. Maak een nieuwe klasse `Verzendmethode` die de volgende eigenschappen heeft:
 
 - **type**: Het type verzending ("Standaard", "Express", "Afhalen")
 - **kosten**: De verzendkosten
@@ -47,12 +38,13 @@ Subtotaal: €915.48
 Kortingscode ZOMER2026: -€137.32 (15%)
 Subtotaal na korting: €778.16
 Verzendkosten: €0.00 (GRATIS verzending!)
+Verwachte levertijd: 2-3 werkdagen
 Totaal: €778.16
 ```
 
 ## d. Meerdere verzendadressen (nog een optionele uitdaging)
 
-In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres, etc.). Maak een klasse `Adres` met velden voor straat, huisnummer, postcode en plaats. Pas de klasse `Klant` aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.
+In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres etc.). Maak een klasse `Adres` met velden voor straat, huisnummer, postcode en plaats. Pas de klasse `Klant` aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.
 
 Als je dit is gelukt kun je jezelf feliciteren: je hebt nu een realistische webshop-structuur gemaakt met compositie!
 

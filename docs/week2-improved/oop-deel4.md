@@ -4,9 +4,7 @@ Getters en setters zijn niet van essentieel belang voor het werken met Python, m
 
 ## Het voorbeeld
 
-In dit voorbeeld maken we gebruik van twee python-bestanden. Het kan ook in één bestand ondergebracht worden, maar hier worden er twee voor gebruikt om onnodig scrollen te voorkomen en om nog een andere wijze van importeren te tonen.
-
-De files zijn [`main.py`](bestanden/webshop/main.py) en [`klant.py`](bestanden/webshop/klant.py). Als eerste bespreken we de file `klant.py`:
+In dit voorbeeld maken we gebruik van het bestand [`klant.py`](bestanden/webshop/klant.py):
 
 ```python
 class Klant:
@@ -14,15 +12,13 @@ class Klant:
     def __init__(self, naam, email):
         self._naam = naam
         self._email = email
-        self.__krediet = 1000.0  # Startk rediet voor nieuwe klanten
-        self.__korting = 0.0  # Standaard geen korting
+        self._krediet = 1000.0  # Startkrediet voor nieuwe klanten
+        self._korting = 0.0     # Standaard geen korting
 ```
 
-Iedere klant heeft een naam en email, en er worden voor iedere klant een aantal standaardinstellingen meegegeven (krediet en korting). Nu de eerste regels van `main.py`. De code van `klant.py` wordt in de eerste regel van `main.py` geïmporteerd:
+Iedere klant heeft een naam en email, en er worden voor iedere klant een aantal standaardinstellingen meegegeven (krediet en korting). Nu de eerste regels om een en ander te testen:
 
 ```python
-from klant import Klant
-
 jan = Klant("Jan Jansen", "jan@email.nl")
 
 print(jan._naam)
@@ -38,11 +34,11 @@ jan@email.nl
 
 ## Attributen buiten de klasse
 
-De file `main.py` wordt verder uitgebreid. Jan krijgt een korting van 10%:
+De test wordt verder uitgebreid. Jan krijgt een korting van 10%:
 
 ```python
-jan.__korting = 0.10
-print(jan.__korting)
+jan._korting = 0.10
+print(jan._korting)
 ```
 
 Uitkomst:
@@ -51,7 +47,7 @@ Uitkomst:
 0.1
 ```
 
-Voor veel programmeurs is dit een gruwel: van buiten de klasse kunnen attributen zomaar aangeroepen en gewijzigd worden. Om te voorkomen dat dit kan, kunnen we in Python de attributen voorzien van een dubbele underscore aan het begin (`__`, een soort halve *dunder*). We illustreren dat aan de hand van de onderstaande klasse:
+Voor veel programmeurs is dit een gruwel: van buiten de klasse kunnen attributen zomaar aangeroepen en gewijzigd worden. Zoals bij het onderwerp Inkapseling besproken, kunnen we om dit te voorkomen in Python de attributen voorzien van een dubbele underscore aan het begin (`__`, een soort halve *dunder*). We illustreren dat nogmaals, aan de hand van onderstaande klasse:
 
 ```python
 # klasse Foo in bestand foo.py
@@ -81,7 +77,7 @@ In [4]:
 
 ## Getters en Setters
 
-Om toch bij die attributen te kunnen, maken we gebruik van zogenaamde `getters` en `setters`. De eerste gebruiken we om de waarde van een attribuut *op te vragen*, terwijl we de tweede constructie gebruiken om de waarde van het attribuut (drum roll) *aan te passen*. Hieronder zie je hoe die methoden in onze klasse `Klant` eruit zien:
+We voorzien `krediet` en `korting` van dubbele underscores. Om nu toch op legale wijze bij deze attributen te kunnen, maken we gebruik van zogenaamde `getters` en `setters`. De eerste gebruiken we om de waarde van een attribuut *op te vragen*, terwijl we de tweede constructie gebruiken om de waarde van het attribuut (drum roll) *aan te passen*. Hieronder zie je hoe die methoden in onze klasse `Klant` eruit zien:
 
 ```python
 def _get_krediet(self):
@@ -95,7 +91,7 @@ def _set_krediet(self, krediet):
         self.__krediet = 0
 ```
 
-Vanwege die enkele underscore moet er ook een regel in `__init__()` veranderd worden:
+Vanwege de underscores moet er ook twee regels in `__init__()` veranderd worden:
 
 ```python
 def __init__(self, naam, email):
@@ -105,7 +101,7 @@ def __init__(self, naam, email):
     self.__korting = 0.0
 ```
 
-Voor de korting kunnen we hetzelfde doen:
+Voor de korting kunnen we hetzelfde doen als bij het krediet:
 
 ```python
 def _get_korting(self):
@@ -120,11 +116,9 @@ def _set_korting(self, korting):
 
 ## Gebruik van getters en setters
 
-Nu kunnen we in `main.py` de getters en setters gebruiken:
+Nu kunnen we de getters en setters gebruiken:
 
 ```python
-from klant import Klant
-
 jan = Klant("Jan Jansen", "jan@email.nl")
 
 # Gebruik getter om krediet op te vragen
@@ -192,7 +186,7 @@ class Klant:
             print("Korting moet tussen 0 en 1.0 liggen")
 ```
 
-Met de `@property` decorator kunnen we attributen gebruiken alsof het gewone attributen zijn, maar er worden wel de getters en setters aangeroepen:
+Met de `@property` decorator kunnen we attributen gebruiken alsof het gewone attributen zijn, maar achter de schermen worden wel de getters en setters aangeroepen:
 
 ```python
 jan = Klant("Jan Jansen", "jan@email.nl")

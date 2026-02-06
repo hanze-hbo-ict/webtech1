@@ -10,7 +10,7 @@ Aan het eind van deze paragraaf maken we [oefening 3](oefeningen/oop-oefening3.m
 
 Als voorbeeld wordt hier een klasse `Bestelling` toegevoegd die gebruik maakt van de klassen `Klant` en `Winkelwagen` die we eerder hebben gemaakt. Een bestelling is namelijk een *compositie* van een klant, een winkelwagen met producten, en een betaalmethode.
 
-Eerst maken we een eenvoudige klasse voor een betaalmethode:
+Eerst maken we een eenvoudige klasse voor een betaalmethode ([`betaalmethode.py`](bestanden/webshop/betaalmethode.py)):
 
 ```python
 class Betaalmethode:

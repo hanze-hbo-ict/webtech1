@@ -36,7 +36,7 @@ De basis van de klasse `Product`:
 ```python
 class Product:
 
-    def __init__(self, naam="Product", prijs=0.0, voorraad=0):
+    def __init__(self, naam, prijs, voorraad):
         self._naam = naam
         self._prijs = prijs
         self._voorraad = voorraad
@@ -107,47 +107,15 @@ Een beetje apart om een commando op te nemen in de definitie van een klasse dat 
 Het kenmerkende voor de klasse `Product` wordt nu dat het de algemene kenmerken voor alle groepen producten als basiscode herbergt, zodat die code niet bij iedere subklasse (ieder producttype) hoeft te worden opgenomen. Daarom kunnen de testgegevens voor de klasse `Product` verwijderd worden uit `main.py` en vervangen worden door gegevens die naar productgroepen verwijzen. Van daaruit kunnen de benodigde gegevens uit de superklasse aangeroepen worden. Een bekend fysiek product is een boek. Dat wordt het eerste object uit de klasse `FysiekProduct`.
 
 ```python
-from product import Product, FysiekProduct
-
-python_boek = FysiekProduct()
-print(python_boek)
-```
-
-Dat levert het volgende resultaat op:
-
-```console
-Product: Product, Prijs: €0.00, Voorraad: 0
-```
-
-Bij het initialiseren van het object 'python_boek' worden geen parameters meegegeven. De klasse `FysiekProduct` kent geen methode `__init__()`. Voor de invulling wordt daarom gekeken of de superklasse wel een methode `__init__()` kent, waarvan de attributen gebruikt kunnen worden. Die is er dus worden de default waarden van de klasse `Product` aan dit object uit de klasse `FysiekProduct` toegewezen.
-
-Er wordt een tweede object uit de klasse `FysiekProduct` aangemaakt, nu wel met de benodigde parameters erbij en een nette lay-out.
-
-```python
 java_boek = FysiekProduct("Java voor beginners", 34.95, 12)
 print(f"Boek - {java_boek}")
 ```
 
-De volgorde van de parameters klopt en Python snapt de bedoeling.
+Bij het initialiseren van het object 'java_boek' worden drie parameters meegegeven. De klasse `FysiekProduct` kent geen methode `__init__()`. Voor de invulling wordt daarom gekeken of de superklasse wel een methode `__init__()` kent, waarvan de attributen gebruikt kunnen worden. Die is er , de volgorde van de parameters klopt en Python snapt de bedoeling.
 
 ```console
 Boek - Product: Java voor beginners, Prijs: €34.95, Voorraad: 12
 ```
-
-Een derde object, nu met gedeeltelijke parameters.
-
-```python
-laptop = Product("MacBook Pro", 1499.99)
-print(laptop)
-```
-
-Resultaat:
-
-```console
-Product: MacBook Pro, Prijs: €1499.99, Voorraad: 0
-```
-
-Er worden een tweetal parameters meegegeven en de derde wordt opgehaald uit de superklasse, vandaar dat 'Voorraad: 0' ook in beeld verschijnt.
 
 Het is niet handig dit allemaal te regelen via de `__init__()` van de superklasse. De klasse `FysiekProduct` zou zelf ook een `__init__` moeten hebben. Dat om iedere groep producten andere eigenschappen mee te geven aan het begin. We passen de klasse `FysiekProduct` dus aan met de volgende constructor:
 
