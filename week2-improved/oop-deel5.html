@@ -3551,7 +3551,7 @@
 <p>De basis van de klasse <code>Product</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">:</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="o">=</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span> <span class="n">prijs</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">voorraad</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">,</span> <span class="n">prijs</span><span class="p">,</span> <span class="n">voorraad</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_naam</span> <span class="o">=</span> <span class="n">naam</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prijs</span> <span class="o">=</span> <span class="n">prijs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_voorraad</span> <span class="o">=</span> <span class="n">voorraad</span>
@@ -3602,30 +3602,12 @@
 </code></pre></div>
 <p>Een beetje apart om een commando op te nemen in de definitie van een klasse dat niets doet. Het commando <code>pass</code> heeft tot doel invulling te zijn op het moment dat er een actie gevraagd wordt, maar er eigenlijk geen reden toe is een actie in de code op te nemen.</p>
 <p>Het kenmerkende voor de klasse <code>Product</code> wordt nu dat het de algemene kenmerken voor alle groepen producten als basiscode herbergt, zodat die code niet bij iedere subklasse (ieder producttype) hoeft te worden opgenomen. Daarom kunnen de testgegevens voor de klasse <code>Product</code> verwijderd worden uit <code>main.py</code> en vervangen worden door gegevens die naar productgroepen verwijzen. Van daaruit kunnen de benodigde gegevens uit de superklasse aangeroepen worden. Een bekend fysiek product is een boek. Dat wordt het eerste object uit de klasse <code>FysiekProduct</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">product</span><span class="w"> </span><span class="kn">import</span> <span class="n">Product</span><span class="p">,</span> <span class="n">FysiekProduct</span>
-
-<span class="n">python_boek</span> <span class="o">=</span> <span class="n">FysiekProduct</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">python_boek</span><span class="p">)</span>
-</code></pre></div>
-<p>Dat levert het volgende resultaat op:</p>
-<div class="highlight"><pre><span></span><code><span class="go">Product: Product, Prijs: €0.00, Voorraad: 0</span>
-</code></pre></div>
-<p>Bij het initialiseren van het object 'python_boek' worden geen parameters meegegeven. De klasse <code>FysiekProduct</code> kent geen methode <code>__init__()</code>. Voor de invulling wordt daarom gekeken of de superklasse wel een methode <code>__init__()</code> kent, waarvan de attributen gebruikt kunnen worden. Die is er dus worden de default waarden van de klasse <code>Product</code> aan dit object uit de klasse <code>FysiekProduct</code> toegewezen.</p>
-<p>Er wordt een tweede object uit de klasse <code>FysiekProduct</code> aangemaakt, nu wel met de benodigde parameters erbij en een nette lay-out.</p>
 <div class="highlight"><pre><span></span><code><span class="n">java_boek</span> <span class="o">=</span> <span class="n">FysiekProduct</span><span class="p">(</span><span class="s2">&quot;Java voor beginners&quot;</span><span class="p">,</span> <span class="mf">34.95</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boek - </span><span class="si">{</span><span class="n">java_boek</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>De volgorde van de parameters klopt en Python snapt de bedoeling.</p>
+<p>Bij het initialiseren van het object 'java_boek' worden drie parameters meegegeven. De klasse <code>FysiekProduct</code> kent geen methode <code>__init__()</code>. Voor de invulling wordt daarom gekeken of de superklasse wel een methode <code>__init__()</code> kent, waarvan de attributen gebruikt kunnen worden. Die is er , de volgorde van de parameters klopt en Python snapt de bedoeling.</p>
 <div class="highlight"><pre><span></span><code><span class="go">Boek - Product: Java voor beginners, Prijs: €34.95, Voorraad: 12</span>
 </code></pre></div>
-<p>Een derde object, nu met gedeeltelijke parameters.</p>
-<div class="highlight"><pre><span></span><code><span class="n">laptop</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">&quot;MacBook Pro&quot;</span><span class="p">,</span> <span class="mf">1499.99</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">laptop</span><span class="p">)</span>
-</code></pre></div>
-<p>Resultaat:</p>
-<div class="highlight"><pre><span></span><code><span class="go">Product: MacBook Pro, Prijs: €1499.99, Voorraad: 0</span>
-</code></pre></div>
-<p>Er worden een tweetal parameters meegegeven en de derde wordt opgehaald uit de superklasse, vandaar dat 'Voorraad: 0' ook in beeld verschijnt.</p>
 <p>Het is niet handig dit allemaal te regelen via de <code>__init__()</code> van de superklasse. De klasse <code>FysiekProduct</code> zou zelf ook een <code>__init__</code> moeten hebben. Dat om iedere groep producten andere eigenschappen mee te geven aan het begin. We passen de klasse <code>FysiekProduct</code> dus aan met de volgende constructor:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">,</span> <span class="n">prijs</span><span class="p">,</span> <span class="n">voorraad</span><span class="p">,</span> <span class="n">gewicht</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">naam</span><span class="o">=</span><span class="n">naam</span><span class="p">,</span> <span class="n">prijs</span><span class="o">=</span><span class="n">prijs</span><span class="p">,</span> <span class="n">voorraad</span><span class="o">=</span><span class="n">voorraad</span><span class="p">)</span>

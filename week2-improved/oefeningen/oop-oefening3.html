@@ -3538,16 +3538,9 @@
 <p>In deze oefening gaan we de <code>Bestelling</code> klasse uit deel 7 verder uitbreiden.</p>
 <h2 id="a-bestellingsnummer-toevoegen">a. Bestellingsnummer toevoegen<a class="headerlink" href="#a-bestellingsnummer-toevoegen" title="Permanent link">&para;</a></h2>
 <p>Pas de code van <code>bestelling.py</code> zodanig aan dat elke bestelling automatisch een uniek bestellingsnummer krijgt. Je kunt hiervoor een class-attribuut gebruiken dat bij elke nieuwe bestelling opgehoogd wordt.</p>
-<p><strong>Tip:</strong> Een class-attribuut wordt gedefinieerd buiten de <code>__init__()</code> methode:</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Bestelling</span><span class="p">:</span>
-    <span class="n">_volgend_nummer</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Class attribuut</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nummer</span> <span class="o">=</span> <span class="n">Bestelling</span><span class="o">.</span><span class="n">_volgend_nummer</span>
-        <span class="n">Bestelling</span><span class="o">.</span><span class="n">_volgend_nummer</span> <span class="o">+=</span> <span class="mi">1</span>
-</code></pre></div>
+<p><strong>Tip:</strong> Een class-attribuut wordt gedefinieerd buiten de <code>__init__()</code> methode en wordt aangeroepen met de klassenaam ervoor, bijvoorbeeld: <code>Bestelling._volgend_nummer</code>.</p>
 <h2 id="b-verzendmethode-toevoegen">b. Verzendmethode toevoegen<a class="headerlink" href="#b-verzendmethode-toevoegen" title="Permanent link">&para;</a></h2>
-<p>Er zijn verschillende verzendmethoden mogelijk: standaard verzending (2-3 werkdagen), express verzending (volgende werkdag), of afhalen in de winkel. Maak een nieuwe klasse <code>Verzendmethode</code> die de volgende eigenschappen heeft:</p>
+<p>Er zijn verschillende verzendmethoden mogelijk: standaard verzending (2-3 werkdagen), express verzending (volgende werkdag) of afhalen in de winkel. Maak een nieuwe klasse <code>Verzendmethode</code> die de volgende eigenschappen heeft:</p>
 <ul>
 <li><strong>type</strong>: Het type verzending ("Standaard", "Express", "Afhalen")</li>
 <li><strong>kosten</strong>: De verzendkosten</li>
@@ -3568,10 +3561,11 @@
 Kortingscode ZOMER2026: -€137.32 (15%)
 Subtotaal na korting: €778.16
 Verzendkosten: €0.00 (GRATIS verzending!)
+Verwachte levertijd: 2-3 werkdagen
 Totaal: €778.16
 </code></pre></div></p>
 <h2 id="d-meerdere-verzendadressen-nog-een-optionele-uitdaging">d. Meerdere verzendadressen (nog een optionele uitdaging)<a class="headerlink" href="#d-meerdere-verzendadressen-nog-een-optionele-uitdaging" title="Permanent link">&para;</a></h2>
-<p>In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres, etc.). Maak een klasse <code>Adres</code> met velden voor straat, huisnummer, postcode en plaats. Pas de klasse <code>Klant</code> aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.</p>
+<p>In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres etc.). Maak een klasse <code>Adres</code> met velden voor straat, huisnummer, postcode en plaats. Pas de klasse <code>Klant</code> aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.</p>
 <p>Als je dit is gelukt kun je jezelf feliciteren: je hebt nu een realistische webshop-structuur gemaakt met compositie!</p>
 <h2 id="testcode">Testcode<a class="headerlink" href="#testcode" title="Permanent link">&para;</a></h2>
 <p>Hier is een voorbeeld hoe je de uitgebreide functionaliteit kunt testen:</p>

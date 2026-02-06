@@ -3469,7 +3469,7 @@
 <h1 id="oop-python-overriding-en-polymorfisme">OOP Python – Overriding en polymorfisme<a class="headerlink" href="#oop-python-overriding-en-polymorfisme" title="Permanent link">&para;</a></h1>
 <h2 id="overriding">Overriding<a class="headerlink" href="#overriding" title="Permanent link">&para;</a></h2>
 <p>Binnen subklassen kunnen methodes ingebouwd worden die dezelfde naam hebben als methodes in hun super-klasse. Hun gedrag wordt hier nu onderzocht. Het komt al voor in de code (zie de methodes <code>verkoop()</code>) maar het kan geen kwaad nog een extra voorbeeld te tonen. En dan wordt de beginregel <code>import random</code> ook eindelijk benut.</p>
-<p>In de klasse <code>DigitaalProduct</code> (een subklasse van <code>Product</code>) wordt een tweede methode opgezet met de naam <code>check_licentie()</code>. Bij digitale producten moet er soms gecontroleerd worden of de licentie nog beschikbaar is voordat de verkoop doorgaat.</p>
+<p>In de klasse <code>DigitaalProduct</code> (een subklasse van <code>Product</code> die je in oefening 2 gemaakt hebt) wordt een methode opgezet met de naam <code>check_licentie()</code>. Bij digitale producten moet er soms gecontroleerd worden of de licentie nog beschikbaar is voordat de verkoop doorgaat.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">check_licentie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -3482,17 +3482,14 @@
 <p>De test:</p>
 <div class="highlight"><pre><span></span><code><span class="n">antivirus</span> <span class="o">=</span> <span class="n">DigitaalProduct</span><span class="p">(</span><span class="s2">&quot;Antivirus Premium&quot;</span><span class="p">,</span> <span class="mf">49.99</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">antivirus</span><span class="p">)</span>
-<span class="n">antivirus</span><span class="o">.</span><span class="n">verkoop</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">antivirus</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="n">antivirus</span><span class="o">.</span><span class="n">_beschikbaar</span> <span class="ow">and</span> <span class="n">antivirus</span><span class="o">.</span><span class="n">_voorraad</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">antivirus</span><span class="o">.</span><span class="n">verkoop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">antivirus</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">antivirus</span><span class="o">.</span><span class="n">_voorraad</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">antivirus</span><span class="o">.</span><span class="n">check_licentie</span><span class="p">():</span>
+        <span class="n">antivirus</span><span class="o">.</span><span class="n">verkoop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div>
 <p>Het resultaat hiervan:</p>
 <div class="highlight"><pre><span></span><code><span class="go">Product: Antivirus Premium, Prijs: €49.99, Voorraad: 10</span>
 <span class="go">***** Licentie voor Antivirus Premium niet beschikbaar *****</span>
-<span class="go">Product: Antivirus Premium, Prijs: €49.99, Voorraad: 10</span>
 <span class="go">Verkocht: 2x Antivirus Premium. Nog 8 op voorraad</span>
 <span class="go">Verkocht: 2x Antivirus Premium. Nog 6 op voorraad</span>
 <span class="go">Verkocht: 2x Antivirus Premium. Nog 4 op voorraad</span>
@@ -3538,11 +3535,11 @@
 <span class="gp gp-VirtualEnv">(1, 2, 3)</span>
 </code></pre></div>
 <p>Python heeft er geen enkele moeite mee om meerdere verschillende typen objecten (hier: <code>int</code>, <code>string</code> en <code>tuple</code>) naar het scherm te schrijven. Dat komt omdat alle typen kunnen beschikken over de methode <code>__str__()</code>. Dat wil aangeven dat hier sprake is van polymorfisme. De functie <code>print()</code> kan in vele situaties succesvol toegepast worden.</p>
-<p>Een tweede en waarschijnlijk meer aansprekend voorbeeld. We gaan kijken naar verschillende betaalmethoden in een webshop. Bekijk het bestand <a href="bestanden/webshop/betaalmethoden.py"><code>betaalmethoden.py</code></a>.</p>
+<p>Een tweede en waarschijnlijk meer aansprekend voorbeeld. We gaan kijken naar verschillende betaalmethoden in een webshop. Bekijk het bestand <a href="bestanden/webshop/betaalmethoden.py"><code>betaalmethoden.py</code></a>. (NB: er is ook een versimpelde versie hiervan die in <code>betaalmethoden.py</code> staat, dus met een 'n'erachter. Deze wordt in het volgende deel gebruikt.)</p>
 <p>De klasse <code>Creditcard</code> kent een drietal methoden.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Creditcard</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">valideer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creditcard nummer wordt gevalideerd...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creditcardnummer wordt gevalideerd...&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">verwerk_betaling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bedrag</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;€</span><span class="si">{</span><span class="n">bedrag</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> wordt afgeschreven van creditcard&quot;</span><span class="p">)</span>

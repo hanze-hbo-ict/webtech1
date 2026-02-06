@@ -3579,20 +3579,17 @@
 <h1 id="oop-python-getters-en-setters">OOP Python – Getters en Setters<a class="headerlink" href="#oop-python-getters-en-setters" title="Permanent link">&para;</a></h1>
 <p>Getters en setters zijn niet van essentieel belang voor het werken met Python, maar kunnen wel heel nuttig in gebruik zijn. Het belang voor Python is heel gering omdat deze programmeertaal in tegenstelling tot bijvoorbeeld Java de attributen uit een klasse niet de status <code>private</code> mee kan geven. Een privaat attribuut kan alleen gewijzigd worden door gebruik te maken van een <code>setter</code> (geef het attribuut een waarde) en <code>getter</code> (haal de waarde van het attribuut op).</p>
 <h2 id="het-voorbeeld">Het voorbeeld<a class="headerlink" href="#het-voorbeeld" title="Permanent link">&para;</a></h2>
-<p>In dit voorbeeld maken we gebruik van twee python-bestanden. Het kan ook in één bestand ondergebracht worden, maar hier worden er twee voor gebruikt om onnodig scrollen te voorkomen en om nog een andere wijze van importeren te tonen.</p>
-<p>De files zijn <a href="bestanden/webshop/main.py"><code>main.py</code></a> en <a href="bestanden/webshop/klant.py"><code>klant.py</code></a>. Als eerste bespreken we de file <code>klant.py</code>:</p>
+<p>In dit voorbeeld maken we gebruik van het bestand <a href="bestanden/webshop/klant.py"><code>klant.py</code></a>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Klant</span><span class="p">:</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_naam</span> <span class="o">=</span> <span class="n">naam</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_email</span> <span class="o">=</span> <span class="n">email</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__krediet</span> <span class="o">=</span> <span class="mf">1000.0</span>  <span class="c1"># Startk rediet voor nieuwe klanten</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__korting</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Standaard geen korting</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_krediet</span> <span class="o">=</span> <span class="mf">1000.0</span>  <span class="c1"># Startkrediet voor nieuwe klanten</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_korting</span> <span class="o">=</span> <span class="mf">0.0</span>     <span class="c1"># Standaard geen korting</span>
 </code></pre></div>
-<p>Iedere klant heeft een naam en email, en er worden voor iedere klant een aantal standaardinstellingen meegegeven (krediet en korting). Nu de eerste regels van <code>main.py</code>. De code van <code>klant.py</code> wordt in de eerste regel van <code>main.py</code> geïmporteerd:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">klant</span><span class="w"> </span><span class="kn">import</span> <span class="n">Klant</span>
-
-<span class="n">jan</span> <span class="o">=</span> <span class="n">Klant</span><span class="p">(</span><span class="s2">&quot;Jan Jansen&quot;</span><span class="p">,</span> <span class="s2">&quot;jan@email.nl&quot;</span><span class="p">)</span>
+<p>Iedere klant heeft een naam en email, en er worden voor iedere klant een aantal standaardinstellingen meegegeven (krediet en korting). Nu de eerste regels om een en ander te testen:</p>
+<div class="highlight"><pre><span></span><code><span class="n">jan</span> <span class="o">=</span> <span class="n">Klant</span><span class="p">(</span><span class="s2">&quot;Jan Jansen&quot;</span><span class="p">,</span> <span class="s2">&quot;jan@email.nl&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">jan</span><span class="o">.</span><span class="n">_naam</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">jan</span><span class="o">.</span><span class="n">_email</span><span class="p">)</span>
@@ -3602,14 +3599,14 @@
 <span class="go">jan@email.nl</span>
 </code></pre></div>
 <h2 id="attributen-buiten-de-klasse">Attributen buiten de klasse<a class="headerlink" href="#attributen-buiten-de-klasse" title="Permanent link">&para;</a></h2>
-<p>De file <code>main.py</code> wordt verder uitgebreid. Jan krijgt een korting van 10%:</p>
-<div class="highlight"><pre><span></span><code><span class="n">jan</span><span class="o">.</span><span class="n">__korting</span> <span class="o">=</span> <span class="mf">0.10</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">jan</span><span class="o">.</span><span class="n">__korting</span><span class="p">)</span>
+<p>De test wordt verder uitgebreid. Jan krijgt een korting van 10%:</p>
+<div class="highlight"><pre><span></span><code><span class="n">jan</span><span class="o">.</span><span class="n">_korting</span> <span class="o">=</span> <span class="mf">0.10</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jan</span><span class="o">.</span><span class="n">_korting</span><span class="p">)</span>
 </code></pre></div>
 <p>Uitkomst:</p>
 <div class="highlight"><pre><span></span><code><span class="go">0.1</span>
 </code></pre></div>
-<p>Voor veel programmeurs is dit een gruwel: van buiten de klasse kunnen attributen zomaar aangeroepen en gewijzigd worden. Om te voorkomen dat dit kan, kunnen we in Python de attributen voorzien van een dubbele underscore aan het begin (<code>__</code>, een soort halve <em>dunder</em>). We illustreren dat aan de hand van de onderstaande klasse:</p>
+<p>Voor veel programmeurs is dit een gruwel: van buiten de klasse kunnen attributen zomaar aangeroepen en gewijzigd worden. Zoals bij het onderwerp Inkapseling besproken, kunnen we om dit te voorkomen in Python de attributen voorzien van een dubbele underscore aan het begin (<code>__</code>, een soort halve <em>dunder</em>). We illustreren dat nogmaals, aan de hand van onderstaande klasse:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># klasse Foo in bestand foo.py</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Foo</span><span class="p">:</span>
@@ -3632,7 +3629,7 @@
 <span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
 </code></pre></div>
 <h2 id="getters-en-setters">Getters en Setters<a class="headerlink" href="#getters-en-setters" title="Permanent link">&para;</a></h2>
-<p>Om toch bij die attributen te kunnen, maken we gebruik van zogenaamde <code>getters</code> en <code>setters</code>. De eerste gebruiken we om de waarde van een attribuut <em>op te vragen</em>, terwijl we de tweede constructie gebruiken om de waarde van het attribuut (drum roll) <em>aan te passen</em>. Hieronder zie je hoe die methoden in onze klasse <code>Klant</code> eruit zien:</p>
+<p>We voorzien <code>krediet</code> en <code>korting</code> van dubbele underscores. Om nu toch op legale wijze bij deze attributen te kunnen, maken we gebruik van zogenaamde <code>getters</code> en <code>setters</code>. De eerste gebruiken we om de waarde van een attribuut <em>op te vragen</em>, terwijl we de tweede constructie gebruiken om de waarde van het attribuut (drum roll) <em>aan te passen</em>. Hieronder zie je hoe die methoden in onze klasse <code>Klant</code> eruit zien:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_get_krediet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__krediet</span>
 
@@ -3643,14 +3640,14 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Krediet kan geen negatieve waarde krijgen&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__krediet</span> <span class="o">=</span> <span class="mi">0</span>
 </code></pre></div>
-<p>Vanwege die enkele underscore moet er ook een regel in <code>__init__()</code> veranderd worden:</p>
+<p>Vanwege de underscores moet er ook twee regels in <code>__init__()</code> veranderd worden:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_naam</span> <span class="o">=</span> <span class="n">naam</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_email</span> <span class="o">=</span> <span class="n">email</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">__krediet</span> <span class="o">=</span> <span class="mf">1000.0</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">__korting</span> <span class="o">=</span> <span class="mf">0.0</span>
 </code></pre></div>
-<p>Voor de korting kunnen we hetzelfde doen:</p>
+<p>Voor de korting kunnen we hetzelfde doen als bij het krediet:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_get_korting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__korting</span>
 
@@ -3661,10 +3658,8 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Korting moet tussen 0 en 1.0 liggen&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="gebruik-van-getters-en-setters">Gebruik van getters en setters<a class="headerlink" href="#gebruik-van-getters-en-setters" title="Permanent link">&para;</a></h2>
-<p>Nu kunnen we in <code>main.py</code> de getters en setters gebruiken:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">klant</span><span class="w"> </span><span class="kn">import</span> <span class="n">Klant</span>
-
-<span class="n">jan</span> <span class="o">=</span> <span class="n">Klant</span><span class="p">(</span><span class="s2">&quot;Jan Jansen&quot;</span><span class="p">,</span> <span class="s2">&quot;jan@email.nl&quot;</span><span class="p">)</span>
+<p>Nu kunnen we de getters en setters gebruiken:</p>
+<div class="highlight"><pre><span></span><code><span class="n">jan</span> <span class="o">=</span> <span class="n">Klant</span><span class="p">(</span><span class="s2">&quot;Jan Jansen&quot;</span><span class="p">,</span> <span class="s2">&quot;jan@email.nl&quot;</span><span class="p">)</span>
 
 <span class="c1"># Gebruik getter om krediet op te vragen</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Krediet: €</span><span class="si">{</span><span class="n">jan</span><span class="o">.</span><span class="n">_get_krediet</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -3723,7 +3718,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Korting moet tussen 0 en 1.0 liggen&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>Met de <code>@property</code> decorator kunnen we attributen gebruiken alsof het gewone attributen zijn, maar er worden wel de getters en setters aangeroepen:</p>
+<p>Met de <code>@property</code> decorator kunnen we attributen gebruiken alsof het gewone attributen zijn, maar achter de schermen worden wel de getters en setters aangeroepen:</p>
 <div class="highlight"><pre><span></span><code><span class="n">jan</span> <span class="o">=</span> <span class="n">Klant</span><span class="p">(</span><span class="s2">&quot;Jan Jansen&quot;</span><span class="p">,</span> <span class="s2">&quot;jan@email.nl&quot;</span><span class="p">)</span>
 
 <span class="c1"># Gebruik als gewone attributen (maar getter wordt aangeroepen)</span>
