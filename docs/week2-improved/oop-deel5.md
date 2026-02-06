@@ -2,7 +2,7 @@
 
 Overerving is een mechanisme waarmee het probleem van gedupliceerde code opgelost kan worden. Het concept is eenvoudig. Stel je voor dat we een model willen maken van verschillende typen vogels. Dan kun je je voorstellen dat dat model er bijvoorbeeld als volgt uit zou komen te zien:
 
-Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/oop-oefening2-improved.md)
+Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/oop-oefening2.md).
 
 ![Plaatje van overerving](imgs/klasse-diagram.png)
 
@@ -190,4 +190,4 @@ Verzendkosten voor Java voor beginners: €3.95
 
 Deze methode is alleen beschikbaar voor de objecten uit de klasse `FysiekProduct`. Een object uit de klasse `Product` kan deze methode niet benaderen.
 
-Maak nu [oefening nummer 2](oefeningen/oop-oefening2-improved.md)
+Maak nu [oefening nummer 2](oefeningen/oop-oefening2.md).
