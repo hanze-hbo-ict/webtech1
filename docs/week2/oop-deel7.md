@@ -1,215 +1,262 @@
 # OOP Python – Compositie
 
-In deze laatste paragraaf aandacht voor nog OOP-techniek, compositie (*composition*). Compositie wil zeggen dat een object *samengesteld* wordt aan de hand van verschillende andere objecten. Het samengesteld object kan op die manier taken delegeren aan die samenstellende objecten. Op zich lijkt compositie wel wat op overerving, maar waar overerving *impliciet* is, is compositie *expliciet* (en daarmee ook schaalbaarder, testbaarder en overdraagbaarder).
+In deze laatste paragraaf aandacht voor nog een OOP-techniek, compositie (*composition*). Compositie wil zeggen dat een object *samengesteld* wordt aan de hand van verschillende andere objecten. Het samengesteld object kan op die manier taken delegeren aan die samenstellende objecten. Op zich lijkt compositie wel wat op overerving, maar waar overerving *impliciet* is, is compositie *expliciet* (en daarmee ook schaalbaarder, testbaarder en overdraagbaarder).
 
 Compositie biedt een superieure manier om delegatie te beheren, aangezien het selectief de toegang kan delegeren, zelfs sommige attributen of methoden kan maskeren, terwijl overerving dit alles moet ontberen.
 
 Aan het eind van deze paragraaf maken we [oefening 3](oefeningen/oop-oefening3.md).
 
-## Een gevleugeld voorbeeld
+## Een webshop-voorbeeld
 
-Als voorbeeld wordt hier een klasse `Vleugel` toegevoegd aan een bestand met o.a. een klasse voor een eend (`Duck`). Deze klasse krijgt behalve de constructor (`__init__`) de methode `vliegen()`. Deze laatste krijgt als parameter `ratio` mee, die de verhouding tussen vleugels en lichaamsgewicht aangeeft. Deze verhouding bepaalt de wijze of een vogel al dan niet makkelijk kan opstijgen.
+Als voorbeeld wordt hier een klasse `Bestelling` toegevoegd die gebruik maakt van de klassen `Klant` en `Winkelwagen` die we eerder hebben gemaakt. Een bestelling is namelijk een *compositie* van een klant, een winkelwagen met producten, en een betaalmethode.
+
+Eerst maken we een eenvoudige klasse voor een betaalmethode ([`betaalmethode.py`](bestanden/webshop/betaalmethode.py)):
 
 ```python
-class Vleugel:
+class Betaalmethode:
+    """Klasse voor betaalmethoden"""
 
-    def __init__(self, ratio):
-        self.ratio = ratio
+    def __init__(self, type_betaling, kosten=0.0):
+        self.type = type_betaling
+        self.kosten = kosten  # Eventuele transactiekosten
 
-    def vliegen(self):
-        if self.ratio > 1:
-            print("Wauwwww, dit is fun")
-        elif self.ratio == 1:
-            print("Pff, hard werken, maar ik vlieg tenminste")
+    def verwerk_betaling(self, bedrag):
+        """Verwerk een betaling"""
+        totaal = bedrag + self.kosten
+        print(f"Betaling van €{totaal:.2f} wordt verwerkt via {self.type}")
+        if self.kosten > 0:
+            print(f"  (inclusief €{self.kosten:.2f} transactiekosten)")
+        return totaal
+```
+
+De volgende stap is om de klasse `Bestelling` te maken die gebruik maakt van `Klant`, `Winkelwagen` en `Betaalmethode`:
+
+```python
+import datetime
+
+
+class Bestelling:
+    """Klasse voor bestellingen in de webshop
+
+    Een bestelling is samengesteld uit:
+    - Een klant
+    - Een winkelwagen met producten
+    - Een betaalmethode
+    - Verzendkosten
+    """
+
+    def __init__(self, klant, winkelwagen, betaalmethode, verzendkosten=5.95):
+        self.klant = klant
+        self.winkelwagen = winkelwagen
+        self.betaalmethode = betaalmethode
+        self.verzendkosten = verzendkosten
+        self.besteldatum = datetime.datetime.now()
+        self.status = "In behandeling"
+
+    def bereken_totaal(self):
+        """Berekent totaalbedrag inclusief verzendkosten"""
+        subtotaal = self.winkelwagen.bereken_totaal()
+
+        # Gratis verzending boven €50
+        if subtotaal >= 50:
+            verzending = 0.0
         else:
-            print("Ik denk dat ik maar weer gewoon ga waggelen")
+            verzending = self.verzendkosten
+
+        return subtotaal + verzending
+
+    def plaats_bestelling(self):
+        """Plaatst de bestelling en verwerkt de betaling"""
+        if not self.winkelwagen.items:
+            print("Kan geen lege bestelling plaatsen!")
+            return False
+
+        print(f"\n{'='*50}")
+        print(f"BESTELLING VOOR {self.klant._naam}")
+        print(f"{'='*50}")
+
+        # Toon producten
+        print("\nProducten:")
+        for product in self.winkelwagen.items:
+            print(f"  - {product}")
+
+        # Bereken kosten
+        subtotaal = self.winkelwagen.bereken_totaal()
+        print(f"\nSubtotaal: €{subtotaal:.2f}")
+
+        if subtotaal >= 50:
+            print("Verzendkosten: €0.00 (GRATIS verzending!)")
+            verzending = 0.0
+        else:
+            print(f"Verzendkosten: €{self.verzendkosten:.2f}")
+            verzending = self.verzendkosten
+
+        totaal = subtotaal + verzending
+        print(f"Totaal: €{totaal:.2f}")
+
+        # Verwerk betaling
+        print(f"\nBetaalmethode: {self.betaalmethode.type}")
+        eindtotaal = self.betaalmethode.verwerk_betaling(totaal)
+
+        # Bevestiging
+        self.status = "Bevestigd"
+        print(f"\nBestelling bevestigd!")
+        print(f"Bevestiging verzonden naar {self.klant._email}")
+        print(f"Verwachte levering: 2-3 werkdagen")
+        print(f"{'='*50}\n")
+
+        return True
+
+    def toon_status(self):
+        """Toont de status van de bestelling"""
+        print(f"\nBestellingsnummer: #{id(self)}")
+        print(f"Klant: {self.klant._naam}")
+        print(f"Datum: {self.besteldatum.strftime('%d-%m-%Y %H:%M')}")
+        print(f"Status: {self.status}")
+        print(f"Aantal producten: {len(self.winkelwagen.items)}")
+        print(f"Totaalbedrag: €{self.bereken_totaal():.2f}")
 ```
 
-De volgende stap is om de klasse `Duck` van een constructor te voorzien en bovendien een methode `vliegen()` toe te voegen die verwijst naar de klasse `Vleugel`.
+## De compositie in actie
+
+Laten we kijken hoe een bestelling werkt. We gebruiken de klassen die we al hebben (Product, Klant, Winkelwagen) en combineren ze:
 
 ```python
-class Duck:
+from product import Product
+from klant import Klant
+from winkelwagen import Winkelwagen
 
-    def __init__(self):
-        self._vleugel = Vleugel(1.8)
+# Maak producten aan
+laptop = Product("Laptop", 799.99, 5)
+muis = Product("Draadloze muis", 25.50, 20)
+toetsenbord = Product("Mechanisch toetsenbord", 89.99, 15)
 
-    def vliegen(self):
-        self._vleugel.vliegen()
-```
+# Maak een klant aan
+anna = Klant("Anna de Vries", "anna@email.nl")
 
-Eenden hebben nu een vleugel en een methode om te vliegen. Kijken of Donald de lucht in wil.
+# Maak een winkelwagen en voeg producten toe
+wagen = Winkelwagen(anna)
+wagen.voeg_toe(laptop)
+wagen.voeg_toe(muis)
+wagen.voeg_toe(toetsenbord)
 
-```python
-if __name__ == '__main__':
-    donald = Duck()
-    donald.vliegen()
+# Kies een betaalmethode
+ideal = Betaalmethode("iDEAL", kosten=0.0)  # Geen transactiekosten
+
+# Maak een bestelling (compositie!)
+bestelling = Bestelling(
+    klant=anna,
+    winkelwagen=wagen,
+    betaalmethode=ideal,
+    verzendkosten=5.95
+)
+
+# Plaats de bestelling
+bestelling.plaats_bestelling()
+
+# Toon status
+bestelling.toon_status()
 ```
 
 Resultaat:
 
 ```console
-Wauwwww, dit is fun
+==================================================
+BESTELLING VOOR Anna de Vries
+==================================================
+
+Producten:
+  - Laptop (€799.99)
+  - Draadloze muis (€25.50)
+  - Mechanisch toetsenbord (€89.99)
+
+Subtotaal: €915.48
+Verzendkosten: €0.00 (GRATIS verzending!)
+Totaal: €915.48
+
+Betaalmethode: iDEAL
+Betaling van €915.48 wordt verwerkt via iDEAL
+
+Bestelling bevestigd!
+Bevestiging verzonden naar anna@email.nl
+Verwachte levering: 2-3 werkdagen
+==================================================
+
+Bestellingsnummer: #4426417040
+Klant: Anna de Vries
+Datum: 31-01-2026 12:45
+Status: Bevestigd
+Aantal producten: 3
+Totaalbedrag: €915.48
 ```
 
-Wat is er nu gebeurd? In de klasse `Duck` is een nieuw object gecreëerd van de klasse `Vleugel`. Vervolgens is er een methode `vliegen()` aangemaakt, waarbij een object uit de klasse `Duck` gebruik maakt van zijn eigen instantie van de klasse `Vleugel` om de methode `vliegen()` daarop aan te roepen.
+## Compositie vs. Overerving
 
-De klasse `Duck` bestaat nu (voor het merendeel) uit eigen methoden, maar er wordt ook een deel van de functionaliteit gedelegeerd naar objecten van een ander type (namelijk `Vleugel`). De eend is dus een *samengestelde klasse* geworden.
+Het verschil tussen compositie en overerving:
 
-## Een wat realistischer voorbeeld
-Daarom nu een meer realistisch voorbeeld. Basis hiervoor is een nieuwe Python-file, getiteld [`html_doc.py`](bestanden/html_doc.py).
+**Overerving** (is-een relatie):
+- Een `FysiekProduct` **is een** `Product`
+- Een `DigitaalProduct` **is een** `Product`
+- Gebruikt `super()` om functionaliteit over te nemen
 
-Een HTML-pagina moet minstens drie elementen bevatten:
+**Compositie** (heeft-een relatie):
+- Een `Bestelling` **heeft een** `Klant`
+- Een `Bestelling` **heeft een** `Winkelwagen`
+- Een `Bestelling` **heeft een** `Betaalmethode`
+- Gebruikt instantievariabelen om andere objecten te bevatten
 
-- een verwijzing naar het doctype
-- een header
-- een body
+## Wanneer compositie gebruiken?
 
-Als opfrisser, een kort overzicht van de basisstructuur van een HTML-pagina.
+Gebruik compositie wanneer:
 
-```html
-<!DOCTYPE html>
-<html>
-	<head>
-	</head>
+1. **Flexibiliteit belangrijker is**: Je kunt tijdens runtime eenvoudig de samenstelling wijzigen (bijvoorbeeld een andere betaalmethode kiezen)
+2. **Meerdere bronnen**: Een object functionaliteit nodig heeft van meerdere verschillende klassen
+3. **Geen "is-een" relatie**: De objecten zijn niet hetzelfde type, maar werken samen
 
-	<body>
-	</body>
-</html>
-```
-
-HTML wordt voornamelijk opgebouwd door gebruik te maken van tags, dus als eerste wordt er een klasse `Tag` gecreëerd, met een constructor.
+Voorbeeld waar we de betaalmethode kunnen wijzigen:
 
 ```python
-class Tag:
+# Maak meerdere betaalmethodes
+ideal = Betaalmethode("iDEAL", kosten=0.0)
+creditcard = Betaalmethode("Creditcard", kosten=2.50)
+paypal = Betaalmethode("PayPal", kosten=1.00)
 
-    def __init__(self, name, contents):
-        self.start_tag = f"<{name}>"
-        self.end_tag = f"</{name}>"
-        self.contents = contents
+# Maak bestelling met iDEAL
+bestelling = Bestelling(anna, wagen, ideal)
+
+# Wijzig de betaalmethode voor het plaatsen
+bestelling.betaalmethode = paypal
+
+# Nu wordt PayPal gebruikt
+bestelling.plaats_bestelling()
 ```
 
-De volgende stap is de tags en de inhoud naar het scherm te schrijven. Met 'inhoud' wordt hier bedoeld de tekens die tussen de begin- en eind tag zijn opgenomen.
+## Voordelen van compositie
 
-```python
-def __str__(self):
-    return f"{self.start_tag}{self.contents}{self.end_tag}"
+1. **Flexibiliteit**: Objecten kunnen tijdens runtime worden vervangen
+2. **Loskoppeling**: Klassen zijn minder afhankelijk van elkaar
+3. **Herbruikbaarheid**: Componenten kunnen in verschillende contexten worden gebruikt
+4. **Testbaarheid**: Componenten kunnen afzonderlijk getest worden
+5. **Onderhoudbaarheid**: Wijzigingen in één component hebben minder impact
 
-def display(self, file=None):
-    print(self, file=file)
-```
+## Samenvatting
 
-De basisstructuur laat zien dat er nog drie andere klassen nodig zijn. De eerste daarvan is `Doctype`. Hierin wordt vastgelegd met welke versie van HTML er gewerkt wordt. Daar wordt een nieuwe klasse voor ontwikkeld.
+In dit deel hebben we geleerd over:
 
-```python
-class DocType(Tag):
+- Compositie als alternatief voor overerving
+- Het verschil tussen "is-een" (overerving) en "heeft-een" (compositie) relaties
+- Het samenstellen van complexe objecten uit eenvoudigere objecten
+- Het delegeren van functionaliteit naar component-objecten
+- Wanneer compositie geschikter is dan overerving
 
-    def __init__(self):
-        super().__init__('!DOCTYPE html', '')
-        self.end_tag = ''   # DOCTYPE heeft geen endtag
-```
+## Afsluiting OOP
 
-!!! Info "Is DOCTYPE echt een html-element?"
-    De declaratie `DOCTYPE` is niet echt een html-tag. Hij behoort tot de zogenaamde *preambule* van de pagina, en vertelt browsers dat de tekst die gaat volgen bestaat uit html; je zou dus kunnen zeggen dat deze tag *voorafgaat* aan de html en er dus geen onderdeel van uitmaakt. [Zoals gewoonlijk is er veel over te vertellen](https://html.spec.whatwg.org/multipage/syntax.html#the-doctype), maar voor het voorbeeld houden we het er hier op dat `DOCTYPE` een subklasse is van `Tag`.
+Je hebt nu alle belangrijke OOP-concepten in Python gezien:
 
-De tweede is de klasse `Head`, de derde is de klasse `Body`:
+1. **Klassen en objecten**: Het maken van sjablonen en instanties
+2. **Inkapseling**: Het afschermen van data met private attributen
+3. **Overerving**: Het hergebruiken van code door overerving
+4. **Polymorfisme**: Dezelfde interface, verschillende implementaties
+5. **Compositie**: Het samenstellen van objecten uit andere objecten
 
-```python
-class Head(Tag):
-
-    def __init__(self, title=None):
-        super().__init__('head', '')
-
-class Body(Tag):
-
-    def __init__(self):
-        super().__init__('body', '')   # De inhoud van de body wordt apart opgebouwd
-        self._body_contents = []
-
-    def add_tag(self, name, contents):
-        new_tag = Tag(name, contents)
-        self._body_contents.append(new_tag)
-
-    def display(self, file=None):
-        for tag in self._body_contents:
-            self.contents += str(tag)
-
-        super().display(file=file)
-```
-
-De constructor (`__init__()`) plaatst de begintag op de juiste plaats. De inhoud van de body is nog leeg. Dat is echter wel de plek waarop de inhoud van HTML-document getoond wordt. De methode `add_tag()` bouwt de inhoud langzaam op en de methode `display()` laat de inhoud verschijnen.
-
-Uiteraard had dezelfde inhoud ook bij de klasse `Head` ondergebracht kunnen worden omdat daar ook de nodige tags aan toegevoegd zouden kunnen worden. Het is hier een voorbeeld en niet het bouwen van een professionele site, dus een versimpeling van de werkelijkheid.
-
-Alle klassen zijn nu aangemaakt en nu kan het daadwerkelijke document opgebouwd worden.
-
-## Een html-document
-
-Alle klassen zijn nu aangemaakt en nu kan het daadwerkelijke document opgebouwd worden.
-
-```python
-class HtmlDoc:
-
-    def __init__(self, title=None):
-        self._doc_type = DocType()
-        self._head = Head()
-        self._body = Body()
-```
-
-Als eerste worden nieuwe objecten aangemaakt voor doctype, head en body. De klasse `HtmlDoc` is dus opgebouwd (*samengesteld*, *gecomponeerd*) vanuit drie andere klassen. Dit object kent geen attributen van zichzelf, maar wordt opgebouwd uit elementen van andere klassen.
-
-```python
-def add_tag(self, name, contents):
-    self._body.add_tag(name, contents)
-```
-Voor iedere object uit de klasse `HtmlDoc` wordt de inhoud apart opgebouwd. De tags worden aan object gekoppeld en deze roept de methode van de klasse `Body` aan om de inhoud op te bouwen. Dat lukt dus omdat er een nieuw object `Body` is aangemaakt.
-
-De inhoud van de pagina kan vervolgens opgebouwd worden. Daarvoor voegen we de methode `display()` toe aan de klasse `HtmlDoc`:
-
-```python
-def display(self, file=None):
-    self._doc_type.display(file=file)
-    print('<html>', file=file)
-    self._head.display(file=file)
-    self._body.display(file=file)
-    print('</html>', file=file)
-```
-
-Het enige werk dat de methode zelf moet uitvoeren is het aanmaken van de begin- en eindtag `html` en drie keer een methode van een andere klasse aanroepen.
-
-Tijd voor een test!
-
-```python
-if __name__ == '__main__':
-    demo_page = HtmlDoc('Demo HTML Document')
-    demo_page.add_tag('h1', 'Muziekschool Session')
-    demo_page.add_tag('h2', 'de specialist in drums en piano')
-    demo_page.add_tag('p', 'verdere informatie staat in deze paragraaf')
-    demo_page.display()
-```
-
-Het resultaat is er, maar wordt niet echt flitsend afgebeeld. Is dat gewenst dat kan op de gebruikelijke manier weer de parameter `file=file` na de diverse display’s toegevoegd worden.
-
-Het is momenteel gewenst dus een aantal kleine aanpassingen zijn gedaan. Nog een test om te kijken of een browserpagina geopend kan worden met de aangemaakte inhoud.
-
-```python
-if __name__ == '__main__':
-    my_page.add_tag('h1', 'Muziekschool Session')
-    my_page.add_tag('h2', 'de specialist in drums en piano')
-    my_page.add_tag('p', 'verdere informatie staat in deze paragraaf')
-    with open('test.html', 'w') as test_doc:
-            my_page.display(file=test.html)
-```
-
-Er is een bestand test.html zichtbaar in het rijtje bestanden dat behoort bij dit project.
-
-![Directory listing met het html-bestand erbij](imgs/directory_listing.png)
-
-Activeer `test.html` en open dit bestand in een zelfgekozen browser. Geef daarvoor een rechterklik op de bestandsnaam, kies voor ‘Open in Browser’ en selecteer de gewenste browser.
-
-![Het resultaat van het script](imgs/test.png)
-
-Wat is nu het belangrijkste verschil tussen overerving en compositie? Een overerving kent een *is-een* relatie (*is-a relationship*): iedere subklasse heeft de kenmerken van de superklasse en is er een uitbreiding op. Compositie kent een *heeft-een* relatie (*has-a relationship*): een klasse is samengesteld uit meerdere andere klassen.
-
-Maak nu [oefening 3](oefeningen/oop-oefening3.md).
-
-
+Deze concepten vormen de basis voor het bouwen van complexe, onderhoudbare applicaties zoals webshops, games en nog veel meer!

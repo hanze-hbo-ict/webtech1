@@ -23,10 +23,10 @@ Het is niet zo dat beide stijlen onafhankelijk van elkaar functioneren. Binnen O
 
 ## Klasse-definitie
 
-Om te beginnen een simpel voorbeeld om het principe van klassen en methoden uit te leggen. Het draait om kroketten (Kwekkeboom en Van Dobben) en het aanzetten van de frituur (Bekijk het bestand [`kroket.py`](bestanden/kroket.py)).
+Om te beginnen een simpel voorbeeld om het principe van klassen en methoden uit te leggen. We bouwen een eenvoudige webshop waarbij we producten kunnen beheren. Bekijk het bestand [`product.py`](bestanden/webshop/product.py).
 
 ```ipython
-In [1]: class Kroket:
+In [1]: class Product:
    ...:
 ```
 
@@ -35,218 +35,176 @@ Een klasse wordt gedefinieerd door het woord `class`, gevolgd door de naam van d
 Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze class bestaat. Dit geven we mee aan de methode die aangeroepen wordt wanneer er een object van een klasse wordt aangemaakt: de zogenaamde *constructor*. In Python is deze methode `__init__` (we komen daar zo wat uitgebreider op terug):
 
 ```ipython
-   ...:     def __init__(self, leverancier, prijs, trek=True):
-   ...:         self.leverancier = leverancier
-   ...:         self.prijs = prijs
-   ...:         self.trek = False
+   ...:     def __init__(self, naam, prijs, voorraad):
+   ...:         self._naam = naam
+   ...:         self._prijs = prijs
+   ...:         self._voorraad = voorraad
+   ...:         self._beschikbaar = True
    In [2]:
 ```
 
-Het zijn er drie (3), `leverancier`, `prijs` en `trek`. Bij `trek = True` wordt de kroket ondergedompeld in het vet. De notatie `self` lijkt nu nog wat vreemd, maar dat went snel; zie eventueel [deze blogpost](https://www.bartbarnard.nl/programmeerblogs/python/self.html) voor meer informatie rondom `self`.
+Het zijn er vier (4): `naam`, `prijs`, `voorraad` en `beschikbaar`. De eigenschap `beschikbaar` krijgt automatisch de waarde `True` bij het aanmaken van een product. De notatie `self` lijkt nu nog wat vreemd, maar dat went snel; zie eventueel [deze blogpost](https://www.bartbarnard.nl/programmeerblogs/python/self.html) voor meer informatie rondom `self`.
 
-Nu de klasse is gedefinieerd kunnen we er objecten van maken – een ander woord voor hiervoor is *instantie*: we maken *instanties* van de klasse `Kroket`:
+Nu de klasse is gedefinieerd kunnen we er objecten van maken – een ander woord voor hiervoor is *instantie*: we maken *instanties* van de klasse `Product`:
 
 ```ipython
-In [2]: kwek = Kroket("Kwekkeboom", 2.50)
+In [2]: laptop = Product("Laptop", 799.99, 5)
 ```
 
-Er is een object aangemaakt met de naam `kwek`. Bij het aanmaken van deze nieuwe instantie is de invulling van twee eigenschappen verplicht. In de definitie van de klasse wordt gevraagd om `leverancier` en `prijs`, dus deze twee waarden moeten opgegeven worden. Gebeurt dat niet, verschijnt er een foutmelding. Dus deze coderegel wil zeggen dat er een instantie (`kwek`) is aangemaakt voor de klasse (`Kroket`) waarbij leverancier (`Kwekkeboom`) en prijs (`2.50`) als verplichte waarden worden meegegeven. De inhoud van de waarden van de velden van de instantie `kwek` kunnen ook getoond worden:
+Er is een object aangemaakt met de naam `laptop`. Bij het aanmaken van deze nieuwe instantie is de invulling van drie eigenschappen verplicht. In de definitie van de klasse wordt gevraagd om `naam`, `prijs` en `voorraad`, dus deze drie waarden moeten opgegeven worden. Gebeurt dat niet, verschijnt er een foutmelding. Dus deze coderegel wil zeggen dat er een instantie (`laptop`) is aangemaakt voor de klasse (`Product`) waarbij naam (`Laptop`), prijs (`799.99`) en voorraad (`5`) als verplichte waarden worden meegegeven. De inhoud van de waarden van de velden van de instantie `laptop` kunnen ook getoond worden:
 
 ```ipython
-In [4]: kwek.leverancier
-Out[4]: 'Kwekkeboom'
+In [4]: laptop._naam
+Out[4]: 'Laptop'
 
-In [5]: kwek.prijs
-Out[5]: 2.5
+In [5]: laptop._prijs
+Out[5]: 799.99
 
 In [6]:
 ```
 
-Uiteraard kunnen er meerdere objecten bij deze klasse worden aangemaakt. Een tweede firma die kroketten verkoopt is Van Dobben.
+Uiteraard kunnen er meerdere objecten bij deze klasse worden aangemaakt. Een tweede product is bijvoorbeeld een boek.
 
 ```ipython
-In [6]: dob = Kroket("Van Dobben", 2.35)
+In [6]: python_boek = Product("Python Crash Course", 34.95, 12)
 ```
 
 De gegevens van beide objecten kunnen ook gecombineerd worden getoond.
 
 ```ipython
-In [7]: print(f"Fabrikanten: {kwek.leverancier} = {kwek.prijs}, {dob.leverancier} = {dob.prijs}")
-Fabrikanten: Kwekkeboom = 2.5, Van Dobben = 2.35
+In [7]: print(f"Producten: {laptop._naam} = €{laptop._prijs}, {python_boek._naam} = €{python_boek._prijs}")
+Producten: Laptop = €799.99, Python Crash Course = €34.95
 
 In [8]:
 ```
 
 Voor de overzichtelijkheid eerst een aantal beschrijvingen:
 
-
 Term | Omschrijving
 -----|------
-Klasse | 	template, sjabloon voor het maken van objecten; alle objecten die met dezelfde klasse zijn gemaakt, hebben dezelfde kenmerken.
-Object | 	een instantie van een klasse.
-Initialisatie | 	een nieuw object van een klasse.
+Klasse | template, sjabloon voor het maken van objecten; alle objecten die met dezelfde klasse zijn gemaakt, hebben dezelfde kenmerken.
+Object | een instantie van een klasse.
+Initialisatie | een nieuw object van een klasse.
 Methode | een functie gedefinieerd in een klasse.
 Attribuut | een variabele die is gebonden aan een object van een klasse.
 
-## Kroketten in het vet
+## Producten verkopen
 
-We breiden de definitie van `Kroket` uit met een tweede methode `in_frituur()`. Het woord `self` moet je altijd aan een methode-definitie toevoegen, zelfs wanneer de methode zelf verder helemaal geen parameters heeft.
+We breiden de definitie van `Product` uit met een tweede methode `verkoop()`. Het woord `self` moet je altijd aan een methode-definitie toevoegen, zelfs wanneer de methode zelf verder helemaal geen parameters heeft.
 
-Deze methode laat de frituur weten dat er moet gebakken worden. De waarde van trek wijzigt naar `True`.
-
-```python
-def in_frituur(self):
-    self.trek = True
-```
-
-!!! Info "Klasse-definitie"
-    Vanaf nu laten we alleen de *wijzigingen* aan de klasse-definitie zien. Als je dit zelf wilt meetypen, is het het handigste om de python-code in een separaat bestand op te slaan, bijvoorbeeld `Kroket.py`. Deze kun je dan steeds na het doorvoeren van een wijziging opnieuw in je interactieve shell laden door middel van `run 'Kroket' `.
-
-
-
-Een testje voor de Van Dobben kroket’:
-
-```ipython
-In [1]: run 'Kroket'
-
-In [2]: dob = Kroket("Van Dobben", 2.35)
-
-In [3]: dob.trek
-Out[3]: False
-
-In [4]: dob.in_frituur()
-
-In [5]: dob.trek
-Out[5]: True
-
-In [6]:
-```
-
-Bij het aanmaken van het object `dob` is de status `False` meegegeven. Het aanroepen van de methode `in_frituur()` zorgt er voor dat trek de status `True` krijgt.
-
-Vaak zijn er meerdere opties het gewenste resultaat te bereiken. Ook hier, alleen nu voor het object `kwek`:
+Deze methode verkoopt een aantal producten en past de voorraad aan. De waarde van `_beschikbaar` wijzigt naar `False` wanneer de voorraad niet toereikend is.
 
 ```python
-Kroket.in_frituur(kwek)  # optie 1
-kwek.in_frituur()        # optie 2
+def verkoop(self, aantal):
+    """Verkoop een aantal items van dit product"""
+    nieuwe_voorraad = self._voorraad - aantal
+    if nieuwe_voorraad >= 0:
+        self._voorraad = nieuwe_voorraad
+        print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
+    else:
+        print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
+        self._beschikbaar = False
 ```
 
-## Constructors
-
-Nog een belangrijk begrip bij het werken met OOP betreft de `constructor`. Deze worden gebruikt om een object op de juiste manier in te stellen wanneer het wordt aangemaakt.
-
-In Python heeft een constructor altijd de vorm `__init__(self)`. Eventueel kun je ook meerdere parameters aan de constructor meegeven; die geef je dan aan achter de standaard-parameter `self`.
-
-!!! info "Dunder-methoden"
-    Zoals je ziet heeft de `constructor` een opvallende vorm; hij wordt omgeven door twee liggende streepjes, `__`. Python kent meer van dergelijke methoden, zoals `__repr__`, `__len__`, enzovoort. Dit zijn methoden die op specifieke momenten dooor Python worden aangeroepen; bijvoorbeeld wanneer je een object *aannmaakt* (`__init__`), een object wilt *uitprinten* (`__repr__`), of de *lengte* van een object wilt weten (`__len__`).
-
-    Dergelijke methoden worden *dunder-methods* genoemd – van *double underscore*.
-
-Het is ook mogelijk om *object* extra eigenschappen mee te geven nadat deze is geïnitialiseerd. Dit kun je doen door gewoon een eigenschap te definiëren en daar een waarde aan toe te kennen. Dit is dan wel een eigenschap die *alleen* voor het specifieke object geldt en niet wordt doorgegeven aan andere objecten van dezelfde klasse.
-
-Als voorbeeld geven we hieronder een extra attribuut `waardering` aan het object `kwek`. Je zult zien dat deze eigenschap niet eveneens beschikbaar is bij het object `dob`:
+De volledige klasse ziet er nu als volgt uit:
 
 ```python
-kwek.waardering = 6.5
-print(kwek.waardering)
-print(dob.waardering)
+class Product:
+    """Basisklasse voor alle producten in de webshop"""
+
+    def __init__(self, naam, prijs, voorraad):
+        self._naam = naam
+        self._prijs = prijs
+        self._voorraad = voorraad
+        self._beschikbaar = True
+
+    def verkoop(self, aantal):
+        """Verkoop een aantal items van dit product"""
+        nieuwe_voorraad = self._voorraad - aantal
+        if nieuwe_voorraad >= 0:
+            self._voorraad = nieuwe_voorraad
+            print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
+        else:
+            print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
+            self._beschikbaar = False
 ```
 
-Als je dit runt, krijg je eerst 6.5 te zien – de waardering die we zojuist hebben toegevoegd. Deze wordt onmiddellijk gevolgd door een foutmelding.
-
-```ipython
-In [7]: kwek.waardering = 6.5
-
-In [8]: kwek.waardering
-Out[8]: 6.5
-
-In [9]: dob.waardering
----------------------------------------------------------------------------
-AttributeError                            Traceback (most recent call last)
-<ipython-input-9-20aa4a747a07> in <module>
-----> 1 dob.waardering
-
-AttributeError: 'Kroket' object has no attribute 'waardering'
-
-In [10]:
-```
-
-## Klasse-attributen
-
-Naast de attributen die meegegeven worden aan elke nieuwe instantie, is het ook mogelijk de klasse attributen mee te geven:
+Tijd voor de test! We maken een nieuw product en verkopen er een aantal:
 
 ```python
-class Kroket:
-    soort = "rundvleeskroket"
-
-    #rest van de definitie is weggelaten
+laptop = Product("Laptop", 799.99, 5)
+laptop.verkoop(2)
 ```
 
-Met de *dunder* `__dict__` kan bekeken worden wat de specifieke inhoud is van elk object:
+En de uitkomst:
 
-```ipython
-In [10]: Kroket.__dict__
-Out[10]:
-mappingproxy({'__module__': '__main__',
-              'soort': 'rundvleeskroket',
-              '__init__': <function __main__.Kroket.__init__(self, leverancier, prijs)>,
-              'in_frituur': <function __main__.Kroket.in_frituur(self)>,
-              '__dict__': <attribute '__dict__' of 'Kroket' objects>,
-              '__weakref__': <attribute '__weakref__' of 'Kroket' objects>,
-              '__doc__': None})
-
-In [11]: In [11]: dob.__dict__
-Out[11]: {'leverancier': 'Van Dobben', 'prijs': 2.35, 'trek': True}
-
-In [12]: kwek.__dict__
-Out[12]: {'leverancier': 'Kwekkeboom', 'prijs': 2.5, 'trek': False, 'waardering': 6.5}
-
-In [13]:
+```console
+Verkocht: 2x Laptop. Nog 3 op voorraad
 ```
 
-De klasse zelf bevat erg veel eigenschappen terwijl de beide objecten alleen de instantievariabelen laten zien, waarbij `kwek` er eentje meer toont, wat logisch is.
+## Een mooiere weergave met `__str__()`
 
-Wat zal er gebeuren als de inhoud van het extra attribuut van de klasse zelf gewijzigd wordt?
+Het kan handig zijn als we een product netjes kunnen printen. Daarvoor gebruiken we de speciale methode `__str__()`:
 
-```ipython
-# Wijzig rundvleeskroket naar groentekroket
-In [13]: Kroket.soort = "groentekroket"
-
-In [14]: Kroket.soort
-Out[14]: 'groentekroket'
-
-In [15]: dob.soort
-Out[15]: 'groentekroket'
-
-In [16]: kwek.soort
-Out[16]: 'groentekroket'
-
-In [17]:
+```python
+def __str__(self):
+    return f"Product: {self._naam}, Prijs: €{self._prijs:.2f}, Voorraad: {self._voorraad}"
 ```
 
-Het resultaat is niet echt verrassend: de wijziging in de klasse vindt ook z'n weg naar de instanties die van deze klasse zijn gemaakt.
+Nu kunnen we eenvoudig een product weergeven:
 
-Nog een laatste test. Is het ook mogelijk voor `kwek` de inhoud van het attribuut van de klasse te wijzigen?
-
-```ipython
-# Kwekkeboom wordt nu garnalenkroket
-In [17]: kwek.soort = "Garnalenkroket"
-
-In [18]: kwek.soort
-Out[18]: 'Garnalenkroket'
-
-In [19]: dob.soort
-Out[19]: 'groentekroket'
-
-In [20]:
+```python
+laptop = Product("Laptop", 799.99, 5)
+print(laptop)
 ```
 
-De uitkomst laat zien dat het specifieke klasse attribuut voor `kwek` is gewijzigd. Het waarom kan uitgelegd worden door te verwijzen naar de terminologie omtrent `global` en `local`. Het klasse-attribuut zal gelden voor *ieder object* tenzij er lokaal bij het object (de instantie) wijzigingen worden doorgevoerd. De werkwijze is altijd zo dat er eerst wordt gekeken welke eigenschappen met het object worden meegegeven en daarna of er ook nog eigenschappen gelden op een hoger niveau.
+Resultaat:
 
-De inhoud van de eigenschappen op 'lokaal' niveau hebben prioriteit boven de 'globaal' meegegeven attributen.
+```console
+Product: Laptop, Prijs: €799.99, Voorraad: 5
+```
 
+## Testen van meerdere verkopen
 
+Laten we nu meerdere verkopen uitvoeren om te zien hoe de voorraad wordt bijgehouden:
 
+```python
+laptop = Product("Laptop", 799.99, 5)
+print(laptop)
 
+laptop.verkoop(2)
+print(laptop)
 
+laptop.verkoop(2)
+print(laptop)
 
+laptop.verkoop(2)  # Dit zal niet lukken - onvoldoende voorraad!
+print(laptop)
+```
+
+Resultaat:
+
+```console
+Product: Laptop, Prijs: €799.99, Voorraad: 5
+Verkocht: 2x Laptop. Nog 3 op voorraad
+Product: Laptop, Prijs: €799.99, Voorraad: 3
+Verkocht: 2x Laptop. Nog 1 op voorraad
+Product: Laptop, Prijs: €799.99, Voorraad: 1
+Onvoldoende voorraad. Nog maar 1 beschikbaar
+Product: Laptop, Prijs: €799.99, Voorraad: 1
+```
+
+Perfect! Onze product-klasse houdt netjes de voorraad bij en waarschuwt wanneer er niet genoeg producten beschikbaar zijn.
+
+## Samenvatting
+
+In dit deel hebben we kennisgemaakt met:
+
+- Het definiëren van een klasse met `class`
+- De constructor `__init__()` om objecten te initialiseren
+- Attributen (eigenschappen) van een klasse
+- Methoden (functies binnen een klasse)
+- Het aanmaken van instanties (objecten)
+- De speciale methode `__str__()` voor nette weergave
+
+In het volgende deel gaan we dieper in op het beschermen van attributen met getters en setters.

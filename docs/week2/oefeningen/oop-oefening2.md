@@ -1,35 +1,39 @@
 # OOP Python – Oefening 2
 
-Maak binnen de file `aardman.py` een nieuwe klasse aan, `Uruk_Hai`, die een subklasse is van `Aardman`. 
+Maak binnen de file `product.py` een nieuwe klasse aan, `DigitaalProduct`, die een subklasse is van `Product`.
 
-Uruk-Hai’s hebben drie (3) levens en 12 hit points.
+Digitale producten hebben geen verzendkosten maar wel een bestandsgrootte. Geef digitale producten een standaard voorraad van 999 (want ze zijn bijna onbeperkt beschikbaar) en voeg een attribuut `_bestandsgrootte` toe (in MB).
 
-Test de klasse door een tweetal instanties aan te maken en hun details te tonen. Bekende Uruk_Hai namen zijn Lurtz en Ugluk.
+Test de klasse door een tweetal instanties aan te maken en hun details te tonen. Goede voorbeelden zijn software zoals "Photoshop" en "Microsoft Office".
 
-Test verder of de methode `schade()` naar behoren werkt. Dat is ook nog niet getest voor de objecten uit de klasse `Ork`. Is hier een mooie gelegenheid voor. Mocht blijken dat de test nog een probleem laat zien, graag een oplossing ervoor.
+Test verder of de methode `verkoop()` naar behoren werkt. Dat is ook nog niet getest voor de objecten uit de klasse `FysiekProduct`. Nu is daar een mooie gelegenheid voor. Mocht blijken dat de test nog een probleem laat zien, graag een oplossing ervoor.
 
-Ook kunnen Orks weer onderverdeeld worden. De bekendste groepen zijn *Mordor* en *Saruman*. Alleen de klasse `Mordor` wordt hier aangemaakt als voorbeeld. Een ork van het type Mordor dient een naam te hebben en krijgt 140 hit points om mee te beginnen. Als een ork van Mordor vier (4) keer geraakt wordt kost het één (1) punt.
-
-```python
-class Mordor(Ork):
-
-    def __init__(self, name):
-        super().__init__(name)
-        self._hit_points = 140
-
-    def schade(self, geraakt):
-        super().schade(geraakt // 4)    
-```
-
-Een Ork uit de Mordor-groep is ‘Gothmog’. Dat wordt het object uit deze klasse dat aangemaakt wordt.
+Ook kunnen fysieke producten weer onderverdeeld worden. De bekendste groepen zijn *Boek* en *Elektronica*. Alleen de klasse `Boek` wordt hier aangemaakt als voorbeeld. Een boek heeft een naam, prijs en voorraad nodig, plus een aantal extra eigenschappen zoals auteur en ISBN. Boeken krijgen standaard 0.5 kg als gewicht.
 
 ```python
-from aardman import Aardman, Ork, Uruk_Hai, Mordor
+class Boek(FysiekProduct):
 
-gothmog = Mordor("Gothmog")
-print(gothmog)
-gothmog.schade(12)
-print(gothmog)
+    def __init__(self, naam, prijs, voorraad, auteur, isbn):
+        super().__init__(naam, prijs, voorraad, gewicht=0.5)
+        self._auteur = auteur
+        self._isbn = isbn
+
+    def __str__(self):
+        basis = super().__str__()
+        return f"{basis}, Auteur: {self._auteur}, ISBN: {self._isbn}"
 ```
 
-Maak nu de klasse `Saruman` aan met zelfgekozen waardes en test deze door een instance aan te maken en deze verschillende hoeveelheden schade toe te brengen.
+Een bekend boek is 'Python Crash Course' van Eric Matthes. Dat wordt het object uit deze klasse dat aangemaakt wordt.
+
+```python
+from product import Product, FysiekProduct, DigitaalProduct, Boek
+
+python_boek = Boek("Python Crash Course", 34.95, 8, "Eric Matthes", "978-1593279288")
+print(python_boek)
+python_boek.verkoop(3)
+print(python_boek)
+```
+
+Maak nu de klasse `Software` aan (als subklasse van `DigitaalProduct`) met zelfgekozen eigenschappen zoals versienummer en besturingssysteem, en test deze door een instantie aan te maken en deze verschillende hoeveelheden verkopen toe te passen.
+
+**Extra uitdaging:** Voeg een methode `download()` toe aan de klasse `DigitaalProduct` die een downloadlink genereert en de voorraad automatisch met 1 vermindert. Bij fysieke producten zou dit een error moeten geven.

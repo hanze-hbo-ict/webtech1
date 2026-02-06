@@ -2,7 +2,7 @@
 
 Overerving is een mechanisme waarmee het probleem van gedupliceerde code opgelost kan worden. Het concept is eenvoudig. Stel je voor dat we een model willen maken van verschillende typen vogels. Dan kun je je voorstellen dat dat model er bijvoorbeeld als volgt uit zou komen te zien:
 
-Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/oop-oefening2.md)
+Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/oop-oefening2.md).
 
 ![Plaatje van overerving](imgs/klasse-diagram.png)
 
@@ -24,163 +24,138 @@ Zo is `VOGEL` een superklasse van `VLIEGEND` en is `VLIEGEND` en subklasse van `
 
 De onderste drie (3) klassen erven van de bovenliggende klassen en zij kunnen in ieder geval beschikken over de attributen snavel en vleugels en ook over de methode `vlieg()`.
 
-## De klasse `Aardman`
+## De klasse `Product`
 
-Verder met het project `Game`. Dit project staat nog in de kinderschoenen en kent momenteel twee files, [`main.py`](bestanden/game/main.py) (waarmee we de code runnen) en [`Speler.py`](bestanden/game/speler.py). Daar wordt een derde file aan toegevoegd met de naam [`aardman.py`](bestanden/game/aardman.py). Daarin wordt als eerste een superklasse, `Aardman`, aangemaakt. Het is de bedoeling in dit spel monsters en trollen uit te schakelen. In deze klasse worden hit-points en levens bijgehouden en of de tegenstander nog in leven is.
+We gaan een webshop bouwen. Dit project staat nog in de kinderschoenen en kent momenteel twee files, [`main.py`](bestanden/webshop/main.py) (waarmee we de code runnen) en [`klant.py`](bestanden/webshop/klant.py). Daar wordt een derde file aan toegevoegd met de naam [`product.py`](bestanden/webshop/product.py). Daarin wordt als eerste een superklasse, `Product`, aangemaakt. Het is de bedoeling in deze webshop verschillende producten te verkopen. In deze klasse worden prijs, voorraad en beschikbaarheid bijgehouden.
 
 !!! Info "Werken vanuit een bestand"
     Vanaf nu werken we met het bestand `main.py` om de werking van de code te demonstreren. Dat is directer en makkelijker dan telkens alles in de interactieve shell opnieuw in te laden. Probeer dit voor je eigen project ook op deze manier te doen.
 
-De basis van de klasse `Aardman`:
+De basis van de klasse `Product`:
 
 ```python
-import random
+class Product:
 
-class Aardman:
-
-    def __init__(self, naam="Aardman", hit_points=0, levens=1):
+    def __init__(self, naam, prijs, voorraad):
         self._naam = naam
-        self._hit_points = hit_points
-        self._levens = levens
-        self._levend = True
+        self._prijs = prijs
+        self._voorraad = voorraad
+        self._beschikbaar = True
 ```
 
-Er wordt nog een tweede methode toegevoegd `schade()`. Het aantal keer dat een tegenstander geraakt is door vijandig vuur, wordt van de `hit_points` afgetrokken. Komt dat aantal onder nul (0), is deze vijand een leven kwijt.
+Er wordt nog een tweede methode toegevoegd `verkoop()`. Het aantal keer dat een product verkocht is, wordt van de `voorraad` afgetrokken. Komt dat aantal onder nul (0), is dit product niet meer beschikbaar.
 
 ```python
-def schade(self,geraakt):
-    punten_over = self._hit_points - geraakt
-    if punten_over >= 0:
-        self._hit_points = punten_over
-        print(f"Je bent {geraakt} keer geraakt en hebt nog {self._hit_points} hit points over")
+def verkoop(self, aantal):
+    nieuwe_voorraad = self._voorraad - aantal
+    if nieuwe_voorraad >= 0:
+        self._voorraad = nieuwe_voorraad
+        print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
     else:
-        self._levens -= 1
+        print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
+        self._beschikbaar = False
 ```
 
 Voor de mooi nog even de `__str__()`-methode.
 
 ```python
 def __str__(self):
-    return f"Naam: {self._naam}, Levens: {self._lives}, Hit points: {self._hit_points}"
+    return f"Product: {self._naam}, Prijs: €{self._prijs:.2f}, Voorraad: {self._voorraad}"
 ```
 
 Om te testen vullen we de onderstaande code in in `main.py`:
 
 ```python
-from aardman import Aardman
+from product import Product
 
-random_aardman = Aardman("Aardman", 12, 1)
-print(random_aardman)
+basis_product = Product("Laptop", 799.99, 5)
+print(basis_product)
 
-random_aardman.schade(4)
-print(random_aardman)
+basis_product.verkoop(2)
+print(basis_product)
 
-random_aardman.schade(8)
-print(random_aardman)
+basis_product.verkoop(2)
+print(basis_product)
 
-random_aardman.schade(9)
-print(random_aardman)
+basis_product.verkoop(2)
+print(basis_product)
 ```
 
 Wanneer we dit runnen, krijgen we het volgende resultaat:
 
 ```console
-Naam: Aardman, Levens: 1, Hit points: 12
-Je bent 4 keer geraakt en hebt nog 8 hit points over
-Naam: Aardman, Levens: 1, Hit points: 8
-Je bent 8 keer geraakt en hebt nog 0 hit points over
-Naam: Aardman, Levens: 1, Hit points: 0
-Naam: Aardman, Levens: 0, Hit points: 12
+Product: Laptop, Prijs: €799.99, Voorraad: 5
+Verkocht: 2x Laptop. Nog 3 op voorraad
+Product: Laptop, Prijs: €799.99, Voorraad: 3
+Verkocht: 2x Laptop. Nog 1 op voorraad
+Product: Laptop, Prijs: €799.99, Voorraad: 1
+Onvoldoende voorraad. Nog maar 1 beschikbaar
+Product: Laptop, Prijs: €799.99, Voorraad: 1
 ```
 
-## De klasse `Ork`
+## De klasse `FysiekProduct`
 
-Het is tot nu toe alleen mogelijk om een enkele aardman aan te maken, en dat is niet uitdagend genoeg. Er kunnen meerdere types gecreëerd worden om het spel interessanter te maken. De Orks (Lord of the Rings) vormen een groep aardmannen. Dat wordt de eerste subklasse: let op de wijze waarop we aangeven dat `Ork` een subklasse is van `Aardman`.
+Het is tot nu toe alleen mogelijk om een enkel generiek product aan te maken, en dat is niet uitdagend genoeg. Er kunnen meerdere types producten gecreëerd worden om de webshop interessanter te maken. Fysieke producten vormen een groep die verzonden moet worden. Dat wordt de eerste subklasse: let op de wijze waarop we aangeven dat `FysiekProduct` een subklasse is van `Product`.
 
 ```python hl_lines="1"
-class Ork(Aardman):
+class FysiekProduct(Product):
     pass
 ```
 
 Een beetje apart om een commando op te nemen in de definitie van een klasse dat niets doet. Het commando `pass` heeft tot doel invulling te zijn op het moment dat er een actie gevraagd wordt, maar er eigenlijk geen reden toe is een actie in de code op te nemen.
 
-Het kenmerkende voor de klasse `Aardman` wordt nu dat het de algemene kenmerken voor alle groepen vijanden als basiscode herbergt, zodat die code niet bij iedere subklasse (iedere tegenstander) hoeft te worden opgenomen. Daarom kunnen de testgegevens voor de klasse `Aardman` verwijderd worden uit `main.py` en vervangen worden door gegevens die naar vijandgroepen verwijzen. Van daaruit kunnen de benodigde gegevens uit de superklasse aangeroepen worden. Een bekende ork is Shagrat. Dat wordt het eerste object uit de klasse `Ork`.
+Het kenmerkende voor de klasse `Product` wordt nu dat het de algemene kenmerken voor alle groepen producten als basiscode herbergt, zodat die code niet bij iedere subklasse (ieder producttype) hoeft te worden opgenomen. Daarom kunnen de testgegevens voor de klasse `Product` verwijderd worden uit `main.py` en vervangen worden door gegevens die naar productgroepen verwijzen. Van daaruit kunnen de benodigde gegevens uit de superklasse aangeroepen worden. Een bekend fysiek product is een boek. Dat wordt het eerste object uit de klasse `FysiekProduct`.
 
 ```python
-from aardman import Aardman, Ork
-
-shagrat = Ork()
-print(shagrat)
+java_boek = FysiekProduct("Java voor beginners", 34.95, 12)
+print(f"Boek - {java_boek}")
 ```
 
-Dat levert het volgende resultaat op:
+Bij het initialiseren van het object 'java_boek' worden drie parameters meegegeven. De klasse `FysiekProduct` kent geen methode `__init__()`. Voor de invulling wordt daarom gekeken of de superklasse wel een methode `__init__()` kent, waarvan de attributen gebruikt kunnen worden. Die is er , de volgorde van de parameters klopt en Python snapt de bedoeling.
 
 ```console
-Naam: Aardman, Levens: 1, Hit points: 0
+Boek - Product: Java voor beginners, Prijs: €34.95, Voorraad: 12
 ```
 
-
-Bij het initialiseren van het object ‘shagrat’ worden geen parameters meegegeven. De klasse `Ork` kent geen methode `__init__()`. Voor de invulling wordt daarom gekeken of de superklasse wel een methode `__init__()` kent, waarvan de attributen gebruikt kunnen worden. Die is er dus worden de default waarden van de klasse `Aardman` aan dit object uit de klasse `Ork` toegewezen.
-
-Er wordt een tweede object uit de klasse `Ork` aangemaakt, Gorbag, nu wel met de benodigde parameters erbij en een nette lay-out.
+Het is niet handig dit allemaal te regelen via de `__init__()` van de superklasse. De klasse `FysiekProduct` zou zelf ook een `__init__` moeten hebben. Dat om iedere groep producten andere eigenschappen mee te geven aan het begin. We passen de klasse `FysiekProduct` dus aan met de volgende constructor:
 
 ```python
-gorbag = Ork("Gorbag", 18, 1)
-print(f"Gorbag - {gorbag}")
+def __init__(self, naam, prijs, voorraad, gewicht=0.0):
+    super().__init__(naam=naam, prijs=prijs, voorraad=voorraad)
+    self._gewicht = gewicht
 ```
 
-De volgorde van de parameters klopt niet helemaal, maar Python snapt de bedoeling.
-
-```console
-Gorbag - Naam: Gorbag, Levens: 1, Hit points: 18
-```
-
-Een derde object, nu met gedeeltelijke parameters.
-
-```python
-duergar = Aardman("Duergar", 23)
-print(duergar)
-```
-
-Resultaat:
-
-```console
-Naam: Duergar, Levens: 1, Hit points: 23
-```
-
-Er worden een tweetal parameters meegegeven en de derde wordt opgehaald uit de superklasse, vandaar dat ‘Levens: 1’ ook in beeld verschijnt.
-
-Het is niet handig dit allemaal te regelen via de `__init__()` van de superklasse. De klasse `Ork` zou zelf ook een `__init__` moeten hebben. Dat om iedere groep tegenstanders een ander aantal levens en een ander aantal hitpoints te mee te geven aan het begin. We passen de klasse `Ork` dus aan met de volgende constructor:
-
-```python
-def __init__(self, naam):
-    super().__init__(naam=naam, levens=1, hit_points=23)
-```
-
-Iedere object van de klasse `Ork` krijgt nu de attributen mee die meegegeven zijn in de `__init__`. De enige parameter die gevuld moet zijn is de naam, de rest wordt automatisch toegekend. De aanroep `super().__init__()` zorgt ervoor dat er een actie wordt uitgevoerd, waarbij de methode `__init__` uit de klasse `Aardman` (de superklasse) wordt aangeroepen. De gegevens worden dan vastgelegd in de attributen, waarna de methode `__str__()` uitgevoerd wordt.
+Ieder object van de klasse `FysiekProduct` krijgt nu de attributen mee die meegegeven zijn in de `__init__`. De eerste drie parameters moeten gevuld zijn, gewicht heeft een standaardwaarde. De aanroep `super().__init__()` zorgt ervoor dat er een actie wordt uitgevoerd, waarbij de methode `__init__` uit de klasse `Product` (de superklasse) wordt aangeroepen. De gegevens worden dan vastgelegd in de attributen, waarna de methode `__str__()` uitgevoerd wordt.
 
 ## Extra eigenschappen in de subklasse
 
-Het is ook mogelijk extra eigenschappen bij een subklasse in te bouwen. Als voorbeeld een methode voor de klasse `Ork`.
+Het is ook mogelijk extra eigenschappen bij een subklasse in te bouwen. Als voorbeeld een methode voor de klasse `FysiekProduct`.
 
 ```python
-def slaan(self):
-    print(f"Me {self._naam}. {self._naam} stomp you")
+def bereken_verzendkosten(self):
+    if self._gewicht <= 1.0:
+        kosten = 3.95
+    elif self._gewicht <= 5.0:
+        kosten = 6.95
+    else:
+        kosten = 9.95
+    print(f"Verzendkosten voor {self._naam}: €{kosten:.2f}")
+    return kosten
 ```
 
 Als we deze methode aan `main.py` toevoegen, krijgen we het resultaat dat eronder staat:
 
 ```python
-gorbag.slaan()
+java_boek = FysiekProduct("Java voor beginners", 34.95, 12, 0.8)
+java_boek.bereken_verzendkosten()
 ```
 
 Resultaat:
 
 ```console
-Me Gorbag. Gorbag stomp you!
+Verzendkosten voor Java voor beginners: €3.95
 ```
 
-Deze methode is alleen beschikbaar voor de objecten uit de klasse `Ork`. Een object uit de klasse `Aardman` kan deze methode niet benaderen.
+Deze methode is alleen beschikbaar voor de objecten uit de klasse `FysiekProduct`. Een object uit de klasse `Product` kan deze methode niet benaderen.
 
-Maak nu [oefening nummer 2](oefeningen/oop-oefening2.md)
-
+Maak nu [oefening nummer 2](oefeningen/oop-oefening2.md).

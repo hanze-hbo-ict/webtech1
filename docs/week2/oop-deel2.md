@@ -1,22 +1,24 @@
-# OOP Python – Methoden
+# OOP Python – Methoden en inkapseling
 
-Inkapseling (Engels: *encapsulation*) is één van de fundamenten van object-georiënteerd programmeren. Het wordt gebruikt om onbevoegden niet de gelegenheid te bieden de kenmerken van een object aan te passen. Als dat mogelijk moet zijn dan dienen zij toegang te krijgen tot de zogenaamde `getters` en `setters`, waarover zo dadelijk meer.
+Inkapseling (Engels: *encapsulation*) is één van de fundamenten van object-georiënteerd programmeren. Het wordt gebruikt om onbevoegden niet de gelegenheid te bieden de kenmerken van een object zomaar aan te passen. Als dat mogelijk moet zijn dan dienen zij toegang te krijgen tot de zogenaamde `getters` en `setters`, waarover zo dadelijk meer.
+
+Aan het eind van deze tekst maken we [oefening nummer 1](oefeningen/oop-oefening1.html).
 
 !!! Info "zichtbaarheid"
     Python wijkt nadrukkelijk af van het idee van inkapseling zoals het bijvoorbeeld gedaan wordt bij Java. Python gebruikt niet de sleutel-woorden `private` of `protected` om de zichtbaarheid van een methode aan te geven.
 
-## Het voorbeeld Bank
+## Het voorbeeld Voorraad
 
-Als voorbeeld hier een bank, waarbij het mogelijk is een rekening te openen, geld te storten en op te nemen en een overzicht van alle gedane transacties op te vragen, waarbij tevens het tijdstip van de transactie getoond wordt. Uiteraard is de opzet erg beperkt.
+Als voorbeeld hier een uitbreiding van onze webshop, waarbij het mogelijk is voorraad bij te bestellen, producten te verkopen en een geschiedenis van alle voorraad-mutaties bij te houden, inclusief tijdstip. Uiteraard is de opzet erg beperkt.
 
-De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand [`bankrekening.py`](bestanden/bankrekening.py).
+De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand [`voorraad.py`](bestanden/webshop/voorraad.py).
 
 ## Klasse en methoden
 
 Stap 1: de klasse
 
 ```python
-class Bankrekening:
+class Voorraad:
 ```
 
 Stap 2: het importeren van de huidige tijd
@@ -25,145 +27,210 @@ Stap 2: het importeren van de huidige tijd
 import datetime
 ```
 
-Stap 3: een functie om het tijdstip van de transactie vast te leggen.
+Stap 3: een functie om het tijdstip van de mutatie vast te leggen.
 
 ```python
-def current_time():
+@staticmethod
+def _current_time():
     now = datetime.datetime.now()
     return f"{now: %Y-%m-%d %H:%M:%S}"
 ```
 
-De functie `current_time()` retourneert het tijdstip van storten in het opgegeven formaat, tot op de seconde nauwkeurig.
+De functie `_current_time()` retourneert het tijdstip van de mutatie in het opgegeven formaat, tot op de seconde nauwkeurig. De `@staticmethod` decorator geeft aan dat dit een functie is die bij de klasse hoort maar niet afhankelijk is van een specifieke instantie.
 
 ## De constructor
 
 Stap 4: de constructor
 
 ```python
-def __init__(self, naam, saldo):
-    self._name = naam
-    self.__saldo = saldo
-    self._transactie_overzicht = []
-    print(f"Bankrekening aangemaakt voor {self._name}")
+def __init__(self, product_naam, aantal):
+    self._product_naam = product_naam
+    self.__aantal = aantal
+    self._mutatie_geschiedenis = []
+    print(f"Voorraad aangemaakt voor {self._product_naam}")
 ```
 
-## Storten en opnemen
+## Bijbestellen en verkopen
 
-Bij het openen van een nieuwe rekening wordt gevraagd om een naam en een inlegbedrag. Een rekeningnummer wordt hier niet uitgedeeld. De variabele `transactie_overzicht` is een lijst (`[]`) waarin alle transacties worden vastgelegd.
+Bij het aanmaken van een nieuwe voorraad wordt gevraagd om een productnaam en een beginhoeveelheid. De variabele `_mutatie_geschiedenis` is een lijst (`[]`) waarin alle mutaties worden vastgelegd.
 
-Stap 5: de methode `storten()`
+Stap 5: de methode `bijbestellen()`
 
 ```python
-def storten(self, bedrag):
-    if bedrag > 0:
-        self.__saldo += bedrag
-        self._transactie_overzicht.append( (Bankrekening._current_time(), bedrag) )
-        self.toon_saldo()
+def bijbestellen(self, aantal):
+    if aantal > 0:
+        self.__aantal += aantal
+        self._mutatie_geschiedenis.append((Voorraad._current_time(), aantal))
+        self.toon_voorraad()
 ```
 
+Indien het bij te bestellen aantal groter dan nul (`0`) is, wordt de voorraad aangepast en wordt de mutatie toegevoegd aan de lijst `_mutatie_geschiedenis[]` (zie je wat het datatype is van dat wat er aan de lijst wordt toegevoegd?). Ook de actuele voorraad wordt nu getoond.
 
-Indien het te storten bedrag groter dan nul (`0`) is, wordt het saldo aangepast en wordt de transactie toegevoegd aan de lijst `transactie_overzicht[]` (zie je wat het datatype is van dat wat er aan de lijst `transactie_overzicht` wordt toegevoegd?). Ook het actuele saldo wordt nu getoond.
-
-Stap 6: de methode `opnemen()`
+Stap 6: de methode `verkoop()`
 
 ```python
-def opnemen(self, bedrag):
-    if 0 < bedrag <= self.__saldo:
-        self.__saldo -= bedrag
-        self._transactie_overzicht.append(((Bankrekening._current_time(), -bedrag)))
+def verkoop(self, aantal):
+    if 0 < aantal <= self.__aantal:
+        self.__aantal -= aantal
+        self._mutatie_geschiedenis.append((Voorraad._current_time(), -aantal))
     else:
-        print("Het bedrag dient groter dan nul (0) en maximaal gelijk aan het saldo te zijn")
-    self.toon_saldo()
+        print("Het aantal dient groter dan nul (0) en maximaal gelijk aan de voorraad te zijn")
+    self.toon_voorraad()
 ```
 
-Er vindt een controle plaats of het saldo toereikend is voor de aanvraag. Zo niet, volgt er een passende mededeling. Zo ja, wordt het saldo bijgewerkt en de transactie weer in de lijst vastgelegd. Ook hier wordt het actuele saldo getoond.
+Er vindt een controle plaats of de voorraad toereikend is voor de verkoop. Zo niet, volgt er een passende mededeling. Zo ja, wordt de voorraad bijgewerkt en de mutatie weer in de lijst vastgelegd. Ook hier wordt de actuele voorraad getoond.
 
-Stap 7: de methode `toon_saldo()`
+Stap 7: de methode `toon_voorraad()`
 
 ```python
-def toon_saldo(self):
-    print(f"Saldo bedraagt {self.__saldo}")
+def toon_voorraad(self):
+    print(f"Voorraad {self._product_naam} bedraagt {self.__aantal}")
 ```
 
-## Transactie-overzicht
+## Mutatie-overzicht
 
-Stap 8: het transactie-overzicht
+Stap 8: het mutatie-overzicht
 
 ```python
-def toon_transacties(self):
-    for date, bedrag in self._transactie_overzicht:
-        if bedrag > 0:
-            trans_type = "gestort"
+def toon_mutaties(self):
+    print(f"\nMutatie-geschiedenis voor {self._product_naam}:")
+    for datum, aantal in self._mutatie_geschiedenis:
+        if aantal > 0:
+            mutatie_type = "bijbesteld"
         else:
-            trans_type = "opgenomen"
-            bedrag *= -1
-        print(f"{bedrag} {trans_type} op {Bankrekening._current_time()}")
+            mutatie_type = "verkocht"
+            aantal = abs(aantal)
+        print(f"  {datum}: {aantal} {mutatie_type}")
 ```
 
-Belangrijk is na te gaan of het bedrag gestort dan wel opgenomen is. Omdat een bedrag altijd groter is dan nul (0), dient dit bedrag bij opnemen met de factor -1 vermenigvuldigd te worden om het saldo te kunnen verlagen. De printopdracht toont alle transacties.
+In een lus wordt de volledige lijst van mutaties doorlopen en wordt de informatie naar het scherm geschreven.
 
-## Interactieve test
+## De volledige code
 
-Nu gaan we kijken of het werkt. Dit doen we weer in onze interactieve shell, waar we eerst het bestand `bankrekening.py` inladen
+De volledige klasse ziet er nu als volgt uit:
 
-```ipython
-In [1]: run "bankrekening"
+```python
+import datetime
 
-In [2]: angela = Bankrekening("Angela", 0)
-Bankrekening aangemaakt voor Angela
 
-In [3]: angela.toon_saldo()
-Saldo bedraagt 0
+class Voorraad:
+    """Klasse voor het bijhouden van productvoorraad"""
 
-In [4]: angela.storten(1000)
-Saldo bedraagt 1000
+    @staticmethod
+    def _current_time():
+        now = datetime.datetime.now()
+        return f"{now: %Y-%m-%d %H:%M:%S}"
 
-In [5]: angela.opnemen(500)
-Saldo bedraagt 500
+    def __init__(self, product_naam, aantal):
+        self._product_naam = product_naam
+        self.__aantal = aantal
+        self._mutatie_geschiedenis = []
+        print(f"Voorraad aangemaakt voor {self._product_naam}")
 
-In [6]: angela.opnemen(1000)
-Het bedrag dient groter dan nul (0) en maximaal gelijk aan het saldo te zijn
-Saldo bedraagt 500
+    def bijbestellen(self, aantal):
+        if aantal > 0:
+            self.__aantal += aantal
+            self._mutatie_geschiedenis.append((Voorraad._current_time(), aantal))
+            self.toon_voorraad()
 
-In [8]: angela.toon_transacties()
-1000 gestort op 2022-01-10 13:47:46
-500 opgenomen op 2022-01-10 13:47:46
+    def verkoop(self, aantal):
+        if 0 < aantal <= self.__aantal:
+            self.__aantal -= aantal
+            self._mutatie_geschiedenis.append((Voorraad._current_time(), -aantal))
+        else:
+            print("Het aantal dient groter dan nul (0) en maximaal gelijk aan de voorraad te zijn")
+        self.toon_voorraad()
 
-In [9]:
+    def toon_voorraad(self):
+        print(f"Voorraad {self._product_naam} bedraagt {self.__aantal}")
+
+    def toon_mutaties(self):
+        print(f"\nMutatie-geschiedenis voor {self._product_naam}:")
+        for datum, aantal in self._mutatie_geschiedenis:
+            if aantal > 0:
+                mutatie_type = "bijbesteld"
+            else:
+                mutatie_type = "verkocht"
+                aantal = abs(aantal)
+            print(f"  {datum}: {aantal} {mutatie_type}")
 ```
 
-## Oefening 1
+## Testen
 
-Maak nu [oefening 1](oefeningen/oop-oefening1.md)
+Nu is het tijd om de voorraad te testen!
 
-## Te veel mogelijkheden
-
-Het idee is gewekt dat alles nu in kannen en kruiken is. Helaas, er zijn toch nog een aantal onvolkomenheden die aanpassing behoeven. Kijk eens naar het volgende scenario, waarbij een min of meer criminele activiteit is aangegeven:
-
-```ipython hl_lines="9"
-In [1]: run "bankrekening"
-
-In [2]: britt = Bankrekening("Britt", 800)
-Bankrekening aangemaakt voor Britt
-
-In [3]: britt.storten(100)
-Saldo bedraagt 900
-
-In [4]: britt.saldo = 1000
-
-In [5]: britt.opnemen(200)
-Saldo bedraagt 700
-
-In [6]: britt.toon_transacties()
-100 gestort op 2022-01-10 14:09:06
-200 opgenomen op 2022-01-10 14:09:06
-
-In [7]: britt.toon_saldo()
-Saldo bedraagt 700
-
-In [8]:
+```python
+laptop_voorraad = Voorraad("Laptop", 10)
+laptop_voorraad.bijbestellen(5)
+laptop_voorraad.verkoop(3)
+laptop_voorraad.verkoop(7)
+laptop_voorraad.bijbestellen(10)
+laptop_voorraad.toon_mutaties()
 ```
 
-Het is dus mogelijk het saldo van een object te veranderen zodat het niet meer recht doet aan het bedrag dat beschikbaar zou moeten zijn na het uitvoeren van de gedane transacties. Dit komt doordat attributen van instanties door iedereen kunnen worden gemaakt en aanpast.
+Dit geeft de volgende uitvoer:
 
-Wat je zou willen is dat een attribuut alleen door *methoden van binnen de klasse* kunnnen worden aangepast. Helaas is dat in Python niet zonder meer mogelijk (er zijn wel packages voor die dat voor je kunnen regelen, [lees bijvoorbeeld deze blog](https://bogotobogo.com/python/python_private_attributes_methods.php)). Het is evenwel conventie binnen de Python-gemeenschap dat we attributen die niet van buiten mogen worden aangepast voorzien van een liggen streepje (`_`) vóór de variabele-naam, zoals we in de code hierboven al hebben laten zien.
+```console
+Voorraad aangemaakt voor Laptop
+Voorraad Laptop bedraagt 15
+Voorraad Laptop bedraagt 12
+Voorraad Laptop bedraagt 5
+Voorraad Laptop bedraagt 15
+
+Mutatie-geschiedenis voor Laptop:
+  2026-01-31 14:23:15: 5 bijbesteld
+  2026-01-31 14:23:15: 3 verkocht
+  2026-01-31 14:23:15: 7 verkocht
+  2026-01-31 14:23:16: 10 bijbesteld
+```
+
+## Private versus Protected attributen
+
+Je ziet in de code dat we twee soorten underscores gebruiken:
+
+- **Enkele underscore** (`_product_naam`): Dit is een *conventie* in Python om aan te geven dat een attribuut "protected" is. Het is bedoeld voor intern gebruik maar is nog steeds toegankelijk van buitenaf.
+- **Dubbele underscore** (`__aantal`): Dit triggert Python's *name mangling* mechanisme, waardoor het attribuut moeilijker direct toegankelijk wordt van buitenaf.
+
+Laten we dit demonstreren:
+
+```python
+laptop_voorraad = Voorraad("Laptop", 10)
+
+# Dit werkt (protected met enkele underscore):
+print(laptop_voorraad._product_naam)  # Output: Laptop
+
+# Dit werkt NIET (private met dubbele underscore):
+print(laptop_voorraad.__aantal)  # AttributeError!
+```
+
+Het tweede voorbeeld geeft een foutmelding:
+
+```console
+AttributeError: 'Voorraad' object has no attribute '__aantal'
+```
+
+Python heeft het attribuut `__aantal` hernoemd naar `_Voorraad__aantal` (name mangling) om directe toegang te voorkomen. Dit is Python's manier om attributen meer "private" te maken, hoewel ze technisch gezien nog steeds toegankelijk zijn via `laptop_voorraad._Voorraad__aantal`.
+
+## Waarom inkapseling?
+
+Inkapseling heeft verschillende voordelen:
+
+1. **Controle**: Je kunt validatie toevoegen (zoals in `verkoop()` waar we checken of er genoeg voorraad is)
+2. **Flexibiliteit**: Je kunt later de interne implementatie aanpassen zonder de interface te wijzigen
+3. **Beveiliging**: Je voorkomt dat gebruikers per ongeluk of opzettelijk ongeldige waarden instellen
+
+In het volgende deel gaan we kijken naar getters en setters, en hoe we de `@property` decorator kunnen gebruiken voor elegantere toegang tot private attributen.
+
+## Samenvatting
+
+In dit deel hebben we geleerd over:
+
+- Inkapseling als OOP-principe
+- Het verschil tussen `_` (protected) en `__` (private) attributen
+- Het gebruik van `@staticmethod` voor klassemethoden
+- Het bijhouden van een geschiedenis met tijdstempels
+- Het valideren van input in methoden
+
+In het volgende deel gaan we kijken naar meerdere klassen die met elkaar samenwerken.
+
+Maak nu [oefening nummer 1](oefeningen/oop-oefening1.html).

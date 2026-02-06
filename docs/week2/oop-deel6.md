@@ -2,72 +2,71 @@
 
 ## Overriding
 
-Binnen subklassen kunnen methodes ingebouwd worden die dezelfde naam hebben als methodes in hun super-klasse. Hun gedrag wordt hier nu onderzocht. Het komt al voor in de code (zie de methodes `schade()`) maar het kan geen kwaad nog een extra voorbeeld te tonen. En dan wordt de beginregel `import  random` ook eindelijk benut.
+Binnen subklassen kunnen methodes ingebouwd worden die dezelfde naam hebben als methodes in hun super-klasse. Hun gedrag wordt hier nu onderzocht. Het komt al voor in de code (zie de methodes `verkoop()`) maar het kan geen kwaad nog een extra voorbeeld te tonen. En dan wordt de beginregel `import random` ook eindelijk benut.
 
-In de klasse `Uruk_Hai` (een subklasse van `Ork`) wordt een tweede methode opgezet met de naam `dodges()`. Een bekend spel in de USA is dodgeball, in Nederland *trefbal* genoemd. Het idee van het spel is te duiken (de letterlijke vertaling van dodge) om een treffer te voorkomen. Daarom wordt het `dodges()`.
+In de klasse `DigitaalProduct` (een subklasse van `Product` die je in oefening 2 gemaakt hebt) wordt een methode opgezet met de naam `check_licentie()`. Bij digitale producten moet er soms gecontroleerd worden of de licentie nog beschikbaar is voordat de verkoop doorgaat.
 
 ```python
-def dodges(self):
+import random
+
+def check_licentie(self):
     if random.randint(1, 3) == 3:
-        print(f"***** {self.name} dodges *****")
-        return True
-    else:
+        print(f"***** Licentie voor {self._naam} niet beschikbaar *****")
         return False
+    else:
+        return True
 ```
 
 De test:
 
 ```python
-lurtz = Uruk_Hai("Lurtz")
-print(lurtz)
-lurtz.schade(14)
-print(lurtz)
+antivirus = DigitaalProduct("Antivirus Premium", 49.99, 10)
+print(antivirus)
 
-while lurtz._levend:
-    lurtz.schade(5)
-print(lurtz)
+while antivirus._voorraad > 0:
+    if antivirus.check_licentie():
+        antivirus.verkoop(2)
 ```
 
 Het resultaat hiervan:
 
 ```console
-Naam: Lurtz, Levens: 3, Hit points: 12
-***** Lurtz dodges *****
-Naam: Lurtz, Levens: 3, Hit points: 12
-Je bent 5 keer geraakt en hebt nog 7 hit points over
-Je bent 5 keer geraakt en hebt nog 2 hit points over
-Lurtz heeft een leven verloren
-Lurtz heeft een leven verloren
-Lurtz is dood
+Product: Antivirus Premium, Prijs: €49.99, Voorraad: 10
+***** Licentie voor Antivirus Premium niet beschikbaar *****
+Verkocht: 2x Antivirus Premium. Nog 8 op voorraad
+Verkocht: 2x Antivirus Premium. Nog 6 op voorraad
+Verkocht: 2x Antivirus Premium. Nog 4 op voorraad
+Verkocht: 2x Antivirus Premium. Nog 2 op voorraad
+Verkocht: 2x Antivirus Premium. Nog 0 op voorraad
 ```
 
-De eerste aanval kan Lurtz nog ontwijken. Random zou deze Uruk_Hai één van de drie pogingen moeten kunnen ontwijken, maar verder zijn er nog zaken die niet optimaal functioneren. Onder meer worden de hit points niet bijgewerkt als er een leven verloren is gegaan. Dat zou verholpen kunnen worden in de methode `schade()` uit de klasse `Aardman`.
+De eerste verkooppoging wordt geblokkeerd door een licentieprobleem. Random zou deze poging één van de drie keer moeten blokkeren. Verder zijn er nog zaken die geoptimaliseerd kunnen worden. Bijvoorbeeld zouden we de licentiecheck automatisch willen uitvoeren bij elke verkoop.
 
-Nu wordt er een tweede methode `schade()` gebouwd en toegevoegd aan de klasse `Uruk_Hai`.
+Nu wordt er een tweede methode `verkoop()` gebouwd en toegevoegd aan de klasse `DigitaalProduct`.
 
 ```python
-def schade(self, geraakt):
-    if not self.dodges():
-        super().schade(geraakt=geraakt)
+def verkoop(self, aantal):
+    if self.check_licentie():
+        super().verkoop(aantal=aantal)
+    else:
+        print("Verkoop geannuleerd: licentie niet beschikbaar")
 ```
 
-Wanneer de testset na deze aanpassing nogmaals wordt uitgevoerd, wordt eerst gekeken of de methode voorkomt in de klasse `Uruk_Hai` en zo niet in de klasse erboven (in de klasse `Aardman`). Lurtz krijgt als er een leven verloren is, weer 12 hitpoints uitgereikt.
+Wanneer de testset na deze aanpassing nogmaals wordt uitgevoerd, wordt eerst gekeken of de methode voorkomt in de klasse `DigitaalProduct` en zo niet in de klasse erboven (in de klasse `Product`). De licentiecheck wordt nu automatisch uitgevoerd voordat de verkoop plaatsvindt.
 
 ```console
-Naam: Lurtz, Levens: 3, Hit points: 12
-Lurtz heeft een leven verloren
-Naam: Lurtz, Levens: 2, Hit points: 12
-Je bent 5 keer geraakt en hebt nog 7 hit points over
-Je bent 5 keer geraakt en hebt nog 2 hit points over
-Lurtz heeft een leven verloren
-***** Lurtz dodges *****
-***** Lurtz dodges *****
-***** Lurtz dodges *****
-Je bent 5 keer geraakt en hebt nog 7 hit points over
-***** Lurtz dodges *****
-Je bent 5 keer geraakt en hebt nog 2 hit points over
-***** Lurtz dodges *****
-Lurtz is dood
+Product: Antivirus Premium, Prijs: €49.99, Voorraad: 10
+Verkocht: 3x Antivirus Premium. Nog 7 op voorraad
+Product: Antivirus Premium, Prijs: €49.99, Voorraad: 7
+Verkocht: 2x Antivirus Premium. Nog 5 op voorraad
+***** Licentie voor Antivirus Premium niet beschikbaar *****
+Verkoop geannuleerd: licentie niet beschikbaar
+Verkocht: 2x Antivirus Premium. Nog 3 op voorraad
+***** Licentie voor Antivirus Premium niet beschikbaar *****
+Verkoop geannuleerd: licentie niet beschikbaar
+Verkocht: 2x Antivirus Premium. Nog 1 op voorraad
+***** Licentie voor Antivirus Premium niet beschikbaar *****
+Verkoop geannuleerd: licentie niet beschikbaar
 ```
 
 ## Polymorfisme
@@ -96,81 +95,105 @@ tim
 
 Python heeft er geen enkele moeite mee om meerdere verschillende typen objecten (hier: `int`, `string` en `tuple`) naar het scherm te schrijven. Dat komt omdat alle typen kunnen beschikken over de methode `__str__()`. Dat wil aangeven dat hier sprake is van polymorfisme. De functie `print()` kan in vele situaties succesvol toegepast worden.
 
-Een tweede en waarschijnlijk meer aansprekend voorbeeld. Er is zelfs [een pagina in Wikipedia](https://nl.wikipedia.org/wiki/Duck-typing) aan gewijd, de ducktest. De ducktest is een gedachtegang en retorisch middel in de vorm van een inductieve redenering. De redeneerwijze is als volgt te omschrijven:
+Een tweede en waarschijnlijk meer aansprekend voorbeeld. We gaan kijken naar verschillende betaalmethoden in een webshop. Bekijk het bestand [`betaalmethoden.py`](bestanden/webshop/betaalmethoden.py). (NB: er is ook een versimpelde versie hiervan die in `betaalmethoden.py` staat, dus met een 'n'erachter. Deze wordt in het volgende deel gebruikt.)
 
-"Als iets eruitziet als een eend, zwemt als een eend en kwaakt als een eend, dan is het waarschijnlijk een eend."
-
-Deze 'test' benoemt een categorie, in dit geval de categorie 'ducks' en maakt dan aannemelijk dat een bepaald fenomeen tot die categorie behoort. De 'test' onderzoekt of bewijst niets, maar wijst op overeenkomsten. Prima om hiermee polymorfisme te bespreken. Bekijk het bestand [`duck.py`](bestanden/ducks.py).
-
-De klasse `Duck` kent een drietal methoden.
+De klasse `Creditcard` kent een drietal methoden.
 
 ```python
-class Duck:
-    def lopen(self):
-        print("Waggel, waggel, waggel")
+class Creditcard:
+    def valideer(self):
+        print("Creditcardnummer wordt gevalideerd...")
 
-    def zwemmen(self):
-        print("Kom er lekker in, het water is heerlijk")
+    def verwerk_betaling(self, bedrag):
+        print(f"€{bedrag:.2f} wordt afgeschreven van creditcard")
 
-    def kwaken(self):
-        print("Kwak, kwak, kwak")
+    def bevestig(self):
+        print("Betaling bevestigd. Transactie afgerond.")
 ```
 
 Een test naar de werking door een object aan te maken en de methodes aan te roepen. Voor het aanroepen van de verschillende functies wordt een definitie aangemaakt.
 
 ```python
-def test_duck(duck):
-    duck.lopen()
-    duck.zwemmen()
-    duck.kwaken()
+def test_betaling(betaalmethode, bedrag):
+    betaalmethode.valideer()
+    betaalmethode.verwerk_betaling(bedrag)
+    betaalmethode.bevestig()
 ```
 
-Wat is er nu logischer dan om als object uit de klasse `Duck` een ‘Donald’ te nemen?
+We maken een object uit de klasse `Creditcard`:
 
 ```python
 if __name__ == '__main__':
-    donald = Duck()
-    test_duck(donald)
+    visa = Creditcard()
+    test_betaling(visa, 99.99)
 ```
 
 Ook hier is de uitkomst niet per se heel spannend:
 
-```python
-Waggel, waggel, waggel
-Kom er lekker in, het water is heerlijk
-Kwak, kwak, kwak
+```console
+Creditcard nummer wordt gevalideerd...
+€99.99 wordt afgeschreven van creditcard
+Betaling bevestigd. Transactie afgerond.
 ```
 
-Nu maken we een tweede klasse `Pinguin` met exact dezelfde methoden – althans, wat de *namen* (*signatures*) betreft:
+Nu maken we een tweede klasse `iDEAL` met exact dezelfde methoden – althans, wat de *namen* (*signatures*) betreft:
 
 ```python
-class Pinguin:
+class iDEAL:
+    def valideer(self):
+        print("Bankrekening wordt geverifieerd...")
 
-    def lopen(self):
-        print("Waggel, waggel, ik waggel ook")
+    def verwerk_betaling(self, bedrag):
+        print(f"€{bedrag:.2f} wordt overgemaakt via iDEAL")
 
-    def zwemmen(self):
-        print("Kom er in, maar het is wel een beetje koud, zo zuidelijk")
-
-    def kwaken(self):
-        print("Kwaken? Lachen, ik ben een pinquin, hoor!")
+    def bevestig(self):
+        print("iDEAL betaling geslaagd!")
 ```
 
-Het beest krijgt de naam ‘percy’ mee en we laten hem ook de duck-test ondergaan.
+We maken een object en laten deze ook de betalingstest ondergaan.
 
 ```python
-percy = Pinguin()
-test_duck(percy)
+ideal_betaling = iDEAL()
+test_betaling(ideal_betaling, 49.95)
 ```
 
 Wat blijkt? Moeiteloos!
 
 ```console
-Waggel, waggel, ik waggel ook
-Kom er in, maar het is wel een beetje koud, zo zuidelijk
-Kwaken? Lachen, ik ben een pinquin, hoor!
+Bankrekening wordt geverifieerd...
+€49.95 wordt overgemaakt via iDEAL
+iDEAL betaling geslaagd!
 ```
 
-Dit is een mooi voorbeeld van polymorfisme. Je hebt twee compleet verschillende implementaties (één voor een eend, één voor een pinguin) die je toch op exact dezelfde manier kunt aanspreken (we gebruiken in beide gevallen dezelfde methode `test_duck`). De drie methoden hebben dus verschillende vormen, waarbij de concrete vorm afhangt van de implementerende klasse (`Duck` of `Pinguin`).
+Dit is een mooi voorbeeld van polymorfisme. Je hebt twee compleet verschillende implementaties (één voor creditcard, één voor iDEAL) die je toch op exact dezelfde manier kunt aanspreken (we gebruiken in beide gevallen dezelfde methode `test_betaling`). De drie methoden hebben dus verschillende vormen, waarbij de concrete vorm afhangt van de implementerende klasse (`Creditcard` of `iDEAL`).
+
+We kunnen zelfs een derde betaalmethode toevoegen, zoals PayPal:
+
+```python
+class PayPal:
+    def valideer(self):
+        print("PayPal account wordt gecontroleerd...")
+
+    def verwerk_betaling(self, bedrag):
+        print(f"€{bedrag:.2f} wordt betaald via PayPal")
+
+    def bevestig(self):
+        print("PayPal transactie voltooid!")
+```
+
+En deze werkt op exact dezelfde manier:
+
+```python
+paypal = PayPal()
+test_betaling(paypal, 149.99)
+```
+
+Resultaat:
+
+```console
+PayPal account wordt gecontroleerd...
+€149.99 wordt betaald via PayPal
+PayPal transactie voltooid!
+```
 
 Er is nog (heel veel) meer te zeggen over polymorfisme; [check eventueel de wiki-pagina hierover](https://nl.wikipedia.org/wiki/Polymorfisme_(informatica)). Voor nu is het voldoende als je weet dat dit bestaat – in een later stadium komen we hier nog uitgebreid op terug.
