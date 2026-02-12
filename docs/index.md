@@ -27,7 +27,7 @@ P-weeknummer | Onderwerpen
 5 | [Flask en Jinja-templates](week4/flask-deel1.md)
 6 | [Flask en formulieren](week5/flask-forms-deel1.md)
 7 | [Flask en databases (ORM)](week6/flask-views-deel1.md)
-8 | [Inloggen](week8/user-authentication-deel1.md) en evt. [Refactoring](week7/flask-applicaties-deel1.md)
+8 | [Inloggen](week7a/user-authentication-deel1.md) en evt. [Refactoring](week7b/flask-applicaties-deel1.md)
 
 ## Toetsing
 
