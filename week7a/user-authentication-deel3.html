@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html/week7/flask-applicaties-deel2.html">
+        <link rel="canonical" href="https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html/week7a/user-authentication-deel3.html">
       
       
-        <link rel="prev" href="flask-applicaties-deel1.html">
+        <link rel="prev" href="user-authentication-deel2.html">
       
       
-        <link rel="next" href="flask-applicaties-deel3.html">
+        <link rel="next" href="user-authentication-deel4.html">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Flask-applicaties - Refactored - Webtechnologie 1</title>
+        <title>User authentication - Flask_login deel II - Webtechnologie 1</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#flask-applicaties-refactored" class="md-skip">
+        <a href="#user-authentication-flask_login-deel-ii" class="md-skip">
           Ga naar inhoud
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Flask-applicaties - Refactored
+              User authentication - Flask_login deel II
             
           </span>
         </div>
@@ -2664,7 +2664,7 @@
   <span class="md-ellipsis">
     
   
-    Week7
+    Week7a
   
 
     
@@ -2680,7 +2680,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Week7
+    Week7a
   
 
           </label>
@@ -2693,14 +2693,42 @@
   
   
     <li class="md-nav__item">
-      <a href="flask-applicaties-deel1.html" class="md-nav__link">
+      <a href="user-authentication-deel1.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flask-applicaties - Structuur
+    User authentication - Hashing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-authentication-deel2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User authentication - Flask_login deel I
   
 
     
@@ -2737,7 +2765,7 @@
   <span class="md-ellipsis">
     
   
-    Flask-applicaties - Refactored
+    User authentication - Flask_login deel II
   
 
     
@@ -2748,14 +2776,14 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="flask-applicaties-deel2.html" class="md-nav__link md-nav__link--active">
+      <a href="user-authentication-deel3.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flask-applicaties - Refactored
+    User authentication - Flask_login deel II
   
 
     
@@ -2781,10 +2809,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#stap-1-het-aanmaken-van-de-structuur-van-de-folderset" class="md-nav__link">
+  <a href="#eerste-opzet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 1: Het aanmaken van de structuur van de folderset.
+        Eerste opzet
       
     </span>
   </a>
@@ -2792,115 +2820,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-2-het-toevoegen-van-de-paginas-die-al-ontwikkeld-zijn" class="md-nav__link">
+  <a href="#logout-view" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn.
+        Logout-view
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn.">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modelspy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        models.py
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#basehtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        base.html
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#homehtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        home.html
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#formspy-uit-de-folder-docenten" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        forms.py uit de folder docenten
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#formspy-uit-de-folder-studenten" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        forms.py uit de folder studenten
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#addhtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        add.html
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#deletehtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        delete.html
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#addhtml-studenten-toevoegen" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        add.html (studenten toevoegen)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#conclusie" class="md-nav__link">
+  <a href="#login-proces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusie
+        Login-proces
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registratie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registratie
       
     </span>
   </a>
@@ -2923,14 +2868,14 @@
   
   
     <li class="md-nav__item">
-      <a href="flask-applicaties-deel3.html" class="md-nav__link">
+      <a href="user-authentication-deel4.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flask-applicaties - Blueprints
+    User authentication - Flask_login deel III
   
 
     
@@ -2976,7 +2921,7 @@
   <span class="md-ellipsis">
     
   
-    Week8
+    Week7b
   
 
     
@@ -2992,7 +2937,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Week8
+    Week7b
   
 
           </label>
@@ -3005,14 +2950,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../week8/user-authentication-deel1.html" class="md-nav__link">
+      <a href="../week7b/flask-applicaties-deel1.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    User authentication - Hashing
+    Flask-applicaties - Structuur
   
 
     
@@ -3033,14 +2978,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../week8/user-authentication-deel2.html" class="md-nav__link">
+      <a href="../week7b/flask-applicaties-deel2.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    User authentication - Flask_login deel I
+    Flask-applicaties - Refactored
   
 
     
@@ -3061,42 +3006,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../week8/user-authentication-deel3.html" class="md-nav__link">
+      <a href="../week7b/flask-applicaties-deel3.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    User authentication - Flask_login deel II
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../week8/user-authentication-deel4.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    User authentication - Flask_login deel III
+    Flask-applicaties - Blueprints
   
 
     
@@ -3144,10 +3061,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#stap-1-het-aanmaken-van-de-structuur-van-de-folderset" class="md-nav__link">
+  <a href="#eerste-opzet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 1: Het aanmaken van de structuur van de folderset.
+        Eerste opzet
       
     </span>
   </a>
@@ -3155,115 +3072,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-2-het-toevoegen-van-de-paginas-die-al-ontwikkeld-zijn" class="md-nav__link">
+  <a href="#logout-view" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn.
+        Logout-view
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn.">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#modelspy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        models.py
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#basehtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        base.html
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#homehtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        home.html
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#formspy-uit-de-folder-docenten" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        forms.py uit de folder docenten
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#formspy-uit-de-folder-studenten" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        forms.py uit de folder studenten
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#addhtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        add.html
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#deletehtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        delete.html
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#addhtml-studenten-toevoegen" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        add.html (studenten toevoegen)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#conclusie" class="md-nav__link">
+  <a href="#login-proces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conclusie
+        Login-proces
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registratie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registratie
       
     </span>
   </a>
@@ -3287,271 +3121,104 @@
 
 
 
-<h1 id="flask-applicaties-refactored">Flask-applicaties - Refactored<a class="headerlink" href="#flask-applicaties-refactored" title="Permanent link">&para;</a></h1>
-<p>Aan het einde van de vorige paragraaf is de algemene structuur voor de applicatie waarmee het overzicht van de docenten die als mentor fungeren samen met de door hen begeleide studenten vastgelegd. Nu is het tijd om deze te implementeren.</p>
-<p>Omdat al veel van de code geschreven en besproken is in voorgaande delen, wordt hier grotendeels het principe copy en paste gehanteerd.</p>
-<p><code>Flask</code> heeft een ingebouwde mogelijkheid waarmee de modulaire componenten voor de Flask-app geregistreerd kunnen worden: <a href="https://flask.palletsprojects.com/en/1.1.x/blueprints/"><em>blueprints</em></a>. Hiermee kan op een eenvoudige wijze een <em>view</em> geraadpleegd worden voor ieder aspect van de applicatie.</p>
-<p>Zo zijn er bijvoorbeeld een tweetal <code>view.py</code>-bestanden: één voor docenten en één voor studenten. En elk van deze <em>views</em> heeft zijn eigen <code>add</code>-view. Om ervoor te zorgen dat de Flask-applicatie niet in de war raakt door een <code>/add</code>-route, maken we gebruik van blueprints. De blueprints registreren een <code>url_prefix</code> voor elk <code>views.py</code>-bestand:</p>
-<ul>
-<li><code>/docenten/add</code></li>
-<li><code>/studenten/add</code></li>
-</ul>
-<p>De voornaamste wijzigingen in de code zullen zijn:</p>
-<ul>
-<li>Herstructurering van de projectmappen</li>
-<li>Het toevoegen van blueprints</li>
-<li>Het registreren van de blueprints  <code>__init__.py</code></li>
-</ul>
-<p>Nogmaals, in dit deel ligt de nadruk in het opzetten van een algemene structuur voor een applicatie. Daarom wordt er geen nieuwe applicatie vanaf scratch ontwikkeld maar wordt de inhoud van de vorige web-applicatie voornamelijk gekopieerd.</p>
-<h2 id="stap-1-het-aanmaken-van-de-structuur-van-de-folderset">Stap 1: Het aanmaken van de structuur van de folderset.<a class="headerlink" href="#stap-1-het-aanmaken-van-de-structuur-van-de-folderset" title="Permanent link">&para;</a></h2>
-<p>Het aanmaken van de structuur zal in gedeelten besproken worden, zodat nog een keer duidelijk wordt hoe het opzetten van een uitgebreide applicatie het beste kan geschieden.</p>
-<div class="highlight"><pre><span></span><code>.
-├── mijnproject
-│   ├── docenten
-│   ├── studenten
-│   ├── templates
-│   ├── __init__.py
-│   └── models.py
-└── app.py
+<h1 id="user-authentication-flask_login-deel-ii">User authentication - Flask_login deel II<a class="headerlink" href="#user-authentication-flask_login-deel-ii" title="Permanent link">&para;</a></h1>
+<p>Het bestand <code>app.py</code> heeft verreweg de meeste aandacht nodig. Daarom is hier een aparte paragraaf voor. Er zijn een aantal zaken die voor het eerst voorbijkomen en een aantal dingen waar een duidelijke uitleg bij vereist is.</p>
+<p>In dit bestand worden de views vastgelegd die nodig zijn om het loginsysteem naar verwachting te laten verlopen. Anders gezegd: de functies die de formulieren en de HTML-bestanden uit de directory <code>templates</code> met elkaar zullen gaan verbinden worden ontworpen en gecodeerd.</p>
+<h2 id="eerste-opzet">Eerste opzet<a class="headerlink" href="#eerste-opzet" title="Permanent link">&para;</a></h2>
+<p>Eerst worden alle imports opgegeven die nodig zijn om dit bestand goed te laten functioneren:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">mijnproject</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span><span class="p">,</span><span class="n">db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">flash</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask_login</span><span class="w"> </span><span class="kn">import</span> <span class="n">login_user</span><span class="p">,</span> <span class="n">login_required</span><span class="p">,</span> <span class="n">logout_user</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mijnproject.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mijnproject.forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoginForm</span><span class="p">,</span> <span class="n">RegistrationForm</span>
 </code></pre></div>
-<p>Om alles uit elkaar te kunnen houden hebben we een nieuw project aangemaakt met de naam 'Refactor'. Binnen het project zijn op het hoogste niveau een tweetal zaken nodig: een folder waarin de items van de applicatie worden ondergebracht, hier <code>mijnproject</code> en een Python-file, hier <code>app.py</code> genaamd. Deze file importeert enkele items en kent verder alleen een verwijzing naar de pagina <code>home.html</code>. Deze file wordt als allerlaatste gecodeerd.</p>
-<p>De folder <code>templates</code> bevat een tweetal HTML-bestanden. Allereerst het bestand <code>base.html</code> met de links naar Bootstrap, de titel, de navigatiebalk en een leeg blok. Het andere bestand, <code>home.html</code> bevat de inhoud van de homepagina.</p>
-<p>In <code>__init__.py</code> worden weer de bekende aspecten van flask geïmporteerd, de database aangemaakt, de basisdirectory bepaald en de koppeling tussen applicatie en database ingesteld. Later worden hier nog de blueprints aan toegevoegd.</p>
-<p>In <code>models.py</code> wordt de structuur van de database bepaald, zoals al een aantal keren aan bod is geweest.</p>
-<p>De structuur van de folder <code>mijnproject</code> is dan als volgt:</p>
-<div class="highlight"><pre><span></span><code>.
-├── mijnproject
-│   ├── docenten
-│   │   ├── templates
-│   │   │   └── docenten
-│   │   ├── forms.py
-│   │   └── views.py
-│   ├── studenten
-│   │   ├── templates
-│   │   │   └── studenten
-│   │   ├── forms.py
-│   │   └── views.py
-│   ├── templates
-│   ├── __init__.py
-│   └── models.py
-└── app.py
+<p>De eerste regel laat de app en de database ophalen. Daarna worden van flask een aantal oude bekenden geïmporteerd.</p>
+<p>Vanaf de derde coderegel wordt het interessant. Deze regel zorgt ervoor dat de afwikkeling van het inloggen en uitloggen verzorgd worden zonder dat deze handelingen door de programmeur zelf geprogrammeerd hoeven te worden. </p>
+<p>Het tweede item wat wordt ingeladen is <code>login_required</code>. Hiermee kan de status van een gebruiker (<em>user</em>) achterhaald worden en op basis van die status de gepaste bijbehorende inhoud getoond worden. Is een gebruiker nog niet ingelogd dan zal hem de mogelijkheid geboden worden dit te doen. Is een gebruiker ingelogd en is het zijn wens de sessie te beëindigen moet deze mogelijkheid hem worden aangeboden. Hoe dat geregeld wordt, komt zo aan bod.</p>
+<p>Verder zijn hier de tabel <code>User</code> en de beide formulieren die in de vorige paragraaf ontworpen zijn nodig. Om er weer in te komen eerst de simpelste van de views, de <code>home-view</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">)</span>
 </code></pre></div>
-<p>Voor zowel de docenten als de studenten wordt een eigen directory ingericht. Hierin kunnen de onderdelen worden opgenomen die van toepassing zijn voor de verschillende onderwerpen. Voor beide directories zijn formulieren, views en templates ontwikkeld die nu keurig van elkaar gescheiden worden ondergebracht in de applicatie. Voor beide domeinen (docenten en studenten) is een eigen folder gereserveerd waarin de specifieke HTML-bestanden voor ieder doel komen te staan.</p>
-<h2 id="stap-2-het-toevoegen-van-de-paginas-die-al-ontwikkeld-zijn">Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn.<a class="headerlink" href="#stap-2-het-toevoegen-van-de-paginas-die-al-ontwikkeld-zijn" title="Permanent link">&para;</a></h2>
-<p>De code van de diverse pagina’s zal nog een keer getoond worden zonder al te veel commentaar erbij.</p>
-<h3 id="modelspy"><code>models.py</code><a class="headerlink" href="#modelspy" title="Permanent link">&para;</a></h3>
-<p>Als eerste <code>models.py</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">#from mijnproject import db</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Docent</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;docenten&#39;</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span><span class="n">primary_key</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">naam</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">student</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Student&#39;</span><span class="p">,</span><span class="n">backref</span><span class="o">=</span><span class="s1">&#39;docent&#39;</span><span class="p">,</span><span class="n">uselist</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">naam</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">naam</span> <span class="o">=</span> <span class="n">naam</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">student</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Docent </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">naam</span><span class="si">}</span><span class="s2"> is mentor van </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">student</span><span class="o">.</span><span class="n">naam</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Docent </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">naam</span><span class="si">}</span><span class="s2"> heeft geen studenten als mentor te begeleiden.&quot;</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;studenten&#39;</span>
-
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span><span class="n">primary_key</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-    <span class="n">naam</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">docent_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span><span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;docenten.id&#39;</span><span class="p">))</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">naam</span><span class="p">,</span><span class="n">docent_id</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">naam</span> <span class="o">=</span> <span class="n">naam</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">docent_id</span> <span class="o">=</span> <span class="n">docent_id</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Deze student heet </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+<p>Als eerste een decorator die verwijst naar de homepagina. Deze functie (<em>view</em>) krijgt de naam <code>home</code> zodat er straks met <code>url_for()</code> gemakkelijk naar verwezen kan worden. De laatste regel vertelt dat in dat geval de pagina <code>home.html</code> getoond wordt, die pas in de volgende paragraaf zijn inhoud zal krijgen.</p>
+<p>De tweede view betreft een view die verschijnt op het moment dat de gebruiker succesvol is ingelogd. Deze view laat een welkomst-bericht tevoorschijn getoverd worden:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/welkom&#39;</span><span class="p">)</span>
+<span class="nd">@login_required</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">welkom</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;welkom.html&#39;</span><span class="p">)</span>
 </code></pre></div>
-<p>Uit het bestand <code>mentor_site.py</code> zijn de klassen <code>Docent</code> en <code>Student</code> overgenomen. Punt van aandacht is nog wel dat er nog een koppeling gemaakt moet worden naar de plek waar db wordt aangemaakt. Dat zal gebeuren in het bestand <code>__init__.py</code>. Het is alvast opgenomen als commentaarregel.
-Als tweede wordt de folder templates gevuld met de bestanden <code>base.html</code> en <code>home.html</code>.</p>
-<h3 id="basehtml"><code>base.html</code><a class="headerlink" href="#basehtml" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span> <span class="na">dir</span><span class="o">=</span><span class="s">&quot;ltr&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://code.jquery.com/jquery-3.2.1.slim.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js&quot;</span> <span class="na">integrity</span><span class="o">=</span><span class="s">&quot;sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl&quot;</span> <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Mentoraat<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-
-<span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar navbar-expand-lg navbar-light bg-light&quot;</span><span class="p">&gt;</span>
-
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-nav&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;index&#39;) }}&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;add_doc&#39;) }}&quot;</span><span class="p">&gt;</span>Voeg docent toe<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;list_doc&#39;) }}&quot;</span><span class="p">&gt;</span> Toon mentoren<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;del_doc&#39;) }}&quot;</span><span class="p">&gt;</span>Verwijder docent Pup<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;add_stu&#39;) }}&quot;</span><span class="p">&gt;</span>Voeg student toe<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-
-<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
-
-{% block content %}
-
-{% endblock %}
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+<p>Wat gelijk opvalt is dat er een tweetal decorators aan het begin van dit codeblok zijn opgenomen. De eerste geeft aan met welke route met het bestand <code>welkom.html</code> correspondeert. De tweede decorator controleert of de gebruiker van deze pagina daadwerkelijk is ingelogd. Is dat zo, wordt het welkomstbericht vrijgegeven. In het andere geval wordt er doorgeschakeld naar het loginformulier. </p>
+<p>Door deze acties te importeren van <code>Flask_login</code> wordt het de ontwikkelaar weer een stuk eenvoudiger gemaakt.</p>
+<h2 id="logout-view">Logout-view<a class="headerlink" href="#logout-view" title="Permanent link">&para;</a></h2>
+<p>Nog een redelijk eenvoudige view voordat er met het betere codeerwerk begonnen kan worden. Het wordt een view met de naam <code>logout</code>. Wat daar de bedoeling van is moge duidelijk zijn.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/logout&#39;</span><span class="p">)</span>
+<span class="nd">@login_required</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">logout</span><span class="p">():</span>
+    <span class="n">logout_user</span><span class="p">()</span>
+    <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Je bent nu uitgelogd!&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">))</span>
 </code></pre></div>
-<p>Deze code zorgt voor het tweede aandachtspunt: de URL’s zullen aangepast moeten worden, omdat ze nu naar verschillende directories verwijzen. Dat is ook één van de laatste aanpassingen die geregeld moeten worden.</p>
-<h3 id="homehtml"><code>home.html</code><a class="headerlink" href="#homehtml" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>{% extends &quot;base.html&quot; %}
-{% block content %}
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jumbotron&quot;</span><span class="p">&gt;</span>
-<span class="hll">    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Overzicht mentoraat<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-</span>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Selecteer om te beginnen een item uit de navigatiebalk.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{% endblock %}
+<p>De <code>logout</code> view bevindt zich op de route <code>/logout</code>. Deze mogelijkheid wordt alleen geboden indien de gebruiker daadwerkelijk is ingelogd. Daar zorgt de decorator <code>login_required</code> voor. Het zou raar zijn uit te kunnen loggen zonder ingelogd te zijn. </p>
+<p>Binnen de functie <code>logout()</code> zorgt de functie <code>logout_user()</code> voor de afwikkeling van het uitloggen. Ook deze functie is geïmporteerd om het leven zo aangenaam mogelijk te maken. Als er succesvol uitgelogd is verschijnt er een flitsbericht en wordt de gebruiker doorgestuurd naar de homepagina.</p>
+<h2 id="login-proces">Login-proces<a class="headerlink" href="#login-proces" title="Permanent link">&para;</a></h2>
+<p>Nu het moeilijkere gedeelte, te beginnen met <code>login</code>. De uitleg wordt in kleine stapjes gedaan om de denkwijze en uitvoer op een handiger manier duidelijk te maken.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
 </code></pre></div>
-<p>Als enige is de tekst <code>&lt;h1&gt;</code> bijgesteld.</p>
-<p><code>__init__.py</code></p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">flask_sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLAlchemy</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">flask_migrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">Migrate</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mijngeheimesleutel&#39;</span>
-
-<span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s1">&#39;data.sqlite&#39;</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_TRACK_MODIFICATIONS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-<span class="n">Migrate</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">)</span>
+<p>Er wordt begonnen met een decorator. En omdat er bij het inloggen een formulier nodig is, kan het niet achterwege gelaten worden de methoden <code>GET</code> en <code>POST</code> in deze coderegel op te nemen.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">LoginForm</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 </code></pre></div>
-<p>Ook hierbij is een gedeelte overgenomen uit het bestand <code>mentor_site.py</code> van de oefening. Maar het is niet integraal overgenomen: er is een aantal regels weggelaten. De reden daarvoor is dat deze file geen code bevat die nodig is om views aan te maken. Dat wordt straks geregeld is de daarvoor beschikbare folders: <code>docenten</code> en <code>studenten</code>.</p>
-<p>Bovendien dienen er nog een aantal registraties voor de blueprints aan de code te worden toegevoegd. Dat is het derde aandachtspunt voor de volgende paragraaf.</p>
-<p>Alleen de gegevens die van toepassing zijn op docenten worden overgenomen uit <code>forms.py</code>. De namen van de formulieren zijn aangepast zodat het een meer gangbaar karakter krijgt. Bovendien kan nu steeds dezelfde naam gebruikt worden omdat de formulieren in verschillende directories zijn ondergebracht. Voor toevoegen wordt nu <code>Add</code> gebruikt, voor verwijderen <code>Del</code>.</p>
-<h3 id="formspy-uit-de-folder-docenten"><code>forms.py</code> uit de folder <code>docenten</code><a class="headerlink" href="#formspy-uit-de-folder-docenten" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask_wtf</span><span class="w"> </span><span class="kn">import</span> <span class="n">FlaskForm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">wtforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">IntegerField</span><span class="p">,</span> <span class="n">SubmitField</span>
+<p>De view krijgt de naam <code>login</code> mee. Als eerste wordt er een instantie aangemaakt van het <code>LoginForm()</code> dat ook meegeleverd is in het importblok.</p>
+<p>Als er in het formulier op de Submit-knop gedrukt is, wordt nagegaan of de gebruiker bekend is in de database. Uit het formulier wordt het e-mailadres opgehaald en vergeleken met de opgeslagen e-mailadressen. Omdat er gecontroleerd is dat er geen dubbele e-mailadressen zijn ingevoerd is het voldoende het eerste gevonden record te benutten. Dit wordt ondergebracht in de variabele <code>user</code>.</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="ow">and</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">login_user</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Succesvol ingelogd.&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>Om succesvol te kunnen inloggen moet er aan twee condities voldaan worden. Het ingevulde wachtwoord van het formulier moet matchen met het corresponderende wachtwoord in de database. Dat regelt de functie <code>check_password()</code>. Bovendien wordt er gecontroleerd of de query wel een waarde heeft toegekend aan de variabele <code>user</code>. Is aan beide voorwaarden voldaan wordt de user automatisch ingelogd door de functie <code>login_user()</code> en verschijnt er een flitsbericht aan de bovenkant van het scherm. De functie <code>check_functie</code> komt mee met <code>User</code>.</p>
+<p>Nu nog wat bijzonders:</p>
+<div class="highlight"><pre><span></span><code>    <span class="nb">next</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;next&#39;</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="nb">next</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;/&#39;</span><span class="p">:</span>
+        <span class="nb">next</span> <span class="o">=</span> <span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;welkom&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
+</code></pre></div>
+<p>Stel een gebruiker probeert een pagina te bezoeken waarvoor inloggen vereist is (zoals <code>welkom.html</code>). Dan slaat <code>Flask</code> die URL op in de variabele <code>next</code>. Vervolgens wordt de gebruiker doorgelinkt naar het inlogformulier. </p>
+<p>Indien er succesvol is ingelogd wordt er nagegaan of de variabele <code>next</code> een waarde heeft. Is dat niet het geval wordt het welkomstbericht getoond, anders verschijnt de pagina waar nu wel toestemming voor gegeven is.</p>
+<p>Tot slot moet van de inlogview worden bepaald wat in beeld verschijnt als de view wordt aangeroepen:</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login.html&#39;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
+</code></pre></div>
+<p>Het is natuurlijk duidelijk dat als de view <code>login</code> aangeroepen wordt, het inlogformulier getoond dient te worden.</p>
+<h2 id="registratie">Registratie<a class="headerlink" href="#registratie" title="Permanent link">&para;</a></h2>
+<p>Nog één view te gaan, het registreren van belangstellenden. Omdat er al veel Engelse termen gebruikt zijn krijgt deze view daarom de route <code>register</code> mee.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/register&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</code></pre></div>
+<p>Ook bij deze view wordt als eerste de route vastgesteld en zijn de methoden <code>GET</code> en <code>POST</code> noodzakelijk omdat gebruikers zich kunnen aanmelden door een formulier in te vullen.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">():</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">RegistrationForm</span><span class="p">()</span>
+</code></pre></div>
+<p>Bij het aanroepen van de view wordt een object van de klasse <code>RegistrationForm</code> aangemaakt. </p>
+<div class="highlight"><pre><span></span><code>    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                    <span class="n">username</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                    <span class="n">password</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">AddForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-    <span class="n">naam</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Naam docent:&#39;</span><span class="p">)</span>
-    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Voeg toe&#39;</span><span class="p">)</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">DelForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="s1">&#39;Vul het ID in van de docent die verwijderd gaat worden:&#39;</span><span class="p">)</span>
-    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Verwijder&#39;</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Dank voor de registratie. Er kan nu ingelogd worden! &#39;</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="formspy-uit-de-folder-studenten"><code>forms.py</code> uit de folder <code>studenten</code><a class="headerlink" href="#formspy-uit-de-folder-studenten" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask_wtf</span><span class="w"> </span><span class="kn">import</span> <span class="n">FlaskForm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">wtforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">IntegerField</span><span class="p">,</span> <span class="n">SubmitField</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">AddForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-    <span class="n">naam</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Naam student:&#39;</span><span class="p">)</span>
-    <span class="n">doc_id</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="s2">&quot;Id van de docent: &quot;</span><span class="p">)</span>
-    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Voeg toe&#39;</span><span class="p">)</span>
+<p>Indien het formulier met goed gevolg is ingevuld, waarbij onder meer de diverse checks zijn uitgevoerd, wordt er een nieuw object <code>user</code> aangemaakt met de ingevulde kenmerken e-mailadres, username en password.</p>
+<p>De gegevens worden toevertrouwd aan de database en bevestigd door het <code>commit()</code>-statement uit te voeren. Een succesvolle registratie verdient uiteraard weer een flitsbericht.</p>
+<div class="highlight"><pre><span></span><code>        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;register.html&#39;</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
 </code></pre></div>
-<p>De formulieren zijn uit elkaar gehaald en in een passende folder ingevoegd. Beiden hebben nu een formulier met de naam <code>AddForm</code>. Dat gaat helemaal goed, omdat later met blueprints de juiste relaties gelegd zullen worden, zodat er geen verwarring kan ontstaan en de verkeerde formulieren getoond gaan worden.</p>
-<p>De nog resterende HTML-files kunnen nu op de juiste plaats gezet worden. Als eerste moeten er drie bestanden in de folder <code>templates/docenten</code> aangemaakt worden: <code>add.html</code>, <code>delete.html</code> en <code>list.html</code>. De namen van de oefening worden vervangen door wat meer algemeen geldige namen.</p>
-<h3 id="addhtml"><code>add.html</code><a class="headerlink" href="#addhtml" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>{% extends &quot;base.html&quot; %}
-{% block content %}
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jumbotron&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Heeft zich een docent als kandidaat mentor gemeld?<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Vul de naam in en klik op &#39;Voeg toe&#39;:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
-        {{ form.hidden_tag() }}
-        {{ form.naam.label }} {{ form.naam() }}
-        {{ form.submit() }}
-    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{% endblock %}
+<p>Wanneer de view wordt aangeroepen komt de inhoud van de pagina <code>register.html</code> in beeld en als het inloggen op een juiste wijze verlopen is wordt er doorgeschakeld naar de view login.</p>
+<p>Nog eentje te gaan. Dit is het bestand <code>app.py</code>, het bestand waarmee de applicatie gerund wordt. Dat betekent dat de volgende twee coderegels nog nodig zijn:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-<p>De code is overgenomen uit <code>voegtoe_docent.html</code>.</p>
-<h3 id="deletehtml"><code>delete.html</code><a class="headerlink" href="#deletehtml" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>{% extends &quot;base.html&quot; %}
-{% block content %}
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jumbotron&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Een docent afmelden als mentor?<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Vul het ID in en klik op &#39;Verwijder&#39;.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
-        {{ form.hidden_tag() }}
-        {{ form.id.label }} {{ form.id() }}
-        {{ form.submit() }}
-    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{% endblock %}
-</code></pre></div>
-<p>Deze code komt uit <code>verwijder_docent.html</code></p>
-<p><code>list.html</code></p>
-<div class="highlight"><pre><span></span><code>{% extends &quot;base.html&quot; %}
-{% block content %}
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jumbotron&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Een overzicht van de mentoren en hun studenten.<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-        {% for doc in docenten  %}
-        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>{{doc}}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-        {% endfor %}
-    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{% endblock %}
-</code></pre></div>
-<p>En deze code is integraal gekopieerd van <code>mentor_overzicht.html</code></p>
-<p>Als laatste is er nog een view nodig om nieuwe studenten in de database te kunnen opnemen. Ook hier wordt gebruik gemaakt van een naam die al eerder gebruikt is: <code>add.html</code>. Omdat alle code in aparte folders is ondergebracht is het geen probleem bij de uitvoering van het programma.</p>
-<h3 id="addhtml-studenten-toevoegen"><code>add.html</code> (studenten toevoegen)<a class="headerlink" href="#addhtml-studenten-toevoegen" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>{% extends &quot;base.html&quot; %}
-{% block content %}
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;jumbotron&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Voeg een student in<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Voeg tevens het ID van de mentor toe en klik op &#39;Voeg toe&#39;:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
-        {{ form.hidden_tag() }}
-        {{ form.naam.label }} {{ form.naam() }}<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-        {{ form.doc_id.label }} {{ form.doc_id() }}<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
-        {{ form.submit() }}
-    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{% endblock %}
-</code></pre></div>
-<p>Deze code is overgenomen uit <code>voegtoe_student.html</code>.</p>
-<h2 id="conclusie">Conclusie<a class="headerlink" href="#conclusie" title="Permanent link">&para;</a></h2>
-<p>De inspanningen in deze paragraaf hebben ertoe geleid dat de structuur die ontworpen is ook daadwerkelijk is aangemaakt. Grote delen van de code van de uitwerking van de oefenopdracht website zijn al op de juiste plaats neergezet.</p>
-<p>Er zijn nog een paar aandachtspunten overgebleven waar in de volgende paragraaf een vervolg aan moet worden gegeven.</p>
-<p>Bovendien worden er de nodige blueprints in de code opgenomen. Tot slot van deze paragraaf een complete directory-listing na onze majeure refactoring:</p>
-<div class="highlight"><pre><span></span><code>.
-├── mijnproject
-│   ├── docenten
-│   │   ├── templates
-│   │   │   └── docenten
-│   │   │       ├── add.html
-│   │   │       ├── delete.html
-│   │   │       └── list.html
-│   │   ├── forms.py
-│   │   └── views.py
-│   ├── studenten
-│   │   ├── templates
-│   │   │   └── studenten
-│   │   │       └── add.html
-│   │   ├── forms.py
-│   │   └── views.py
-│   ├── templates
-│   │   ├── base.html
-│   │   └── home.html
-│   ├── __init__.py
-│   └── models.py
-└── app.py
-</code></pre></div>
+<p>Omdat er straks weer getest wordt, heeft debug de waarde <code>True</code> meegekregen zodat bij ieder foutje onmiddellijk in beeld verschijnt waar de fout gevonden kan worden. Werkt de applicatie feilloos en kan deze in productie genomen worden, mag debug zeker niet meer de status <code>True</code> hebben.</p>
 
 
 

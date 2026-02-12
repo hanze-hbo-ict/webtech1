@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html/week7/flask-applicaties-deel1.html">
+        <link rel="canonical" href="https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html/week7a/user-authentication-deel1.html">
       
       
         <link rel="prev" href="../week6/oefeningen/flask-views-oefening1.html">
       
       
-        <link rel="next" href="flask-applicaties-deel2.html">
+        <link rel="next" href="user-authentication-deel2.html">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Flask-applicaties - Structuur - Webtechnologie 1</title>
+        <title>User authentication - Hashing - Webtechnologie 1</title>
       
     
     
@@ -84,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#flask-applicaties-structuur" class="md-skip">
+        <a href="#user-authentication-hashing" class="md-skip">
           Ga naar inhoud
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Flask-applicaties - Structuur
+              User authentication - Hashing
             
           </span>
         </div>
@@ -2664,7 +2664,7 @@
   <span class="md-ellipsis">
     
   
-    Week7
+    Week7a
   
 
     
@@ -2680,7 +2680,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Week7
+    Week7a
   
 
           </label>
@@ -2709,7 +2709,7 @@
   <span class="md-ellipsis">
     
   
-    Flask-applicaties - Structuur
+    User authentication - Hashing
   
 
     
@@ -2720,14 +2720,14 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="flask-applicaties-deel1.html" class="md-nav__link md-nav__link--active">
+      <a href="user-authentication-deel1.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flask-applicaties - Structuur
+    User authentication - Hashing
   
 
     
@@ -2753,10 +2753,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#refactoring" class="md-nav__link">
+  <a href="#inleiding" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Refactoring
+        Inleiding
       
     </span>
   </a>
@@ -2764,13 +2764,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#nieuwe-structuur" class="md-nav__link">
+  <a href="#password-hashing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Nieuwe structuur
+        Password hashing
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Password hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bcrypt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bcrypt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#werkzeug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Werkzeug
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2790,14 +2818,14 @@
   
   
     <li class="md-nav__item">
-      <a href="flask-applicaties-deel2.html" class="md-nav__link">
+      <a href="user-authentication-deel2.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flask-applicaties - Refactored
+    User authentication - Flask_login deel I
   
 
     
@@ -2818,14 +2846,42 @@
   
   
     <li class="md-nav__item">
-      <a href="flask-applicaties-deel3.html" class="md-nav__link">
+      <a href="user-authentication-deel3.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flask-applicaties - Blueprints
+    User authentication - Flask_login deel II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="user-authentication-deel4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User authentication - Flask_login deel III
   
 
     
@@ -2871,7 +2927,7 @@
   <span class="md-ellipsis">
     
   
-    Week8
+    Week7b
   
 
     
@@ -2887,7 +2943,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Week8
+    Week7b
   
 
           </label>
@@ -2900,14 +2956,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../week8/user-authentication-deel1.html" class="md-nav__link">
+      <a href="../week7b/flask-applicaties-deel1.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    User authentication - Hashing
+    Flask-applicaties - Structuur
   
 
     
@@ -2928,14 +2984,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../week8/user-authentication-deel2.html" class="md-nav__link">
+      <a href="../week7b/flask-applicaties-deel2.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    User authentication - Flask_login deel I
+    Flask-applicaties - Refactored
   
 
     
@@ -2956,42 +3012,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../week8/user-authentication-deel3.html" class="md-nav__link">
+      <a href="../week7b/flask-applicaties-deel3.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    User authentication - Flask_login deel II
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../week8/user-authentication-deel4.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    User authentication - Flask_login deel III
+    Flask-applicaties - Blueprints
   
 
     
@@ -3039,10 +3067,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#refactoring" class="md-nav__link">
+  <a href="#inleiding" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Refactoring
+        Inleiding
       
     </span>
   </a>
@@ -3050,13 +3078,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#nieuwe-structuur" class="md-nav__link">
+  <a href="#password-hashing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Nieuwe structuur
+        Password hashing
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Password hashing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bcrypt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bcrypt
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#werkzeug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Werkzeug
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3077,73 +3133,64 @@
 
 
 
-<h1 id="flask-applicaties-structuur">Flask-applicaties - Structuur<a class="headerlink" href="#flask-applicaties-structuur" title="Permanent link">&para;</a></h1>
-<h2 id="refactoring">Refactoring<a class="headerlink" href="#refactoring" title="Permanent link">&para;</a></h2>
-<p>Tot nu toe zijn alle coderegels in één <code>app.py</code>-bestand ondergebracht. Voor grotere Flask-applicaties is het logischer om delen van de applicatie in hun eigen bestanden vast te leggen bijvoorbeeld in <code>models.py</code>, <code>forms.py</code> en <code>views.py</code>.</p>
-<p>Voor nog grotere toepassingen begint het logisch te worden om de bestanden te herstructureren en componenten te scheiden zoals forms, views en templates voor elke belangrijke component.</p>
-<p>In dit deel hebben we aandacht voor de wijze waarop de ontwikkelde applicatie van <a href="../week6/oefeningen/flask-views-oefening1.html">oefening 1</a> <em>gerefactored</em> kan worden. Bij die oefening waren alle formulieren, views en templates in een enkel bestand of directory opgenomen. Zo maakte je een bestand <code>mentor_site.py</code>, waarin zowel het model als de verschillende routes waren opgenomen, en had je ook een bestand <code>forms.py</code>, waarin je de verschillende formulier-klassen had aangebracht. </p>
-<p><a href="https://en.wikipedia.org/wiki/Code_refactoring">Refactoren is een andere structuur aan code (of eigenlijk een hele <em>code-base</em>) geven</a>. In dit geval wordt het bestand <code>mentor_site.py</code> (dat je bij de vorige oefening hebt gemaakt) opgesplitst in afzonderlijke componenten voor de hierboven genoemde aspecten. In plaats van <code>mentor_site.py</code> wordt vanaf nu <code>app.py</code> gehanteerd.</p>
-<p><img alt="mentor_site.py opgesplitst tot twee componenten" src="imgs/structuur-flask-app.png" /></p>
-<div class="admonition tip">
-<p class="admonition-title">Gebruik een bibliotheek</p>
-<p>De <a href=""><code>blueprints</code></a>-bibliotheek kan gebruikt worden om deze afzonderlijke modulaire componenten te verbinden met het hoofdbestand <code>app.py</code>. Hier komen we zo op terug.</p>
-</div>
-<p>Houd er rekening mee dat de <code>app.py</code> nog steeds een rol speelt, alleen verwijst het nu alleen nog naar de subcomponenten in plaats van zelf alle code te bevatten.</p>
-<h2 id="nieuwe-structuur">Nieuwe structuur<a class="headerlink" href="#nieuwe-structuur" title="Permanent link">&para;</a></h2>
-<p>Tijd om de definitieve structuur aan te brengen voor deze applicatie. Let op, dit is een best lang overzicht:</p>
+<h1 id="user-authentication-hashing">User authentication - Hashing<a class="headerlink" href="#user-authentication-hashing" title="Permanent link">&para;</a></h1>
+<h2 id="inleiding">Inleiding<a class="headerlink" href="#inleiding" title="Permanent link">&para;</a></h2>
+<p>De titel van dit deel is <em>User Authentication</em>. Gelijk weer een omschrijving in het Engels... Vertaald naar normaal Nederlands levert dat het begrip gebruikersauthenticatie op. Hiermee wordt bedoeld dat voordat een gebruiker toegang wordt verleend op een aanvraag er een procedure wordt opgestart om te bepalen of het een rechtmatige aanvraag betreft.</p>
+<p>Kortweg, het draait om het inloggen.</p>
+<p>Tot nu toe heeft iedereen toegang tot elke pagina van de ontwikkelde webapplicaties. Vaak is het wenselijk de toegang te beperken tot alleen geregistreerde gebruikers. Het gaat in dit deel om de autorisatie en authenticatie van de gebruikers.</p>
+<p>De onderwerpen die we gaan behandelen zijn:</p>
 <ul>
-<li><code>app.py</code>  (main <code>app.py</code>-bestand dat moet worden aangeroepen om de server voor de webapp te starten)</li>
-<li><code>requirements.txt</code> (Bestand waarin de <em>dependencies</em> zijn opgeslagen)</li>
-<li>mijn_project (project map, sub-componenten in aparte mappen)<ul>
-<li><code>data.sqlite</code></li>
-<li><code>models.py</code></li>
-<li><code>__init__.py</code></li>
-<li>docenten<ul>
-<li><code>forms.py</code></li>
-<li><code>views.py</code></li>
-<li>templates<ul>
-<li>docenten<ul>
-<li><code>add.html</code></li>
-<li><code>delete.html</code></li>
-<li><code>list.html</code></li>
+<li>Password hashing</li>
+<li>De <code>Flask-Login</code> library</li>
 </ul>
-</li>
+<h2 id="password-hashing">Password hashing<a class="headerlink" href="#password-hashing" title="Permanent link">&para;</a></h2>
+<p>Als een website gebruikersverificatie kent, zijn wachtwoorden en gebruikersnamen opgeslagen in een database. Om veiligheidsredenen zal nooit de letterlijke inhoud van het wachtwoord worden opgeslagen. Dat zou te gemakkelijk te achterhalen zijn voor hackers, en bovendien is het niet netjes wanneer een database-administrator gewoon beschikking zou hebben over wachtwoorden.</p>
+<p>Een hashfunctie brengt hierbij uitkomst. Het is een algoritme dat een wachtwoord kan omtoveren naar een veilig alternatief. En met veilig wordt bedoeld dat een buitenstaander uit de hash niet kan achterhalen wat het originele wachtwoord is.</p>
+<p>In de praktijk werkt dat als volgt: als een gebruiker een wachtwoord invoert, kan dit eenvoudig vergeleken worden met de opgeslagen hash. De hash is het enige wat opgeslagen wordt, en het is niet mogelijk (of in ieder geval erg moeilijk) om het wachtwoord te reconstrueren op basis van die hash.</p>
+<p>Voor het werken met die hashes kan uit een tweetal beschikbare bibliotheken gekozen worden:</p>
+<ul>
+<li><a href="https://flask-bcrypt.readthedocs.io/en/latest/"><code>Bcrypt</code></a></li>
+<li><a href="https://techmonger.github.io/4/secure-passwords-werkzeug/"><code>Werkzeug</code></a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>studenten<ul>
-<li><code>forms.py</code></li>
-<li><code>views.py</code></li>
-<li>templates<ul>
-<li>studenten<ul>
-<li><code>add.html</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>static (voor de opslag van CSS, JS, afbeeldingen, lettertypen etc.)</li>
-<li>templates<ul>
-<li><code>base.html</code></li>
-<li><code>home.html</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<div class="admonition info">
-<p class="admonition-title">requirements.txt</p>
-<p>In Python projecten zal je vaak een <code>requirements.txt</code> bestand zien. Dit is een bestand waar de afhankelijkheden (de gebruikte modules) van de applicatie zijn beschreven. Je kan met <code>pip</code> de geïnstalleerde modules als volgt naar dit bestand laten schrijven:</p>
-<div class="highlight"><pre><span></span><code><span class="go">pip freeze &gt; requirements.txt</span>
+<p>Beiden kunnen zeer goed gebruikt worden in een Flask-applicatie om te kunnen achterhalen of er een juist wachtwoord is ingevoerd. Van beide pakketten wordt een voorbeeld gegeven hoe het gebruikt kan worden.</p>
+<p><code>Bcrypt</code> en <code>Werkzeug</code> komen vaak mee als <code>Flask</code> geïnstalleerd wordt. Is dat niet het geval kunnen de pakketten <a href="../week5/flask-forms-deel1.html">op de bekende wijze</a> opgehaald worden.</p>
+<h3 id="bcrypt">Bcrypt<a class="headerlink" href="#bcrypt" title="Permanent link">&para;</a></h3>
+<p>Is Bcrypt aanwezig, is de eerste actie het importeren ervan. Daarna maken we een object aan van het type <code>BCrypt()</code> en gebruiken dat object om het wachtwoord te hashen:</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span><span class="w"> </span><span class="nn">flask_bcrypt</span><span class="w"> </span><span class="kn">import</span> <span class="n">Bcrypt</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">bcrypt</span> <span class="o">=</span> <span class="n">Bcrypt</span><span class="p">()</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">hashed_pass</span> <span class="o">=</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">generate_password_hash</span><span class="p">(</span><span class="s1">&#39;supergeheimwachtwoord&#39;</span><span class="p">)</span>
 </code></pre></div>
-<p>Als je vervolgens de inhoud van <code>requirements.txt</code> bekijkt zal je zien dat het modules bevat inclusief versienummer, bijvoorbeeld <code>Flask==1.1.2</code>. Dit bestand wordt ook gebruikt om in bijvoorbeeld een nieuwe virtuele omgeving de vereiste modules te installeren, bijvoorbeeld:</p>
-<div class="highlight"><pre><span></span><code><span class="go">pip install -r requirements.txt</span>
+<p>Het wachtwoord wordt gehashed en bewaard in de variabele <code>hashed_pass</code>. Nadat het geprint is, is het echt niet meer te herleiden naar het origineel:</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="nb">print</span><span class="p">(</span><span class="n">hashed_pass</span><span class="p">)</span>
+<span class="sa">b</span><span class="s1">&#39;$2b$12$rFOT5/VUiUpjODpcCn/0UONrhkQ2h224c7Srz3jk2qJOAUw2.xvyG&#39;</span>
 </code></pre></div>
-<p>Het vastzetten van modules en bijbehorende versienummers is een manier om een repliceerbare omgeving voor een applicatie te gegaranderen, bijvoorbeeld als het live op een server moet draaien of wanneer je met andere mensen aan een project gaat samenwerken.</p>
-</div>
-<p>In de volgende paragraaf wordt een applicatie omgeschreven naar een meer overzichtelijke vorm. Als voorbeeld gebruiken we de applicatie van de oefening uit het deel waarin voor het eerst een website gebouwd is.</p>
+<p>Wordt het runnen herhaald, verschijnt er een andere hash.</p>
+<p>Uiteraard nu weer een test naar de werking.</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed_pass</span><span class="p">,</span> <span class="s1">&#39;verkeerdwachtwoord&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="kc">False</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed_pass</span><span class="p">,</span> <span class="s1">&#39;supergeheimwachtwoord&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="kc">True</span>
+</code></pre></div>
+Precies in de lijn der verwachting.</p>
+<h3 id="werkzeug">Werkzeug<a class="headerlink" href="#werkzeug" title="Permanent link">&para;</a></h3>
+<p>Je kunt hetzelfde bereiken met Werkzeug, waarbij de syntax en de check zelfs nog iets simpeler is:</p>
+<div class="highlight"><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span><span class="w"> </span><span class="nn">werkzeug.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span><span class="n">check_password_hash</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">hashed_pass</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="s1">&#39;supergeheimwachtwoord&#39;</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="nb">print</span> <span class="p">(</span><span class="n">hashed_pass</span><span class="p">)</span>
+<span class="n">pbkdf2</span><span class="p">:</span><span class="n">sha256</span><span class="p">:</span><span class="mi">150000</span><span class="err">$</span><span class="n">hUiH149n</span><span class="err">$</span><span class="n">af71be7ff46588f9c5d93b4ec9f46ef1a64801d02434ee2057ca81b8bb2939cb</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed_pass</span><span class="p">,</span><span class="s1">&#39;verkeerdwachtwoord&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="kc">False</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed_pass</span><span class="p">,</span><span class="s1">&#39;supergeheimwachtwoord&#39;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="kc">True</span>
+</code></pre></div>
+<p>Het verschil tussen beiden is dat bij Werkzeug exact de juiste methoden binnengehaald worden en bij Bcrypt moet er soms een beetje over nagedacht worden. De keuze tussen deze pakketten is vrij arbitrair en ligt een beetje aan de voorkeuren van de ontwikkelaar.</p>
 
 
 
