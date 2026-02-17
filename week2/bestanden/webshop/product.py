@@ -8,7 +8,6 @@ class Product:
         self._naam = naam
         self._prijs = prijs
         self._voorraad = voorraad
-        self._beschikbaar = True
 
     def verkoop(self, aantal):
         """Verkoop een aantal items van dit product"""
@@ -18,7 +17,6 @@ class Product:
             print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
         else:
             print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
-            self._beschikbaar = False
 
     def __str__(self):
         return f"Product: {self._naam}, Prijs: €{self._prijs:.2f}, Voorraad: {self._voorraad}"
