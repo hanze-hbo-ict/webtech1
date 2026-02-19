@@ -2995,7 +2995,7 @@
 <p>Digitale producten hebben geen verzendkosten maar wel een bestandsgrootte. Geef digitale producten een standaard voorraad van 999 (want ze zijn bijna onbeperkt beschikbaar) en voeg een attribuut <code>_bestandsgrootte</code> toe (in MB).</p>
 <p>Test de klasse door een tweetal instanties aan te maken en hun details te tonen. Goede voorbeelden zijn software zoals "Photoshop" en "Microsoft Office".</p>
 <p>Test verder of de methode <code>verkoop()</code> naar behoren werkt. Dat is ook nog niet getest voor de objecten uit de klasse <code>FysiekProduct</code>. Nu is daar een mooie gelegenheid voor. Mocht blijken dat de test nog een probleem laat zien, graag een oplossing ervoor.</p>
-<p>Ook kunnen fysieke producten weer onderverdeeld worden. De bekendste groepen zijn <em>Boek</em> en <em>Elektronica</em>. Alleen de klasse <code>Boek</code> wordt hier aangemaakt als voorbeeld. Een boek heeft een naam, prijs en voorraad nodig, plus een aantal extra eigenschappen zoals auteur en ISBN. Boeken krijgen standaard 0.5 kg als gewicht.</p>
+<p>We gaan verder met overerving. Ook fysieke producten kunnen weer onderverdeeld worden. Bekende groepen zijn <em>Boek</em> en <em>Elektronica</em>. Alleen de klasse <code>Boek</code> wordt hier aangemaakt als voorbeeld. Een boek heeft een naam, prijs en voorraad nodig, plus een aantal extra eigenschappen zoals auteur en ISBN. Boeken krijgen standaard 0.5 kg als gewicht.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Boek</span><span class="p">(</span><span class="n">FysiekProduct</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">,</span> <span class="n">prijs</span><span class="p">,</span> <span class="n">voorraad</span><span class="p">,</span> <span class="n">auteur</span><span class="p">,</span> <span class="n">isbn</span><span class="p">):</span>
@@ -3008,15 +3008,13 @@
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">basis</span><span class="si">}</span><span class="s2">, Auteur: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_auteur</span><span class="si">}</span><span class="s2">, ISBN: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_isbn</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
 <p>Een bekend boek is 'Python Crash Course' van Eric Matthes. Dat wordt het object uit deze klasse dat aangemaakt wordt.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">product</span><span class="w"> </span><span class="kn">import</span> <span class="n">Product</span><span class="p">,</span> <span class="n">FysiekProduct</span><span class="p">,</span> <span class="n">DigitaalProduct</span><span class="p">,</span> <span class="n">Boek</span>
-
-<span class="n">python_boek</span> <span class="o">=</span> <span class="n">Boek</span><span class="p">(</span><span class="s2">&quot;Python Crash Course&quot;</span><span class="p">,</span> <span class="mf">34.95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;Eric Matthes&quot;</span><span class="p">,</span> <span class="s2">&quot;978-1593279288&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">python_boek</span> <span class="o">=</span> <span class="n">Boek</span><span class="p">(</span><span class="s2">&quot;Python Crash Course&quot;</span><span class="p">,</span> <span class="mf">34.95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;Eric Matthes&quot;</span><span class="p">,</span> <span class="s2">&quot;978-1593279288&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">python_boek</span><span class="p">)</span>
 <span class="n">python_boek</span><span class="o">.</span><span class="n">verkoop</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">python_boek</span><span class="p">)</span>
 </code></pre></div>
-<p>Maak nu de klasse <code>Software</code> aan (als subklasse van <code>DigitaalProduct</code>) met zelfgekozen eigenschappen zoals versienummer en besturingssysteem, en test deze door een instantie aan te maken en deze verschillende hoeveelheden verkopen toe te passen.</p>
-<p><strong>Extra uitdaging:</strong> Voeg een methode <code>download()</code> toe aan de klasse <code>DigitaalProduct</code> die een downloadlink genereert en de voorraad automatisch met 1 vermindert. Bij fysieke producten zou dit een error moeten geven.</p>
+<p>Maak nu de klasse <code>Software</code> aan als subklasse van <code>DigitaalProduct</code> met zelfgekozen eigenschappen zoals versienummer en besturingssysteem, en test deze door een instantie aan te maken en deze verschillende hoeveelheden verkopen toe te passen.</p>
+<p><strong>Extra uitdaging:</strong> Voeg een methode <code>download()</code> toe aan de klasse <code>DigitaalProduct</code> die een downloadlink genereert. Bij fysieke producten zou dit een error moeten geven.</p>
 
 
 
