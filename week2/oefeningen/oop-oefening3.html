@@ -3176,13 +3176,13 @@ Verwachte levertijd: 2-3 werkdagen
 Totaal: €778.16
 </code></pre></div></p>
 <h2 id="d-meerdere-verzendadressen-nog-een-optionele-uitdaging">d. Meerdere verzendadressen (nog een optionele uitdaging)<a class="headerlink" href="#d-meerdere-verzendadressen-nog-een-optionele-uitdaging" title="Permanent link">&para;</a></h2>
-<p>In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres etc.). Maak een klasse <code>Adres</code> met velden voor straat, huisnummer, postcode en plaats. Pas de klasse <code>Klant</code> aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.</p>
+<p>In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres etc.). Maak een klasse <code>Adres</code> met velden voor straat, huisnummer, en plaats. Pas de klasse <code>Klant</code> aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.</p>
 <p>Als je dit is gelukt kun je jezelf feliciteren: je hebt nu een realistische webshop-structuur gemaakt met compositie!</p>
 <h2 id="testcode">Testcode<a class="headerlink" href="#testcode" title="Permanent link">&para;</a></h2>
-<p>Hier is een voorbeeld hoe je de uitgebreide functionaliteit kunt testen:</p>
+<p>Hier is een voorbeeld hoe je de complete functionaliteit kunt testen:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">product</span><span class="w"> </span><span class="kn">import</span> <span class="n">Product</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">klant</span><span class="w"> </span><span class="kn">import</span> <span class="n">Klant</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">winkelwagen</span><span class="w"> </span><span class="kn">import</span> <span class="n">Winkelwagen</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">webshop</span><span class="w"> </span><span class="kn">import</span> <span class="n">Winkelwagen</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bestelling</span><span class="w"> </span><span class="kn">import</span> <span class="n">Bestelling</span><span class="p">,</span> <span class="n">Verzendmethode</span><span class="p">,</span> <span class="n">Kortingscode</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">betaalmethode</span><span class="w"> </span><span class="kn">import</span> <span class="n">Betaalmethode</span>
 
@@ -3192,6 +3192,8 @@ Totaal: €778.16
 
 <span class="c1"># Maak klant en winkelwagen</span>
 <span class="n">jan</span> <span class="o">=</span> <span class="n">Klant</span><span class="p">(</span><span class="s2">&quot;Jan Jansen&quot;</span><span class="p">,</span> <span class="s2">&quot;jan@email.nl&quot;</span><span class="p">)</span>
+<span class="n">jan</span><span class="o">.</span><span class="n">voeg_adres_toe</span><span class="p">(</span><span class="s2">&quot;Bloemstraat&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Groningen&quot;</span><span class="p">)</span>
+<span class="n">jan</span><span class="o">.</span><span class="n">voeg_adres_toe</span><span class="p">(</span><span class="s2">&quot;Zernikeplein&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;Groningen&quot;</span><span class="p">)</span>
 <span class="n">wagen</span> <span class="o">=</span> <span class="n">Winkelwagen</span><span class="p">(</span><span class="n">jan</span><span class="p">)</span>
 <span class="n">wagen</span><span class="o">.</span><span class="n">voeg_toe</span><span class="p">(</span><span class="n">laptop</span><span class="p">)</span>
 <span class="n">wagen</span><span class="o">.</span><span class="n">voeg_toe</span><span class="p">(</span><span class="n">muis</span><span class="p">)</span>
@@ -3210,7 +3212,7 @@ Totaal: €778.16
 <span class="n">bestelling</span><span class="o">.</span><span class="n">pas_kortingscode_toe</span><span class="p">(</span><span class="n">korting</span><span class="p">)</span>
 
 <span class="c1"># Plaats bestelling</span>
-<span class="n">bestelling</span><span class="o">.</span><span class="n">plaats_bestelling</span><span class="p">()</span>
+<span class="n">bestelling</span><span class="o">.</span><span class="n">plaats_bestelling</span><span class="p">(</span><span class="n">adres_index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bestellingsnummer: </span><span class="si">{</span><span class="n">bestelling</span><span class="o">.</span><span class="n">nummer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>

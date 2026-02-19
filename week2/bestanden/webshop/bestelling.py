@@ -49,27 +49,17 @@ class Bestelling:
             print(f"  - {product}")
 
         # Bereken kosten
-        subtotaal = self.winkelwagen.bereken_totaal()
-        print(f"\nSubtotaal: €{subtotaal:.2f}")
-
-        if subtotaal >= 50:
-            print("Verzendkosten: €0.00 (GRATIS verzending!)")
-            verzending = 0.0
-        else:
-            print(f"Verzendkosten: €{self.verzendkosten:.2f}")
-            verzending = self.verzendkosten
-
-        totaal = subtotaal + verzending
+        totaal = self.bereken_totaal()
         print(f"Totaal: €{totaal:.2f}")
 
         # Verwerk betaling
         print(f"\nBetaalmethode: {self.betaalmethode.type}")
-        eindtotaal = self.betaalmethode.verwerk_betaling(totaal)
+        self.betaalmethode.verwerk_betaling(totaal)
 
         # Bevestiging
         self.status = "Bevestigd"
         print(f"\nBestelling bevestigd!")
-        print(f"Bevestiging verzonden naar {self.klant._email}")
+        print(f"Bevestiging per e-mail verzonden naar {self.klant._email}")
         print(f"Verwachte levering: 2-3 werkdagen")
         print(f"{'='*50}\n")
 
