@@ -1,254 +1,347 @@
-# OOP Python - Meerdere klassen
+# OOP Python – Overerving
 
-Het is belangrijk om commentaar op te nemen binnen codeblokken. Het is dan voor iemand die de code niet ontwikkeld heeft, maar deze wel moet refactoren, duidelijk wat de bedoeling is. Dat gaan we hier ook doen.
+In dit deel leer je hoe **overerving** werkt in Python. Dit is een essentiële basis voor het werken met SQLAlchemy, waar je straks modellen maakt die erven van `db.Model`.
 
-## De klasse `Product`
+## Wat is overerving?
 
-Als voorbeeld wordt hier een applicatie opgebouwd, waarbij gegevens vanuit drie klassen aangeroepen zullen worden. Die klassen zijn `Product`, `Klant` en `Winkelwagen`. De code is te vinden in het bestand [webshop.py](bestanden/webshop/webshop.py)
-
-De eerste klasse is `Product`. In het commentaar van deze klasse zetten we een korte beschrijving van de klasse, gevolgd door een omschrijving van de attributen die van objecten deze klasse worden bijgehouden. Na dit commentaar volgt de *constructor*, die we ook voorzien van een korte beschrijving.
+Overerving betekent dat een klasse eigenschappen en methoden overneemt van een andere klasse:
 
 ```python
 class Product:
-    """Klasse waarin productgegevens worden vastgelegd
+    def __init__(self, naam: str, prijs: float):
+        self.naam = naam
+        self.prijs = prijs
 
-    Attributen:
-        naam (str): De naam van het product.
-        prijs (float): De prijs van het product in euro's.
-        voorraad (int): Het aantal beschikbare producten. Standaard 0.
-    """
+class FysiekProduct(Product):
+    def __init__(self, naam: str, prijs: float, gewicht: float):
+        super().__init__(naam, prijs)  # Roep parent constructor aan
+        self.gewicht = gewicht
 
-    def __init__(self, naam, prijs, voorraad=0):
-        self._naam = naam
-        self._prijs = prijs
-        self._voorraad = voorraad
-
-    def __str__(self):
-        return f"{self._naam} (€{self._prijs:.2f})"
+laptop = FysiekProduct("Laptop", 799.99, 2.5)
+print(laptop.naam)  # Werkt! Overgenomen van Product
 ```
 
-## De klasse `Winkelwagen`
+**Terminologie:**
 
-In hetzelfde bestand maken we nu een tweede klasse: `Winkelwagen`. Aan deze winkelwagen kunnen producten worden toegevoegd.
+- `Product` is de **bovenliggende klasse** (ook wel: parent class, superclass)
+- `FysiekProduct` is de **subklasse** (ook wel: child class, derived class)
+
+## Wanneer gebruik je overerving?
+
+Gebruik overerving wanneer er een **"is een"** relatie is:
+
+- Een `FysiekProduct` **is een** `Product`
+- Een `DigitaalProduct` **is een** `Product`
+- Een `User` **is een** `db.Model` (SQLAlchemy!)
+
+!!! note "Is-een vs heeft-een"
+    **Overerving (is-een):** Een laptop is een product
+    **Compositie (heeft-een):** Een bestelling heeft een klant (zie deel 4)
+
+## `super()` gebruiken
+
+`super()` roept de bovenliggende klasse aan. Dit gebruik je vooral in `__init__`:
 
 ```python
-class Winkelwagen:
-    """Klasse voor een winkelwagen met producten
+class Product:
+    def __init__(self, naam: str, prijs: float):
+        self.naam = naam
+        self.prijs = prijs
+        print(f"Product aangemaakt: {naam}")
 
-    Attributen:
-        items (list): Een lijst met producten in de winkelwagen.
-        klant (Klant): De klant bij wie deze winkelwagen hoort.
-
-    Methods:
-        voeg_toe: Voegt een product toe aan de winkelwagen.
-        verwijder: Verwijdert een product uit de winkelwagen.
-        bereken_totaal: Berekent het totaalbedrag van alle producten.
-    """
-
-    def __init__(self, klant):
-        self.items = []
-        self.klant = klant
-
-    def voeg_toe(self, product):
-        """Voegt een product toe aan de winkelwagen
-
-        Parameters:
-            product (Product): Het toe te voegen product
-        """
-        self.items.append(product)
-        print(f"{product._naam} toegevoegd aan winkelwagen van {self.klant._naam}")
-
-    def verwijder(self, product):
-        """Verwijdert een product uit de winkelwagen
-
-        Parameters:
-            product (Product): Het te verwijderen product
-        """
-        if product in self.items:
-            self.items.remove(product)
-            print(f"{product._naam} verwijderd uit winkelwagen")
-        else:
-            print(f"{product._naam} zit niet in de winkelwagen")
-
-    def bereken_totaal(self):
-        """Berekent het totaalbedrag van alle producten in de winkelwagen
-
-        Returns:
-            float: Het totaalbedrag
-        """
-        totaal = sum(product._prijs for product in self.items)
-        return totaal
-
-    def toon_inhoud(self):
-        """Toont de volledige inhoud van de winkelwagen"""
-        if not self.items:
-            print(f"Winkelwagen van {self.klant._naam} is leeg")
-        else:
-            print(f"\nWinkelwagen van {self.klant._naam}:")
-            for product in self.items:
-                print(f"  - {product}")
-            print(f"Totaal: €{self.bereken_totaal():.2f}")
+class FysiekProduct(Product):
+    def __init__(self, naam: str, prijs: float, gewicht: float):
+        super().__init__(naam, prijs)  # Parent initialisatie
+        self.gewicht = gewicht
+        print(f"Gewicht: {gewicht} kg")
 ```
 
-Het is hier allemaal een beetje overdone, maar het idee is duidelijk.
+!!! warning "super() is verplicht"
+    Als je `super().__init__()` vergeet, worden de attributen van de bovenliggende klasse niet geïnitialiseerd. Je krijgt dan fouten als `AttributeError: 'FysiekProduct' object has no attribute 'naam'`.
 
-## De klasse `Klant`
+## Methoden overerven en overschrijven
 
-Er is al verwezen naar de klasse Klant, maar die bestaat op dit moment nog niet. Daar gaat nu verandering in komen.
+Subklassen erven alle methoden van de bovenliggende klasse:
 
 ```python
-class Klant:
-    """Klasse om klantgegevens op te slaan
+class Product:
+    def __init__(self, naam: str, prijs: float, voorraad: int):
+        self.naam = naam
+        self.prijs = prijs
+        self.voorraad = voorraad
 
-    Attributen:
-        naam (str): De naam van de klant.
-        email (str): Het e-mailadres van de klant.
-        bestellingen (list): Een lijst met de bestellingen van deze klant.
+    def verkoop(self, aantal: int) -> bool:
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
+        return False
 
-    Methods:
-        plaats_bestelling: Plaatst een bestelling voor de klant.
-    """
+    def bereken_waarde(self) -> float:
+        return self.prijs * self.voorraad
 
-    def __init__(self, naam, email):
-        self._naam = naam
-        self._email = email
-        self._bestellingen = []
+class FysiekProduct(Product):
+    def __init__(self, naam: str, prijs: float, voorraad: int, gewicht: float):
+        super().__init__(naam, prijs, voorraad)
+        self.gewicht = gewicht
 
-    def plaats_bestelling(self, winkelwagen):
-        """Plaatst een bestelling
-
-        Parameters:
-            winkelwagen (Winkelwagen): De winkelwagen met producten
-        """
-        if not winkelwagen.items:
-            print("Winkelwagen is leeg!")
-            return
-
-        totaal = winkelwagen.bereken_totaal()
-        self._bestellingen.append({
-            'items': winkelwagen.items.copy(),
-            'totaal': totaal
-        })
-        print(f"\nBestelling geplaatst voor {self._naam}")
-        print(f"Totaalbedrag: €{totaal:.2f}")
-        print(f"Bevestiging verstuurd naar {self._email}")
-
-        # Leeg de winkelwagen na bestelling
-        winkelwagen.items.clear()
-
-    def toon_bestellingen(self):
-        """Toont alle bestellingen van deze klant"""
-        if not self._bestellingen:
-            print(f"{self._naam} heeft nog geen bestellingen geplaatst")
+    def bereken_verzendkosten(self) -> float:
+        """Nieuwe methode, alleen in FysiekProduct."""
+        if self.gewicht <= 1.0:
+            return 3.95
+        elif self.gewicht <= 5.0:
+            return 6.95
         else:
-            print(f"\nBestellingen van {self._naam}:")
-            for i, bestelling in enumerate(self._bestellingen, 1):
-                print(f"\n  Bestelling {i}:")
-                for product in bestelling['items']:
-                    print(f"    - {product}")
-                print(f"  Totaal: €{bestelling['totaal']:.2f}")
+            return 9.95
+
+# Test
+boek = FysiekProduct("Python Crash Course", 34.95, 10, 0.6)
+boek.verkoop(3)  # Inherited van Product!
+print(f"Voorraad: {boek.voorraad}")  # 7
+print(f"Verzendkosten: €{boek.bereken_verzendkosten():.2f}")  # €3.95
 ```
 
-Ook deze klasse moet de mogelijkheid hebben bestellingen te plaatsen. Bijzondere aandacht voor het feit dat de winkelwagen wordt geleegd na een bestelling.
+### Methoden overschrijven
 
-## Het geheel in actie
-
-Nu de drie klassen af zijn, kunnen we deze gebruiken. Eerst importeren we alles:
+Je kunt een methode van de bovenliggende klasse vervangen door dezelfde methode in de child te definiëren:
 
 ```python
-# Maak enkele producten aan
-laptop = Product("Laptop", 799.99, 5)
-muis = Product("Draadloze muis", 25.50, 20)
-toetsenbord = Product("Mechanisch toetsenbord", 89.99, 15)
-monitor = Product("27-inch monitor", 299.99, 8)
+class Product:
+    def __init__(self, naam: str, prijs: float):
+        self.naam = naam
+        self.prijs = prijs
 
-# Maak een klant aan
-jan = Klant("Jan Jansen", "jan@email.nl")
+    def __str__(self) -> str:
+        return f"Product: {self.naam} - €{self.prijs:.2f}"
 
-# Maak een winkelwagen voor Jan
-winkelmand = Winkelwagen(jan)
+class DigitaalProduct(Product):
+    def __init__(self, naam: str, prijs: float, bestandsgrootte: float):
+        super().__init__(naam, prijs)
+        self.bestandsgrootte = bestandsgrootte
 
-# Voeg producten toe
-winkelmand.voeg_toe(laptop)
-winkelmand.voeg_toe(muis)
-winkelmand.voeg_toe(toetsenbord)
+    def __str__(self) -> str:
+        """Override: voeg bestandsgrootte toe."""
+        return f"Digitaal Product: {self.naam} - €{self.prijs:.2f} ({self.bestandsgrootte} MB)"
 
-# Toon de inhoud
-winkelmand.toon_inhoud()
-
-# Plaats de bestelling
-jan.plaats_bestelling(winkelmand)
-
-# Voeg nog meer producten toe en plaats een tweede bestelling
-winkelmand.voeg_toe(monitor)
-winkelmand.voeg_toe(muis)  # Nog een muis
-winkelmand.toon_inhoud()
-jan.plaats_bestelling(winkelmand)
-
-# Toon alle bestellingen
-jan.toon_bestellingen()
+photoshop = DigitaalProduct("Photoshop", 29.99, 2480.0)
+print(photoshop)  # Gebruikt de overridden __str__
 ```
 
-Dit geeft de volgende uitvoer:
+!!! tip "Type annotations bij overschrijven"
+    Gebruik bij overschrijven dezelfde type annotations als de overschreven methode. Dit houdt je code consistent en voorkomt fouten.
 
-```console
-Laptop toegevoegd aan winkelwagen van Jan Jansen
-Draadloze muis toegevoegd aan winkelwagen van Jan Jansen
-Mechanisch toetsenbord toegevoegd aan winkelwagen van Jan Jansen
+## Overerving met dataclasses
 
-Winkelwagen van Jan Jansen:
-  - Laptop (€799.99)
-  - Draadloze muis (€25.50)
-  - Mechanisch toetsenbord (€89.99)
-Totaal: €915.48
+Dataclasses maken overerving nog eenvoudiger - je hoeft geen `super().__init__()` te gebruiken:
 
-Bestelling geplaatst voor Jan Jansen
-Totaalbedrag: €915.48
-Bevestiging verstuurd naar jan@email.nl
+```python
+from dataclasses import dataclass
 
-27-inch monitor toegevoegd aan winkelwagen van Jan Jansen
-Draadloze muis toegevoegd aan winkelwagen van Jan Jansen
+@dataclass
+class Product:
+    naam: str
+    prijs: float
+    voorraad: int = 0
 
-Winkelwagen van Jan Jansen:
-  - 27-inch monitor (€299.99)
-  - Draadloze muis (€25.50)
-Totaal: €325.49
+    def verkoop(self, aantal: int) -> bool:
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
+        return False
 
-Bestelling geplaatst voor Jan Jansen
-Totaalbedrag: €325.49
-Bevestiging verstuurd naar jan@email.nl
+@dataclass
+class FysiekProduct(Product):
+    gewicht: float = 0.5  # Nieuw attribuut
 
-Bestellingen van Jan Jansen:
+    def bereken_verzendkosten(self) -> float:
+        if self.gewicht <= 1.0:
+            return 3.95
+        elif self.gewicht <= 5.0:
+            return 6.95
+        else:
+            return 9.95
 
-  Bestelling 1:
-    - Laptop (€799.99)
-    - Draadloze muis (€25.50)
-    - Mechanisch toetsenbord (€89.99)
-  Totaal: €915.48
-
-  Bestelling 2:
-    - 27-inch monitor (€299.99)
-    - Draadloze muis (€25.50)
-  Totaal: €325.49
+# Gebruik
+laptop = FysiekProduct("Gaming Laptop", 1299.99, 5, gewicht=2.5)
+print(laptop)
+# FysiekProduct(naam='Gaming Laptop', prijs=1299.99, voorraad=5, gewicht=2.5)
 ```
 
-## Waarom meerdere klassen?
+!!! info "Parent attributen eerst"
+    Bij dataclass overerving komen attributen van de bovenliggende klasse automatisch eerst. Attributen van de subklasse komen daarna. Je hoeft niets extra's te doen.
 
-Het gebruik van meerdere klassen heeft verschillende voordelen:
+## Overerving op meerdere niveaus
 
-1. **Scheiding van verantwoordelijkheden**: Elke klasse heeft zijn eigen taak (Product: productinfo, Klant: klantinfo, Winkelwagen: producten verzamelen)
-2. **Herbruikbaarheid**: De `Product` klasse kan worden hergebruikt in andere delen van de applicatie
-3. **Onderhoudbaarheid**: Wijzigingen in één klasse hebben minder impact op andere klassen
-4. **Realistische modellering**: Het komt overeen met hoe een echte webshop werkt
+Je kunt ook van een subklasse erven (overervingshiërarchie):
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class Product:
+    naam: str
+    prijs: float
+    voorraad: int = 0
+
+@dataclass
+class FysiekProduct(Product):
+    gewicht: float = 0.5
+
+@dataclass
+class Boek(FysiekProduct):
+    auteur: str = ""
+    isbn: str = ""
+
+    def __str__(self) -> str:
+        return f"{self.naam} door {self.auteur} (ISBN: {self.isbn})"
+
+# Boek erft van FysiekProduct, die erft van Product
+python_boek = Boek(
+    naam="Python Crash Course",
+    prijs=34.95,
+    voorraad=8,
+    gewicht=0.6,
+    auteur="Eric Matthes",
+    isbn="978-1593279288"
+)
+
+print(python_boek)
+# Python Crash Course door Eric Matthes (ISBN: 978-1593279288)
+```
+
+!!! note "Overervingshiërarchie"
+    `Boek` → `FysiekProduct` → `Product`
+    Een `Boek` heeft toegang tot alle attributen en methoden van zowel `FysiekProduct` als `Product`.
+
+## Preview: SQLAlchemy modellen
+
+Dit is waarom je overerving leert - straks in week 6 ga je database modellen maken:
+
+```python
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String
+
+db = SQLAlchemy()
+
+class User(db.Model):  # Erft van db.Model!
+    __tablename__ = 'users'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    username: Mapped[str] = mapped_column(String(80))
+    email: Mapped[str] = mapped_column(String(120))
+
+class Product(db.Model):  # Erft van db.Model!
+    __tablename__ = 'products'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str] = mapped_column(String(100))
+    prijs: Mapped[float]
+```
+
+Door te erven van `db.Model` krijgen je klassen automatisch alle database functionaliteit: opslaan, opvragen, verwijderen, etc.
+
+!!! info "Waarom OOP voor SQLAlchemy?"
+    SQLAlchemy gebruikt OOP omdat het perfect past bij database structuur:
+    - Elke **klasse** = een database **tabel**
+    - Elk **object** = een **rij** in de tabel
+    - Overerving geeft je de database functionaliteit
+
+    SQLAlchemy vertaalt je Python code naar SQL. In week 3 schrijf je die SQL zelf - dat laat zien wat er achter de schermen gebeurt.
+
+## Praktijkvoorbeeld: Producttypes
+
+Hier een compleet voorbeeld met verschillende producttypes:
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class Product:
+    """Basis product klasse."""
+    naam: str
+    prijs: float
+    voorraad: int = 0
+    beschrijving: str | None = None
+
+    def verkoop(self, aantal: int) -> bool:
+        """Verkoop items. Geeft True terug bij succes."""
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
+        return False
+
+    def voorraad_waarde(self) -> float:
+        """Bereken totale waarde van voorraad."""
+        return self.prijs * self.voorraad
+
+@dataclass
+class FysiekProduct(Product):
+    """Product dat fysiek verzonden moet worden."""
+    gewicht: float = 0.5
+
+    def bereken_verzendkosten(self) -> float:
+        """Bereken verzendkosten op basis van gewicht."""
+        if self.gewicht <= 1.0:
+            return 3.95
+        elif self.gewicht <= 5.0:
+            return 6.95
+        else:
+            return 9.95
+
+@dataclass
+class DigitaalProduct(Product):
+    """Product dat digitaal geleverd wordt."""
+    bestandsgrootte: float = 0.0  # MB
+    download_link: str = ""
+    voorraad: int = 999  # Digitale producten zijn bijna onbeperkt
+
+    def download(self) -> dict:
+        """Simuleer download. Geeft download info terug."""
+        if self.voorraad > 0:
+            self.voorraad -= 1
+            return {
+                "product": self.naam,
+                "link": self.download_link,
+                "grootte_mb": self.bestandsgrootte
+            }
+        return {"error": "Niet beschikbaar"}
+
+# Test
+laptop = FysiekProduct("Gaming Laptop", 1299.99, 5, gewicht=2.5)
+game = DigitaalProduct(
+    "Cyberpunk 2077", 59.99,
+    bestandsgrootte=70000.0,
+    download_link="https://gog.com/download/cyberpunk"
+)
+
+print(f"Laptop verzendkosten: €{laptop.bereken_verzendkosten():.2f}")
+info = game.download()
+print(f"Download: {info['product']} ({info['grootte_mb']} MB)")
+```
+
+## Checklist
+
+Controleer of je het volgende beheerst:
+
+- [ ] Begrijpen wanneer je overerving gebruikt (is-een relatie)
+- [ ] `super().__init__()` correct gebruiken in reguliere klassen
+- [ ] Overerving met dataclasses (automatische parent attributen)
+- [ ] Methoden overschrijven met dezelfde signature
+- [ ] Meerdere niveaus overerving (Boek → FysiekProduct → Product)
+- [ ] Type annotations bij inherited en overridden methoden
+- [ ] Begrijpen waarom SQLAlchemy overerving gebruikt
 
 ## Samenvatting
 
-In dit deel hebben we geleerd over:
+In dit deel heb je geleerd:
 
-- Het werken met meerdere klassen die elkaar gebruiken
-- Het documenteren van klassen met docstrings
-- Het modelleren van een realistische applicatie (webshop)
-- Het gebruik van lijsten om collecties van objecten op te slaan
-- Het doorgeven van objecten als parameters
+- **Overerving**: Een subklasse neemt eigenschappen over van de bovenliggende klasse
+- **`super()`**: Roept de bovenliggende klasse aan, vooral in `__init__()`
+- **Overschrijven**: Een subklasse kan methoden van de bovenliggende klasse vervangen
+- **Dataclass overerving**: Nog eenvoudiger dan reguliere klassen
+- **Hierarchie**: Meerdere niveaus overerving mogelijk
+- **SQLAlchemy preview**: Database modellen erven van `db.Model`
 
-In het volgende deel gaan we dieper in op getters en setters met de `@property` decorator.
+**Volgende stap:** In deel 4 leer je over compositie - objecten die andere objecten bevatten. Dit is de basis voor foreign keys in databases.
+
+**Oefening:** Maak [Oefening 3](oefeningen/oop-oefening3.md) om overerving te oefenen.

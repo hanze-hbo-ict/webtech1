@@ -1,91 +1,206 @@
 # OOP Python – Oefening 3
 
-In deze oefening gaan we de `Bestelling`-klasse uit deel 7 verder uitbreiden.
+In deze oefening pas je **overerving** toe. Je maakt subklassen van `Product` voor verschillende producttypen, wat je voorbereidt op het werken met database modellen die erven van `db.Model`.
 
-## a. Bestellingsnummer toevoegen
+## Achtergrond
 
-Pas de code van [`bestelling.py`](../bestanden/webshop/bestelling.py) zodanig aan dat elke bestelling automatisch een uniek bestellingsnummer krijgt. Je kunt hiervoor een class-attribuut gebruiken dat bij elke nieuwe bestelling opgehoogd wordt.
+In een webshop heb je verschillende soorten producten:
 
-**Tip:** Een class-attribuut wordt gedefinieerd buiten de `__init__()` methode en wordt aangeroepen met de klassenaam ervoor, bijvoorbeeld: `Bestelling._volgend_nummer`.
+- **Fysieke producten**: hebben gewicht en verzendkosten
+- **Digitale producten**: hebben bestandsgrootte en geen verzending
 
-## b. Verzendmethode toevoegen
+Dit is een perfect geval voor overerving: beide zijn producten, maar met specifieke eigenschappen.
 
-Er zijn verschillende verzendmethoden mogelijk: standaard verzending (2-3 werkdagen), express verzending (volgende werkdag) of afhalen in de winkel. Maak een nieuwe klasse `Verzendmethode` die de volgende eigenschappen heeft:
+## Deel a: FysiekProduct
 
-- **type**: Het type verzending ("Standaard", "Express", "Afhalen")
-- **kosten**: De verzendkosten
-- **levertijd**: De levertijd als tekst (bijv. "2-3 werkdagen")
+Maak een `FysiekProduct` klasse die erft van `Product`.
 
-Pas vervolgens de klasse `Bestelling` aan zodat je een `Verzendmethode` object mee kunt geven in plaats van alleen verzendkosten. Zorg ervoor dat de levertijd ook wordt getoond bij het plaatsen van een bestelling.
+### Opdracht a
 
-## c. Kortingscode toevoegen (optionele uitdaging)
+**Extra attributen:**
 
-Klanten kunnen soms een kortingscode gebruiken. Maak een nieuwe klasse `Kortingscode` die een code en een kortingspercentage bevat. Breid de klasse `Bestelling` op zo'n manier uit, dat het mogelijk is om een kortingscode toe te passen. Maak hiervoor een methode `pas_kortingscode_toe(kortingscode)`. Zorg er ook voor dat bij het *plaatsen* van de bestelling de korting correct wordt toegepast en getoond.
+- `gewicht` (float): Gewicht in kg
 
-Voorbeeld gebruik:
+**Extra methoden:**
 
-```python
-# Maak kortingscode aan
-zomer2026 = Kortingscode("ZOMER2026", 0.15)  # 15% korting
+- `bereken_verzendkosten() -> float`: Bereken verzendkosten op basis van gewicht
+  - Tot 1 kg: €3.95
+  - Tot 5 kg: €6.95
+  - Meer dan 5 kg: €9.95
 
-# Pas toe op bestelling
-bestelling.pas_kortingscode_toe(zomer2026)
-```
-
-Verwachte output bij plaatsen bestelling:
-```
-Subtotaal: €915.48
-Kortingscode ZOMER2026: -€137.32 (15%)
-Subtotaal na korting: €778.16
-Verzendkosten: €0.00 (GRATIS verzending!)
-Verwachte levertijd: 2-3 werkdagen
-Totaal: €778.16
-```
-
-## d. Meerdere verzendadressen (nog een optionele uitdaging)
-
-In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres etc.). Maak een klasse `Adres` met velden voor straat, huisnummer, en plaats. Pas de klasse `Klant` aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.
-
-Als je dit is gelukt kun je jezelf feliciteren: je hebt nu een realistische webshop-structuur gemaakt met compositie!
-
-## Testcode
-
-Hier is een voorbeeld hoe je de complete functionaliteit kunt testen:
+### Startcode a
 
 ```python
+from dataclasses import dataclass
 from product import Product
-from klant import Klant
-from webshop import Winkelwagen
-from bestelling import Bestelling, Verzendmethode, Kortingscode
-from betaalmethode import Betaalmethode
 
-# Maak producten
-laptop = Product("Laptop", 799.99, 5)
-muis = Product("Draadloze muis", 25.50, 20)
+@dataclass
+class FysiekProduct(Product):
+    gewicht: float = 0.5  # Default 0.5 kg
 
-# Maak klant en winkelwagen
-jan = Klant("Jan Jansen", "jan@email.nl")
-jan.voeg_adres_toe("Bloemstraat", 1, "Groningen")
-jan.voeg_adres_toe("Zernikeplein", 11, "Groningen")
-wagen = Winkelwagen(jan)
-wagen.voeg_toe(laptop)
-wagen.voeg_toe(muis)
-
-# Maak verzendmethode
-express = Verzendmethode("Express", 9.95, "volgende werkdag")
-
-# Maak betaalmethode
-ideal = Betaalmethode("iDEAL", 0.0)
-
-# Maak bestelling
-bestelling = Bestelling(jan, wagen, ideal, verzendmethode=express)
-
-# Pas kortingscode toe
-korting = Kortingscode("WELKOM10", 0.10)
-bestelling.pas_kortingscode_toe(korting)
-
-# Plaats bestelling
-bestelling.plaats_bestelling(adres_index=1)
-
-print(f"\nBestellingsnummer: {bestelling.nummer}")
+    def bereken_verzendkosten(self) -> float:
+        # Jouw code hier
+        pass
 ```
+
+!!! tip "Werken met dataclass overerving"
+    Bij dataclasses hoef je geen `super().__init__()` te gebruiken - de attributen van de bovenliggende klasse worden automatisch overgenomen!
+
+### Test je FysiekProduct
+
+```python
+boek = FysiekProduct(
+    naam="Python Crash Course",
+    prijs=34.95,
+    voorraad=8,
+    gewicht=0.6
+)
+
+print(boek)
+print(f"Verzendkosten: €{boek.bereken_verzendkosten():.2f}")
+
+laptop = FysiekProduct("Gaming Laptop", 1299.99, 3, gewicht=2.5)
+print(f"Verzendkosten laptop: €{laptop.bereken_verzendkosten():.2f}")
+```
+
+**Verwachte output:**
+
+```text
+FysiekProduct(naam='Python Crash Course', prijs=34.95, voorraad=8, beschrijving=None, gewicht=0.6)
+Verzendkosten: €3.95
+Verzendkosten laptop: €6.95
+```
+
+## Deel b: DigitaalProduct
+
+Maak een `DigitaalProduct` klasse die erft van `Product`.
+
+### Opdracht b
+
+**Extra attributen:**
+
+- `bestandsgrootte` (float): Grootte in MB
+- `download_link` (str): URL voor download
+
+**Defaults:**
+
+- `voorraad`: 999 (digitale producten zijn bijna onbeperkt beschikbaar)
+
+**Extra methoden:**
+
+- `download() -> dict`: Simuleer een download
+  - Verminder voorraad met 1
+  - Geef een dictionary terug met info: `{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}`
+
+### Startcode b
+
+```python
+@dataclass
+class DigitaalProduct(Product):
+    bestandsgrootte: float = 0.0  # MB
+    download_link: str = ""
+    voorraad: int = 999  # Override parent default
+
+    def download(self) -> dict:
+        # Jouw code hier
+        pass
+```
+
+### Test je DigitaalProduct
+
+```python
+photoshop = DigitaalProduct(
+    naam="Adobe Photoshop",
+    prijs=29.99,
+    bestandsgrootte=2480.0,
+    download_link="https://adobe.com/download/ps"
+)
+
+print(photoshop)
+info = photoshop.download()
+print(f"Download info: {info}")
+print(f"Voorraad na download: {photoshop.voorraad}")
+```
+
+## Deel c: Subklasse van subklasse
+
+Maak een `Boek` klasse die erft van `FysiekProduct`.
+
+### Opdracht c
+
+**Extra attributen:**
+
+- `auteur` (str): Naam van de auteur
+- `isbn` (str): ISBN nummer
+
+**Defaults:**
+
+- `gewicht`: 0.5 kg (boeken zijn meestal licht)
+
+**Override `__str__()`:**
+Maak een eigen string-representatie die ook auteur en ISBN toont.
+
+### Startcode c
+
+```python
+@dataclass
+class Boek(FysiekProduct):
+    auteur: str = ""
+    isbn: str = ""
+    gewicht: float = 0.5
+
+    def __str__(self) -> str:
+        # Hint: gebruik f-string met alle relevante info
+        pass
+```
+
+### Test je Boek
+
+```python
+python_boek = Boek(
+    naam="Python Crash Course",
+    prijs=34.95,
+    voorraad=8,
+    auteur="Eric Matthes",
+    isbn="978-1593279288"
+)
+
+print(python_boek)
+print(f"Verzendkosten: €{python_boek.bereken_verzendkosten():.2f}")
+
+# Test verkoop (inherited van Product)
+python_boek.verkoop(3)
+print(f"Voorraad na verkoop: {python_boek.voorraad}")
+```
+
+## Extra uitdaging: Software klasse (optioneel)
+
+Maak een `Software` klasse die erft van `DigitaalProduct` met extra attributen:
+
+- `versie` (str): Versienummer
+- `besturingssysteem` (str): "Windows", "Mac", "Linux", etc.
+
+Test door een instantie te maken en downloads te simuleren.
+
+## Checklist
+
+Controleer voordat je klaar bent:
+
+- [ ] `FysiekProduct` erft van `Product`
+- [ ] `DigitaalProduct` erft van `Product`
+- [ ] `Boek` erft van `FysiekProduct`
+- [ ] Alle type annotations aanwezig
+- [ ] `download()` geeft een dictionary terug (geen print)
+- [ ] `bereken_verzendkosten()` werkt correct
+- [ ] `__str__()` overschreven in de `Boek`-klasse
+- [ ] Code werkt met alle testcode
+
+## Wat je geleerd hebt
+
+- Overerving met dataclasses
+- Override van default waarden in subklassen
+- Override van methoden (`__str__`)
+- Overerving hierarchie (Boek → FysiekProduct → Product)
+- Return dicts voor gestructureerde data
+
+**Preview:** Database modellen werken precies zo - je maakt klassen die erven van `db.Model`!
