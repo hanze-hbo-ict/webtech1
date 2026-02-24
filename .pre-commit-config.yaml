@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: pymarkdown
+        name: Markdown linting (pymarkdown)
+        language: system
+        entry: uv run pymarkdown --config pyproject.toml scan
+        types: [markdown]
+        files: ^docs/.*\.md$
+        pass_filenames: true
