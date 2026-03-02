@@ -327,6 +327,16 @@ def search():
 - `executescript()` met user input
 - Vertrouwen op client-side validatie alleen
 
+!!! tip "Test je beveiliging"
+    Test je applicaties altijd met deze input strings:
+    ```text
+    ' OR '1'='1
+    ' OR '1'='1' --
+    '; DROP TABLE users; --
+    1' AND '1'='2
+    ```
+    Als deze niet gewoon als letterlijke strings behandeld worden, heb je een probleem!
+
 ## Samenvatting
 
 Je hebt geleerd:
@@ -337,16 +347,6 @@ Je hebt geleerd:
 - **Veilige patterns** voor alle CRUD operaties
 - **Flask specifieke risico's** en oplossingen
 - **Best practices** voor veilige database code
-
-!!! tip "Test je beveiliging"
-    Test je applicaties altijd met deze input strings:
-    ```text
-    ' OR '1'='1
-    ' OR '1'='1' --
-    '; DROP TABLE users; --
-    1' AND '1'='2
-    ```
-    Als deze niet gewoon als letterlijke strings behandeld worden, heb je een probleem!
 
 **Volgende stap:** [Deel 6](sql-deel6.md) - Database error handling.
 
