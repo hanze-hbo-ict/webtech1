@@ -175,8 +175,8 @@ Verwachte output format:
 
 ```text
 Voorraadwaarde per categorie:
-1. Electronics: €15,432.50 (15 producten)
-2. Books: €3,245.20 (20 producten)
+1. Electronics: €52685.72 (15 producten)
+2. Clothing: €18094.45 (15 producten)
 ...
 ```
 
@@ -207,7 +207,7 @@ def get_category_catalog(self, category_name: str) -> dict:
     #     'category': 'Electronics',
     #     'description': 'Electronic devices and accessories',
     #     'product_count': 15,
-    #     'total_value': 15432.50,
+    #     'total_value': 52685.72,
     #     'products': [
     #         {
     #             'name': 'Laptop HP',
@@ -255,13 +255,13 @@ HDMI Cable 2m: €12.99
 ...
 
 === Opgave 6: Gemiddelde Prijs per Categorie ===
-Electronics: gemiddeld €189.32
-Home & Garden: gemiddeld €42.99
-Beauty: gemiddeld €40.86
+Electronics: gemiddeld €226.19
+Home & Garden: gemiddeld €50.66
+Beauty: gemiddeld €42.49
 ...
 
 === Opgave 7: Aantal Producten Op Voorraad ===
-Totaal: 118 producten op voorraad
+Totaal: 120 producten op voorraad
 ```
 
 ## Checklist
