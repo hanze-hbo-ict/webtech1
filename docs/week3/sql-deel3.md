@@ -18,25 +18,23 @@ import sqlite3
 from sqlite3 import Row
 
 def inspect_database(db_path: str = "webshop.sqlite") -> None:
-    """Toon database structuur en basisstatistieken."""
+    """Toon basisstatistieken van de webshop database."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
 
-        # Haal schema informatie op
-        cursor = conn.execute("""
-            SELECT name, sql
-            FROM sqlite_master
-            WHERE type='table'
-        """)
+        cat_count = conn.execute(
+            "SELECT COUNT(*) AS count FROM categories"
+        ).fetchone()["count"]
+
+        prod_count = conn.execute(
+            "SELECT COUNT(*) AS count FROM products"
+        ).fetchone()["count"]
 
         print("Database tabellen:\n")
-        for table in cursor.fetchall():
-            print(f"Tabel: {table['name']}")
-
-            # Tel records per tabel
-            count_cursor = conn.execute(f"SELECT COUNT(*) as count FROM {table['name']}")
-            count = count_cursor.fetchone()['count']
-            print(f"Aantal records: {count}\n")
+        print(f"Tabel: categories")
+        print(f"Aantal records: {cat_count}\n")
+        print(f"Tabel: products")
+        print(f"Aantal records: {prod_count}\n")
 
 # Gebruik
 inspect_database()
@@ -514,7 +512,7 @@ Keyboard Mechanical: €119.99 (22 op voorraad)
 
 Je hebt geleerd:
 
-- Database structuur inspecteren met `sqlite_master`
+- Database statistieken opvragen per tabel
 - **JOINs** gebruiken om meerdere tabellen te combineren
 - JOIN tussen products en categories
 - **WHERE** clausules combineren met JOINs
