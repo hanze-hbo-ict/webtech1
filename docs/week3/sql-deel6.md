@@ -42,10 +42,10 @@ def add_product_unsafe(name: str, price: float, stock: int, category_id: int) ->
         conn.commit()
         return cursor.lastrowid
 
-# Dit crasht als product naam al bestaat (UNIQUE constraint)
+# Dit crasht als name None is (NOT NULL constraint)
 productid = add_product_unsafe("Laptop HP", 899.99, 10, 1)  # Werkt
-productid = add_product_unsafe("Laptop HP", 899.99, 10, 1)  # CRASH!
-# sqlite3.IntegrityError: UNIQUE constraint failed: products.name
+productid = add_product_unsafe(None, 899.99, 10, 1)  # CRASH!
+# sqlite3.IntegrityError: NOT NULL constraint failed: products.name
 ```
 
 ### Voorbeeld met error handling (goed)
@@ -66,8 +66,8 @@ def add_product_safe(name: str, price: float, stock: int, category_id: int) -> i
             return cursor.lastrowid
 
     except sqlite3.IntegrityError as e:
-        # UNIQUE constraint violation
-        print(f"Fout: product '{name}' bestaat al of ongeldige categorie")
+        # NOT NULL of UNIQUE constraint violation
+        print(f"Fout: ongeldige waarde voor product '{name}'")
         return None
 
     except sqlite3.Error as e:
@@ -82,8 +82,8 @@ if productid:
 else:
     print("Product niet aangemaakt")
 
-# Tweede keer - geen crash, netjes afgehandeld
-productid = add_product_safe("Laptop HP", 899.99, 10, 1)
+# None als naam - geen crash, netjes afgehandeld
+productid = add_product_safe(None, 899.99, 10, 1)
 if productid:
     print(f"Product aangemaakt met ID {productid}")
 else:
@@ -99,6 +99,7 @@ def add_product(name: str, price: float, stock: int, category_id: int) -> int | 
     """Voeg product toe met constraint validation."""
     try:
         with sqlite3.connect("webshop.sqlite") as conn:
+            conn.execute("PRAGMA foreign_keys = ON")
             cursor = conn.execute(
                 "INSERT INTO products (name, price, stock, category_id) VALUES (?, ?, ?, ?)",
                 (name, price, stock, category_id)
@@ -124,9 +125,8 @@ def add_product(name: str, price: float, stock: int, category_id: int) -> int | 
 
 # Test
 add_product("Laptop HP", 899.99, 10, 1)  # Werkt
-add_product("Laptop HP", 799.99, 5, 1)   # Duplicate - netjes afgehandeld
-add_product("", 299.99, 2, 1)            # NOT NULL - netjes afgehandeld
-add_product("Mouse", 29.99, 10, 999)     # FOREIGN KEY - netjes afgehandeld
+add_product(None, 799.99, 5, 1)           # NOT NULL - netjes afgehandeld
+add_product("Mouse", 29.99, 10, 999)      # FOREIGN KEY - netjes afgehandeld
 ```
 
 ### OperationalError (database problemen)

@@ -52,7 +52,7 @@ Tabel: products
 Aantal records: 120
 ```
 
-!!! info "PRIMARY KEY AUTOINCREMENT"
+!!! info "PRIMARY KEY"
     SQLite vult automatisch de primary key kolom `id` in wanneer je een nieuwe record toevoegt:
     ```python
     cursor = conn.execute("INSERT INTO categories (name, description) VALUES (?, ?)",
@@ -85,7 +85,7 @@ if product:
 Output:
 
 ```text
-Product 42: Sneakers Nike - €89.99
+Product 42: Polo Shirt White - €24.99
 ```
 
 ### Sorteren met ORDER BY
@@ -115,10 +115,10 @@ for product in products[:5]:  # Toon eerste 5 (duurste)
 Output:
 
 ```text
+Laptop HP EliteBook: €899.99
 Smartphone Samsung Galaxy: €699.99
 Tablet iPad Air: €599.99
 Monitor Dell 27 inch: €349.99
-4K Blu-ray Player: €199.99
 Smartwatch Fitbit: €199.99
 ```
 
@@ -266,11 +266,11 @@ Output:
 ```text
 Categorie statistieken:
 
-Books: 20 producten, gemiddelde prijs: €24.34, totale voorraad: 703
-Clothing: 15 producten, gemiddelde prijs: €37.19, totale voorraad: 570
-Electronics: 15 producten, gemiddelde prijs: €189.32, totale voorraad: 413
-Home & Garden: 12 producten, gemiddelde prijs: €42.99, totale voorraad: 358
-Sports: 12 producten, gemiddelde prijs: €36.24, totale voorraad: 445
+Books: 20 producten, gemiddelde prijs: €25.54, totale voorraad: 643
+Electronics: 15 producten, gemiddelde prijs: €226.19, totale voorraad: 428
+Clothing: 15 producten, gemiddelde prijs: €42.52, totale voorraad: 555
+Home & Garden: 12 producten, gemiddelde prijs: €50.66, totale voorraad: 338
+Sports: 12 producten, gemiddelde prijs: €40.24, totale voorraad: 405
 ...
 ```
 
@@ -317,11 +317,12 @@ for product in phone_products:
 Output:
 
 ```text
-Gevonden 3 producten met 'phone' in de naam:
+Gevonden 4 producten met 'phone' in de naam:
 
 Electronics: Bluetooth Headphones Sony - €149.99 (18 op voorraad)
 Electronics: Smartphone Samsung Galaxy - €699.99 (8 op voorraad)
 Music & Movies: DJ Headphones - €89.99 (16 op voorraad)
+Music & Movies: Microphone USB - €69.99 (18 op voorraad)
 ```
 
 !!! info "LIKE operator en wildcard"
@@ -368,13 +369,13 @@ for product in products[:10]:
 Output:
 
 ```text
-Gevonden 21 betaalbare producten met voldoende voorraad:
+Gevonden 37 betaalbare producten met voldoende voorraad:
 
-Card Game Uno: €9.99 (60 op voorraad)
+Chocolate Bar Dark 70%: €3.99 (100 op voorraad)
+Highlighter Set (6): €7.99 (55 op voorraad)
+Printer Paper 500 sheets: €8.99 (50 op voorraad)
 The Art of War: €9.99 (48 op voorraad)
-The Great Gatsby: €10.99 (50 op voorraad)
-Sticky Notes Pack: €11.99 (65 op voorraad)
-Honey Natural 500g: €11.99 (30 op voorraad)
+Card Game Uno: €9.99 (60 op voorraad)
 ...
 ```
 
