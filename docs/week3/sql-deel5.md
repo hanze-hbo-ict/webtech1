@@ -338,16 +338,16 @@ Je hebt geleerd:
 - **Flask specifieke risico's** en oplossingen
 - **Best practices** voor veilige database code
 
-**Volgende stap:** [Deel 6](sql-deel6.md) - Database error handling.
-
-**Oefening:** Maak nu [oefening 2](oefeningen/sql-oefening2.md) over SQL injection.
-
 !!! tip "Test je beveiliging"
     Test je applicaties altijd met deze input strings:
-    ```
-' OR '1'='1
+    ```text
+    ' OR '1'='1
     ' OR '1'='1' --
     '; DROP TABLE users; --
     1' AND '1'='2
     ```
     Als deze niet gewoon als letterlijke strings behandeld worden, heb je een probleem!
+
+**Volgende stap:** [Deel 6](sql-deel6.md) - Database error handling.
+
+**Oefening:** Maak nu [oefening 2](oefeningen/sql-oefening2.md) over SQL injection.
