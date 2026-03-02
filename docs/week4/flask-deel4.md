@@ -542,10 +542,10 @@ Gebruik altijd `base.html` voor consistente layout.
 ```html
 {# Dit is een Jinja2 comment - wordt niet gerenderd #}
 
-{% comment %}
+{#
 Multi-line comment
 Ook mogelijk
-{% endcomment %}
+#}
 
 <!-- HTML comment - wordt WEL naar browser gestuurd -->
 ```

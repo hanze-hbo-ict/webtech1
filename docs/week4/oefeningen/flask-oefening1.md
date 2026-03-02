@@ -155,13 +155,13 @@ else:
 **Hint 2 - String concatenatie:**
 
 ```python
-artiestennaam = naam + suffix
+artiest_naam = naam + suffix
 ```
 
 **Hint 3 - Uppercase:**
 
 ```python
-artiestennaam = artiestennaam.upper()
+artiest_naam = artiest_naam.upper()
 ```
 
 **Hint 4 - Template renderen:**
@@ -170,7 +170,7 @@ artiestennaam = artiestennaam.upper()
 return render_template(
     "artiestennaam.html",
     echte_naam=naam,
-    artiest_naam=artiestennaam
+    artiest_naam=artiest_naam
 )
 ```
 
@@ -333,10 +333,10 @@ Voeg een formulier toe zodat gebruikers hun naam kunnen invoeren zonder URL aan 
 **Update `app.py`:**
 
 ```python
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, Response
 
 @app.route("/genereer", methods=["POST"])
-def genereer() -> str:
+def genereer() -> Response:
     """Handle form submission en redirect naar artiestennaam route.
 
     Returns:
