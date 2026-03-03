@@ -1,6 +1,8 @@
 # Context voor AI Agents & Contributors
 
-Dit document beschrijft de ontwerpprincipes, schrijfstijl en architectuur beslissingen voor het Webtechnologie 1 cursusmateriaal. Lees dit **eerst** voordat je wijzigingen maakt.
+Dit document beschrijft de ontwerpprincipes, schrijfstijl en architectuurbeslissingen voor het Webtechnologie 1 cursusmateriaal. Lees dit **eerst** voordat je wijzigingen maakt.
+
+**Kerndoel:** Studenten voorbereiden op moderne Flask development met helder, natuurlijk Nederlands lesmateriaal.
 
 ## Projectdoel
 
@@ -472,23 +474,7 @@ product2 = Product("Product B", 20.0, 10)
 
 ### Branches aanmaken
 
-```bash
-# Haal upstream op
-git fetch upstream
-
-# Maak feature branch vanaf upstream/main
-git checkout -b feature/oop-modernisering upstream/main
-
-# Wijzigingen aanbrengen, dan committen
-git add docs/week2/
-git commit -m "Herschrijf OOP deel 1: moderne Python + type annotations"
-
-# Push naar eigen fork
-git push -u origin feature/oop-modernisering
-
-# PR aanmaken naar upstream
-gh pr create --repo hanze-hbo-ict/webtech1 --base main
-```
+Branch vanaf `upstream/main`, push naar eigen fork, dien PR in naar `hanze-hbo-ict/webtech1`. Branch naming: `feature/beschrijving`.
 
 ### Branching
 
@@ -524,34 +510,7 @@ Alle wijzigingen via PR's:
 - Beslissen wanneer te mergen (dit jaar / volgend jaar)
 - Discussie mogelijk over aanpak
 
-## Technische Setup
-
-### Dependencies
-
-```toml
-[project]
-dependencies = [
-    "mkdocs>=1.6.0",
-    "mkdocs-material>=9.5.0",
-    "pymdown-extensions>=10.11.0",
-    "mknotebooks>=0.8.0",
-]
-```
-
-### Development
-
-```bash
-# Setup
-uv sync
-
-# Live preview
-uv run mkdocs serve
-
-# Build
-uv run mkdocs build
-```
-
-### File conventies
+## File conventies
 
 - Nieuwe versies: `oop-deel1-nieuw.md` (voor vergelijking)
 - Na merge: hernoemen naar `oop-deel1.md`
@@ -606,15 +565,5 @@ Wanneer je over Flask schrijft:
 **Wordt Nederlands:**
 - models → **modellen**
 - forms → **formulieren**
-- views → **weergaven** (of houd "views" als gangbaar?)
+- views → **views** (gangbaar Flask jargon, geen Nederlandse vertaling nodig)
 
-**Nog te bepalen:** Consistente keuzes maken bij verdere materialen.
-
-## Vragen?
-
-Bij twijfel over stijlkeuzes:
-1. Lees voorbeelden in deze guide
-2. Bekijk bestaande herschreven materialen
-3. Vraag in PR comments
-
-**Kerndoel:** Studenten voorbereiden op moderne Flask development met helder, natuurlijk Nederlands lesmateriaal.
