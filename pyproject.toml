@@ -22,6 +22,8 @@ dev = [
     # Markdown linting
     "pymarkdownlnt>=0.9.35",
     "pre-commit>=4.5.1",
+    # Code opmaak
+    "ruff>=0.9.0",
 ]
 
 [tool.pymarkdown]

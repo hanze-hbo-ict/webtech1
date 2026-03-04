@@ -64,11 +64,11 @@ def check_syntax(block_num: int, code: str) -> str | None:
 
 def run_ruff(args: list[str]) -> subprocess.CompletedProcess | None:
     """
-    Voert ruff uit via uvx. Geeft None terug als ruff niet beschikbaar is.
+    Voert ruff uit via uv run. Geeft None terug als ruff niet beschikbaar is.
     """
     try:
         return subprocess.run(
-            ["uvx", "ruff"] + args,
+            ["uv", "run", "ruff"] + args,
             capture_output=True,
             text=True,
         )
