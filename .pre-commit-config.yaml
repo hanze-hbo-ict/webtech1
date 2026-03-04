@@ -8,6 +8,14 @@ repos:
         pass_filenames: false
         always_run: true
 
+      - id: check-code-blocks
+        name: Python syntaxcontrole en opmaak in markdown
+        language: system
+        entry: python3 .claude/check-code-blocks.py
+        types: [markdown]
+        files: ^docs/.*\.md$
+        pass_filenames: true
+
       - id: pymarkdown
         name: Markdown linting (pymarkdown)
         language: system

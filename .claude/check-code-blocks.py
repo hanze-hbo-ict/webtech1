@@ -96,19 +96,20 @@ def check_ruff(block_num: int, code: str) -> list[str]:
         os.unlink(tmpfile)
 
 
-def check_file(filepath: str) -> None:
+def check_file(filepath: str) -> bool:
+    """Controleert een bestand en print de resultaten. Geeft True terug als er problemen zijn."""
     if not filepath.endswith(".md"):
-        return
+        return False
 
     if not os.path.isfile(filepath):
-        return
+        return False
 
     with open(filepath, encoding="utf-8") as f:
         content = f.read()
 
     blocks = extract_python_blocks(content)
     if not blocks:
-        return
+        return False
 
     syntax_errors = []
     ruff_issues = []
@@ -133,11 +134,22 @@ def check_file(filepath: str) -> None:
         for issue in all_issues:
             print(f"  - {issue}")
         print("  Corrigeer deze problemen voordat je verder gaat.")
+        return True
     else:
         print(f"CODECONTROLE {filename}: {checked} blok(ken) gecontroleerd — syntax en opmaak ok.")
+        return False
 
 
 def main() -> None:
+    # Pre-commit modus: bestandspaden als CLI-argumenten
+    if sys.argv[1:]:
+        has_errors = False
+        for filepath in sys.argv[1:]:
+            if check_file(filepath):
+                has_errors = True
+        sys.exit(1 if has_errors else 0)
+
+    # Claude Code PostToolUse modus: bestandspad via JSON stdin
     try:
         data = json.load(sys.stdin)
     except (json.JSONDecodeError, EOFError):
