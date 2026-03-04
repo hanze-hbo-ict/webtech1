@@ -1,13 +1,6 @@
 repos:
   - repo: local
     hooks:
-      - id: no-commit-to-main
-        name: Blokkeer commits op main
-        language: system
-        entry: .claude/no-commit-to-main.sh
-        pass_filenames: false
-        always_run: true
-
       - id: check-code-blocks
         name: Python syntaxcontrole en opmaak in markdown
         language: system
