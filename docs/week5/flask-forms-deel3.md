@@ -1,180 +1,354 @@
-# Flask en Forms - Flash-berichten
+# Flask Forms - Flash Messages
 
-## Introductie
-De titel van deze paragraaf is geen typfout. Er wordt inderdaad Flash bedoeld.
-Soms is het handig de gebruiker een bericht te sturen dat niet permanent bewaard hoeft te worden op de view-pagina. Een dergelijk bericht kan naar de gebruiker ‘geflasht’ worden en vervolgens worden gesloten. Dat betekent dat het niet meer hardcoded in een view op een Python-file hoeft te worden opgenomen.
+Flask kan tijdelijke berichten tonen aan gebruikers - bijvoorbeeld een bevestiging na het verzenden van een formulier. Deze berichten heten **flash messages**.
+
+Flash messages zijn perfect voor:
+
+- Bevestigingen ("Formulier verzonden!")
+- Waarschuwingen ("Let op: dit veld is verplicht")
+- Errors ("Er ging iets mis")
+- Informatie ("Je sessie verloopt over 5 minuten")
 
 Aan het eind van deze tekst maken we [oefening 1](oefeningen/flask-forms-oefening1.md).
 
-## Voorbeeld
-Flask kan dat op een gemakkelijke manier voor elkaar krijgen.
-Dit wordt nu weer besproken aan de hand van een voorbeeld. In dit voorbeeld zijn twee bestanden nodig, [`home2.html`](bestanden/home2.html) en [`flashing_messages.py`](bestanden/flashing_messages.py).
+## Basis voorbeeld
 
-### Python gedeelte
-Zoals gebruikelijk als eerste de Python-file. Het begin moet geen vragen meer oproepen.
+We maken een formulier met een knop die een flash message toont. Project structuur:
 
-```python hl_lines="1"
-from flask import Flask, render_template, flash, session, redirect, url_for
+```text
+mijn-flask-app/
+├── app.py
+└── templates/
+    └── home.html
+```
+
+### Flask applicatie
+
+**`app.py`:**
+
+```python
+from flask import Flask, render_template, flash, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField
+from wtforms import SubmitField
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mijngeheimesleutel'
-```
 
-Het enige bijzondere bij het importeren is dat nu ook `flash` in het rijtje wordt meegenomen.
-Vervolgens wordt de applicatie weer aangemaakt en omdat er met een formulier gewerkt wordt is de geheime sleutel ook een vereiste.
 
-#### SimpelForm
-Het formulier moet ook weer aangemaakt worden:
+class KlikForm(FlaskForm):
+    """Simpel formulier met alleen een knop."""
 
-```python
-class SimpelForm(FlaskForm):
     submit = SubmitField('Klik mij!')
-```
 
-Het formulier kent slechts een enkel veld, een knop met de tekst ‘Klik mij!’.
-Het idee is dat als de button geactiveerd wordt, er een melding op het scherm verschijnt.
 
-#### View functies
-Als derde actie wordt de view voor het formulier opgezet:
-
-```python
 @app.route('/', methods=['GET', 'POST'])
-def index():
-    form = SimpelForm()
+def index() -> str:
+    """Homepage met klik formulier.
+
+    Returns:
+        Gerenderde template met formulier en flash messages
+    """
+    form = KlikForm()
 
     if form.validate_on_submit():
-        flash("Je hebt zojuist de button geactiveerd!")
-
+        flash('Je hebt zojuist de button geactiveerd!')
         return redirect(url_for('index'))
-    return render_template('home2.html', form=form)
-```
 
-De view heeft de naam index meegekregen en er wordt een instantie van de klasse `SimpelForm` aangemaakt. Wanneer er op de knop geklikt wordt, zorgt het flash-commando ervoor dat er melding naar het scherm gestuurd wordt via het redirect-statement. Het tweede return-statement is nodig om in eerste instantie het formulier te laten zien.
+    return render_template('home.html', form=form)
 
-#### Afsluiting python code
-Om de boel te laten runnen, gebruiken we de inmiddels bekende code:
 
-```python
 if __name__ == '__main__':
     app.run(debug=True)
 ```
 
+**Code uitleg:**
 
-### HTML gedeelte
+- `flash('bericht')` - Stuurt bericht naar de template
+- `redirect(url_for('index'))` - Navigate terug naar index (voorkomt dubbele submit bij refresh)
+- Flash messages worden automatisch verwijderd na 1x tonen
 
-#### Bootstrap
-Bij het opzetten van de file `home2.html `komt de opgedane kennis van Bootstrap goed van pas. De melding die naar het scherm gestuurd gaat worden krijgt een opvallende lay-out mee zodat het is duidelijk herkenbaar is.
+### Template met Bootstrap
 
-Als er elementen van Bootstrap gebruikt gaan worden in een HTML-file is het nodig een aantal koppelingen te leggen naar Bootstrap. Deze linken worden in de ‘head’ van de HTML-file, `home2.html`, ondergebracht.
+We gebruiken Bootstrap 5 voor de styling van flash messages.
+
+**`templates/home.html`:**
 
 ```html
+<!DOCTYPE html>
+<html lang="nl">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-  WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-```
+    <meta charset="UTF-8">
+    <title>Flash Messages</title>
 
-Deze code is overgenomen uit [het HTML-bestand met daarin oplossing van oefening 5](../week1/oefeningen/wk1oefening5.md) uit het onderdeel HTML/CSS/Bootstrap. Hierna kan gesprongen worden naar dat gedeelte op de site van Bootstrap waar de code voor de melding gevonden kan worden. Dat gedeelte kan [hier gevonden worden](https://getbootstrap.com/docs/4.0/components/alerts/).
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Flash Message Demo</h1>
 
-Voor de melding wordt als component `Alert` geselecteerd. Hiermee kunnen feedbackberichten als reactie op gebruikersacties aangemaakt worden. Van de beschikbare opties is hier gekozen voor `dismissing`.
-Het onderstaande plaatje is rechtstreeks overgenomen van de Bootstrap-site.
+        <!-- Flash messages -->
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
 
-![Alert melding code en voorbeeld op bootstrap site](imgs/alert-melding-bootstrap.png)
-
-De button ‘Copy’ hoort er natuurlijk niet bij. Deze heeft tot doel een kopie van de code naar Clipboard te sturen.
-
-Deze code kan natuurlijk aan `home2.html `toegevoegd worden. Voordat deze actie daadwerkelijk wordt uitgevoerd, is het nodig eerst nog twee andere stappen te verrichten:
-
-#### Container
-
-```html
-<div class="container">
-{% for mess in get_flashed_messages()  %}
-
-    {{ mess }}
-
-{% endfor %}
-```
-
-Alle bedrijvigheden worden bij elkaar gehouden door ze in een container te stoppen. Het ziet er misschien wat vreemd uit dat er een `for` is opgenomen in de code. Het is natuurlijk mogelijk dat er meerdere berichten geflitst gaan worden. De `for` verstuurt ze dan tegelijkertijd. Voor de code maakt het niet uit of het er één is of meerdere.
-
-Daarna kan de Bootstrap-code worden ingeladen:
-
-```html
-{% for mess in get_flashed_messages()  %}
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{ mess }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-{% endfor %}
-```
-Wat gebeurt er nu precies wanneer de boodschap verstuurd wordt? Of anders gezegd, wat staat er nu precies?
-
-#### get_flashed_messages()
-Als het flash-commando afgaat dan worden de meldingen naar de template gestuurd die in de view is opgenomen. Dat gaat in de vorm van de methode `get_flashed_messages()`. Hierin worden alle berichten ondergebracht en deze worden als het er meer zijn, na elkaar afgespeeld.
-
-#### fade show
-De aanroep naar de Bootstrap-klasse zorgt ervoor dat de gebruiker de mogelijkheid krijgt het bericht weer te laten verdwijnen door op het kruisje rechtsboven te klikken. De property `fade show` geeft aan dat de melding gaat vervagen totdat deze niet meer zichtbaar is.
-
-#### button
-De regel die begint met `<button type….> `is nodig om het kruisje rechtsboven in weer te geven, en dat een klik op dat kruisje het bericht afsluit.
-
-#### aria-label
-Het `aria-label` attribuut wordt gebruikt om een string te definiëren die het huidige element labelt. Het wordt vaak gebruikt als er geen tekstlabel zichtbaar is. Door `aria-hidden = "true"` aan een element toe te voegen, worden dat element en al zijn onderliggende elementen verwijderd en is daarna niet langer beschikbaar.
-
-#### afsluiting html code
-Om deze code af te maken moet het formulier nog worden ontworpen en de container beëindigd:
-
-```html
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.submit() }}
-    </form>
-</div>
-```
-
-Tenslotte is het niet zo heel erg netjes om een tekst als ‘Holy guacamole’ als boodschap te flashen. Omdat de melding al in de view is opgenomen kan deze regel geschrapt worden.
-
-#### volledige html code
-De gehele code wordt dan (zonder de head-sectie):
-
-```html
-<div class="container">
-
-    {% for mess in get_flashed_messages()  %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        {{ mess }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <!-- Formulier -->
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
     </div>
-    {% endfor %}
 
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.submit() }}
-    </form>
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</body>
+</html>
+```
+
+**Template uitleg:**
+
+- `get_flashed_messages()` - Haalt alle flash messages op
+- `{% for message in ... %}` - Loop door alle messages (kan er 0, 1 of meerdere zijn)
+- `.alert-dismissible` - Maakt het bericht sluitbaar
+- `.btn-close` - Sluit-knopje (X rechtsboven)
+- `.fade.show` - Fade animatie bij sluiten
+
+### Testen
+
+Start de applicatie:
+
+```console
+uv run python app.py
+```
+
+Navigeer naar `http://127.0.0.1:5000/`:
+
+> **Verwacht resultaat:** Je ziet een eenvoudige pagina met de koptekst "Flash Message Demo" en een blauwe knop met de tekst "Klik mij!". Er is nog geen melding zichtbaar.
+
+Klik op de knop:
+
+> **Verwacht resultaat:** Boven de knop verschijnt een gele Bootstrap-waarschuwingsmelding met de tekst "Je hebt zojuist de button geactiveerd!" en een sluitknopje (×) rechts in de melding.
+
+Klik op het X - het bericht verdwijnt.
+
+## Flash message categorieën
+
+Je kunt categorieën toevoegen aan flash messages voor verschillende styling:
+
+```python
+flash('Formulier succesvol verzonden!', 'success')
+flash('Waarschuwing: vul alle velden in', 'warning')
+flash('Er is een fout opgetreden', 'danger')
+flash('Ter informatie: sessie verloopt over 5 min', 'info')
+```
+
+In de template haal je categorie en message tegelijk op:
+
+```html
+{% for category, message in get_flashed_messages(with_categories=true) %}
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+```
+
+Dit genereert automatisch de juiste Bootstrap classes:
+
+- `alert-success` (groen)
+- `alert-warning` (geel)
+- `alert-danger` (rood)
+- `alert-info` (blauw)
+
+### Voorbeeld met categorieën
+
+```python
+@app.route('/contact', methods=['GET', 'POST'])
+def contact() -> str:
+    """Contact formulier met verschillende flash messages."""
+    form = ContactForm()
+
+    if form.validate_on_submit():
+        if not form.email.data:
+            flash('Email is verplicht!', 'danger')
+        else:
+            flash('Bericht verzonden!', 'success')
+            return redirect(url_for('index'))
+
+    return render_template('contact.html', form=form)
+```
+
+## Bootstrap alert klassen
+
+Bootstrap 5 heeft verschillende alert types:
+
+```html
+<!-- Success (groen) -->
+<div class="alert alert-success">Gelukt!</div>
+
+<!-- Warning (geel) -->
+<div class="alert alert-warning">Let op!</div>
+
+<!-- Danger (rood) -->
+<div class="alert alert-danger">Fout!</div>
+
+<!-- Info (blauw) -->
+<div class="alert alert-info">Info</div>
+```
+
+Met `alert-dismissible` kan de gebruiker het bericht sluiten:
+
+```html
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    Bericht hier
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 ```
 
+## Accessibility attributen
 
-### Runnen van de applicatie
+Bootstrap alerts gebruiken ARIA attributen voor toegankelijkheid:
 
-Wanneer we de code testen door de python file te runnen krijgen we het volgende:
+- `role="alert"` - Screen readers kondigen dit aan als belangrijk bericht
+- `aria-label="Close"` - Beschrijft de close button voor screen readers
+- `.btn-close` - Gestandaardiseerde close button (Bootstrap 5)
 
-![Een button met de tekst 'Klik mij!'](imgs/Button-met-klik-mij-tekst.png)
+## Complete voorbeeld
+
+**`app.py`:**
+
+```python
+from flask import Flask, render_template, flash, redirect, url_for, session
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 
 
-En na de klik:
-![De pagina nadat er op de button is geklikt. Een bericht wordt geflasht](imgs/button-met-melding.png)
+class NaamForm(FlaskForm):
+    """Formulier voor voornaam en achternaam."""
 
-Tenslotte de test wat er gebeurt wanneer er op het kruisje geklikt wordt:
+    voornaam = StringField('Voornaam', validators=[DataRequired()])
+    achternaam = StringField('Achternaam', validators=[DataRequired()])
+    submit = SubmitField('Verzend')
 
-![Het bericht is verdwenen](imgs/Button-met-klik-mij-tekst.png)
 
-Maak nu [oefening 1](oefeningen/flask-forms-oefening1.md).
+@app.route('/', methods=['GET', 'POST'])
+def index() -> str:
+    """Homepage met naam formulier.
+
+    Returns:
+        Gerenderde template met formulier
+    """
+    form = NaamForm()
+
+    if form.validate_on_submit():
+        # Sla op in session
+        session['voornaam'] = form.voornaam.data
+        session['achternaam'] = form.achternaam.data
+
+        # Flash message met volledige naam
+        volledige_naam = f"{form.voornaam.data} {form.achternaam.data}"
+        flash(f'Welkom, {volledige_naam}!', 'success')
+
+        return redirect(url_for('index'))
+
+    return render_template('home.html', form=form)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+**`templates/home.html`:**
+
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Naam Formulier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Welkom</h1>
+
+        <!-- Flash messages met categorieën -->
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+
+        <!-- Formulier -->
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.voornaam.label(class="form-label") }}
+                {{ form.voornaam(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.achternaam.label(class="form-label") }}
+                {{ form.achternaam(class="form-control") }}
+            </div>
+
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</body>
+</html>
+```
+
+Dit toont een flash message met de volledige naam na het verzenden.
+
+## Type hints voor flash
+
+```python
+from flask import flash
+
+def verzend_formulier(naam: str, email: str) -> None:
+    """Verzend formulier en toon flash message.
+
+    Args:
+        naam: Naam van de gebruiker
+        email: Email adres
+    """
+    flash(f'Bedankt, {naam}! Bevestiging gestuurd naar {email}', 'success')
+```
+
+**Volgende stap:** Maak nu [oefening 1](oefeningen/flask-forms-oefening1.md).
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Flash messages**: tijdelijke berichten versturen naar de template met `flash('bericht')` vanuit een view function
+- **get_flashed_messages()**: haalt alle flash messages op in de template via een `{% for %}`-lus; berichten worden automatisch verwijderd na één keer tonen
+- **Flash categorieën**: een categorie meegeven als tweede argument aan `flash()`, zoals `'success'`, `'warning'`, `'danger'` of `'info'`, voor gedifferentieerde weergave
+- **with_categories**: met `get_flashed_messages(with_categories=true)` haal je zowel de categorie als het bericht op als tuple zodat je de stijl kunt afstemmen op het type bericht
+- **Bootstrap 5 integratie**: Bootstrap alert classes (`alert-success`, `alert-warning`, `alert-danger`, `alert-info`) koppelen aan de flash categorie voor automatische kleuropmaak via `alert-{{ category }}`
+- **alert-dismissible**: Bootstrap klasse die samen met `.btn-close` een sluitknopje toevoegt waarmee de gebruiker een melding handmatig kan verwijderen
+- **fade show**: Bootstrap klassen die een fade-animatie geven bij het sluiten van een alert
+- **ARIA-attributen**: `role="alert"` en `aria-label="Close"` maken Bootstrap-alerts toegankelijk voor schermlezers
+- **PRG-patroon met flash**: na een succesvolle formulierverwerking redirecten én een flash message toevoegen voorkomt dubbele submissions en geeft de gebruiker directe bevestiging

@@ -1,149 +1,418 @@
-# Flask – basale werking
+# Flask – Basale Werking
 
-Vanuit vogelvluchtperspectief werkt Flask als volgt. Er komt een request binnen bij de server. De server checkt welke route er exact wordt opgevraagd en voert de daarmee corresponderende functie uit. Deze functie retourneert iets, in de regels een string, wat door de server weer wordt doorgestuurd aan de client.
+Aan het eind van deze tekst maken we [oefening 1](oefeningen/flask-oefening1.md).
 
-Aan het eind van deze tekst maken we [oefening 1](oefeningen/flask-oefening1.md)
+## Hoe werkt Flask?
 
-## Een voorbeeld
+Vanuit vogelvluchtperspectief werkt Flask als volgt:
 
-We maken dit duidelijk aan de hand van een voorbeeld. We maken een scriptje `app.py`, waarin we allereerst de klasse `Flask` importeren en daar vervolgens een instantie van aanmaken.
+1. **Client stuurt request** → Browser navigeert naar een URL (bijv. `/products`)
+2. **Flask routeert request** → Flask checkt welke functie bij deze route hoort
+3. **Functie wordt uitgevoerd** → De view-functie genereert een response (HTML, JSON, etc.)
+4. **Response naar client** → Browser toont de HTML of verwerkt de data
+
+Dit patroon heet het **Request-Response Cycle** en is fundamental voor alle webframeworks.
+
+## Je eerste Flask app
+
+We maken een bestand `app.py` waarin we de `Flask` class importeren en een instantie (applicatie object) maken:
 
 ```python
 from flask import Flask
+
 app = Flask(__name__)
-```
 
-Om aan te geven dat we een bepaalde string willen retourneren bij bij een specifieke request, maken we gebruik van een zogenaamde *decorator*: een speciale constructie weermee je functionaliteit aan een functie kunt toevoegen. Door middel van de decorator `@app.route()` kunnen we aangeven dat de functie die daarmee gedecoreerd is moet worden uitgevoerd op het moment dat die specifiek request gevraagd wordt. Zie het onderstaande voorbeeld, waaraan we voor de duidelijkheid regelnummer hebben toegevoegd.
 
-<!-- Ik dacht toch werkelijk dat je regelnummers in fenced code block aan kon zetten -->
-<!-- maar lijkt toch van niet. Dus maar met de hand -->
-<!-- https://stackoverflow.com/questions/55653184/enable-line-numbers-for-specific-markdown-code-listings-designated-with-backtick
-
-HOEM: dit kan met mkdocs (nadeel, niet overdraagbaar naar andere omgevingen)
-https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#adding-line-numbers
--->
-
-```python hl_lines="1" linenums="1"
 @app.route("/")
-def index():
-    # render de template Basic.html
+def index() -> str:
+    """Homepage route - retourneert een welkomstbericht."""
     return "<h1>Welkom bij muziekschool Session</h1>"
 
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 ```
 
-We bespreken deze code regel voor regel:
+### Code uitleg regel voor regel
 
-1. Door middel van deze decoratie geven we aan dat de methode die *hieronder* staat (de functie die met deze annotatie is gedecoreerd) moet worden uitgevoerd wanneer er een request wordt ontvangen die correspondeert met deze *route*. De route is de string-parameter (`/` in dit specifieke geval) die je ook terug ziet komen in de locatiebalk van de browser;
-2. Een standaard functie-definitie; in latere voorbeelden zullen we toelichten hoe hier parameters aan kunnen worden toegevoegd;
-3. commentaar;
-4. Hier wordt de string `<h1>Welkom bij muziekschool Session</h1>` aan de client (de browser) geretourneerd.
-5. lege regel voor de duidelijkheid.
-6. Deze regel is bedoeld om te checken of dit script direct wordt uitgevoerd en niet wordt geïmporteerd vanuit een ander script of een andere module; zie eventueel [deze blog op medium.com](https://medium.com/python-features/understanding-if-name-main-in-python-a37a3d4ab0c3) voor een complete uitleg.
-7. Hier wordt de methode `run` aangeroepen op onze instantie van de `Flask` klasse. Deze start een ontwikkelserver op en gaat luisteren naar requests van clients. Standaard luistert deze server naar poort 5000, maar dat kun je zelf ook installen.
+**Regel 1**: `from flask import Flask`
 
-Als we deze code runnen, gebeurt er het volgende:
+- Importeer de `Flask` class uit de flask module
+
+**Regel 3**: `app = Flask(__name__)`
+
+- Maak een Flask applicatie instance
+- `__name__` vertelt Flask waar templates en static files staan
+
+**Regel 6**: `@app.route("/")`
+
+- **Decorator** die de functie hieronder koppelt aan een route
+- `/` is de homepage (root URL)
+- Als gebruiker naar `http://127.0.0.1:5000/` gaat, wordt `index()` aangeroepen
+
+**Regel 7**: `def index() -> str:`
+
+- View function die HTML returnt
+- `-> str` is een **type hint** (modern Python pattern!)
+- Docstring beschrijft wat de functie doet
+
+**Regel 9**: `return "<h1>...</h1>"`
+
+- HTML string die naar de browser wordt gestuurd
+- Later vervangen we dit door templates
+
+**Regel 12-13**: `if __name__ == "__main__":`
+
+- Dit blok wordt alleen uitgevoerd als je dit bestand direct runt
+- Voorkomt dat de server start bij imports
+
+**Regel 13**: `app.run(debug=True)`
+
+- Start de development server
+- `debug=True` activeert auto-reload en betere foutmeldingen
+
+!!! tip "Type hints in Flask"
+    We gebruiken type hints (`-> str`) bij alle Flask routes. Dit is modern Python en helpt editors met autocomplete en type checking!
+
+### De app runnen
+
+Start je app met uv (vanuit Week 2/3 workflow):
 
 ```console
- * Serving Flask app "server1" (lazy loading)
- * Environment: production
-   WARNING: Do not use the development server in a production environment.
-   Use a production WSGI server instead.
- * Debug mode: off
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+uv run python app.py
 ```
 
-Als we dan met een browser naar de gegeven url gaan (`http://127.0.0.1:5000/`) krijgen we het volgende te zien:
+Je ziet output zoals:
 
-![De eerste flask pagina](imgs/index.png)
+```console
+ * Serving Flask app "app"
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+```
 
-De eerste webpagina is aangemaakt, door het runnen van een Flask-applicatie!.
+Open je browser en ga naar `http://127.0.0.1:5000/`:
 
-## Een tweede pagina
+> **Verwacht resultaat:** De browser toont de homepage met de tekst "Welkom bij muziekschool Session" als grote kop (`<h1>`), zonder verdere opmaak of stijl.
 
-Een enkele webpagina is natuurlijk al mooi, maar een beetje zichzelf respecterende ontwerper laat het niet bij enkel een startpagina. De applicatie wordt nu uitgebreid door er een tweede pagina aan vast te koppelen. Vanuit de startpagina kan gesprongen worden naar de tweede pagina. Ook deze tweede pagina gaat alleen tekst bevatten.
+!!! warning "Development server"
+    De Flask development server is ALLEEN voor development! Voor productie gebruik je een echte WSGI server zoals Gunicorn of uWSGI.
 
-De crux hiervoor is de decorator `@app.route()`. De toegevoegde stringparameter die aan de decorator wordt doorgegeven, bepaalt de URL-extensie die naar de functie zal linken.
+## Meerdere routes
 
-Momenteel wordt onze homepage lokaal weergegeven als `http://127.0.0.1:5000/`. Er worden decorators gebruikt die hieraan toegevoegd worden zoals bijvoorbeeld `@app.route("/some_page")`, waardoor de URL `http://127.0.0.1:5000/some_page` wordt. We breiden het script van hierboven uit met een volgende route:
+Een webapplicatie heeft meestal meerdere pagina's. Voeg eenvoudig extra routes toe:
 
 ```python
-@app.route("/informatie")	#127.0.0.1:5000/informatie
-def info():
-    return "<h1>Dit hebben we jou te bieden:</h1>"
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def index() -> str:
+    """Homepage."""
+    return "<h1>Welkom bij muziekschool Session</h1>"
+
+
+@app.route("/informatie")
+def info() -> str:
+    """Informatiepagina over de muziekschool."""
+    return "<h1>Dit hebben we jou te bieden:</h1><p>Piano, gitaar, drums, zang</p>"
+
+
+@app.route("/contact")
+def contact() -> str:
+    """Contactpagina."""
+    return "<h1>Neem contact op</h1><p>Email: info@session.nl</p>"
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
 ```
 
-Wanneer we nu met de browser naar `http://127.0.0.1:5000/informatie` gaan, krijgen we het onderstaande resultaat:
+Nu kun je naar drie verschillende URLs gaan:
 
-![Een tweede pagina in Flask](imgs/informatie.png)
+- `http://127.0.0.1:5000/` → Homepage
+- `http://127.0.0.1:5000/informatie` → Informatiepagina
+- `http://127.0.0.1:5000/contact` → Contactpagina
 
-!!! Info "Herstarten van de server"
-    Om de tweede route te kunnen benaderen, moet je de server herstarten. Omdat dit gedoe is, is het dikwijls handiger om tijdens de ontwikkeling de server automatisch te herstarten wanneer de code hiervan wordt aangepast. Dat kun je doen door `debug=True` mee te geven bij het runnen, dus `app.run(debug=True)`.
+> **Verwacht resultaat:** De browser toont de `/informatie` pagina met de kop "Dit hebben we jou te bieden:" gevolgd door de tekst "Piano, gitaar, drums, zang".
 
+!!! info "Auto-reload met debug mode"
+    Met `debug=True` hoef je de server niet handmatig te herstarten. Flask detecteert wijzigingen en herstart automatisch!
 
-## 404
+## 404 - Pagina niet gevonden
 
-Wanneer er een verkeerd adres wordt opgegeven om wat voor reden dan ook, verschijnt de volgende melding:
+Als je naar een route gaat die niet bestaat (bijv. `http://127.0.0.1:5000/nope`), krijg je een 404 error:
 
-![Pagina die niet bestaat](imgs/bestaat-niet.png)
+> **Verwacht resultaat:** De browser toont de standaard Flask 404-foutpagina met de melding "Not Found" en de uitleg dat de gevraagde URL niet op de server bestaat.
 
-## dynamische routes
+Je kunt eigen foutpagina's maken voor 404s.
 
-Het kan zijn dat de website vele gebruikers heeft die allen een eigen profielpagina hebben. Deze profielpagina moet voor iedere gebruiker natuurlijk uniek zijn. Het moet niet kunnen dat meerdere gebruikers dezelfde URL gaan gebruiken. Dat zou in de volgende vorm `www.site.com/gebruiker/unieke_gebruikers_pagina` geregeld kunnen worden.
+## Dynamische routes
 
-Om dit effect te bereiken, zijn *dynamische routes* ontwikkeld. Dynamische routes kennen twee belangrijke aspecten:
+Wat als je honderden cursisten hebt, elk met hun eigen profielpagina? Je wilt niet voor elke cursist een aparte route schrijven!
 
-•	Er moet een variabele in de route zijn opgenomen `<variabele>`;
+**Oplossing:** Dynamische routes met URL parameters.
 
-•	De waarde van die variabele moet doorgegeven worden aan de methode.
-
-Hieronder staat een algemeen voorbeeld van de werking van een dynamische route. De gebruiker geeft zijn naam op en wordt doorverbonden naar zijn profielpagina:
-
-```python hl_lines="1"
-@app.route("/zomaar_een_pagina/<naam>")
-def andere_pagina(naam):
-    return f"Gebruiker: {naam}"
-```
-
-Met deze kennis krijgt de applicatie weer een extra dimensie. De muziekschool heeft vele cursisten en iedereen heeft de mogelijkheid een eigen pagina in te richten. We voeren hierom de onderstaande route toe aan onze server:
+### Basis voorbeeld
 
 ```python
 @app.route("/cursist/<naam>")
-def cursist(naam):
-    return f"<h1>Dit is de pagina van {naam}<h1>"
+def cursist(naam: str) -> str:
+    """Cursist profielpagina met dynamische naam.
+
+    Args:
+        naam: De naam van de cursist uit de URL
+    """
+    return f"<h1>Dit is de pagina van {naam}</h1>"
 ```
 
-Uiteraard weer een testje. De applicatie wordt gerund en URL van de pagina van een cursist wordt ingegeven. We gaan hiervoor naar de url `http://localhost:5000/cursist/Henk`: let op dat de de string *na* `cursist` (`Henk` in dit geval) wordt opgevangen door de parameter `naam` in de functie `cursist`.
+**Hoe werkt dit:**
 
-![De pagina van Henk](imgs/cursist_Henk.png)
+- `<naam>` in de route is een **variabele**
+- De waarde wordt uit de URL gehaald en doorgegeven aan de functie
+- `naam: str` is de parameter met type hint
 
-Als we bijvoorbeeld in plaats van 'Henk' 'Ralf' gebruiken, dus navigeren naar `http://localhost:5000/cursist/Ralf`, krijgen we de corresponderende pagina:
+**Voorbeelden:**
 
-![De pagina van Ralf](imgs/cursist_Ralf.png)
+- `http://localhost:5000/cursist/Henk` → Pagina van Henk
+- `http://localhost:5000/cursist/Joyce` → Pagina van Joyce
+- `http://localhost:5000/cursist/Ralf` → Pagina van Ralf
 
-## Foutmeldingen
+> **Verwacht resultaat:** De browser toont de pagina voor de route `/cursist/Henk` met de tekst "Dit is de pagina van Henk" als grote kop.
 
-Werkend met Flask zal het ongetwijfeld voorkomen dat er fouten sluipen in de code. Zijn er fouten detecteert dan kan de optie `debug=True` ingeschakeld worden om te helpen de fouten op te sporen.
+### URL parameters met types
 
-Om dit te kunnen demonstreren wordt er een fout ingebouwd in de code. Van elke naam wordt nu gevraagd de twintigste letter af te beelden. In het geval dat de naam Joyce luidt, zal dat een foutmelding opleveren, aangezien de naam maar uit vijf (5) tekens bestaat.
+Je kunt het type van URL parameters specificeren:
 
 ```python
-@app.route("/lengte/<naam>")
-def lengte(naam):
-    return f"De twintigste letter van de naam {naam} is {naam[20]}"
+@app.route("/product/<int:product_id>")
+def product(product_id: int) -> str:
+    """Product detailpagina.
+
+    Args:
+        product_id: ID van het product (integer)
+    """
+    return f"<h1>Product {product_id}</h1>"
+
+
+@app.route("/prijs/<float:bedrag>")
+def prijs(bedrag: float) -> str:
+    """Toon prijs met BTW.
+
+    Args:
+        bedrag: Prijs excl. BTW
+    """
+    btw = bedrag * 0.21
+    totaal = bedrag + btw
+    return f"<p>Excl: €{bedrag:.2f}<br>BTW: €{btw:.2f}<br>Totaal: €{totaal:.2f}</p>"
 ```
 
-Als we deze pagina oproepen met een naam die korter is dan twintig letters en we hebben de debug-modus *niet* aanstaan (`app.run()`), krijgen we het onderstaande te zien:
+**Beschikbare types:**
 
-![Een niet zo gek informatieve foutmelding](imgs/lengte_Karel.png)
+- `<variabele>` → string (default)
+- `<int:variabele>` → integer
+- `<float:variabele>` → float
+- `<path:variabele>` → string met slashes (voor file paths)
+- `<uuid:variabele>` → UUID string
 
-Als we `debug=True` zetten, krijgen we een wat informatiever foutmelding:
+> **Verwacht resultaat:** De browser toont de pagina voor `/product/123` met de kop "Product 123". Flask heeft de `<int:product_id>` parameter automatisch als integer verwerkt.
 
-![Een wat informatiever foutmelding](imgs/lengte_Joyce.png)
+### Meerdere parameters
 
-Dit geeft al een stuk meer informatie. Achter elke regel is een kleine console te vinden. En als daarop geklikt wordt, hier bij de regel waarop het fout gaat, verschijnt het volgende in beeld, er wordt gevraagd een pincode in te voeren. Als je die pincode hebt ingevoerd kan er naar de regel gesprongen worden die zorgt voor de foutmelding en gekeken worden wat er aan de hand is.
+```python
+@app.route("/les/<string:instrument>/<int:niveau>")
+def les(instrument: str, niveau: int) -> str:
+    """Lesinfo met instrument en niveau.
 
-![Springen naar de regel die de foutmelding heeft opgeworpen](imgs/met_pincode.png)
+    Args:
+        instrument: Type instrument (gitaar, piano, etc.)
+        niveau: Niveau (1=beginner, 2=gevorderd, 3=expert)
+    """
+    niveau_naam = ["beginner", "gevorderd", "expert"][niveau - 1]
+    return f"<h1>{instrument.capitalize()} - {niveau_naam}</h1>"
+```
 
-Maak nu [oefening 1](oefeningen/flask-oefening1.md)
+URL: `http://localhost:5000/les/gitaar/2` → "Gitaar - gevorderd"
+
+## Debug mode en foutmeldingen
+
+### Zonder debug mode
+
+Voeg opzettelijk een fout toe:
+
+```python
+@app.route("/fout/<naam>")
+def fout(naam: str) -> str:
+    """Demonstreer foutmelding (opzettelijke bug)."""
+    # Bug: probeer 20e karakter terwijl naam meestal korter is
+    return f"De 20e letter van {naam} is {naam[20]}"
+```
+
+Start server ZONDER debug: `app.run()` (zonder `debug=True`)
+
+Navigeer naar `http://localhost:5000/fout/Jan` (3 karakters, geen 20e):
+
+> **Verwacht resultaat:** De browser toont een generieke "500 Internal Server Error" pagina zonder verdere details. Er is geen uitleg over de oorzaak van de fout zichtbaar.
+
+Weinig informatie, moeilijk te debuggen!
+
+### Met debug mode
+
+Zet `debug=True` aan: `app.run(debug=True)`
+
+Nu krijg je een **interactieve debugger**:
+
+> **Verwacht resultaat:** De browser toont de Flask interactieve debugger met de volledige stack trace, de exacte foutmelding (`IndexError: string index out of range`), en de regelnummer in de code waar de fout optrad.
+
+Je ziet:
+
+- Exacte foutmelding (`IndexError: string index out of range`)
+- Stack trace met regelnummers
+- Code context (welke regel crashte)
+- Interactieve console (klik op console icoon, voer PIN in)
+
+!!! danger "Debug mode in productie"
+    NOOIT `debug=True` gebruiken in productie! Het toont sourcecode en staat remote code execution toe (via de debug console).
+    Productie setup:
+    ```python
+    if __name__ == "__main__":
+        # Development
+        app.run(debug=True)
+    else:
+        # Productie (via Gunicorn/uWSGI)
+        pass
+    ```
+
+## Best practices
+
+### Type hints overal
+
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def index() -> str:
+    """Homepage."""
+    return "<h1>Welkom</h1>"
+
+
+@app.route("/user/<int:user_id>")
+def user(user_id: int) -> str:
+    """User profile.
+
+    Args:
+        user_id: ID van de gebruiker
+    """
+    return f"<p>User ID: {user_id}</p>"
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+### Docstrings voor routes
+
+```python
+@app.route("/product/<int:product_id>")
+def product(product_id: int) -> str:
+    """Product detailpagina.
+
+    Deze route toont details van een specifiek product.
+
+    Args:
+        product_id: Unieke identifier van het product
+
+    Returns:
+        HTML string met product informatie
+    """
+    # Later: haal product op uit database
+    return f"<h1>Product {product_id}</h1>"
+```
+
+### Consistente naming
+
+```python
+# Goed: lowercase met underscores
+@app.route("/my-page")
+def my_page() -> str:
+    """Route handler voor /my-page."""
+    return "<p>Content</p>"
+
+# Vermijd: CamelCase in functienamen
+@app.route("/other-page")
+def otherPage() -> str:  # Niet Pythonic!
+    return "<p>Content</p>"
+```
+
+## Voorbereiding op Templates (Deel 4)
+
+HTML in Python strings is niet handig voor grotere pagina's. Met **Jinja2 templates** scheid je HTML van Python:
+
+```python
+# Nu (deel 3):
+@app.route("/")
+def index() -> str:
+    return "<h1>Welkom</h1><p>Dit is de homepage</p>"
+
+# Straks (deel 4):
+from flask import render_template
+
+@app.route("/")
+def index() -> str:
+    return render_template("index.html", title="Welkom")
+```
+
+Met templates scheid je HTML (presentatie) van Python (logica)!
+
+## Link met Week 3 (SQL)
+
+Later combineer je Flask routes met databases:
+
+```python
+import sqlite3
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route("/products")
+def products() -> str:
+    """Toon alle producten uit database."""
+    with sqlite3.connect("shop.db") as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.execute("SELECT * FROM products")
+        results = cursor.fetchall()
+
+    # Nu: HTML in string (onhandig)
+    html = "<h1>Producten</h1><ul>"
+    for product in results:
+        html += f"<li>{product['name']}: €{product['price']}</li>"
+    html += "</ul>"
+    return html
+
+# Later (Week 6): met SQLAlchemy + templates!
+```
+
+## Samenvatting
+
+Je hebt geleerd:
+
+- **Flask app structuur**: `Flask(__name__)`, routes, `app.run()`
+- **Routes maken**: `@app.route("/path")`
+- **Type hints**: `-> str` voor return types, `naam: str` voor parameters
+- **Dynamische routes**: `<naam>`, `<int:id>`, `<float:prijs>`
+- **Debug mode**: Auto-reload en interactieve debugger
+- **Best practices**: Type hints, docstrings, consistent naming
+
+**Volgende stap:** [Deel 4](flask-deel4.md) - Jinja2 templates.
+
+**Oefening:** Maak nu [oefening 1](oefeningen/flask-oefening1.md).
+
+!!! tip "Modern Flask pattern"
+    Deze patterns (type hints, docstrings, `uv`) gebruik je voor alle Flask projecten in deze cursus. In Week 6 voeg je SQLAlchemy toe voor database operaties!

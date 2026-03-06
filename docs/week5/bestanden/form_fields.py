@@ -8,6 +8,8 @@ app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 
 
 class InfoForm(FlaskForm):
+    """Formulier met verschillende field types."""
+
     naam = StringField('Wat is je naam?', validators=[DataRequired()])
     geslacht = BooleanField("Ben je een vrouw?")
     instrument = RadioField('Welk instrument wil je leren bespelen?',
@@ -20,12 +22,18 @@ class InfoForm(FlaskForm):
 
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
-    # Maak een object van de klasse InfoForm aan.
+def index() -> str:
+    """Homepage met info formulier.
+
+    Returns:
+        Bij GET: formulier template
+        Bij POST: redirect naar bedankt pagina
+    """
+    # Maak een object van de klasse InfoForm aan
     form = InfoForm()
     # Als het formulier valide is
     if form.validate_on_submit():
-        # Haal de gegeven op uit het formulier.
+        # Haal de gegevens op uit het formulier en sla op in session
 
         session['naam'] = form.naam.data
         session['geslacht'] = form.geslacht.data
@@ -39,7 +47,12 @@ def index():
 
 
 @app.route('/bedankt')
-def bedankt():
+def bedankt() -> str:
+    """Bedankt pagina met session data.
+
+    Returns:
+        Gerenderde bedankt template
+    """
     return render_template('bedankt.html')
 
 
