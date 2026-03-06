@@ -1,10 +1,8 @@
 # Flask – Project Setup met uv
 
-**uv** is een snelle Python package en project manager, geschreven in Rust. Het combineert de functionaliteit van pip, venv, en andere tools in één simpele interface.
+**uv** is een Python package en project manager waarmee je packages installeert en je projectomgeving beheert.
 
 ## uv installeren
-
-Als je uv nog niet hebt geïnstalleerd van Week 2, installeer het dan nu:
 
 === "macOS"
     ```console
