@@ -1,0 +1,39 @@
+[project]
+name = "webtech1-docs"
+version = "0.1.0"
+description = "Documentatie voor Webtechnologie 1 cursus - Hanze HBO-ICT"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.5.0",
+    "pymdown-extensions>=10.11.0",
+    "mkdocs-glightbox>=0.4.0",
+]
+
+[dependency-groups]
+dev = [
+    # Flask dependencies voor het testen van voorbeeldcode
+    "flask>=3.0.0",
+    "flask-sqlalchemy>=3.1.0",
+    "flask-login>=0.6.0",
+    "flask-wtf>=1.2.0",
+    "wtforms>=3.1.0",
+    # Markdown linting
+    "pymarkdownlnt>=0.9.35",
+    "pre-commit>=4.5.1",
+]
+
+[tool.pymarkdown]
+plugins.md001.enabled = false
+plugins.md013.enabled = false
+plugins.md024.siblings_only = true
+plugins.md033.allowed_elements = "!--,![CDATA[,!DOCTYPE,br,small,kbd,sub,sup,details,summary,i,id"
+plugins.md036.enabled = false
+plugins.md040.enabled = true
+plugins.md041.enabled = false
+# MD046 uitgeschakeld: pymarkdownlnt begrijpt de MkDocs Material tab- en
+# admonition-syntax niet. Ingesprongen inhoud (4 spaties) na een lege regel
+# wordt als indented code block gezien, wat valse positieven geeft bij tabs
+# met meerdere alinea's of lijsten.
+plugins.md046.enabled = false

@@ -1,163 +1,398 @@
-# SQLite, basisvaardigheden
+# SQLite in Python: Basics
 
-Hoewel SQL uitvoerig besproken is in het eerste kwartaal, kan het absoluut geen kwaad de belangrijkste statements nog even voor het voetlicht te halen en dan voor  SQLite3. Bovendien is dit een handige manier om SQLite3 te leren kennen.
+Python heeft de `sqlite3` library built-in. Hieronder zie je hoe je een database connectie maakt, queries uitvoert, en data ophaalt.
 
-Alles begint met het aanmaken van een database, dus ook hier. De database krijgt de passende naam ’test.db’. Om de database aan te maken moet er in de command-line ingetoetst worden: `sqlite3 test.db`. Hiermee wordt de interactive shell geopend met de database `test`:
+## Database connectie
 
-```console
-hostname:user$ sqlite3 test.db
-SQLite version 3.24.0 2018-06-04 14:10:15
-Enter ".help" for usage hints.
-sqlite>
+De basis: database connectie maken en een tabel aanmaken.
+
+```python
+import sqlite3
+from sqlite3 import Connection
+
+def create_database() -> Connection:
+    """Maak database connectie en tabel aan."""
+    conn = sqlite3.connect("contacts.db")
+
+    # Maak contacts tabel
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS contacts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            phone TEXT
+        )
+    """)
+
+    conn.commit()
+    return conn
+
+# Gebruik
+conn = create_database()
+print("Database en tabel aangemaakt")
+conn.close()
 ```
 
-Een bestaande database of tabel kan opgeroepen worden met het commando `.open <filename>`. Uiteraard dient op de plaats van `<filename>` de naam van de database of tabel ingevuld te worden.
+!!! note "CREATE TABLE IF NOT EXISTS"
+    Dit voorkomt errors als de tabel al bestaat. Handig tijdens development wanneer je het script meerdere keren uitvoert.
 
-Een belangrijk eerste commando om te leren is `.headers on`. Daarmee worden de kolomnamen boven de gegevens ook getoond. Laten we bij wijze van voorbeeld nu eerst een tabel maken.
+## Insert: Data toevoegen
 
-```console
-sqlite> .headers on
-sqlite> create table contacts(name text, phone integer, mail text);
-sqlite>
+Voeg contacten toe aan de database:
+
+```python
+import sqlite3
+
+def add_contact(name: str, email: str, phone: str | None = None) -> int:
+    """
+    Voeg een contact toe aan de database.
+
+    Returns:
+        int: ID van het toegevoegde contact
+    """
+    conn = sqlite3.connect("contacts.db")
+
+    cursor = conn.execute(
+        "INSERT INTO contacts (name, email, phone) VALUES (?, ?, ?)",
+        (name, email, phone)
+    )
+
+    contact_id = cursor.lastrowid
+    conn.commit()
+    conn.close()
+
+    return contact_id
+
+# Gebruik
+jan_id = add_contact("Jan Jansen", "jan@email.nl", "06-12345678")
+sara_id = add_contact("Sara de Vries", "sara@email.nl")
+
+print(f"Jan toegevoegd met ID: {jan_id}")
+print(f"Sara toegevoegd met ID: {sara_id}")
 ```
 
+!!! warning "SQL Injection voorkomen met placeholders"
+    Gebruik **altijd** `?` placeholders in plaats van f-strings:
+    **Goed:**
+    ```python
+    cursor.execute("SELECT * FROM contacts WHERE name = ?", (name,))
+    ```
+    **FOUT (SQL injection risico!):**
+    ```python
+    cursor.execute(f"SELECT * FROM contacts WHERE name = '{name}'")
+    ```
+    Dit wordt uitgebreid besproken in Deel 5 over SQL injection.
 
-De tabel `contacts` bestaat uit drie kolommen: `name`, `phone en `mail`. Er gebeurt verder niets. Maar geen nieuws is hier goed nieuws: zolang er geen meldingen getoond worden werkt alles naar behoren.
+## Select: Data ophalen
 
-!!! Info "Telefoonnummer in tekst"
-    Normaal gezien is het beter een telefoonnummer het type tekst mee te geven, omdat zo'n nummer in de regel begint met een nul (0). Om het voorbeeld duidelijker te maken, houden we het hier echter op een integer.
+Haal data op met `SELECT` queries:
 
-Een tabel zonder rijen heeft geen zin. Op de bekende wijze kunnen records toegevoegd worden (`INSERT …  INTO … `):
+```python
+import sqlite3
+from sqlite3 import Row
 
-```console
-sqlite> insert into contacts(name, phone, mail) values ('Bart',123456, 'bart@org.nl');
-sqlite>
+def get_all_contacts() -> list[Row]:
+    """Haal alle contacten op."""
+    conn = sqlite3.connect("contacts.db")
+    conn.row_factory = Row  # Zodat we kolommen bij naam kunnen benaderen
+
+    cursor = conn.execute("SELECT * FROM contacts ORDER BY name")
+    contacts = cursor.fetchall()
+
+    conn.close()
+    return contacts
+
+# Gebruik
+contacts = get_all_contacts()
+
+for contact in contacts:
+    print(f"{contact['name']}: {contact['email']}")
 ```
 
-Kijken of het toevoegen gelukt is. Voor het opvragen van gegevens gebruiken we zoals altijd `SELECT`. Vanaf nu worden de gereserveerde woorden met een hoofdletter weergegeven. Het maakt voor SQLite niet uit, maar het staat netter.
+Output:
 
-```console
-sqlite> SELECT * FROM contacts;
-name|phone|mail
-Bart|123456|bart@org.nl
-sqlite>
+```text
+Jan Jansen: jan@email.nl
+Sara de Vries: sara@email.nl
 ```
 
-!!! Info "Afsluiten met een puntkomma"
-    Zoals je ziet moet je commando's in SQLite afsluiten met een puntkomma (`;`). Als je dit niet doet, geeft SQLite een nieuwe regel met `...>`. Dit biedt je de mogelijkheid om het commando op de volgende regel af te ronden.
+!!! info "row_factory = Row"
+    Met `row_factory = Row` kun je kolommen benaderen via `row['name']` in plaats van `row[0]`. Dit maakt code leesbaarder.
 
-    Deze optie is heel prettig omdat het nu mogelijk is ieder SQL-statement van een goede opbouw te voorzien door de onderdelen netjes aan het begin van een regel op te nemen. Dit komt de leesbaarheid ten goede.
+### Enkele rij ophalen
 
-Nog een tweede record toevoegen:
+Gebruik `fetchone()` voor één result:
 
-```console
-sqlite> INSERT INTO Contacts VALUES ('Henk', 76543232, 'henk@org.nl');
-sqlite>
+```python
+def get_contact_by_email(email: str) -> Row | None:
+    """Haal één contact op op basis van email."""
+    conn = sqlite3.connect("contacts.db")
+    conn.row_factory = Row
+
+    cursor = conn.execute(
+        "SELECT * FROM contacts WHERE email = ?",
+        (email,)
+    )
+
+    contact = cursor.fetchone()
+    conn.close()
+
+    return contact
+
+# Gebruik
+contact = get_contact_by_email("jan@email.nl")
+
+if contact:
+    print(f"Gevonden: {contact['name']}")
+else:
+    print("Contact niet gevonden")
 ```
 
-Deze schrijfwijze wijkt af van het vorige INSERT-commando. Het gaat wel goed maar alleen als de juiste waarden *in de juiste volgorde* aan de tabel worden aangeboden. Als je voor niet alle kolommen een waarde hebt, *moet* je de kolommen in het `INSERT`-statement opnemen. De volgorde van de waarden moet verder overeenkomen met de kolommen. Zie het onderstaande voorbeeld:
+## Update: Data wijzigen
 
-```console
-sqlite> INSERT INTO Contacts VALUES ('Kobus', 543219);
-Error: table contacts has 3 columns but 2 values were supplied
-sqlite> INSERT INTO Contacts (phone, name) VALUES (543219, 'Kobus');
-sqlite> select * from contacts;
-name|phone|mail
-Bart|123456|bart@org.nl
-Henk|76543232|henk@org.nl
-Kobus|543219|
-sqlite>
+Wijzig bestaande records met `UPDATE`:
+
+```python
+def update_phone(email: str, new_phone: str) -> bool:
+    """
+    Update telefoonnummer van een contact.
+
+    Returns:
+        bool: True als update gelukt, False als contact niet bestaat
+    """
+    conn = sqlite3.connect("contacts.db")
+
+    cursor = conn.execute(
+        "UPDATE contacts SET phone = ? WHERE email = ?",
+        (new_phone, email)
+    )
+
+    conn.commit()
+    rows_affected = cursor.rowcount
+    conn.close()
+
+    return rows_affected > 0
+
+# Gebruik
+success = update_phone("jan@email.nl", "06-98765432")
+
+if success:
+    print("Telefoonnummer bijgewerkt")
+else:
+    print("Contact niet gevonden")
 ```
 
-Nog een poging een record in te voegen:
+!!! warning "Altijd WHERE clausule bij UPDATE"
+    Zonder `WHERE` clausule worden **alle** rijen geüpdatet:
+    ```python
+    # GEVAARLIJK - iedereen krijgt hetzelfde telefoonnummer!
+    conn.execute("UPDATE contacts SET phone = ?", (phone,))
+    ```
 
-```console
-sqlite> insert into contacts values ('Ilse','06-205 389', 'ilse@org.nl');
-sqlite>
+## Delete: Data verwijderen
+
+Verwijder records met `DELETE`:
+
+```python
+def delete_contact(email: str) -> bool:
+    """
+    Verwijder een contact op basis van email.
+
+    Returns:
+        bool: True als delete gelukt, False als contact niet bestaat
+    """
+    conn = sqlite3.connect("contacts.db")
+
+    cursor = conn.execute(
+        "DELETE FROM contacts WHERE email = ?",
+        (email,)
+    )
+
+    conn.commit()
+    rows_affected = cursor.rowcount
+    conn.close()
+
+    return rows_affected > 0
+
+# Gebruik
+deleted = delete_contact("sara@email.nl")
+
+if deleted:
+    print("Contact verwijderd")
+else:
+    print("Contact niet gevonden")
 ```
 
-Verbazingwekkend, geen foutmelding. En dat terwijl we toch de tweede kolom (`phone`) gedefinieerd hebben als `integer`. De rij is netjes onder aan de tabel ingevoegd. Dit werkt bij geen enkel andere SQL-variant. Daarom is het heel belangrijk een juist datatype te kiezen bij het ontwerpen van de database.
+!!! warning "Altijd WHERE clausule bij DELETE"
+    Zonder `WHERE` clausule worden **alle** rijen verwijderd:
+    ```python
+    # GEVAARLIJK - ALLE contacten worden gewist!
+    conn.execute("DELETE FROM contacts")
+    ```
 
-SQLite mist een handig commando dat de andere varianten wel kennen, namelijk `ALTER TABLE`. Met dit commando kan de structuur van een tabel aangepast worden. Bij SQLite dient er een nieuwe tabel aangemaakt te worden ter vervanging van de oude. Daarom nogmaals, denk heel goed na over het ontwerp van de database.
+## Context managers (with statement)
 
-Invoegen is al aan de beurt geweest, wijzigen (`UPDATE`) wordt nu besproken. Belangrijk is altijd om van tevoren een backup te maken voor het geval dat de database is het honderd loopt. Daar heeft SQLite een specifiek commando voor, `.backup`. De backup krijgt de naam `testbackup`.
+Bovenstaande code heeft een probleem: als er een error optreedt, wordt `conn.close()` niet aangeroepen. Gebruik `with` voor automatic cleanup:
 
-```console
-sqlite> .backup testbackup
-sqlite>
+!!! info "De `with` statement"
+    `with` is een codeblok voor resources die opgeruimd moeten worden. Python roept aan het einde van het blok altijd de opruimcode aan, ook als er een error optreedt.
+
+    `as conn` geeft de resource een naam waarmee je in het blok werkt.
+
+```python
+def add_contact_safe(name: str, email: str, phone: str | None = None) -> int:
+    """Voeg contact toe met automatic connection cleanup."""
+    with sqlite3.connect("contacts.db") as conn:
+        cursor = conn.execute(
+            "INSERT INTO contacts (name, email, phone) VALUES (?, ?, ?)",
+            (name, email, phone)
+        )
+        contact_id = cursor.lastrowid
+        conn.commit()
+        return contact_id
+    # conn.close() wordt automatisch aangeroepen
+
+# Gebruik
+try:
+    contact_id = add_contact_safe("Piet Bakker", "piet@email.nl")
+    print(f"Contact toegevoegd met ID: {contact_id}")
+except sqlite3.IntegrityError:
+    print("Email bestaat al (UNIQUE constraint)")
 ```
 
-Omdat het een SQLite-commando is en geen SQL-statement hoeft er geen `;` achter genoteerd worden, alleen een punt (`.`) om het commando mee te beginnen.
+`sqlite3.IntegrityError` is een exception die sqlite3 gooit als een database-constraint wordt geschonden - hier de UNIQUE constraint op het email-veld.
 
-De email van Kobus ontbreekt nog en die wordt nu toegevoegd.
+!!! tip "Altijd with gebruiken"
+    De `with` statement zorgt dat de connectie altijd wordt gesloten, ook bij errors. Dit is de **aangeraden manier** om met databases te werken.
 
-```console
-sqlite> UPDATE contacts SET mail='kobus@org.nl' WHERE name='Kobus';
-sqlite> SELECT * FROM contacts;
-name|phone|mail
-Bart|123456|bart@org.nl
-Henk|76543232|henk@org.nl
-Kobus|543219|kobus@org.nl
-Ilse|06-205 389|ilse@org.nl
-sqlite>
+## Complete voorbeeld
+
+Hier een volledig voorbeeld dat alle CRUD operaties (Create, Read, Update, Delete) combineert:
+
+```python
+import sqlite3
+from sqlite3 import Row
+
+class ContactDatabase:
+    """Database manager voor contacten."""
+
+    def __init__(self, db_path: str = "contacts.db"):
+        self.db_path = db_path
+        self._create_table()
+
+    def _create_table(self) -> None:
+        """Maak contacts tabel aan als deze niet bestaat."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS contacts (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    email TEXT NOT NULL UNIQUE,
+                    phone TEXT
+                )
+            """)
+            conn.commit()
+
+    def add(self, name: str, email: str, phone: str | None = None) -> int:
+        """Voeg contact toe."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "INSERT INTO contacts (name, email, phone) VALUES (?, ?, ?)",
+                (name, email, phone)
+            )
+            conn.commit()
+            return cursor.lastrowid
+
+    def get_all(self) -> list[Row]:
+        """Haal alle contacten op."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = Row
+            cursor = conn.execute("SELECT * FROM contacts ORDER BY name")
+            return cursor.fetchall()
+
+    def get_by_email(self, email: str) -> Row | None:
+        """Haal één contact op."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = Row
+            cursor = conn.execute(
+                "SELECT * FROM contacts WHERE email = ?",
+                (email,)
+            )
+            return cursor.fetchone()
+
+    def update_phone(self, email: str, phone: str) -> bool:
+        """Update telefoonnummer."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "UPDATE contacts SET phone = ? WHERE email = ?",
+                (phone, email)
+            )
+            conn.commit()
+            return cursor.rowcount > 0
+
+    def delete(self, email: str) -> bool:
+        """Verwijder contact."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "DELETE FROM contacts WHERE email = ?",
+                (email,)
+            )
+            conn.commit()
+            return cursor.rowcount > 0
+
+# Gebruik
+db = ContactDatabase()
+
+# Create
+jan_id = db.add("Jan Jansen", "jan@email.nl", "06-12345678")
+sara_id = db.add("Sara de Vries", "sara@email.nl")
+
+# Read
+contacts = db.get_all()
+for contact in contacts:
+    print(f"{contact['name']}: {contact['email']}")
+
+# Update
+db.update_phone("jan@email.nl", "06-98765432")
+
+# Delete
+db.delete("sara@email.nl")
+
+# Verify
+print("\nNa delete:")
+for contact in db.get_all():
+    print(f"{contact['name']}: {contact['email']}")
 ```
 
-Denk erom een `WHERE`-clausule toe te voegen om te voorkomen dat iedereen hetzelfde e-mailadres krijgt.
+## Verschillen met PostgreSQL
 
-De enige nog niet besproken optie is het verwijderen van gegevens (`DELETE`). De gegevens van Kobus worden uit de tabel contacts verwijderd. Let er ook hier op een `WHERE`-clausule te gebruiken omdat anders alle records gewist worden.
+Je bent gewend aan PostgreSQL. Enkele verschillen met SQLite:
 
-```console
-sqlite> DELETE FROM contacts WHERE name='Kobus';
-sqlite> SELECT * FROM contacts;
-name|phone|mail
-Bart|123456|bart@org.nl
-Henk|76543232|henk@org.nl
-Ilse|06-205 389|ilse@org.nl
-sqlite>
-```
+| Aspect | PostgreSQL | SQLite |
+|--------|-----------|--------|
+| **Datatypes** | Veel expliciete types (VARCHAR, TIMESTAMP, etc.) | Type affinity: TEXT, INTEGER, REAL, BLOB, NULL — kolomtype is een hint, geen harde eis |
+| **Constraints** | Alle constraints, ook achteraf via ALTER TABLE | Zelfde constraints bij `CREATE TABLE`; maar toevoegen of verwijderen van constraints achteraf is niet mogelijk |
+| **ALTER TABLE** | Volledig | `RENAME TABLE`, `RENAME COLUMN`, `ADD COLUMN` en `DROP COLUMN` worden ondersteund; kolomtype wijzigen vereist een nieuwe tabel |
+| **Type checking** | Strikt | Losjes (string in INTEGER kolom kan!) |
+| **Concurrent writes** | Meerdere schrijvers tegelijk | Één schrijver tegelijk; WAL-mode verbetert leesgelijktijdigheid, maar SQLite is bedoeld voor single-user gebruik |
 
-Het kan af en toe voorkomen dat er gestopt moet worden en dat SQLite moet worden afgesloten. Daar is het commando `.quit` (kleine letters) voor beschikbaar. SQLite kan weer opgestart worden door in de command-line `SQLite3` in te geven. En met `.open <filename>` kan de database weer geactiveerd worden.
+!!! warning "SQLite type validatie is losjes"
+    SQLite accepteert dit zonder error:
+    ```python
+    conn.execute("CREATE TABLE IF NOT EXISTS test (id INTEGER, score INTEGER)")
+    conn.execute("INSERT INTO test VALUES (?, ?)", (1, "geen-integer"))  # string in INTEGER kolom
+    ```
+    PostgreSQL zou dit afwijzen. Zorg dus zelf voor correcte types!
 
-```console
-sqlite> .quit
-hostname:user$
-hostname:user$  sqlite3
-SQLite version 3.24.0 2018-06-04 14:10:15
-Enter ".help" for usage hints.
-Connected to a transient in-memory database.
-Use ".open FILENAME" to reopen on a persistent database.
-sqlite> .open test.db;
-sqlite>
-```
+## Samenvatting
 
-## Nog een paar handige commando's
+Je hebt geleerd:
 
-SQLite kent een flink aantal zogenoemde *punt-commando's* (*dot-commands). Hieronder staat een aantal van deze commando's; [hier kun je ze allemaal terugvinden](https://sqlite.org/cli.html#special_commands_to_sqlite3_dot_commands_):
+- Database connectie maken met `sqlite3.connect()`
+- CRUD operaties: `INSERT`, `SELECT`, `UPDATE`, `DELETE`
+- Placeholders (`?`) gebruiken tegen SQL injection
+- `row_factory = Row` voor dict-like access
+- Context managers (`with`) voor automatic cleanup
+- Type annotations en moderne Python patterns
 
-Commando | Omschrijving
------|-----
-`.tables` | geeft een overzicht van alle tabellen die in de database zijn opgenomen
-`.schema` |  laat de structuur zien van alle tabellen uit de database
-`.dump`  |  geeft een overzicht van alle records uit een tabel (dit kun je gebruiken om andere tabel mee te vullen)
-
-```console
-sqlite> .open test.db
-sqlite> .tables
-contacts
-sqlite> .schema
-CREATE TABLE contacts(name text, phone integer, mail text);
-sqlite> .dump
-PRAGMA foreign_keys=OFF;
-BEGIN TRANSACTION;
-CREATE TABLE contacts(name text, phone integer, mail text);
-INSERT INTO contacts VALUES('Bart',123456,'bart@org.nl');
-INSERT INTO contacts VALUES('Henk',76543232,'henk@org.nl');
-INSERT INTO contacts VALUES('Kobus',543219,'kobus@org.nl');
-INSERT INTO contacts VALUES('Ilse','06-205 389','ilse@org.nl');
-COMMIT;
-sqlite>
-```
-
-
-
-
+**Volgende stap:** [Deel 3](sql-deel3.md) - JOINs met meerdere tabellen.

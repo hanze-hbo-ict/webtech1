@@ -1,24 +1,65 @@
-# Databasebeheer in Python
+# SQLite in Python
 
-In het informatietijdperk waarin de wereld momenteel verkeert, spelen gegevens een enorme rol. Er worden ongelofelijk veel gegevens onderling uitgewisseld, denk maar eens aan de sociale media. Een uurtje online vergt al gauw 100MB nog zonder dat er allerlei films en video ge-upload of gestreamd worden. Daarnaast heeft het  online bestellen van goederen een enorme vlucht genomen. 
+In het vak Databases heb je geleerd werken met PostgreSQL. In deze module gebruik je **SQLite** - een lichtgewicht database die als een enkel bestand werkt en built-in bij Python zit. Geen server setup nodig.
 
-Kleding, eten, films, reizen, ... alles kan online geboekt worden. En aan het bedrijfsleven de taak dat allemaal in goede banen te leiden. In essentie is de hele wereld bezig met het maken, opslaan en ophalen van gegevens!  En er komt nog heel wat bij kijken om dat allemaal in goede banen te leiden. Hier komt een databasebeheersysteem (DBMS) uitstekend van pas.
+## SQLite CLI (kort)
 
-Een DBMS is een softwaresysteem waarmee gegevens uit een database geselecteerd kunnen worden, worden toegevoegd, gewijzigd en verwijderd. Bovendien bevat de software items waarmee de database onderhouden kan worden. Te denken valt hier aan het opzetten van een nieuwe database, het bepalen welke restricties erop toegepast moeten worden en onder meer wordt hiermee geregeld welke rechten de verschillende gebruikers mogen hebben. Dergelijke  systemen variëren in grootte, van kleine systemen die gewoon op een pc draaien tot grotere systemen die op mainframes geïnstalleerd zijn.
+Je kunt SQLite via de command-line gebruiken (vergelijkbaar met `psql` voor PostgreSQL). Of het al beschikbaar is hangt af van je besturingssysteem:
 
-De focus ligt uiteraard op Python, maar deze programmeertaal is uitstekend in staat  om te communiceren met databases. Er zijn veel verschillende DBMS-systemen, zoals [MySQL](https://www.mysql.com/), [Oracle](https://www.oracle.com/database/), [Firebird](http://firebirdsql.org/) en nog veel meer.
+=== "macOS en Linux"
+    SQLite3 is standaard aanwezig, er is niets te installeren. Controleer met `sqlite3 --version` in de terminal.
 
-Hier is gekozen voor [SQLite](https://sqlite.org/index.html). Dit is een open-source, volledig functioneel, op zichzelf staand, op SQL gebaseerd lichtgewicht databasebeheersysteem. Gegevens kunnen gewoon in een bestand worden opgeslagen. SQL-query’s kunnen op SQLite-tabellen worden uitgevoerd om de gewenste acties netjes tot een goed einde te brengen.
+=== "Windows"
+    SQLite3 staat niet standaard op Windows. De makkelijkste manier is via **winget** (de packagemanager die standaard op Windows 10 en 11 zit). Open PowerShell en voer uit: `winget install SQLite.SQLite`. Herstart daarna je terminal.
 
-Het mooie is bovendien dat SQLite met Python mee geïnstalleerd is. Is er iets misgegaan tijdens de installatie kan de laatste versie gedownload worden van https://www.sqlite.org/index.html .
+    Werkt winget niet? Installeer dan handmatig:
 
-Om met SQLite te kunnen werken moet in de command-line het commando `sqlite3` ingetoetst worden waarna het programma wordt geopend.
+    1. Download `sqlite-tools-win-x64-*.zip` van [sqlite.org/download.html](https://www.sqlite.org/download.html) (onder "Precompiled Binaries for Windows")
+    2. Pak het zip-bestand uit naar een vaste map, bijv. `C:\sqlite`
+    3. Voeg die map toe aan je PATH:
+        - Zoek via de Windows-zoekbalk naar "omgevingsvariabelen"
+        - Klik op "Omgevingsvariabelen bewerken voor uw account"
+        - Selecteer `Path` onder "Gebruikersvariabelen" en klik "Bewerken"
+        - Klik "Nieuw", typ `C:\sqlite` en bevestig alles met OK
+    4. Herstart PowerShell en controleer met `sqlite3 --version`
+
+Eenmaal geïnstalleerd open je een database zo:
 
 ```console
-hostname:user$ sqlite3
-SQLite version 3.32.3 2020-06-18 14:16:19
+$ sqlite3 test.db
+SQLite version 3.39.5
 Enter ".help" for usage hints.
-Connected to a transient in-memory database.
-Use ".open FILENAME" to reopen on a persistent database.
-sqlite> 
+sqlite> .tables
+sqlite> .quit
 ```
+
+Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
+
+| Commando | Betekenis |
+|----------|-----------|
+| `.tables` | Toon alle tabellen |
+| `.schema` | Toon tabelstructuur |
+| `.quit` | Afsluiten |
+
+!!! tip "Visueel werken met DB Browser for SQLite"
+    Als je liever visueel werkt (vergelijkbaar met pgAdmin voor PostgreSQL), gebruik dan [DB Browser for SQLite](https://sqlitebrowser.org/).
+
+    **Voordelen:**
+
+    - Tabellen visueel bekijken en bewerken
+    - SQL queries uitvoeren met syntax highlighting
+    - Database structuur inspecteren
+    - Handig tijdens Flask development om snel data te controleren
+
+**Volgende stap:** [Python exceptions](python-exceptions.md) - nodig voor deel 2.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **SQLite**: een lichtgewicht database die als één bestand werkt, zonder serverinstallatie, en standaard meegeleverd wordt met Python
+- **SQLite CLI op macOS/Linux**: de `sqlite3`-tool is standaard beschikbaar en direct te starten met `sqlite3 bestandsnaam.db`
+- **SQLite installeren op Windows**: via `winget install SQLite.SQLite` of handmatig downloaden en de map toevoegen aan de PATH-omgevingsvariabele
+- **Database openen via de CLI**: `sqlite3 <bestandsnaam>` opent een bestaande database of maakt een nieuw bestand aan
+- **Punt-commando's**: `.tables` toont alle tabellen, `.schema` toont de tabelstructuur, `.quit` sluit de CLI af
+- **DB Browser for SQLite**: een grafische tool om visueel met SQLite te werken, vergelijkbaar met pgAdmin voor PostgreSQL
