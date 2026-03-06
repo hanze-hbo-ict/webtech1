@@ -6,21 +6,24 @@
 
 Als je uv nog niet hebt geïnstalleerd van Week 2, installeer het dan nu:
 
-```console
-pip install uv
-```
-
-!!! tip "Alternatieve installatie methoden"
-    Je kunt uv ook installeren met:
-    **macOS/Linux (via curl):**
+=== "macOS"
     ```console
     curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
-    **Windows (via PowerShell):**
+=== "Linux"
+    ```console
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+=== "Windows"
+    ```console
+    winget install -e --id astral-sh.uv
+    ```
+    Of via PowerShell:
     ```console
     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
     ```
-    Zie [uv documentatie](https://docs.astral.sh/uv/getting-started/installation/) voor meer opties.
+
+Zie [uv documentatie](https://docs.astral.sh/uv/getting-started/installation/) voor meer opties.
 
 Controleer of uv correct is geïnstalleerd:
 
@@ -293,11 +296,7 @@ uv run app.py
 
 ### "uv: command not found"
 
-Installeer uv eerst:
-
-```console
-pip install uv
-```
+Volg de installatie-instructies bovenaan deze pagina voor jouw besturingssysteem.
 
 ### "Python version mismatch"
 
@@ -347,7 +346,7 @@ Maar normaal gesproken gebruik je gewoon `uv run` en hoef je niets te activeren!
 
 Je hebt geleerd:
 
-- **uv installeren** met `pip install uv`
+- **uv installeren** via de standalone installer voor jouw platform
 - **Flask project maken** met `uv init` en `uv add flask`
 - **Flask app runnen** met `uv run app.py`
 - **Project structuur** met `pyproject.toml` en `uv.lock`
