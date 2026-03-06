@@ -234,6 +234,11 @@ else:
 
 Bovenstaande code heeft een probleem: als er een error optreedt, wordt `conn.close()` niet aangeroepen. Gebruik `with` voor automatic cleanup:
 
+!!! info "De `with` statement"
+    `with` is een codeblok voor resources die opgeruimd moeten worden. Python roept aan het einde van het blok altijd de opruimcode aan, ook als er een error optreedt.
+
+    `as conn` geeft de resource een naam waarmee je in het blok werkt.
+
 ```python
 def add_contact_safe(name: str, email: str, phone: str | None = None) -> int:
     """Voeg contact toe met automatic connection cleanup."""
