@@ -5,6 +5,11 @@
 ## uv installeren
 
 === "macOS"
+    Via Homebrew:
+    ```console
+    brew install uv
+    ```
+    Of via de standalone installer:
     ```console
     curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
@@ -54,7 +59,7 @@ Dit maakt automatisch:
 
 - `pyproject.toml` - Project configuratie en dependencies
 - `.python-version` - Python versie voor dit project
-- `hello.py` - Een voorbeeld bestand (kun je verwijderen)
+- `main.py` - Een voorbeeld bestand (kun je verwijderen)
 
 ### Stap 3: Flask installeren
 
@@ -95,7 +100,7 @@ dependencies = [
 Verwijder het voorbeeld bestand en maak een nieuwe `app.py`:
 
 ```console
-rm hello.py
+rm main.py
 ```
 
 Maak `app.py` met deze inhoud:
@@ -344,7 +349,7 @@ Maar normaal gesproken gebruik je gewoon `uv run` en hoef je niets te activeren!
 
 Je hebt geleerd:
 
-- **uv installeren** via de standalone installer voor jouw platform
+- **uv installeren** via Homebrew (macOS) of de standalone installer voor jouw platform
 - **Flask project maken** met `uv init` en `uv add flask`
 - **Flask app runnen** met `uv run app.py`
 - **Project structuur** met `pyproject.toml` en `uv.lock`
