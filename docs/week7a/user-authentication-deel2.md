@@ -42,7 +42,6 @@ De onderste coderegel is nieuw. Waarschijnlijk zul je deze module separaat insta
 - Het zorgt voor een handige “Remember me"-functionaliteit.
 - Het helpt mee de sessiegegevens van de gebruikers te beschermen tegen diefstal door cookiedieven.
 
-
 Er zijn ook een aantal zaken die niet geregeld worden door de `Loginmanager`, maar daar wordt een oplossing voor geregeld tijdens het coderen.
 
 Zie de onderstaande code-listing voor een uitgewerkt voorbeeld:
@@ -88,23 +87,37 @@ Nu kan de gebruikersklasse aangemaakt worden. De naam van de klasse wordt `User`
 De klasse `User()` erft eigenschappen van `dbModel` en `UserMixin`:
 
 ```python
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String
+
 class User(db.Model, UserMixin):
+    """User model voor authenticatie.
 
-     __tablename__ = 'users'
+    Erft van db.Model voor database functionaliteit en UserMixin voor
+    ingebouwde Flask-Login methoden zoals is_authenticated(), is_active(),
+    is_anonymous(), en get_id().
+    """
+    __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.String(64), unique=True, index=True)
-    password_hash = db.Column(db.String(128))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    username: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    password_hash: Mapped[str | None] = mapped_column(String(128))
 ```
-
 
 Achter de variabelen `email`, `username` en `password_hash` staat een getal genoteerd (64 of 128). Dat betreft het aantal posities dat voor die variabele beschikbaar is. Verder hebben `email` en `username` het kenmerk `unique` meegekregen. Op de primary key wordt automatisch gecontroleerd dat er geen dubbele waarden van voorkomen, maar het e-mailadres en de gebruikersnaam mogen natuurlijk ook maar één keer voorkomen in de database met inloggegevens.
 
 Nu is het weer de beurt aan `__init__()`. De volgorde waarin de coderegels worden opgenomen in de diverse bestanden heeft steeds eenzelfde stramien.
 
 ```python
-def __init__(self, email, username, password):
+def __init__(self, email: str, username: str, password: str) -> None:
+    """Initialiseer een nieuwe gebruiker.
+
+    Args:
+        email: Het e-mailadres van de gebruiker
+        username: De unieke gebruikersnaam
+        password: Het wachtwoord in plain text (wordt automatisch gehashed)
+    """
     self.email = email
     self.username = username
     self.password_hash = generate_password_hash(password)
@@ -115,7 +128,15 @@ Voor iedere nieuwe gebruiker wordt gevraagd om een gebruikersnaam, een e-mailadr
 Verder is er nog een methode nodig die gaat controleren of het ingevoerde wachtwoord het juiste is. In de vorige paragraaf is deze methode uitgebreid besproken:
 
 ```python
-def check_password(self, password):
+def check_password(self, password: str) -> bool:
+    """Controleer of het opgegeven wachtwoord correct is.
+
+    Args:
+        password: Het te verifiëren wachtwoord in plain text
+
+    Returns:
+        True als het wachtwoord overeenkomt, anders False
+    """
     return check_password_hash(self.password_hash, password)
 ```
 
@@ -123,11 +144,21 @@ Er wordt gecontroleerd of het opgegeven password voldoet aan de hash-versie. Er 
 
 Als laatste nog een nieuwe vereiste methode. Deze nieuwe functie `load_user()` wordt in de code opgenomen net voor het definiëren van de klasse `User()`:
 
-
 ```python
 @login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
+def load_user(user_id: int) -> User | None:
+    """Laad een gebruiker op basis van het user ID.
+
+    Deze functie wordt gebruikt door Flask-Login om de huidige gebruiker
+    te laden uit de sessie.
+
+    Args:
+        user_id: Het ID van de gebruiker om te laden
+
+    Returns:
+        De User instantie als gevonden, anders None
+    """
+    return db.session.get(User, int(user_id))
 ```
 
 De `user_loader` decorator geeft `Flask-login` toestemming om de gegevens van de huidige gebruiker te laden en het bijbehorende ID te gebruiken. Daarmee kan de gebruiker pagina’s bekijken die bij zijn profiel horen, zoals onder andere het beheren van de eigen gegevens en eigen blogberichten. En na een succesvolle aanmelding kan de naam van de gebruiker aan een welkomstwoord gekoppeld worden.
@@ -144,15 +175,20 @@ from wtforms import ValidationError
 from mijnproject.models import User
 ```
 
-Er moet gecontroleerd worden of velden op een formulier voldoen aan de verplichting een waarde te krijgen. Verder vindt er toezicht plaats of het opgegeven e-mailadres aan de eisen voldoet – is er bijvoorbeeld een apenstaartje (`@`) meegestuurd en dergelijke. De validator `EqualTo` is uitgerust om twee waardes met elkaar te vergelijken. Mocht er iets niet in orde dan kan er met behulp van de `ValidationError` een passende melding getoond wordt.
+Er moet gecontroleerd worden of velden op een formulier voldoen aan de verplichting een waarde te krijgen. Verder vindt er toezicht plaats of het opgegeven e-mailadres aan de eisen voldoet: is er bijvoorbeeld een apenstaartje (`@`) meegestuurd en dergelijke. De validator `EqualTo` is uitgerust om twee waardes met elkaar te vergelijken. Mocht er iets niet in orde dan kan er met behulp van de `ValidationError` een passende melding getoond wordt.
 
 Nu kunnen de formulieren opgebouwd worden, te beginnen met het registratieformulier. Omdat er als veel vaker Engelse termen in de code zijn opgetekend, worden hier ook Engelse benamingen gehanteerd.
 
 ```python
 class RegistrationForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(),Email()])
+    """Formulier voor het registreren van nieuwe gebruikers."""
+
+    email = StringField('Email', validators=[DataRequired(), Email()])
     username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), EqualTo('pass_confirm', 	message='Passwords Must Match!')])
+    password = PasswordField(
+        'Password',
+        validators=[DataRequired(), EqualTo('pass_confirm', message='Passwords Must Match!')]
+    )
     pass_confirm = PasswordField('Confirm password', validators=[DataRequired()])
     submit = SubmitField('Leg vast!')
 ```
@@ -168,17 +204,34 @@ Nu weer terug naar het veld waar voor de eerste keer het wachtwoord wordt ingevu
 Aan dit formulier worden nog een tweetal methoden verbonden:
 
 ```python
-def validate_email(self, field):
-    if User.query.filter_by(email=field.data).first():
+def validate_email(self, field) -> None:
+    """Valideer dat het e-mailadres nog niet in gebruik is.
+
+    Args:
+        field: Het email veld uit het formulier
+
+    Raises:
+        ValidationError: Als het e-mailadres al geregistreerd is
+    """
+    if db.session.execute(db.select(User).filter_by(email=field.data)).scalar_one_or_none():
         raise ValidationError('Dit e-mailadres staat al geregistreerd!')
 ```
-De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt gecontroleerd of het opgegeven e-mailadres gevonden kan worden door de waarde ervan op te geven in de `query.filter.by(waarde).first()`. Geeft dit resultaat `True`, dan is er al een e-mailadres met een gelijke inhoud in de database te vinden – en dat mag niet. Er moet dan een melding getoond worden, hetgeen hier dus via de `ValidationError` geregeld is.
+
+De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt gecontroleerd of het opgegeven e-mailadres gevonden kan worden door de waarde ervan op te geven in `db.session.execute(db.select(User).filter_by(email=field.data)).scalar_one_or_none()`. Geeft dit resultaat niet `None`, dan is er al een e-mailadres met een gelijke inhoud in de database te vinden, en dat mag niet. Er moet dan een melding getoond worden, hetgeen hier dus via de `ValidationError` geregeld is.
 
 De tweede methode is nagenoeg gelijk aan de eerste. Alleen moet er nu nagegaan worden of de gebruikersnaam al in de database voorkomt.
 
 ```python
-def validate_username(self, field):
-    if User.query.filter_by(username=field.data).first():
+def validate_username(self, field) -> None:
+    """Valideer dat de gebruikersnaam nog niet in gebruik is.
+
+    Args:
+        field: Het username veld uit het formulier
+
+    Raises:
+        ValidationError: Als de gebruikersnaam al bestaat
+    """
+    if db.session.execute(db.select(User).filter_by(username=field.data)).scalar_one_or_none():
         raise ValidationError('Deze gebruikersnaam is al vergeven, probeer een ander naam!')
 ```
 
@@ -188,6 +241,8 @@ Nu het registratieformulier ontwikkeld is, is de volgende logische stap het aanm
 
 ```python
 class LoginForm(FlaskForm):
+    """Formulier voor het inloggen van bestaande gebruikers."""
+
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Inloggen')
@@ -195,4 +250,17 @@ class LoginForm(FlaskForm):
 
 Ook hier geldt dat het inlogformulier eigenschappen overneemt van `FlaskForm`. Verder is er niet zo veel bijzonders bij dit formulier te vermelden. Zoals al wel vaker gezegd, meer van hetzelfde.
 
-Het formulier kent twee velden, eentje om de gebruikersnaam in te geven en het tweede veld is beschikbaar voor het wachtwoord. Tenslotte kan het inloggen worden afgesloten door op de knop met het opschrift ‘Inloggen’ te klikken.
+Het formulier kent twee velden, eentje om de gebruikersnaam in te geven en het tweede veld is beschikbaar voor het wachtwoord. Tenslotte kan het inloggen worden afgesloten door op de knop met het opschrift 'Inloggen' te klikken.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Flask-Login**: een bibliotheek die sessie- en gebruikersbeheer verzorgt, waaronder inloggen, uitloggen en het onthouden van gebruikerssessies
+- **LoginManager**: het centrale object uit Flask-Login dat via `init_app()` aan de app gekoppeld wordt en via `login_view` aangeeft waar gebruikers kunnen inloggen
+- **UserMixin**: een superklasse die de `User`-klasse standaardmethoden geeft zoals `is_authenticated()`, `is_active()`, `is_anonymous()` en `get_id()`
+- **Wachtwoord hashing in het model**: het wachtwoord wordt bij het aanmaken van een gebruiker direct gehashed opgeslagen; de plain-text variant wordt nergens bewaard
+- **`check_password()`-methode**: controleert bij het inloggen of het ingevoerde wachtwoord overeenkomt met de opgeslagen hash
+- **`user_loader`-decorator**: laadt de huidige gebruiker op basis van het sessie-ID, zodat Flask-Login de ingelogde gebruiker bij elke aanvraag automatisch kan opzoeken
+- **`RegistrationForm`**: een WTForms-formulier met validaties voor uniek e-mailadres, unieke gebruikersnaam en wachtwoordbevestiging via `EqualTo`
+- **`LoginForm`**: een eenvoudig formulier met een e-mailadres- en wachtwoordveld voor bestaande gebruikers

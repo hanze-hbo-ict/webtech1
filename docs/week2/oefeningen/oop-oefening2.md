@@ -1,37 +1,151 @@
 # OOP Python – Oefening 2
 
-Maak binnen de file [`product.py`](../bestanden/webshop/product.py) een nieuwe klasse aan, `DigitaalProduct`, die een subklasse is van `Product`.
+In deze oefening ga je werken met **dataclasses** en geavanceerde **type hints**. Je zet een reguliere klasse om naar een dataclass en maakt een winkelwagen systeem.
 
-Digitale producten hebben geen verzendkosten maar wel een bestandsgrootte. Geef digitale producten een standaard voorraad van 999 (want ze zijn bijna onbeperkt beschikbaar) en voeg een attribuut `_bestandsgrootte` toe (in MB).
+## Deel a: Product omzetten naar dataclass
 
-Test de klasse door een tweetal instanties aan te maken en hun details te tonen. Goede voorbeelden zijn software zoals "Photoshop" en "Microsoft Office".
+Je hebt in oefening 1 waarschijnlijk een reguliere `Product` klasse gemaakt. Nu ga je deze omzetten naar een dataclass.
 
-Test verder of de methode `verkoop()` naar behoren werkt. Dat is ook nog niet getest voor de objecten uit de klasse `FysiekProduct`. Nu is daar een mooie gelegenheid voor. Mocht blijken dat de test nog een probleem laat zien, graag een oplossing ervoor.
+### Opdracht a
 
-We gaan verder met overerving. Ook fysieke producten kunnen weer onderverdeeld worden. Bekende groepen zijn *Boek* en *Elektronica*. Alleen de klasse `Boek` wordt hier aangemaakt als voorbeeld. Een boek heeft een naam, prijs en voorraad nodig, plus een aantal extra eigenschappen zoals auteur en ISBN. Boeken krijgen standaard 0.5 kg als gewicht.
+Maak een bestand `product.py` met een `Product` dataclass:
+
+**Attributen:**
+
+- `naam` (str): Productnaam
+- `prijs` (float): Prijs in euro's
+- `voorraad` (int): Aantal op voorraad (default: 0)
+- `beschrijving` (str | None): Een optionele beschrijving (default: None)
+
+**Methoden:**
+
+- `verkoop(aantal: int) -> bool`: Verkoop items, geeft True bij succes
+- `voorraad_waarde() -> float`: Bereken totale waarde van voorraad
+
+### Startcode
 
 ```python
-class Boek(FysiekProduct):
+from dataclasses import dataclass
 
-    def __init__(self, naam, prijs, voorraad, auteur, isbn):
-        super().__init__(naam, prijs, voorraad, gewicht=0.5)
-        self._auteur = auteur
-        self._isbn = isbn
-
-    def __str__(self):
-        basis = super().__str__()
-        return f"{basis}, Auteur: {self._auteur}, ISBN: {self._isbn}"
+@dataclass
+class Product:
+    # Jouw code hier
+    pass
 ```
 
-Een bekend boek is 'Python Crash Course' van Eric Matthes. Dat wordt het object uit deze klasse dat aangemaakt wordt.
+!!! tip "str | None"
+    `beschrijving: str | None = None` betekent dat beschrijving een string OF None kan zijn.
+
+### Test je Product
 
 ```python
-python_boek = Boek("Python Crash Course", 34.95, 8, "Eric Matthes", "978-1593279288")
-print(python_boek)
-python_boek.verkoop(3)
-print(python_boek)
+laptop = Product("Laptop", 799.99, 5, "Gaming laptop met RGB")
+muis = Product("Muis", 25.50, 20)  # Geen beschrijving
+
+print(laptop)
+print(f"Voorraadwaarde: €{laptop.voorraad_waarde():.2f}")
+
+laptop.verkoop(2)
+
+print(laptop)
+print(f"Voorraadwaarde: €{laptop.voorraad_waarde():.2f}")
 ```
 
-Maak nu de klasse `Software` aan als subklasse van `DigitaalProduct` met zelfgekozen eigenschappen zoals versienummer en besturingssysteem, en test deze door een instantie aan te maken en deze verschillende hoeveelheden verkopen toe te passen.
+**Verwachte output:**
 
-**Extra uitdaging:** Voeg een methode `download()` toe aan de klasse `DigitaalProduct` die een downloadlink genereert. Bij fysieke producten zou dit een error moeten geven.
+```text
+Product(naam='Laptop', prijs=799.99, voorraad=5, beschrijving='Gaming laptop met RGB')
+Voorraadwaarde: €3999.95
+Product(naam='Laptop', prijs=799.99, voorraad=3, beschrijving='Gaming laptop met RGB')
+Voorraadwaarde: €2399.97
+```
+
+## Deel b: Winkelwagen met list type hint
+
+Maak een bestand `winkelwagen.py` met een `Winkelwagen` dataclass.
+
+### Opdracht b
+
+**Attributen:**
+
+- `klant_naam` (str): Naam van de klant
+- `items` (list[Product]): Lijst met producten
+
+**Methoden:**
+
+- `voeg_toe(product: Product) -> None`: Voeg product toe
+- `verwijder(product: Product) -> bool`: Verwijder product, geeft True als gelukt
+- `bereken_totaal() -> float`: Bereken totaalprijs
+- `aantal_items() -> int`: Geef aantal items terug
+
+!!! warning "Veranderbare standaardwaarden: gebruik field()"
+    Voor lists als default waarde **moet** je `field(default_factory=list)` gebruiken!
+
+    ```python
+    from dataclasses import dataclass, field
+
+    @dataclass
+    class Winkelwagen:
+        klant_naam: str
+        items: list[Product] = field(default_factory=list)
+    ```
+
+### Test je Winkelwagen
+
+```python
+from product import Product
+from winkelwagen import Winkelwagen
+
+# Maak producten
+laptop = Product("Laptop", 799.99, 5)
+muis = Product("Muis", 25.50, 20)
+toetsenbord = Product("Toetsenbord", 89.99, 15)
+
+# Maak winkelwagen
+wagen = Winkelwagen("Jan Jansen")
+print(f"Aantal items: {wagen.aantal_items()}")  # Should be 0
+
+# Voeg producten toe
+wagen.voeg_toe(laptop)
+wagen.voeg_toe(muis)
+wagen.voeg_toe(toetsenbord)
+
+print(f"Aantal items: {wagen.aantal_items()}")
+print(f"Totaal: €{wagen.bereken_totaal():.2f}")
+
+# Verwijder item
+if wagen.verwijder(muis):
+    print("Muis verwijderd")
+
+print(f"Nieuw totaal: €{wagen.bereken_totaal():.2f}")
+```
+
+**Verwachte output:**
+
+```text
+Aantal items: 0
+Aantal items: 3
+Totaal: €915.48
+Muis verwijderd
+Nieuw totaal: €889.98
+```
+
+## Checklist
+
+Controleer voordat je klaar bent:
+
+- [ ] `Product` gebruikt `@dataclass` decorator (de `@`-aanduiding boven de klasse)
+- [ ] `str | None` gebruikt voor beschrijving
+- [ ] `Winkelwagen` gebruikt `list[Product]` type hint
+- [ ] `field(default_factory=list)` gebruikt voor items
+- [ ] Alle methoden hebben return type annotations
+- [ ] Code werkt met de testcode
+
+## Wat je geleerd hebt
+
+- `@dataclass` vermindert herhalende code (boilerplate)
+- `X | None` voor waarden die None kunnen zijn
+- `list[Type]` voor typed lists
+- `field(default_factory=list)` voor veranderbare standaardwaarden
+
+**Tip:** Deze patterns zie je later terug in SQLAlchemy modellen!

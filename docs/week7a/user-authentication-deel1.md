@@ -34,7 +34,6 @@ Beiden kunnen zeer goed gebruikt worden in een Flask-applicatie om te kunnen ach
 
 Is Bcrypt aanwezig, is de eerste actie het importeren ervan. Daarna maken we een object aan van het type `BCrypt()` en gebruiken dat object om het wachtwoord te hashen:
 
-
 ```ipython
 
 In [1]: from flask_bcrypt import Bcrypt
@@ -62,6 +61,7 @@ Out[5]: False
 In [6]: bcrypt.check_password_hash(hashed_pass, 'supergeheimwachtwoord')
 Out[6]: True
 ```
+
 Precies in de lijn der verwachting.
 
 ### Werkzeug
@@ -85,6 +85,14 @@ Out[5]: True
 
 Het verschil tussen beiden is dat bij Werkzeug exact de juiste methoden binnengehaald worden en bij Bcrypt moet er soms een beetje over nagedacht worden. De keuze tussen deze pakketten is vrij arbitrair en ligt een beetje aan de voorkeuren van de ontwikkelaar.
 
+## Samenvatting
 
+In deze les heb je geleerd:
 
-
+- **Authenticatie**: het proces van het controleren of een gebruiker rechtmatig toegang heeft tot een webapplicatie, in de volksmond het inloggen
+- **Wachtwoord hashing**: een hashfunctie zet een wachtwoord om naar een onleesbare reeks tekens die niet terug te leiden is naar het origineel
+- **Opslag van hashes**: de database bewaart uitsluitend de gehashte versie van een wachtwoord, nooit de plain-text variant
+- **Wachtwoord verificatie**: bij het inloggen wordt het ingevoerde wachtwoord vergeleken met de opgeslagen hash via een controlemethode, zonder het origineel te hoeven kennen
+- **Bcrypt**: een bibliotheek die `generate_password_hash()` en `check_password_hash()` aanbiedt voor het hashen en controleren van wachtwoorden
+- **Werkzeug**: een alternatieve bibliotheek met een iets eenvoudigere importstructuur voor hetzelfde doel
+- **Herhaalbaarheid**: elke aanroep van de hashfunctie levert een andere hash op voor hetzelfde wachtwoord, wat de beveiliging verder versterkt

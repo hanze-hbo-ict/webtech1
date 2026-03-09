@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} bewerken - Admin{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('admin_products') }}">Admin - Producten</a></li>
+                <li class="breadcrumb-item active">{{ product.name }} bewerken</li>
+            </ol>
+        </nav>
+
+        <h1 class="mb-4">Product Bewerken</h1>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('admin_edit_product', product_id=product.id) }}">
+                    {{ form.hidden_tag() }}
+
+                    <!-- Product Naam -->
+                    <div class="mb-3">
+                        {{ form.name.label(class="form-label") }}
+                        {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                        {% if form.name.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Prijs -->
+                    <div class="mb-3">
+                        {{ form.price.label(class="form-label") }}
+                        <div class="input-group">
+                            <span class="input-group-text">€</span>
+                            {{ form.price(class="form-control" + (" is-invalid" if form.price.errors else ""), step="0.01") }}
+                            {% if form.price.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.price.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Voorraad -->
+                    <div class="mb-3">
+                        {{ form.stock.label(class="form-label") }}
+                        {{ form.stock(class="form-control" + (" is-invalid" if form.stock.errors else "")) }}
+                        {% if form.stock.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.stock.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Categorie -->
+                    <div class="mb-3">
+                        {{ form.category_id.label(class="form-label") }}
+                        {{ form.category_id(class="form-select" + (" is-invalid" if form.category_id.errors else "")) }}
+                        {% if form.category_id.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.category_id.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Beschrijving -->
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label") }}
+                        {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""), rows="4") }}
+                        {% if form.description.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.description.errors %}
+                                    <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('product', product_id=product.id) }}" class="btn btn-secondary">
+                            Annuleren
+                        </a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Delete Button -->
+        <div class="card mt-3 border-danger">
+            <div class="card-body">
+                <h5 class="card-title text-danger">Verwijder Product</h5>
+                <p class="card-text text-muted">
+                    Let op: Deze actie kan niet ongedaan gemaakt worden!
+                </p>
+                <form method="POST" action="{{ url_for('admin_delete_product', product_id=product.id) }}"
+                      onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
+                    <button type="submit" class="btn btn-danger">
+                        Product Verwijderen
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

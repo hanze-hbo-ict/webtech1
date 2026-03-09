@@ -60,7 +60,7 @@ Afbeeldingen zijn een ander belangrijk onderdeel van veel webpagina's. Om een af
 
 Met dit element kan een afbeelding in een HTML-pagina ingebed worden. Om aan te geven wáár het betreffende plaatje gevonden kan worden, moeten we een zogenaamd *attribuut* aan de tag toevoegen. Door gebruik te maken van attributen kun je html-tags voorzien van speciale betekenis, zoals bijvoorbeeld de locatie (url) van een plaatje.
 
-De algemene vorm van een attribuut is `name="value"`. In het geval van onze `<img>`-tag is de *name* van het attribuut `src` en de *value* van het attribuut de `url` van het plaatje. (`src `= source en source betekent bron). Dit attribuut bevat het pad naar het afbeeldingsbestand. Het pad kan leiden naar een folder op de eigen computer of zelfs naar een plaatje op het internet zelf.
+De algemene vorm van een attribuut is `name="value"`. In het geval van onze `<img>`-tag is de *name* van het attribuut `src` en de *value* van het attribuut de `url` van het plaatje. (`src`= source en source betekent bron). Dit attribuut bevat het pad naar het afbeeldingsbestand. Het pad kan leiden naar een folder op de eigen computer of zelfs naar een plaatje op het internet zelf.
 
 Behalve de url van het plaatje voegen we in de regel ook nog een `alt`-attribuut toe (`alt` = alternative, alternatief in het Nederlands). Met dit attribuut kan een beschrijving aan de afbeelding gekoppeld worden voor het geval bezoekers zijn niet in staat de afbeelding te bekijken.
 
@@ -72,6 +72,7 @@ In [de folder waar verder alle html-voorbeelden bewaard zijn](../bestanden/html.
     <img src="venazza.jpeg" alt="Een afbeelding van Venazza">
 </body>
 ```
+
 ![Een file met een plaatje](imgs/venazza.png)
 
 Het `alt`-attribuut is handig voor mensen met een visuele beperking: op deze manier weet de spraaksoftware wat er moet worden uitgesproken wanneer er een plaatje op de pagina voorkomt. Maar ook tijdens het ontwikkelen kan het handig zijn, om bijvoorbeeld eenvoudig te achterhalen of je de bestandsnaam van de afbeelding goed hebt.
@@ -100,11 +101,11 @@ Zowel een `<div>` als een `<span>` hebben vanuit zichzelf geen speciale style. D
 <body>
     <div style="color: red; background-color: white;">
         <h2>Dit is tekst in H2</h2>
-        <p>Deze <span style="color: blue; background-color: white;">tekst</span> is ingesloten 	door het P element.</P>
+        <p>Deze <span style="color: blue; background-color: white;">tekst</span> is ingesloten  door het P element.</P>
     </div>
     <div style="color: green; background-color: yellow;">
         <h3>Dit is tekst in H3</h3>
-        <p>Deze <span style="color: red; background-color: black;">tekst</span> is ingesloten 	door het P element.</P>
+        <p>Deze <span style="color: red; background-color: black;">tekst</span> is ingesloten  door het P element.</P>
     </div>
 </body>
 ```

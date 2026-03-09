@@ -68,7 +68,6 @@ Let op de attributen `class` bij beide `divs` en het attribuut `id` bij de onder
 
 Elk html-element kan ingesteld worden door de inhoud van een class of van een id. In het css-document worden dan de stijldeclaraties voor de `class` of `id` bepaald. Er is een specifieke syntax voor beschikbaar.
 
-
 - `.` (punt) matcht op de *waarde* van het `class`-attribuut
 - `#` (hashtag) matcht op de *waarde* van het `id`-attribuut
 
@@ -96,13 +95,3 @@ Wat het volgende resultaat tot gevolg heeft:
 ![Uitgebreide styling](imgs/class_div.png)
 
 Maak nu [oefening nummer 3](../oefeningen/wk1oefening3.md)
-
-
-
-
-
-
-
-
-
-

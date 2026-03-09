@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Welkom {{ current_user.name }} - Webshop{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4">
+            Welkom, {{ current_user.name }}!
+            {% if current_user.is_admin %}
+            <span class="badge bg-danger">Admin</span>
+            {% endif %}
+        </h1>
+        <p class="lead text-muted">Je bent succesvol ingelogd in de webshop</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Account Info -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Account Informatie</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-4">Naam:</dt>
+                    <dd class="col-sm-8">{{ current_user.name }}</dd>
+
+                    <dt class="col-sm-4">Email:</dt>
+                    <dd class="col-sm-8">{{ current_user.email }}</dd>
+
+                    <dt class="col-sm-4">Account Type:</dt>
+                    <dd class="col-sm-8">
+                        {% if current_user.is_admin %}
+                        <span class="badge bg-danger">Administrator</span>
+                        {% else %}
+                        <span class="badge bg-success">Customer</span>
+                        {% endif %}
+                    </dd>
+
+                    <dt class="col-sm-4">Lid sinds:</dt>
+                    <dd class="col-sm-8">{{ current_user.created_at.strftime('%d-%m-%Y') }}</dd>
+
+                    <dt class="col-sm-4">Bestellingen:</dt>
+                    <dd class="col-sm-8">{{ current_user.order_count }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Snelle Acties</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('products.index') }}" class="btn btn-outline-primary">
+                        🛍️ Bekijk Categorieën
+                    </a>
+                    <a href="{{ url_for('products.contact') }}" class="btn btn-outline-secondary">
+                        📧 Contact Opnemen
+                    </a>
+
+                    {% if current_user.is_admin %}
+                    <hr>
+                    <a href="{{ url_for('admin.products') }}" class="btn btn-outline-danger">
+                        🔒 Admin - Alle Producten
+                    </a>
+                    <a href="{{ url_for('admin.add_product') }}" class="btn btn-outline-danger">
+                        ➕ Admin - Product Toevoegen
+                    </a>
+                    {% endif %}
+
+                    <hr>
+                    <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary">
+                        🚪 Uitloggen
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Orders (placeholder voor Week 7b/8) -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Recente Bestellingen</h5>
+            </div>
+            <div class="card-body">
+                {% if current_user.orders %}
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Order #</th>
+                                <th>Datum</th>
+                                <th>Status</th>
+                                <th>Totaal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in current_user.orders %}
+                            <tr>
+                                <td>#{{ order.id }}</td>
+                                <td>{{ order.order_date.strftime('%d-%m-%Y %H:%M') }}</td>
+                                <td><span class="badge bg-warning">{{ order.status }}</span></td>
+                                <td>€{{ "%.2f"|format(order.total_amount) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted mb-0">Je hebt nog geen bestellingen geplaatst.</p>
+                <a href="{{ url_for('products.index') }}" class="btn btn-primary mt-2">
+                    Start met Winkelen
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

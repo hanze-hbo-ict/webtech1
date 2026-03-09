@@ -19,13 +19,13 @@ print("\n" + "="*50 + "\n")
 print("=== Test FysiekProduct ===")
 java_boek = FysiekProduct("Java voor beginners", 34.95, 12, 0.8)
 print(java_boek)
-java_boek.bereken_verzendkosten()
+print(f"Verzendkosten: €{java_boek.bereken_verzendkosten():.2f}")
 
 laptop = FysiekProduct("MacBook Pro", 1499.99, 3, 2.1)
-laptop.bereken_verzendkosten()
+print(f"Verzendkosten: €{laptop.bereken_verzendkosten():.2f}")
 
 print("\n" + "="*50 + "\n")
 
 # Hier kun je tests toevoegen voor DigitaalProduct
 # Hier kun je tests toevoegen voor Boek
-# Hier kun je eventueel ook nog (extra) tests toevoegen voor Klant en Winkelwagen
+# Hier kun je eventueel ook nog (extra) tests toevoegen voor Customer en Cart

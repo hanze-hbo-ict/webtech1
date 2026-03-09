@@ -33,7 +33,6 @@ Je kunt CSS in het html-bestand zelf schrijven, maar je kunt het ook in een sepa
 
 ![Een eenvoudige stylesheet](imgs/styled_page.png)
 
-
 Alle tekst opgenomen binnen een paragraaf heeft daadwerkelijk een rode kleur gekregen.
 
 !!! info "External, Internal en Inline"
@@ -91,7 +90,7 @@ li {
 ![Multistyle](imgs/multistyle.png)
 
 !!! info "Single line of multiline"
-    Zoals veel onderwerpen in de software engineering bestaat er een uitgebreide discussie over de vraag of de css-regels onder elkaar (*multiline*) of achter elkaar (*single line*) moet zetten – zie [deze link](https://www.newmediacampaigns.com/page/single-line-vs-multi-line-css-a-tool-to-end-the-debate) (en de daar genoemde verdere links) voor een fraai overzicht van deze discussie. Voor beide manieren is iets te zeggen. Ons advies zou zijn om je hier een eigen mening over te vormen en je daaraan te houden.
+    Zoals veel onderwerpen in de software engineering bestaat er een uitgebreide discussie over de vraag of de css-regels onder elkaar (*multiline*) of achter elkaar (*single line*) moet zetten, zie [deze link](https://www.newmediacampaigns.com/page/single-line-vs-multi-line-css-a-tool-to-end-the-debate) (en de daar genoemde verdere links) voor een fraai overzicht van deze discussie. Voor beide manieren is iets te zeggen. Ons advies zou zijn om je hier een eigen mening over te vormen en je daaraan te houden.
 
 Er zijn *heel veel* (letterlijk honderden) attributen die je door middel van css kunt styleren. Bekijk [de uitgebreide documentatie op MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) om hier een beeld van te krijgen.
 
@@ -114,9 +113,3 @@ p {
 ```
 
 De `rgb()`-methode kent nog een variant, `rgba()`. De letter `a` staat voor alpha en bepaalt de *transparantie* van de opvulling. Alphawaarde 0 (nul) is volkomen transparant, alphawaarde 1 is volledig opaak.
-
-
-
-
-
-

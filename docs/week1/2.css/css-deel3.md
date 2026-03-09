@@ -39,6 +39,7 @@ Eigenschap   | Waarden | Betekenis
 -------------|---------|--------------
 font-family  | Lijst van lettertypen | hiermee wordt bepaald welk lettertype <br/> gebruikt moet worden bij de weergave van de tekst.
 font-style   | normal   | normaal
+
              | italic   | cursief
              | oblique  | schuin
 font-weight  | normal   | normaal

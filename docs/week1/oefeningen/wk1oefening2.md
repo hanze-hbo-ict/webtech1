@@ -9,4 +9,4 @@ Nog enkele aanwijzingen:
 - De invulkaders moeten gebruik maken van een placeholder.
 - De gegevens hoeven niet doorgegeven te worden naar een tweede pagina.
 - In het voorbeeld zijn iDEAL, PayPal en Creditcard als opties gebruikt voor de keuzelijst.
-- De aankruisvakjes zijn van het type ‘checkbox’; informatie over hun werking kan gevonden worden op de site https://developer.mozilla.org/nl/ .
+- De aankruisvakjes zijn van het type ‘checkbox’; informatie over hun werking kan gevonden worden op de site <https://developer.mozilla.org/nl/> .

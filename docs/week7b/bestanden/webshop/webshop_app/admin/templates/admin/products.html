@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Alle Producten{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-5">Admin - Product Beheer</h1>
+        <p class="lead text-muted">Beheer alle producten in de webshop</p>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-12">
+        <a href="{{ url_for('admin.add_product') }}" class="btn btn-primary">
+            <strong>+</strong> Nieuw Product Toevoegen
+        </a>
+    </div>
+</div>
+
+<!-- Products Table -->
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Naam</th>
+                        <th>Categorie</th>
+                        <th>Prijs</th>
+                        <th>Voorraad</th>
+                        <th>Acties</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>
+                            <a href="{{ url_for('products.product', product_id=product.id) }}">
+                                {{ product.name }}
+                            </a>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary">{{ product.category.name }}</span>
+                        </td>
+                        <td>€{{ "%.2f"|format(product.price) }}</td>
+                        <td>
+                            {% if product.stock > 0 %}
+                            <span class="badge bg-success">{{ product.stock }}</span>
+                            {% else %}
+                            <span class="badge bg-danger">Uitverkocht</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a href="{{ url_for('product', product_id=product.id) }}"
+                                   class="btn btn-outline-primary"
+                                   title="Bekijken">
+                                    👁️
+                                </a>
+                                <a href="{{ url_for('admin.edit_product', product_id=product.id) }}"
+                                   class="btn btn-outline-secondary"
+                                   title="Bewerken">
+                                    ✏️
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if not products %}
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Geen producten gevonden</h4>
+            <p>Er zijn momenteel geen producten in de database.</p>
+            <hr>
+            <p class="mb-0">
+                <a href="{{ url_for('admin.add_product') }}" class="alert-link">
+                    Voeg het eerste product toe
+                </a>
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Statistics -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">Statistieken</h5>
+                <p class="card-text">
+                    <strong>Totaal aantal producten:</strong> {{ products|length }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

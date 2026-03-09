@@ -19,7 +19,7 @@ De voornaamste wijzigingen in de code zullen zijn:
 
 Nogmaals, in dit deel ligt de nadruk in het opzetten van een algemene structuur voor een applicatie. Daarom wordt er geen nieuwe applicatie vanaf scratch ontwikkeld maar wordt de inhoud van de vorige web-applicatie voornamelijk gekopieerd.
 
-## Stap 1: Het aanmaken van de structuur van de folderset.
+## Stap 1: Het aanmaken van de structuur van de folderset
 
 Het aanmaken van de structuur zal in gedeelten besproken worden, zodat nog een keer duidelijk wordt hoe het opzetten van een uitgebreide applicatie het beste kan geschieden.
 
@@ -65,8 +65,7 @@ De structuur van de folder `mijnproject` is dan als volgt:
 
 Voor zowel de docenten als de studenten wordt een eigen directory ingericht. Hierin kunnen de onderdelen worden opgenomen die van toepassing zijn voor de verschillende onderwerpen. Voor beide directories zijn formulieren, views en templates ontwikkeld die nu keurig van elkaar gescheiden worden ondergebracht in de applicatie. Voor beide domeinen (docenten en studenten) is een eigen folder gereserveerd waarin de specifieke HTML-bestanden voor ieder doel komen te staan.
 
-
-## Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn.
+## Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn
 
 De code van de diverse pagina’s zal nog een keer getoond worden zonder al te veel commentaar erbij.
 
@@ -75,38 +74,84 @@ De code van de diverse pagina’s zal nog een keer getoond worden zonder al te v
 Als eerste `models.py`:
 
 ```python
-#from mijnproject import db
+# from mijnproject import db
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey
+
 
 class Docent(db.Model):
+    """
+    Model voor docenten die als mentor fungeren.
+
+    Attributes:
+        id: Unieke identifier voor de docent
+        naam: Naam van de docent
+        student: Relatie naar de Student die deze docent begeleidt
+    """
 
     __tablename__ = 'docenten'
-    id = db.Column(db.Integer,primary_key = True)
-    naam = db.Column(db.Text)
-    student = db.relationship('Student',backref='docent',uselist=False)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
+    student: Mapped['Student | None'] = relationship(back_populates='docent')
 
-    def __init__(self,naam):
+    def __init__(self, naam: str) -> None:
+        """
+        Initialiseer een nieuwe docent.
+
+        Args:
+            naam: De naam van de docent
+        """
         self.naam = naam
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        Geef een tekstuele representatie van de docent.
+
+        Returns:
+            String met docent naam en eventuele student
+        """
         if self.student:
             return f"Docent {self.naam} is mentor van {self.student.naam}"
         else:
             return f"Docent {self.naam} heeft geen studenten als mentor te begeleiden."
 
+
 class Student(db.Model):
+    """
+    Model voor studenten die door een mentor worden begeleid.
+
+    Attributes:
+        id: Unieke identifier voor de student
+        naam: Naam van de student
+        docent_id: Foreign key naar de begeleidende docent
+    """
 
     __tablename__ = 'studenten'
 
-    id = db.Column(db.Integer,primary_key= True)
-    naam = db.Column(db.Text)
-    docent_id = db.Column(db.Integer,db.ForeignKey('docenten.id'))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
+    docent_id: Mapped[int | None] = mapped_column(ForeignKey('docenten.id'))
+    docent: Mapped['Docent | None'] = relationship(back_populates='student')
 
-    def __init__(self,naam,docent_id):
+    def __init__(self, naam: str, docent_id: int) -> None:
+        """
+        Initialiseer een nieuwe student.
+
+        Args:
+            naam: De naam van de student
+            docent_id: Het ID van de begeleidende docent
+        """
         self.naam = naam
         self.docent_id = docent_id
 
-    def __repr__(self):
-        return f"Deze student heet {self.name}"
+    def __repr__(self) -> str:
+        """
+        Geef een tekstuele representatie van de student.
+
+        Returns:
+            String met de naam van de student
+        """
+        return f"Deze student heet {self.naam}"
 ```
 
 Uit het bestand `mentor_site.py` zijn de klassen `Docent` en `Student` overgenomen. Punt van aandacht is nog wel dat er nog een koppeling gemaakt moet worden naar de plek waar db wordt aangemaakt. Dat zal gebeuren in het bestand `__init__.py`. Het is alvast opgenomen als commentaarregel.
@@ -189,18 +234,23 @@ Bovendien dienen er nog een aantal registraties voor de blueprints aan de code t
 
 Alleen de gegevens die van toepassing zijn op docenten worden overgenomen uit `forms.py`. De namen van de formulieren zijn aangepast zodat het een meer gangbaar karakter krijgt. Bovendien kan nu steeds dezelfde naam gebruikt worden omdat de formulieren in verschillende directories zijn ondergebracht. Voor toevoegen wordt nu `Add` gebruikt, voor verwijderen `Del`.
 
-
 ### `forms.py` uit de folder `docenten`
+
 ```python
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 
 
 class AddForm(FlaskForm):
+    """Formulier voor het toevoegen van een nieuwe docent."""
+
     naam = StringField('Naam docent:')
     submit = SubmitField('Voeg toe')
 
+
 class DelForm(FlaskForm):
+    """Formulier voor het verwijderen van een docent."""
+
     id = IntegerField('Vul het ID in van de docent die verwijderd gaat worden:')
     submit = SubmitField('Verwijder')
 ```
@@ -211,7 +261,10 @@ class DelForm(FlaskForm):
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 
+
 class AddForm(FlaskForm):
+    """Formulier voor het toevoegen van een nieuwe student."""
+
     naam = StringField('Naam student:')
     doc_id = IntegerField("Id van de docent: ")
     submit = SubmitField('Voeg toe')
@@ -332,3 +385,15 @@ Bovendien worden er de nodige blueprints in de code opgenomen. Tot slot van deze
 │   └── models.py
 └── app.py
 ```
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Mappenstructuur aanmaken**: de volledige directory-boom wordt stapsgewijs opgezet met mijnproject/, docenten/, studenten/, templates/ en de benodigde Python-bestanden
+- **`models.py`**: bevat de SQLAlchemy-modellen Docent en Student met typed mapped columns en een één-op-één relatie; de db-koppeling wordt later gelegd via `__init__.py`
+- **`__init__.py`**: initialiseert de Flask-app, configureert de SQLite-database en Flask-Migrate; bevat bewust geen routes, want die worden per subcomponent in eigen views.py-bestanden ondergebracht
+- **`forms.py` per module**: elke module (docenten, studenten) heeft een eigen forms.py met een AddForm; dezelfde klassenaam kan hergebruikt worden doordat de bestanden in aparte directories staan
+- **HTML-templates**: base.html en home.html op projectniveau; add.html, delete.html en list.html voor docenten; add.html voor studenten, elk geplaatst in een bijbehorende submap
+- **Copy-paste-strategie**: bestaande code van de vorige oefenopdracht wordt grotendeels overgenomen en op de juiste locatie in de nieuwe structuur gezet, zonder inhoudelijke wijzigingen
+- **Openstaande aandachtspunten**: blueprints moeten nog worden toegevoegd en de url_for()-links in de navigatiebalk moeten worden bijgewerkt naar de nieuwe structuur
