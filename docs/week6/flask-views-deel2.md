@@ -1,158 +1,209 @@
-# Flask en SQL - het opzetten van een database
+# Flask en SQLAlchemy - Database Setup
 
-In totaal worden een drietal Python-files aangemaakt bij de demonstratie hoe een database aan een Flask-applicatie gekoppeld kan worden.
+Je maakt een database voor je Flask applicatie in drie stappen. Dit deel behandelt het opzetten van de database en het definiëren van een model.
 
-## 1. `basic_model_app.py`
+## Project structuur
 
-Bestudeer het bestand [`basic_model_app.py`](bestanden/crud/basic_model_app.py). De eerste stap bij het opzetten van een database in een Python-file is uiteraard het importeren van de benodigde pakketten en klassen:
+Voor de voorbeelden gebruik je drie Python bestanden:
+
+- `basic_model_app.py` - Database configuratie en model definitie
+- `setup_database.py` - Database aanmaken en eerste data toevoegen
+- `basic_CRUD.py` - CRUD operaties uitvoeren (volgende deel)
+
+## 1. Database configuratie (`basic_model_app.py`)
+
+Bestudeer het volledige bestand [`basic_model_app.py`](bestanden/crud/basic_model_app.py).
+
+### Imports
 
 ```python
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import Mapped, mapped_column
 ```
 
-De middelste coderegel is bekend, en de onderste regel zorgt ervoor dat het pakket SQLAlchemy beschikbaar komt bij het runnen van de file. Het nut van de bovenste regel komt zo ter sprake.
+De `os` module gebruik je om automatisch het juiste pad naar je database te bepalen.
 
-De volgende actie is om het programma te vertellen wat de basis-directory is. Normaal gesproken zou een gebruiker dat zelf moeten opgeven, maar doordat `os` geïmporteerd is, kan dat geheel automatisch geregeld worden:
+### Basedir bepalen
 
 ```python
 basedir = os.path.abspath(os.path.dirname(__file__))
 ```
 
-Er gebeurt hier het volgende:
+Deze regel bepaalt waar je database bestand komt te staan:
 
-Er wordt achteraan begonnen. Op de plaats van `__file__` wordt bij het runnen de naam van de Python-file ingevuld, hier wordt dat dan `BasisModelApp.py`.
+1. `__file__` - Naam van het huidige Python bestand (`basic_model_app.py`)
+2. `os.path.dirname(__file__)` - Directory waar dit bestand staat
+3. `os.path.abspath()` - Volledig absoluut pad
 
-`(os.path.dirname(__file__)` gaat op zoek naar de plek waar `basic_model_app.py` te vinden is. Dat zou hier zoiets zijn als `IdeaProjects/Flask_database/basic_model_app.py`.
+Voorbeeld: `/Users/jouw-naam/IdeaProjects/Flask_database/basic_model_app.py`
 
-De call naar `os.path.abpath()` levert het gehele pad op. In dit geval wordt het dus `/Users/tath/IdeaProjects/Flask_database/basic_model_app.py`.
-Zoals gezegd, deze regel hoeft één keer aangemaakt te worden en kan veel vaker gebruikt worden. Het maakt ook niet uit of het gaat om een Windows-machine, een Mac OS of een Linux, het pad staat vast.
-En op die plek wordt de database gebouwd.
+Deze code werkt op Windows, macOS en Linux - het pad wordt automatisch correct bepaald.
 
-Vervolgens wordt de applicatie aangemaakt:
+### Flask app aanmaken
 
 ```python
 app = Flask(__name__)
 ```
 
-#### Connectie tussen python en de database
-
-Hierna moet de connectie gelegd worden tussen de Flask-applicatie en de database (let op: deze regels kunnen wat lang zijn, dus je moet misschien even een beetje naar rechts scrollen):
+### Database configuratie
 
 ```python
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 ```
 
-De bovenste regel is een *must*, en is vergelijkbaar met de noodzaak een geheime sleutel op te voeren wanneer Flask gekoppeld is aan een formulier. De kern van deze regel is dat hier de applicatie verteld wordt waar de database gevonden kan worden.
-In de opgegeven basis-directory wordt dan gezocht naar de file `data.sqlite`.
+**Eerste regel**: Vertelt Flask waar de database bestand staat. De database wordt `data.sqlite` genoemd en staat in dezelfde directory als `basic_model_app.py`.
 
-De tweede regel geeft aan dat in dit geval geen modificaties gewenst zijn. Niet iedere aanpassing hoeft uitgebreid getoond te worden. De default-waarde in ingesteld op `True`, vandaar deze extra regel.
+**Tweede regel**: Schakelt modification tracking uit. Deze feature is nuttig voor debugging, maar kost geheugen. Standaard staat het aan (`True`), daarom expliciet uitzetten.
 
-Deze laatste regel koppelt database en applicatie:
+### SQLAlchemy koppelen
 
 ```python
 db = SQLAlchemy(app)
 ```
 
-De laatst besproken vier (4) coderegels (`app = Flask(__name__)` telt niet mee) zorgen ervoor dat de SQL-database wordt aangemaakt waarbij uitsluitend coderegels gebruikt worden en geen SQL-statements.
+Dit object (`db`) gebruik je voor alle database operaties.
 
-#### Model
+## Model definiëren
 
-Nu kan het *Model* aangemaakt worden. Daarvoor dient een klasse gecreëerd te worden. Model klinkt indrukwekkend, maar het is niets meer dan een representatie van een tabel in de database.
-De eerste tabel krijgt de naam ‘Cursist’ mee:
+Een **model** is een Python class die een database tabel representeert. Je schrijft de class, SQLAlchemy maakt de tabel.
 
-```python
-class Cursist(db.Model):
-```
-
-De applicatie is gekoppeld aan de database db die nu in elk geval al kan beschikken over een Model-klasse. Zonder tegenspraak wordt de naam van de klasse ook vastgelegd als naam van de tabel. Is er een andere naam gewenst, bijvoorbeeld *cursisten* dan kan dat aangepast worden.
+### Basis model
 
 ```python
 class Cursist(db.Model):
-    # __tablename__ = 'cursisten'
+    """Model voor cursisten van de muziekschool."""
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
+    leeftijd: Mapped[int | None]
+
+    def __init__(self, naam: str, leeftijd: int):
+        """Maak nieuwe cursist aan.
+
+        Args:
+            naam: Voor- en achternaam
+            leeftijd: Leeftijd in jaren
+        """
+        self.naam = naam
+        self.leeftijd = leeftijd
+
+    def __repr__(self) -> str:
+        """String representatie voor debugging."""
+        return f"Cursist {self.naam} is {self.leeftijd} jaar oud."
 ```
 
-Alles staat nu klaar, de kolommen kunnen opgegeven worden. Hier is voor de demonstratie gekozen slechts een beperkt aantal kenmerken van iedere cursist op te nemen.
-Het zijn er drie: `id`, `voornaam` en `leeftijd`.
+**Class definitie**:
 
-Het `id` is van het type `integer` en wordt de primaire sleutel van de tabel. Naam is een tekstveld en in de kolom leeftijd moet een getal komen te staan, dus dat wordt een `integer`:
+- Erft van `db.Model` - dit maakt het een SQLAlchemy model
+- Standaard wordt de tabel ook `cursist` genoemd (kleine letter)
 
-```python
-id = db.Column(db.Integer,primary_key=True)
-naam = db.Column(db.Text)
-leeftijd = db.Column(db.Integer)
-```
+**Kolommen**:
 
-Hierna krijgt de klasse Cursist zijn constructor (`__init__()`):
+- `id` - Integer, primary key (uniek nummer per cursist)
+- `naam` - Text veld
+- `leeftijd` - Integer
 
-```python
-def __init__(self,naam,leeftijd):
-    self.naam = naam
-    self.leeftijd = leeftijd
-```
+**Constructor**:
 
-Bij het invoeren van een nieuwe cursist zijn naam en leeftijd verplicht. Er wordt automatisch een nieuw id toegevoegd op het moment dat er een nieuwe cursist wordt opgevoerd.
+- Naam en leeftijd zijn verplicht bij aanmaken
+- ID wordt automatisch gegenereerd
 
-Tot slot nog de methode `__repr__()`. Zoals we al eerder hebben gezien wordt deze methode gebruikt om een stringvoorstelling van een Python-object te krijgen. Met de methode `__repr__()` is het mogelijk een query te maken vanuit de database en het resultaat van de query afdrukken.
+**`__repr__` methode**:
 
-```python
-def __repr__(self):
-    return f"Cursist {self.naam} is {self.leeftijd} jaar oud."
-```
+- Geeft leesbare tekst bij printen van objecten
+- Handig bij debugging en queries
 
-Tot zover de basiscode voor het opzetten van een database. Een aantal elementen van de code worden geïmporteerd in de file `setup_database.py`, waarin de eerste records aan de database toegevoegd zullen worden.
+!!! tip "Custom tabelnaam"
+    Wil je een andere tabelnaam dan de class naam? Voeg `__tablename__` toe:
+    ```python
+    class Cursist(db.Model):
+        __tablename__ = 'cursisten'
+        # ...
+    ```
 
-## 2. `setup_database.py`
+## 2. Database aanmaken (`setup_database.py`)
 
-Voor de tweede stap maken we gebruik van het bestand [`setup_database.py`](bestanden/crud/setup_database.py). Let wel: Dit is een heel eenvoudig script dat laat zien hoe een database in te stellen. Later worden hierbij weer templates gebruikt.
+Bestudeer het volledige bestand [`setup_database.py`](bestanden/crud/setup_database.py).
 
-Ook voor deze file zal de opbouw van de code stap voor stap beschreven worden. In de eerste plaats worden er een aantal elementen uit de file `basic_model_app.py` geïmporteerd:
+Dit eenvoudige script maakt de database aan en voegt eerste data toe.
+
+### Database aanmaken
 
 ```python
 from basic_model_app import db, Cursist
-```
 
-De database en de tabel Cursist zijn ingeladen en nu moet de database en het bestand worden aangemaakt. Daarvoor is onderstaand commando beschikbaar:
-
-```python
+# Maak database bestand en tabellen aan
 db.create_all()
 ```
 
-#### Toevoegen van records
+`db.create_all()` leest alle models en maakt de bijbehorende tabellen in de database. Het `data.sqlite` bestand wordt nu aangemaakt.
 
-Wanneer tabel klaar staat kunnen de eerste records toegevoegd worden:
+### Records toevoegen
 
 ```python
+# Maak objecten aan
 joyce = Cursist('Joyce', 36)
-bram = Cursist('Bram',24)
-```
+bram = Cursist('Bram', 24)
 
-De objecten zijn aangemaakt, maar zijn nog niet bekend bij de database. Dat kan als volgt:
-
-```python
+# Voeg toe aan database sessie
 db.session.add_all([joyce, bram])
-```
 
-De id's worden dus automatisch aangemaakt zodra de gegevens aan de database zijn toegevoegd.
-De data kan definitief vastgelegd worden door de functie `commit()`:
-
-```python
+# Schrijf definitief naar database
 db.session.commit()
 ```
 
-Als alles naar behoren is ingevoerd kan getest worden of de gegevens inderdaad zijn vastgelegd in de database. Daarvoor vragen we de beide id’s op uit de tabel Cursist. De nummers 1 en 2 zouden te zien moeten zijn:
+**Stappen**:
+
+1. Maak Python objecten aan
+2. Voeg ze toe aan de database sessie met `add_all()`
+3. Commit de sessie - nu worden ze écht opgeslagen
+
+**Database sessie**: Verzamelt alle wijzigingen en schrijft ze in één keer weg. Dit is efficiënter dan elke toevoeging apart opslaan.
+
+### ID's controleren
 
 ```python
-print(joyce.id)
-print(bram.id)
+print(joyce.id)  # 1
+print(bram.id)   # 2
 ```
 
-Het resultaat:
+De ID's worden automatisch toegekend bij `commit()`.
+
+Output:
 
 ```console
-> 1
-> 2
+1
+2
 ```
 
+## Complete code overzicht
+
+Je hebt nu:
+
+1. **`basic_model_app.py`** - Database configuratie + Cursist model
+2. **`setup_database.py`** - `db.create_all()` + initiële data
+
+Wanneer je `setup_database.py` runt:
+
+- Database bestand `data.sqlite` wordt aangemaakt
+- Tabel `cursist` wordt aangemaakt met drie kolommen
+- Twee records worden toegevoegd
+
+**Volgende stap:** [Deel 3](flask-views-deel3.md) - CRUD operaties uitvoeren.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Basedir bepalen**: met `os.path.abspath(os.path.dirname(__file__))` stel je platformonafhankelijk het absolute pad in van de map waarin je bestand staat.
+- **Database-URI**: via `app.config['SQLALCHEMY_DATABASE_URI']` vertel je Flask waar het SQLite-bestand (`data.sqlite`) staat.
+- **SQLALCHEMY_TRACK_MODIFICATIONS**: deze instelling schakel je expliciet uit (op `False`) om onnodig geheugengebruik te vermijden.
+- **SQLAlchemy koppelen**: `db = SQLAlchemy(app)` maakt het `db`-object aan waarmee je alle database-operaties uitvoert.
+- **Model definiëren**: een modelklasse erft van `db.Model`, gebruikt `Mapped` en `mapped_column` voor kolomdefinities, en bevat een `__init__`- en een `__repr__`-methode.
+- **Tabelnaam aanpassen**: met het klasse-attribuut `__tablename__` geef je de databasetabel een andere naam dan de standaard (lowercase klassenaam).
+- **Tabellen aanmaken**: `db.create_all()` leest alle models en maakt de bijbehorende tabellen aan in de database.
+- **Records toevoegen**: met `db.session.add_all([...])` gevolgd door `db.session.commit()` voeg je meerdere objecten tegelijk toe en sla je ze definitief op.
+- **Automatische ID's**: primaire sleutels worden pas toegewezen na `db.session.commit()`; daarna zijn ze als attribuut op het object beschikbaar.

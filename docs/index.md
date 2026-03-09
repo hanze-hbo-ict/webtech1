@@ -6,13 +6,11 @@ Zoals altijd hebben we ook in deze module te maken met versies van de afhankelij
 
 De module is onderdeel van de propedeuse van de opleiding HBO-ICT en is daarom bewust breed van ondiep van opzet: we bespreken alle facetten en alle lagen waar webtechnologie mee te maken heeft, maar gaan nergens echt de diepte in. Het web is een complex apparaat waarin veel verschillende technieken samenwerken en het is binnen het tijdsbestek van tien weken niet mogelijk om die allemaal uit ten treure te behandelen. Voor deze propedeutische fase is het voldoende wanneer deelnemers aan het eind voldoende <i>working knowledge</i> van dit alles hebben. Bij de opleiding Software Engineering komt het web nog uitgebreid aan de orde in semester vier.
 
-
 ## Opzet van het thema
 
 Elke week staat een specifiek onderdeel van het web centraal. Dit onderwerp wordt ondersteund door een vooraf opgenomen theorieles die studenten in hun eigen tijd kunnen doornemen. Hiernaast zijn er werkcolleges, waarin studenten werken aan oefeningen die het onderwerp van die week via een meer praktische weg over het voetlicht brengen. Vanaf week vijf werken studenten in duo’s aan hun eigen project, op basis waarvan de beoordeling plaatsvindt.
 
 Elke klas heeft twee werkcolleges per week. Bij dit werkcollege wordt de theoretische opzet nog een keer praktisch uitgebreid toegelicht. Per week zijn er ook oefeningen gegeven waar studenten individueel of met hun projectduopartner aan kunnen werken. De werkcolleges zijn verder natuurlijk bedoeld om te werken aan het project; de practiumdocent is dan aanwezig om vragen te stellen of te beantwoorden.
-
 
 ## Weekplanning
 
@@ -22,7 +20,7 @@ P-weeknummer | Onderwerpen
 ---|---
 1 | [Front-end, html en css](week1/1.html/html-deel1.md)
 2 | [Python OOP](week2/oop-deel1.md)
-3 | _voorjaarsvakantie_
+3 | *voorjaarsvakantie*
 4 | [Python en databases](week3/sql-deel1.md)
 5 | [Flask en Jinja-templates](week4/flask-deel1.md)
 6 | [Flask en formulieren](week5/flask-forms-deel1.md)

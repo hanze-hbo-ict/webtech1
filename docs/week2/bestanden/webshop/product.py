@@ -2,43 +2,67 @@ import random
 
 
 class Product:
-    """Basisklasse voor alle producten in de webshop"""
+    """Basisklasse voor alle producten in de webshop."""
 
-    def __init__(self, naam, prijs, voorraad):
-        self._naam = naam
-        self._prijs = prijs
-        self._voorraad = voorraad
+    def __init__(self, naam: str, prijs: float, voorraad: int):
+        """Maak een nieuw product aan.
 
-    def verkoop(self, aantal):
-        """Verkoop een aantal items van dit product"""
-        nieuwe_voorraad = self._voorraad - aantal
-        if nieuwe_voorraad >= 0:
-            self._voorraad = nieuwe_voorraad
-            print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
+        Args:
+            naam: Naam van het product
+            prijs: Prijs in euro's
+            voorraad: Aantal items op voorraad
+        """
+        self.naam = naam
+        self.prijs = prijs
+        self.voorraad = voorraad
+
+    def verkoop(self, aantal: int) -> bool:
+        """Verkoop een aantal items van dit product.
+
+        Args:
+            aantal: Aantal items om te verkopen
+
+        Returns:
+            True als verkoop succesvol, False bij onvoldoende voorraad
+        """
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
         else:
-            print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
+            return False
 
-    def __str__(self):
-        return f"Product: {self._naam}, Prijs: €{self._prijs:.2f}, Voorraad: {self._voorraad}"
+    def __str__(self) -> str:
+        """String representatie van het product."""
+        return f"Product: {self.naam}, Prijs: €{self.prijs:.2f}, Voorraad: {self.voorraad}"
 
 
 class FysiekProduct(Product):
-    """Subklasse voor fysieke producten die verzonden moeten worden"""
+    """Subklasse voor fysieke producten die verzonden moeten worden."""
 
-    def __init__(self, naam, prijs, voorraad, gewicht=0.0):
+    def __init__(self, naam: str, prijs: float, voorraad: int, gewicht: float = 0.0):
+        """Maak een fysiek product aan.
+
+        Args:
+            naam: Naam van het product
+            prijs: Prijs in euro's
+            voorraad: Aantal items op voorraad
+            gewicht: Gewicht in kilogram (default: 0.0)
+        """
         super().__init__(naam=naam, prijs=prijs, voorraad=voorraad)
-        self._gewicht = gewicht
+        self.gewicht = gewicht
 
-    def bereken_verzendkosten(self):
-        """Bereken verzendkosten op basis van gewicht"""
-        if self._gewicht <= 1.0:
-            kosten = 3.95
-        elif self._gewicht <= 5.0:
-            kosten = 6.95
+    def bereken_verzendkosten(self) -> float:
+        """Bereken verzendkosten op basis van gewicht.
+
+        Returns:
+            Verzendkosten in euro's
+        """
+        if self.gewicht <= 1.0:
+            return 3.95
+        elif self.gewicht <= 5.0:
+            return 6.95
         else:
-            kosten = 9.95
-        print(f"Verzendkosten voor {self._naam}: €{kosten:.2f}")
-        return kosten
+            return 9.95
 
 
 # Hier kun je de klasse DigitaalProduct toevoegen tijdens oefening 2

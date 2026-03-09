@@ -25,7 +25,7 @@ __Stap 1:__ html-document zonder koppeling naar Bootstrap.
 
 __Stap 2:__ Toevoegen links van Bootstrap.
 
-Ieder html-document dat gebruik wil maken van de faciliteiten die door Bootstrap aangeboden worden, dient de benodigde links in de `<head>`-sectie op te nemen. Deze links kunnen gekopieerd worden van de site https://getbootstrap.com/, [zoals we al besproken hebben](bootstrap-deel1.md).
+Ieder html-document dat gebruik wil maken van de faciliteiten die door Bootstrap aangeboden worden, dient de benodigde links in de `<head>`-sectie op te nemen. Deze links kunnen gekopieerd worden van de site <https://getbootstrap.com/>, [zoals we al besproken hebben](bootstrap-deel1.md).
 
 ```html
 <!DOCTYPE html>
@@ -33,13 +33,11 @@ Ieder html-document dat gebruik wil maken van de faciliteiten die door Bootstrap
     <head>
         <title>Met</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </head>
     <body>
 
@@ -56,7 +54,7 @@ Nog een geluk dat de links gekopieerd kunnen worden.
 Een duidelijk verschil. De marges en het lettertype is aangepast door de Bootstrap-instellingen.
 
 !!! info "width en init-scale"
-    Bootstrap 4 is ontworpen om te kunnen werken met mobiele apparaten. Daarvoor is een `<meta>`-tag toegevoegd. Hier geven we twee waarden aan mee. Door te stellen dat `width = device-width` wordt de breedte van de pagina hetzelfde als de schermbreedte van het apparaat (dit is afhankelijk van het apparaat); `initial-scale = 1` stelt het initiële zoomniveau in, wanneer de pagina voor het eerst wordt geladen door de browser.
+    Bootstrap 5 is ontworpen om te kunnen werken met mobiele apparaten. Daarvoor is een `<meta>`-tag toegevoegd. Hier geven we twee waarden aan mee. Door te stellen dat `width = device-width` wordt de breedte van de pagina hetzelfde als de schermbreedte van het apparaat (dit is afhankelijk van het apparaat); `initial-scale = 1` stelt het initiële zoomniveau in, wanneer de pagina voor het eerst wordt geladen door de browser.
 
 __Stap3:__ Container toevoegen.
 
@@ -72,33 +70,33 @@ Bootstrap vereist een omvattend element om de inhoud van de site in te pakken. H
 
 ![Container](imgs/bootstrap3.png)
 
-__Stap 4:__ Jumbotron.
+__Stap 4:__ Hero sectie.
 
-Een jumbotron zorgt voor een groot grijs vak, om speciale inhoud of informatie te accentueren. In een jumbotron kan nagenoeg elke geldige HTML geplaatst worden, inclusief andere Bootstrap-elementen of -klassen.
+In Bootstrap 5 is de jumbotron vervangen door utility classes. We kunnen een vergelijkbaar effect creëren met een `<div>` met een achtergrondkleur en padding. Dit maakt een prominente sectie om speciale inhoud of informatie te accentueren.
 
-Om een jumbotron aan te maken, is een `<div>`-element nodig met klasse `jumbotron`.
+In deze hero sectie kan nagenoeg elke geldige HTML geplaatst worden, inclusief andere Bootstrap-elementen of -klassen.
 
 ```html
 <body>
     <div class="container">
         <h1>Hello, world</h1>
 
-        <div class="jumbotron">
-            <h1 class="display-3">Hello, Jumbotron!</h1>
+        <div class="bg-light p-5 rounded">
+            <h1 class="display-3">Hello, Hero!</h1>
 
-            <p class="lead">Dit is een eenvoudige paragraaf, waarbij gebruik gemaakt wordt van de jumbotron, om extra aandacht te vragen voor dit specifieke onderdeel.</p>
+            <p class="lead">Dit is een eenvoudige paragraaf, waarbij gebruik gemaakt wordt van een hero sectie, om extra aandacht te vragen voor dit specifieke onderdeel.</p>
         </div>
     </div>
 </body>
 ```
 
-![Jumobtron](imgs/bootstrap4.png)
+![Hero sectie](imgs/bootstrap4.png)
 
 __Stap 5:__ Knoppen toevoegen.
 
 Bootstrap kent ook verschillende typen knoppen. Eén van de voordelen hiervan is dat door het algemene gebruik van Bootstrap de meeste mensen bekend zijn met de betekenis van de specifieke vorm van de knoppen, en de interactie met je site dus soepeler gaat lopen.
 
-We gaan nu ook knoppen aan ons voorbeeld toevoegen. Als je de component *Buttons* [op de site van Bootstrap](https://getbootstrap.com/docs/5.0/components/buttons/) selecteert, krijg je te zien welke buttons er allemaal bestaan. Zie het voorbeeld hieronder (om het geheel overzichtelijk laten we de container met de jumbotron achterwege).
+We gaan nu ook knoppen aan ons voorbeeld toevoegen. Als je de component *Buttons* [op de site van Bootstrap](https://getbootstrap.com/docs/5.3/components/buttons/) selecteert, krijg je te zien welke buttons er allemaal bestaan. Zie het voorbeeld hieronder (om het geheel overzichtelijk laten we de container met de hero sectie achterwege).
 
 ```html
 <div class="container">
@@ -143,10 +141,10 @@ In de html hieronder hebben we nog een paar wijzigingen aan onze geweldige site 
         <button class="btn btn-success btn-lg active" type="button"       name="button">Button</button>
         <button class="btn " disabled type="button" name="button">Disabled Button</button>
 
-        <div class="jumbotron">
-            <h1 class="display-3">Hello, Jumbotron!</h1>
+        <div class="bg-light p-5 rounded mt-3">
+            <h1 class="display-3">Hello, Hero!</h1>
 
-            <p class="lead">Dit is een eenvoudige paragraaf, waarbij gebruik gemaakt wordt van de jumbotron, om extra aandacht te vragen voor dit specifieke onderdeel.</p>
+            <p class="lead">Dit is een eenvoudige paragraaf, waarbij gebruik gemaakt wordt van een hero sectie, om extra aandacht te vragen voor dit specifieke onderdeel.</p>
 
             <p>We maken hier gebruik van een paragraaf, om de spatiëring een de ruimte tussen de container te regelen..</p>
 
@@ -159,13 +157,3 @@ In de html hieronder hebben we nog een paar wijzigingen aan onze geweldige site 
 ```
 
 ![bootstap 7](imgs/bootstrap7.png)
-
-
-
-
-
-
-
-
-
-

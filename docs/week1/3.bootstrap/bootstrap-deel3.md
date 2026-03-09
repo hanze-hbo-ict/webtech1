@@ -2,6 +2,9 @@
 
 Eén van de meest gebruikte onderwerpen bij het ontwikkelen van een webapplicatie is het werken met formulieren. Basis hiervoor is html-code, aangevuld met de Bootstrap-links. De `<input>`-tag wordt veelvuldig gebruikt, in meerdere variaties en in combinatie met de klassen van Bootstrap.
 
+!!! info "Bootstrap 5 formulieren"
+    In Bootstrap 5 is de formulier styling aangepast. De klasse `form-group` is vervangen door `mb-3` (margin-bottom) en formulier labels gebruiken nu de `form-label` klasse voor betere styling en toegankelijkheid.
+
 Aan de hand van een kant-en-klaar formulier wordt de onderliggende code besproken. De volledige code kan weer in de documentatie gevonden worden. Uiteraard worden de items op het formulier opgenomen in het html-document tussen de tags `<form>` en `</form>`. Bovendien wordt het gehele formulier in een container ingebed. Dat alles levert de volgende basis op:
 
 ```html
@@ -18,9 +21,9 @@ Aan de hand van een kant-en-klaar formulier wordt de onderliggende code besproke
 ### Email-adres
 
 ```html
-<div class="form-group">
-    <label for="e-mail">E-mailadres</label>
-    <input type="email" class="form-control" id="e-mail" aria-	describedby="emailHelp" placeholder="E-mailadres">
+<div class="mb-3">
+    <label for="e-mail" class="form-label">E-mailadres</label>
+    <input type="email" class="form-control" id="e-mail" aria-describedby="emailHelp" placeholder="E-mailadres">
     <small id="emailHelp" class="form-text text-muted">
         Wij geven uw persoonlijke gegevens nooit door
         aan andere organisaties.
@@ -28,15 +31,15 @@ Aan de hand van een kant-en-klaar formulier wordt de onderliggende code besproke
 </div>
 ```
 
-Het meeste uit het bovenstaande zal je bekend voorkomen uit de vorige paragrafen. Nieuw is de `div` met class `form-group`: dit geeft aan welke `input`-elementen bij elkaar horen, welke begeleidende tekst daarbij hoort, enzovoort.
+Het meeste uit het bovenstaande zal je bekend voorkomen uit de vorige paragrafen. Nieuw is de `div` met class `mb-3`: dit zorgt voor margin-bottom spacing en geeft aan welke `input`-elementen bij elkaar horen, welke begeleidende tekst daarbij hoort, enzovoort.
 
 ![Form1](imgs/bootstrap_form1.png)
 
 ### Wachtwoord
 
 ```html
-<div class="form-group">
-    <label for="password">Wachtwoord</label>
+<div class="mb-3">
+    <label for="password" class="form-label">Wachtwoord</label>
     <input type="password" class="form-control" id="password" placeholder="Wachtwoord">
 </div>
 ```
@@ -46,8 +49,8 @@ Het meeste uit het bovenstaande zal je bekend voorkomen uit de vorige paragrafen
 ### Keuzelijstje
 
 ```html
-<div class="form-group">
-    <label for="keuze">Betaalwijze</label>
+<div class="mb-3">
+    <label for="keuze" class="form-label">Betaalwijze</label>
     <select class="form-control" id="keuze">
         <option>iDeal</option>
         <option>Cash</option>
@@ -60,11 +63,11 @@ Het meeste uit het bovenstaande zal je bekend voorkomen uit de vorige paragrafen
 
 ![Forms 3](imgs/bootstrap_form3.png)
 
-### Keuzelijst met meerdere keuzemogelijkheden:
+### Keuzelijst met meerdere keuzemogelijkheden
 
 ```html
-<div class="form-group">
-    <label for="exampleSelect2">Welke instrumenten bespeelt u</label>
+<div class="mb-3">
+    <label for="exampleSelect2" class="form-label">Welke instrumenten bespeelt u</label>
     <select multiple class="form-control" id="exampleSelect2">
         <option>Piano</option>
         <option>Kerkorgel</option>
@@ -80,8 +83,8 @@ Het meeste uit het bovenstaande zal je bekend voorkomen uit de vorige paragrafen
 ### Tekstvak
 
 ```html
-<div class="form-group">
-    <label for="tekstvak">Eventuele op- of aanmerkingen:</label>
+<div class="mb-3">
+    <label for="tekstvak" class="form-label">Eventuele op- of aanmerkingen:</label>
     <textarea class="form-control" id="tekstvak" rows="3"></textarea>
 </div>
 ```
@@ -93,23 +96,23 @@ Het meeste uit het bovenstaande zal je bekend voorkomen uit de vorige paragrafen
 De eerste is checked, en de derde disabled. Let ook op de nieuwe `fieldset`-tag.
 
 ```html
-<fieldset class="form-group">
+<fieldset class="mb-3">
     <legend>Radio buttons</legend>
     <div class="form-check">
         <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" 	id="optionsRadios1" value="option1" checked>
+        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
         Er is al een selectie gemaakt voor u&mdash; dat is een uitstekende keuze
         </label>
     </div>
     <div class="form-check">
         <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" 	id="optionsRadios2" value="option2">
+        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
         Wordt voor optie 2 gekozen, wordt de keuze voor optie 1 ongedaan gemaakt.
         </label>
     </div>
     <div class="form-check disabled">
         <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="optionsRadios" 	id="optionsRadios3" value="option3" disabled>
+        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
         Optie drie kan niet gekozen worden.
         </label>
     </div>

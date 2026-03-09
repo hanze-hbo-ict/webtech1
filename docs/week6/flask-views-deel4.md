@@ -1,214 +1,350 @@
-# Flask en SQL - Relaties
+# Flask en SQLAlchemy - Relaties tussen tabellen
 
-Bij grotere projecten zijn altijd meerdere modellen (tabellen) beschikbaar. Die modellen hebben een relatie met elkaar. Tot nu toe is er gewerkt met `Cursist` als model. Daarnaast bestaat er ook een model `Instrument`, waar de gegevens van de instrumenten beheerd worden, waarin de muziekschool lesgeeft. Een derde model wat erg voor de hand ligt is `Docent`. Docenten geven les aan cursisten om hen een instrument te leren bespelen.
+In grotere projecten heb je meerdere modellen die met elkaar samenhangen. Tot nu toe heb je gewerkt met één model (`Cursist`). De muziekschool heeft ook:
 
-In deze demonstratie is het uitgangspunt dat cursisten meerdere instrumenten kunnen leren bespelen en dat de lessen door een enkele docent gegeven worden. Om de boel op dit moment niet nodeloos complex te maken, stellen we even dat een instrument maar door één cursist kan worden bespeeld. Het strokendiagram van de database wordt dan als volgt:
+- **Instrument** - Instrumenten waarin de school lesgeeft
+- **Docent** - Docenten die les geven
 
-![Strokendiagram van de database](imgs/strokendiagram.png)
+Deze modellen hebben relaties met elkaar:
 
-### Sleutels
+- Een cursist kan **meerdere instrumenten** leren bespelen (één-op-veel)
+- Een cursist heeft **één docent** (één-op-één)
+- Een instrument wordt (in dit voorbeeld) door **één cursist** bespeeld
 
-Om relaties te kunnen begrijpen is het nodig nog even kort aandacht te besteden aan een tweetal belangrijke termen, de primaire sleutel (__primary key__) en de refererende sleutel (__foreign key__).
+```mermaid
+erDiagram
+    Cursist ||--o{ Instrument : "bespeelt (cursist_id)"
+    Cursist ||--o| Docent : "begeleid door (cursist_id)"
+```
 
-De modellen (tabellen) krijgen de volgende structuur:
+## Sleutels
+
+### Primary Key (Primaire sleutel)
+
+Elk model heeft een `id` kolom die de **primary key** is. Deze waarde is uniek per record en identificeert één specifieke rij.
 
 `Cursist`:
 
-- id (primaire sleutel, type integer)
-- naam (type text)
+- id (primary key, integer)
+- naam (text)
 
 `Instrument`:
 
-- id (primaire sleutel, type integer)
-- naam (type text)
+- id (primary key, integer)
+- naam (text)
 
 `Docent`:
 
-- id (primaire sleutel, type integer)
-- naam (type text)
+- id (primary key, integer)
+- naam (text)
 
-Een primair sleutelveld zorgt ervoor dat elke rij uit het model uniek is. Een primaire sleutel mag bij geen enkel model een dubbele waarde krijgen. Omdat er een index als primair sleutelveld gebruikt wordt hoeven we ons daar geen zorgen om te maken.
+### Foreign Key (Refererende sleutel)
 
-Telkens wanneer er een nieuw object van de klasse `Instrument` wordt aangemaakt, kunnen we aangeven welke cursist dat instrument gaat bespelen. Hetzelfde geldt voor ieder nieuw object uit de klasse `Docent` – ook hiervan kunnen we aangeven welk instrument die docent gaat doceren. 
+Om een **relatie** te leggen tussen tabellen gebruik je een **foreign key**. Dit is een kolom die verwijst naar de `id` van een ander model.
 
-Er wordt dan gevraagd welke cursist door deze docent begeleid gaat worden. En daarbij komen dan de refererende sleutels om de hoek kijken. Er moet een relatie worden geïntroduceerd tussen cursist en instrument en tussen cursist en docent. Bij het opzetten van de file `models.py` komt dit nog uitgebreid ter sprake.
+Voorbeeld: `Instrument` moet weten welke cursist het instrument bespeelt. Daarom krijgt `Instrument` een `cursist_id` kolom die verwijst naar `Cursist.id`.
 
-## `models.py`
-De opzet van deze applicatie wordt gedaan door eerst weer een nieuw project op te starten met de naam ‘Relaties’. Daarom is het nodig als eerste een opzet van de database aan te maken. Daarvoor wordt de file [`models.py`](bestanden/relaties/models.py) in het leven geroepen.
+## Database migraties met Flask-Migrate
 
-Als eerste moeten natuurlijk weer de gebruikelijke zaken geïmporteerd worden. Daarna wordt aangegeven op welke plaats zich de basis directory bevindt. De actie wordt gevolgd door het aanmaken van de applicatie en de bijbehorende acties met `SQLALCHEMY`. Aan het einde van dit eerste blok worden applicatie en database weer aan elkaar gekoppeld en wordt het migratiepad ingericht.
+Bij het werken met relaties is het handig om **Flask-Migrate** te gebruiken. Dit pakket helpt bij het aanmaken en wijzigen van database schema's.
+
+Installeer Flask-Migrate:
+
+```console
+uv add flask-migrate
+```
+
+Flask-Migrate houdt bij welke wijzigingen je in je models maakt en past de database automatisch aan.
+
+## Models met relaties (`models.py`)
+
+Bestudeer het volledige bestand [`models.py`](bestanden/relaties/models.py).
+
+### Setup
 
 ```python
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
-# Koppelt de Flask-applicatie met de database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-Migrate(app,db)
+Migrate(app, db)
 ```
 
-Het model `Cursist`:
+`Migrate(app, db)` koppelt Flask-Migrate aan je applicatie.
+
+### Cursist model met relaties
 
 ```python
 class Cursist(db.Model):
+    """Cursist van de muziekschool."""
 
     __tablename__ = 'cursisten'
 
-    id = db.Column(db.Integer,primary_key = True)
-    naam = db.Column(db.Text)
-    # cursist heeft een één-op-veel relatie met instrument
-    instrumenten = db.relationship('Instrument',backref='cursist',lazy='dynamic')
-    # cursist heeft een één-op-een relatie met docent
-    docent = db.relationship('Docent',backref='cursist',uselist=False)
-```
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
 
-Er wordt wat nader ingegaan op de relatie-aspecten. Aangegeven is dat de relatie tussen cursisten en instrumenten, een één-op-een relatie is. De coderegel nader uitgelegd:
+    # Één-op-veel relatie met instrumenten
+    instrumenten: Mapped[list['Instrument']] = relationship(back_populates='cursist')
 
-```python
-instrumenten = db.relationship('Instrument',backref='cursist',lazy='dynamic')
-```
+    # Één-op-één relatie met docent
+    docent: Mapped['Docent | None'] = relationship(back_populates='cursist')
 
-In de variabele `instrumenten` wordt vastgelegd dat binnen deze database er een relatie bestaat naar `Instrument` toe en dat er voor de methode `lazy=’dynamic’` gekozen is.
+    def __init__(self, naam: str):
+        """Maak nieuwe cursist aan.
 
-De lazy-parameter bepaalt hoe de gerelateerde objecten worden geladen bij het doorzoeken van relaties. Er kan uit vier (4) verschillende opties gekozen worden. In de meeste gevallen wordt er een keuze voor `‘dynamic’` gemaakt. De andere drie mogelijke parameterinvullingen zijn:
-
-- `select` (of `True`)
-- `joined` (of `False`)
-- `subquery`
-
-Nu het uitgangspunt is dat er tussen docent en cursist een één-op-één relatie bestaat, moet hier nu ingevuld worden `uselist=False`. Een cursist kan niet meer dan één docent als leraar hebben en een docent, in onze bijzondere muziekschool, heeft maar één cursist.
-
-De klasse `Cursist` krijgt ook nog de beschikking over de volgende methoden:
-
-```python
-    def __init__(self,naam):
+        Args:
+            naam: Voor- en achternaam
+        """
         self.naam = naam
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """String representatie."""
         if self.docent:
             return f"Cursist {self.naam} heeft {self.docent.naam} als docent"
         else:
             return f"Cursist {self.naam} heeft nog geen docent toegewezen gekregen"
 
-    def overzicht_instrumenten(self):
-        print("Mijn instrumenten:")
-        for instr in self.instrumenten:
-            print(instr.naam)
+    def overzicht_instrumenten(self) -> list[str]:
+        """Geef lijst van instrumentnamen terug.
+
+        Returns:
+            Lijst met namen van instrumenten
+        """
+        return [instr.naam for instr in self.instrumenten]
 ```
 
-De methode `overzicht_instrumenten` toont de instrumenten waar een cursist momenteel les in volgt.
+**Relaties uitleg**:
 
-Het model `Instrument`:
+**Één-op-veel (Cursist ↔ Instrumenten)**:
+
+```python
+instrumenten: Mapped[list['Instrument']] = relationship(back_populates='cursist')
+```
+
+- `Mapped[list['Instrument']]` - Lijst van Instrument objecten (één-op-veel)
+- `back_populates='cursist'` - Koppelt aan de `cursist` relatie in het `Instrument` model
+
+**Één-op-één (Cursist ↔ Docent)**:
+
+```python
+docent: Mapped['Docent | None'] = relationship(back_populates='cursist')
+```
+
+- `Mapped['Docent | None']` - Eén object of None (één-op-één)
+
+!!! note "Return values in plaats van print"
+    De `overzicht_instrumenten()` methode **geeft een lijst terug** in plaats van printen. Dit kun je gebruiken in routes en templates.
+
+### Instrument model
 
 ```python
 class Instrument(db.Model):
+    """Instrument waarin de school lesgeeft."""
 
     __tablename__ = 'instrumenten'
 
-    id = db.Column(db.Integer,primary_key = True)
-    naam = db.Column(db.Text)
-    # Er wordt cursisten.id ingevuld vanwege de tabelnaam ='cursisten'
-    cursist_id = db.Column(db.Integer,db.ForeignKey('cursisten.id'))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
 
-    def __init__(self,naam,cursist_id):
+    # Foreign key naar cursisten tabel
+    cursist_id: Mapped[int | None] = mapped_column(ForeignKey('cursisten.id'))
+    cursist: Mapped['Cursist | None'] = relationship(back_populates='instrumenten')
+
+    def __init__(self, naam: str, cursist_id: int):
+        """Maak nieuw instrument aan.
+
+        Args:
+            naam: Naam van het instrument
+            cursist_id: ID van de cursist die dit instrument bespeelt
+        """
         self.naam = naam
         self.cursist_id = cursist_id
 ```
 
+**Foreign key**: `ForeignKey('cursisten.id')` verwijst naar de **tabelnaam** (`cursisten`), niet de class naam.
 
-Het model `Docent`:
+### Docent model
 
 ```python
 class Docent(db.Model):
+    """Docent die lesgeeft aan één cursist."""
 
     __tablename__ = 'docenten'
 
-    id = db.Column(db.Integer,primary_key= True)
-    naam = db.Column(db.Text)
-    cursist_id = db.Column(db.Integer,db.ForeignKey('cursisten.id'))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
 
-    def __init__(self,naam,cursist_id):
+    # Foreign key naar cursisten tabel
+    cursist_id: Mapped[int | None] = mapped_column(ForeignKey('cursisten.id'))
+    cursist: Mapped['Cursist | None'] = relationship(back_populates='docent')
+
+    def __init__(self, naam: str, cursist_id: int):
+        """Maak nieuwe docent aan.
+
+        Args:
+            naam: Voor- en achternaam
+            cursist_id: ID van de cursist die deze docent begeleidt
+        """
         self.naam = naam
         self.cursist_id = cursist_id
 ```
 
-Tot zover de code van de file `models.py`. Om de database aan te maken en om de wijzigingen door te voeren dienen nu de vier stappen van de vorige paragraaf uitgevoerd te worden:
+## Database aanmaken met migraties
 
-- Stel de omgevingsvariabele FLASK_APP in
-    - Voor een MacOS / Linux-machine is dat `export FLASK_APP = models.py`
-    - Voor een Windows-machine, met cmd: `set FLASK_APP = models.py`, met PowerShell: `$Env:FLASK_APP = "models.py"`
+Nu je `models.py` hebt met alle relaties, maak je de database aan:
 
-- `flask db init`
+**1. Stel FLASK_APP in**:
 
-- `flask db migrate`
+=== "Linux / macOS"
+    ```console
+    export FLASK_APP=models.py
+    ```
 
-- `flask db upgrade`
+=== "Windows (cmd)"
+    ```console
+    set FLASK_APP=models.py
+    ```
 
-## Demonstratie
-Nu de tabel is aangemaakt kunnen er gegevens ingebracht worden. Voor deze demonstratie gebruiken we de file [`populate_database.py`](bestanden/relaties/populate_database.py):
+=== "Windows (PowerShell)"
+    ```console
+    $Env:FLASK_APP = "models.py"
+    ```
+
+**2. Initialiseer migraties**:
+
+```console
+flask db init
+```
+
+Dit maakt een `migrations/` directory aan.
+
+**3. Maak eerste migratie**:
+
+```console
+flask db migrate -m "Initial migration"
+```
+
+Flask-Migrate detecteert je models en maakt migratie scripts.
+
+**4. Voer migratie uit**:
+
+```console
+flask db upgrade
+```
+
+Nu worden de tabellen aangemaakt in `data.sqlite`.
+
+## Data toevoegen met relaties
+
+Bestudeer het volledige bestand [`populate_database.py`](bestanden/relaties/populate_database.py).
 
 ```python
-from models import db,Cursist,Instrument,Docent
+from models import db, Cursist, Instrument, Docent
 
-# Maak twee cursisten aan
+# Maak cursisten aan
 joyce = Cursist("Joyce")
 bram = Cursist("Bram")
 
-# Voeg de cursisten toe aan de database en leg ze vast
-db.session.add_all([joyce,bram])
+db.session.add_all([joyce, bram])
 db.session.commit()
 
-# Ter controle een print van alle cursisten, met de teksten van __repr__ uit Cursist
-print(Cursist.query.all())
+# Controleer
+print(db.session.execute(db.select(Cursist)).scalars().all())
+# [Cursist Joyce heeft nog geen docent toegewezen gekregen,
+#  Cursist Bram heeft nog geen docent toegewezen gekregen]
 
-# Vind alle cursisten met de naam “Joyce",
-# worden er meerdere gevonden in de lijst , dan alleen de eerste daarom index [0]
-# Kan ook gevonden worden door .first() te gebruiken i plaats van  .all()[0]
-joyce = Cursist.query.filter_by(naam='Joyce').all()[0]
+# Zoek Joyce op
+joyce = db.session.execute(db.select(Cursist).filter_by(naam='Joyce')).scalar_one_or_none()
 
-# Maak een docent aan voor Joyce
+# Voeg docent toe voor Joyce
 david = Docent("David", joyce.id)
 
-# De instrumenten waar Joyce les in heeft
+# Voeg instrumenten toe voor Joyce
 instr1 = Instrument('Drums', joyce.id)
 instr2 = Instrument("Piano", joyce.id)
 
-# Leg de aanpassingen vast in de database
-# Merk op dat het om verschillende objecten gaat
 db.session.add_all([david, instr1, instr2])
 db.session.commit()
 
-# Nagaan wat de veranderingen voor Joyce hebben opgeleverd.
-joyce = Cursist.query.filter_by(naam='Joyce').first()
+# Check de relaties
+joyce = db.session.execute(db.select(Cursist).filter_by(naam='Joyce')).scalar_one_or_none()
 print(joyce)
+# Cursist Joyce heeft David als docent
 
-# Een overzicht van de instrumenten waar Joyce les in heeft
 print(joyce.overzicht_instrumenten())
-
-# Het is ook mogelijk zaken te verwijderen uit de database:
-# find_cur = Cursist.query.get(1)
-# db.session.delete(find_cur)
-# db.session.commit()
+# ['Drums', 'Piano']
 ```
 
-Na het runnen is dit het resultaat:
+Output:
 
 ```console
 [Cursist Joyce heeft nog geen docent toegewezen gekregen, Cursist Bram heeft nog geen docent toegewezen gekregen]
 Cursist Joyce heeft David als docent
-Mijn instrumenten:
-Drums
-Piano
+['Drums', 'Piano']
 ```
 
-Bovendien kan nagegaan worden hoe de structuur van de database is opgebouwd:
+!!! tip "Query methoden"
+    - `db.session.execute(db.select(Model)).scalars().all()` - Alle records
+    - `db.session.execute(db.select(Model).filter_by(naam='Joyce')).scalar_one_or_none()` - Filter op naam
+    - `db.session.get(Model, id)` - Zoek op primary key
 
-![De structuur van de database](imgs/structuur-database.png)
+De database structuur:
+
+```mermaid
+erDiagram
+    cursisten {
+        int id PK
+        string naam
+    }
+    instrumenten {
+        int id PK
+        string naam
+        int cursist_id FK
+    }
+    docenten {
+        int id PK
+        string naam
+        int cursist_id FK
+    }
+    cursisten ||--o{ instrumenten : "cursist_id"
+    cursisten ||--o| docenten : "cursist_id"
+```
+
+## Relaties gebruiken
+
+Via de `back_populates` parameter kun je in beide richtingen navigeren:
+
+```python
+# Van cursist naar instrumenten
+joyce.instrumenten  # Alle instrumenten van Joyce
+
+# Van instrument naar cursist (via back_populates)
+drums = db.session.execute(db.select(Instrument).filter_by(naam='Drums')).scalar_one_or_none()
+drums.cursist  # Geeft Joyce object terug
+drums.cursist.naam  # "Joyce"
+```
+
+**Volgende stap:** [Deel 5](flask-views-deel5.md) - Complete Flask applicatie met database.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Primary key**: elke tabel heeft een uniek `id`-veld als primaire sleutel waarmee een rij eenduidig geïdentificeerd kan worden.
+- **Foreign key**: een relatie tussen tabellen leg je vast met een `ForeignKey`-kolom die verwijst naar de `id` van een andere tabel; je gebruikt de tabelnaam (bijv. `'cursisten.id'`), niet de klassenaam.
+- **Één-op-veel relatie**: door `Mapped[list['Model']]` te combineren met `relationship(back_populates=...)` koppel je één bovenliggende rij aan meerdere gerelateerde rijen.
+- **Één-op-één relatie**: `Mapped['Model | None']` samen met `relationship(back_populates=...)` koppelt twee rijen één-op-één aan elkaar.
+- **back_populates**: dit parameter synchroniseert de relatie in beide richtingen, zodat je zowel van de bovenliggende als van de onderliggende kant kunt navigeren.
+- **Flask-Migrate**: dit pakket beheert databaseschema-wijzigingen via migratiescripts en installeert met `uv add flask-migrate`; koppelen doe je via `Migrate(app, db)`.
+- **Migratieworkflow**: na modelwijzigingen voer je achtereenvolgens `flask db init`, `flask db migrate -m "..."` en `flask db upgrade` uit om de database bij te werken.
+- **Navigeren via relaties**: dankzij `back_populates` kun je vanuit een object direct gerelateerde objecten ophalen (bijv. `joyce.instrumenten`) of omgekeerd (bijv. `drums.cursist`).

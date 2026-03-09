@@ -2,7 +2,6 @@
 
 Aan het eind van deze tekst maken we [oefening nummer 2](../oefeningen/wk1oefening2.md).
 
-
 Een erg belangrijke schakel tussen een bezoeker en een website of applicatie zijn *formulieren*. Formulieren stellen gebruikers in staat in te loggen, bestellingen te plaatsen, gericht te zoeken naar informatie met behulp van zoekschermen en nog veel meer.
 
 HTML-formulieren worden op een webpagina geplaatst met behulp van de tag `<form>`. Een formulier kan aan een bestaand HTML-document toegevoegd worden. Een formulier begint met `<form>` en helemaal aan het einde van het formulier komt te tag `</form>`.te staan.
@@ -19,7 +18,8 @@ HTML-formulieren worden op een webpagina geplaatst met behulp van de tag `<form>
     Zoals zo vaak in code is het ook handig om *commentaar* in html te zetten. Zoals je hierboven kunt zien, doe je dat in dit specieke geval met `<!--` en `-->`. Als je complexe html aan het schrijven bent, kan het handig zijn om de *eind*-tag van een commentaarregel te voorzien, waarin je aangeeft welke tag je hiermee afsluit...
 
 ## Input-tag
-Het HTML-element `<input>` wordt gebruikt om interactieve besturingselementen te maken voor webgebaseerde formulieren. Dit element wordt gebruikt om gegevens van de gebruiker te accepteren en is één van de krachtigst, meest complexe en gevaarlijkste elementen in heel HTML vanwege het enorme aantal combinaties van invoertypen en attributen – én omdat je hiermee de bezoeker de mogelijkheid biedt om contact met de server te maken.
+
+Het HTML-element `<input>` wordt gebruikt om interactieve besturingselementen te maken voor webgebaseerde formulieren. Dit element wordt gebruikt om gegevens van de gebruiker te accepteren en is één van de krachtigst, meest complexe en gevaarlijkste elementen in heel HTML vanwege het enorme aantal combinaties van invoertypen en attributen, én omdat je hiermee de bezoeker de mogelijkheid biedt om contact met de server te maken.
 
 Alle `<input>`-tags kennen het attribuut `type`. Standaard is de waarde hiervan `text`, wat betekent dat er een tekstinput wordt weergegeven.
 
@@ -56,7 +56,7 @@ Een eenvoudig inlogformulier zou door de volgende HTML-regels gebouwd kunnen wor
 
 ```html
 <body>
-    <form method="get" action="pagina1.html"> 
+    <form method="get" action="pagina1.html">
         <h1>Inloggen</h1>
         <h2>Vul e-mail en wachtwoord in</h2>
         <input type="text" size="30">
@@ -110,7 +110,7 @@ Met deze aanpassingen komt de html van de pagina hierboven er als volgt uit te z
 
 Stel dat je het formulier zoals dat hierboven is weergegeven zou invullen met de volgende gegevens:
 
-- email: henk@hanze.com
+- email: <henk@hanze.com>
 - password: supergeheim
 
 Als je dan op 'Verstuur' zou klikken, zie je het volgende in de adresbalk van je browser staan:
@@ -170,7 +170,7 @@ Een andere vorm van selectie zijn de zogenaamde *selectboxes*. Deze lijken erg o
 
 Een laatste mogelijkheid voor keuzelijsten die we bespreken is het *drop-down menu*. Het voordeel hiervan ten opzichte van keuzerondjes is dat het minder ruimte in beslag neemt. Maar dat is ook een nadeel, omdat gebruikers niet meteen alle opties kunnen zien.
 
-Zo'n keuzelijst maak je met de tag `select`; de opties die in die lijst moeten komen geef je aan met de `option`-tag. 
+Zo'n keuzelijst maak je met de tag `select`; de opties die in die lijst moeten komen geef je aan met de `option`-tag.
 
 ```html
 <form>
@@ -205,18 +205,3 @@ De grootte van het tekstvak kan worden bepaald door een aantal rijen en een aant
 ![Textarea](imgs/textarea.png)
 
 Maak nu [oefening nummer 2](../oefeningen/wk1oefening2.md).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

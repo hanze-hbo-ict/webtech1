@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - Webshop{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('products.index') }}">Home</a></li>
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('products.category', category_id=product.category_id) }}">
+                {{ product.category.name }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+    </ol>
+</nav>
+
+<!-- Admin Actions -->
+<div class="row mb-3">
+    <div class="col-12">
+        <a href="{{ url_for('admin.edit_product', product_id=product.id) }}"
+           class="btn btn-sm btn-outline-secondary">
+            ✏️ Bewerken (Admin)
+        </a>
+    </div>
+</div>
+
+<!-- Product Detail -->
+<div class="row">
+    <!-- Product Image -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-body bg-light d-flex align-items-center justify-content-center"
+                 style="min-height: 400px;">
+                <span class="text-muted fs-3">{{ product.name }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="col-md-6">
+        <h1 class="display-5 mb-3">{{ product.name }}</h1>
+
+        <p class="text-muted mb-3">
+            <a href="{{ url_for('category', category_id=product.category_id) }}"
+               class="text-decoration-none">
+                {{ product.category.name }}
+            </a>
+        </p>
+
+        <div class="mb-4">
+            <h2 class="text-primary">€{{ "%.2f"|format(product.price) }}</h2>
+        </div>
+
+        <!-- Stock Status -->
+        <div class="mb-4">
+            {% if product.stock > 0 %}
+            <div class="alert alert-success" role="alert">
+                <strong>Op voorraad:</strong> {{ product.stock }} stuks beschikbaar
+            </div>
+            {% else %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Uitverkocht:</strong> Dit product is momenteel niet beschikbaar
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Description -->
+        {% if product.description %}
+        <div class="mb-4">
+            <h4>Beschrijving</h4>
+            <p class="text-muted">{{ product.description }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Action Buttons -->
+        <div class="d-grid gap-2">
+            {% if product.stock > 0 %}
+            <button class="btn btn-primary btn-lg" disabled>
+                Toevoegen aan Winkelwagen (Week 7)
+            </button>
+            {% else %}
+            <button class="btn btn-secondary btn-lg" disabled>
+                Niet beschikbaar
+            </button>
+            {% endif %}
+
+            <a href="{{ url_for('category', category_id=product.category_id) }}"
+               class="btn btn-outline-secondary">
+                Terug naar {{ product.category.name }}
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Product Details Table -->
+<div class="row mt-5">
+    <div class="col-12">
+        <h4>Product Specificaties</h4>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th scope="row" style="width: 200px;">Product ID</th>
+                    <td>{{ product.id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Naam</th>
+                    <td>{{ product.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Categorie</th>
+                    <td>
+                        <a href="{{ url_for('products.category', category_id=product.category_id) }}">
+                            {{ product.category.name }}
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Prijs</th>
+                    <td>€{{ "%.2f"|format(product.price) }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Voorraad</th>
+                    <td>{{ product.stock }} stuks</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

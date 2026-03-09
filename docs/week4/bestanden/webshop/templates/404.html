@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Pagina niet gevonden - Webshop{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="py-5">
+            <h1 class="display-1 text-muted">404</h1>
+            <h2 class="mb-4">Pagina niet gevonden</h2>
+            <p class="lead text-muted mb-4">
+                De pagina die je zoekt bestaat niet of is verplaatst.
+            </p>
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                Terug naar Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

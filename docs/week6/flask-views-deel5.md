@@ -1,351 +1,446 @@
-# Flask en SQL - Website
+# Flask en SQLAlchemy - Complete Website
 
-Alle inspanningen in de vorige paragrafen zijn niet voor niets geweest. Er is op dit moment  voldoende kennis en informatie aangereikt om nu eindelijk een ‘echte’ website te bouwen! Alle opgedane kennis wordt in deze paragraaf met elkaar verbonden.
+Je combineert nu alle kennis: templates, formulieren, en database. Je bouwt een beheersite voor cursisten van de muziekschool met:
 
-De belangrijkste kenmerken die in deze paragraaf besproken zullen worden zijn:
+- Formulier om cursisten toe te voegen
+- Overzicht van alle cursisten
+- Formulier om cursisten te verwijderen
 
-- Het werken met templates;
-- Gebruikersinformatie via formulieren ophalen;
-- De aangeleverde informatie opslaan in de database;
-- Overzichten maken van de opgeslagen informatie;
+## Project structuur
 
-Dit wordt allemaal toegepast op een beheersite voor de gegevens van de cursisten met onder meer:
+Je maakt de volgende bestanden:
 
-- Een formulier waarmee nieuwe cursisten toegevoegd kunnen worden;
-- Een formulier om cursisten uit de database te verwijderen;
-- De mogelijkheid tot het maken van een overzicht van alle cursisten;
+**Python bestanden**:
 
-Er wordt vanaf scratch begonnen om meer inzicht te krijgen in de wijze waarop een website opgebouwd wordt. Daarbij wordt een stappenplan aangehouden.
+- `beheer_cursist.py` - Hoofd applicatie met routes
+- `forms.py` - Formulier definities
 
-## Stap 1: Inventarisatie
-Er moeten verschillende componenten geconstrueerd worden om de eerste website werkend te krijgen: 
+**Templates directory**:
 
-Twee Python-files:
+- `base.html` - Basis template met navigatie
+- `home.html` - Homepage
+- `voegtoe_cur.html` - Cursist toevoegen
+- `toon_cur.html` - Cursisten tonen
+- `verwijder_cur.html` - Cursist verwijderen
 
-- [`beheer_cursist.py`](bestanden/relaties/beheer_cursist.py)
-- [`forms.py`](bestanden/forms.py)
-  
-Een directory Templates met een vijftal HTML-bestanden:
+```text
+project/
+├── beheer_cursist.py
+├── forms.py
+└── templates/
+    ├── base.html
+    ├── home.html
+    ├── voegtoe_cur.html
+    ├── toon_cur.html
+    └── verwijder_cur.html
+```
 
-- [`base.html`](bestanden/templates/base.html)
-- [`home.html`](bestanden/templates/home.html)
-- [`voegtoe_cur.html`](bestanden/templates/voegtoe_cur.html)
-- [`toon_cur.html`](bestanden/templates/toon_cur.html)
-- [`verwijder_cur.html`](bestanden/templates/verwijder_cur.html)
-  
-Het einde van stap 1 bestaat eruit alle bestanden aan te maken. Dat levert het volgende plaatje op:
+## Stap 1: Database en model setup
 
-![het overzicht van de bestanden](imgs/5-bestanden.png)
+**`beheer_cursist.py`** - Bestudeer het volledige bestand [`beheer_cursist.py`](bestanden/relaties/beheer_cursist.py).
 
-## Stap 2: Begin met het opzetten van de file waarin de structuur wordt bepaald.
-
-In dit geval is dat [`beheer_cursist.py`](bestanden/relaties/beheer_cursist.py). De eerste regels van dit bestand zijn moeten nu bekend voorkomen.
-`VoegtoeForm` en `VerwijderForm` worden nog niet herkend, omdat ze pas later worden aangemaakt. 
-
-Het werken met Forms vereist dat er een geheime sleutel moet worden ingegeven. De naam maakt niet uit, als er maar een sleutelwaarde wordt ingesteld. Het weglaten van deze regel levert een foutmelding op.
+### Imports en configuratie
 
 ```python
 import os
-from forms import  VoegtoeForm, VerwijderForm
+from forms import VoegtoeForm, VerwijderForm
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy.orm import Mapped, mapped_column
+
 app = Flask(__name__)
-# Omdat er formulieren gebruikt worden is een geheime sleutel nodig!
 app.config['SECRET_KEY'] = 'mijngeheimesleutel'
 ```
-Het tweede gedeelte bestaat uit het opzetten van de koppeling tussen applicatie en database:
+
+`SECRET_KEY` is vereist voor formulieren (CSRF-beveiliging).
+
+### Database setup
 
 ```python
-#SQL database opzet
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-Migrate(app,db)
+Migrate(app, db)
 ```
 
-Tot dusver niets bijzonders. Het volgende gedeelte levert vast ook geen problemen op. De tabel (het model) voor de cursist wordt nu aangemaakt. Om het een klein project te laten blijven, en om de opbouw op een eenduidige wijze te kunnen beschrijven, blijft het bij een enkel model, dat ook nog eens geen relaties kent naar andere modellen:
+### Cursist model
 
 ```python
 class Cursist(db.Model):
+    """Model voor cursisten van de muziekschool."""
 
     __tablename__ = 'cursisten'
-    id = db.Column(db.Integer,primary_key = True)
-    naam = db.Column(db.Text)
 
-    def __init__(self,naam):
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
+
+    def __init__(self, naam: str):
+        """Maak nieuwe cursist aan.
+
+        Args:
+            naam: Voor- en achternaam
+        """
         self.naam = naam
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """String representatie."""
         return f"Naam van de cursist: {self.naam}"
 ```
 
-## Stap 3: Aanmaken van de views-functies met de formulieren.
+Dit model is eenvoudig - geen relaties, alleen een naam. Perfect om de basis te begrijpen.
 
-Voor het gemak zijn de Engelse termen aangehouden zoals *add*, *delete* en *list*.
+## Stap 2: Routes en views
 
-### index
+### Homepage route
 
 ```python
 @app.route('/')
-def index():
+def index() -> str:
+    """Homepage route.
+
+    Returns:
+        Gerenderde home template
+    """
     return render_template('home.html')
 ```
 
-Wanneer de index wordt opgevraagd wordt er doorgeschakeld naar de pagina [`home.html`](bestanden/templates/home.html).
-
-### add
+### Cursist toevoegen
 
 ```python
 @app.route('/add', methods=['GET', 'POST'])
-def add_cur():
+def add_cur() -> str:
+    """Voeg nieuwe cursist toe.
+
+    Returns:
+        Bij GET: formulier template
+        Bij POST: redirect naar cursisten lijst
+    """
     form = VoegtoeForm()
 
     if form.validate_on_submit():
         naam = form.naam.data
 
-        # Voeg een nieuwe cursist toe aan de database
+        # Voeg nieuwe cursist toe
         new_cur = Cursist(naam)
         db.session.add(new_cur)
         db.session.commit()
 
-        return redirect(url_for('toon_cur'))
+        return redirect(url_for('list_cur'))
 
-    return render_template('voegtoe_cur.html',form=form)
+    return render_template('voegtoe_cur.html', form=form)
 ```
 
-Op het moment dat deze view wordt aangeroepen wordt er doorgeschakeld naar [`voegtoe_cur.html`](bestanden/templates/voegtoe_cur.html). Daar wordt een leeg formulier getoond met een passende tekst. Als de naam van een nieuwe cursist is ingevuld en bevestigd, wordt [`toon_cur.html`](bestanden/templates/toon_cur.html) geopend en verschijnt de lijst met alle aanwezige cursisten in beeld. In dit voorbeeld zal deze lijst zeer beperkt blijven.
+**Workflow**:
 
-### list
+1. GET request: Toon leeg formulier
+2. POST request: Naam opslaan in database, redirect naar lijst
+
+### Cursisten tonen
 
 ```python
 @app.route('/list')
-def list_cur():
-    # Maak een lijst van alle aanwezige cursisten in de database.
-    cursisten = Cursist.query.all()
+def list_cur() -> str:
+    """Toon alle cursisten.
+
+    Returns:
+        Template met lijst van cursisten
+    """
+    cursisten = db.session.execute(db.select(Cursist)).scalars().all()
     return render_template('toon_cur.html', cursisten=cursisten)
 ```
 
-In deze view wordt een lijst aangemaakt van alle cursisten en die lijst wordt doorgegeven naar [`toon_cur.html`](bestanden/templates/toon_cur.html), die de deelnemers laat zien.
+Haalt alle cursisten op en geeft ze door aan de template.
 
-### delete
+### Cursist verwijderen
 
 ```python
 @app.route('/delete', methods=['GET', 'POST'])
-def del_cur():
+def del_cur() -> str:
+    """Verwijder cursist op basis van ID.
+
+    Returns:
+        Bij GET: formulier template
+        Bij POST: redirect naar cursisten lijst
+    """
     form = VerwijderForm()
 
     if form.validate_on_submit():
         id = form.id.data
-        cur = Cursist.query.get(id)
+        cur = db.session.get(Cursist, id)
         db.session.delete(cur)
         db.session.commit()
 
-        return redirect(url_for('toon_cur'))
-    return render_template('verwijder_cur.html',form=form)
+        return redirect(url_for('list_cur'))
+
+    return render_template('verwijder_cur.html', form=form)
 ```
 
-Weer meer van hetzelfde. Als het de bedoeling is een cursist te verwijderen dan wordt deze view opgestart. Omdat er nog niet op een button geklikt is, wordt gelinkt naar [`verwijder_cur.html`](bestanden/templates/verwijder_cur.html) en zal er een leeg scherm te zien zijn met weer een passende tekst. Na invulling van het id van de cursist en een bevestiging daarvan door op de knop te drukken, zal het record verwijderd worden waarna [`toon_cur.html`](bestanden/templates/toon_cur.html) aangeroepen wordt waardoor de aangepast lijst zichtbaar is.
+**Workflow**:
 
-## Stap 4: het aanmaken van de database en het opstarten van de applicatie
+1. GET request: Toon leeg formulier
+2. POST request: Verwijder cursist op ID, redirect naar lijst
 
-De volgende (voorlaatste) regel betreft het daadwerkelijk aanmaken van de database. We zien hier de regel `db.create_all()`; dit houdt in dat we de database (het SQLAlchemy-object dat we hebben aangemaakt op regel 19) de opdracht geven alle model-klassen langs te lopen en de corresponderende (*gemapte*) database-tabellen aan te maken (op basis van de informatie die is ingegeven in die modelklassen).
+## Stap 3: Database aanmaken en app starten
 
-!!! Info "Verschillende versies van SQLAlchemy"
-    In nieuwere versies van SQLAlchemy is het creëren van de database zelf behoorlijk aangepast. In [de documentatie staat](https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/api/#flask_sqlalchemy.SQLAlchemy.create_all) *This requires that a Flask application context is active*. Dit betekent dat je het statement binnen een *flask-context* moet uitvoeren:
+### Database initialisatie
 
+```python
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
+```
+
+!!! info "Flask application context"
+    In moderne SQLAlchemy (3.0+) moet `db.create_all()` binnen een application context draaien:
     ```python
     with app.app_context():
         db.create_all()
     ```
+    Dit zorgt ervoor dat SQLAlchemy toegang heeft tot de Flask configuratie.
 
-Tenslotte starten we de applicatie op, op de manier die we al gewend zijn.
+## Stap 4: Formulieren definiëren
 
-```python
-if __name__ == '__main__':
-    app.run(debug=True)
-```
-
-## Stap 5: Het ontwerpen van de formulieren 
-
-Hier worden de formulieren in [`forms.py`](bestanden/forms.py) ontworpen.
-Er is al uitvoerig aandacht besteed aan het opzetten van formulieren met `Flask`. Ook deze twee formulieren `VoegtoeForm` en `VerwijderForm` zullen vast geen vragen meer oproepen:
+**`forms.py`** - Bestudeer het volledige bestand [`forms.py`](bestanden/forms.py).
 
 ```python
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 
 class VoegtoeForm(FlaskForm):
+    """Formulier voor nieuwe cursist."""
 
     naam = StringField('Vul de naam van de nieuwe cursist in:')
     submit = SubmitField('Voeg toe')
 
+
 class VerwijderForm(FlaskForm):
+    """Formulier voor cursist verwijderen."""
 
     id = IntegerField('Vul het ID van de cursist die verwijderd gaat worden in:')
     submit = SubmitField('Verwijder')
 ```
 
-Het formulier om een cursist toe te voegen kent een veld waarin een naam kan worden ingegeven en een knop om te bevestigen. Voor het verwijderen van een cursist is een veld nodig om het `id` in te geven en weer een knop om te bevestigen.
+Twee eenvoudige formulieren:
 
-## Stap 6: Het vullen van de HTML-bestanden.
+- **VoegtoeForm**: Naam (text veld) + submit
+- **VerwijderForm**: ID (nummer veld) + submit
 
-### `base.html`
-In dit bestand wordt de structuur van de website grotendeels vastgelegd. In ieder geval wordt de connectie naar Bootstrap hier vastgelegd en wordt er ook een navigatiebalk opgemaakt. Het is de bedoeling dat alle overige webpagina’s van dit sjabloon gebruik gaan maken. Die pagina’s kunnen hun eigen specifieke inhoud opnemen in het block-vak.
+## Stap 5: Templates maken
+
+### `base.html` - Basis template
+
+Bestudeer het volledige bestand [`base.html`](bestanden/templates/base.html).
 
 ```html
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="nl">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 	integrity="sha384-	Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 	crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-	KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 	crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 	integrity="sha384-	ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 	crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 	integrity="sha384-	JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 	crossorigin="anonymous"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Beheer cursisten</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-nav">
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('add_cur') }}">Voeg cursist toe</a>
+                <a class="nav-link" href="{{ url_for('list_cur') }}">Toon cursisten</a>
+                <a class="nav-link" href="{{ url_for('del_cur') }}">Verwijder cursist</a>
+            </div>
+        </div>
+    </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" href="{{ url_for('index') }}">Home</a>
-        <a class="nav-item nav-link" href="{{ url_for('add_cur') }}">Voeg cursist toe</a>
-        <a class="nav-item nav-link" href="{{ url_for('list_cur') }}">Toon cursisten</a>
-        <a class="nav-item nav-link" href="{{ url_for('del_cur') }}">Verwijder cursist</a>
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
     </div>
-</nav>
 
-{% block content %}
-
-{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 ```
 
-Als eerste dus de gekopieerde linken, vervolgens de navigatiebalk en tenslotte de plek waar ruimte is voor de andere pagina’s om hun inhoud te tonen.
+**Bootstrap 5** CDN links en navigatie balk. Alle andere templates extenden deze basis.
 
 ### `home.html`
 
-Een heel eenvoudige pagina om mee te starten:
+Bestudeer het volledige bestand [`home.html`](bestanden/templates/home.html).
 
 ```html
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron">
-    <h1>Welkom bij de beheersite van onze cursisten</h1>
-    <p>Om te beginnen, selecteer een item uit de navigatiebalk.</p>
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welkom bij de beheersite van onze cursisten</h1>
+        <p class="col-md-8 fs-4">Om te beginnen, selecteer een item uit de navigatiebalk.</p>
+    </div>
 </div>
 {% endblock %}
 ```
 
-De code van `base.html` wordt als eerste ingeladen. In het block worden de inleidende teksten vermeld en er is als accent gekozen om het ‘`jumbotron`’-effect te selecteren.
+!!! note "Bootstrap 5 wijziging"
+    `jumbotron` bestaat niet meer in Bootstrap 5. Gebruik `p-5 mb-4 bg-light rounded-3` voor hetzelfde effect.
 
 ### `voegtoe_cur.html`
 
+Bestudeer het volledige bestand [`voegtoe_cur.html`](bestanden/templates/voegtoe_cur.html).
+
 ```html
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron">
-    <h1>Heeft zich een nieuwe cursist aangemeld?</h1>
-    <p>Vul de naam in en klik op Voeg toe:</p>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.naam.label }} {{ form.naam() }}
-        {{ form.submit() }}
-    </form>
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Heeft zich een nieuwe cursist aangemeld?</h1>
+        <p>Vul de naam in en klik op Voeg toe:</p>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.naam.label(class="form-label") }}
+                {{ form.naam(class="form-control") }}
+            </div>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
 </div>
 {% endblock %}
 ```
 
-Niets nieuws onder de zon. Alleen hier nog even aandacht voor de geheime tag die moet worden opgenomen wanneer er met een formulier wordt gewerkt.
+`{{ form.hidden_tag() }}` voegt CSRF token toe (verplicht).
 
 ### `toon_cur.html`
 
+Bestudeer het volledige bestand [`toon_cur.html`](bestanden/templates/toon_cur.html).
+
 ```html
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron">
-    <h1>Dit zijn de momenteel ingeschreven cursisten.</h1>
-    <ul>
-        {% for cur in cursisten  %}
-        <li>{{cur}}</li>
-        {% endfor %}
-    </ul>
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Dit zijn de momenteel ingeschreven cursisten</h1>
+        <ul class="list-group list-group-flush">
+            {% for cur in cursisten %}
+            <li class="list-group-item">{{ cur }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}
 ```
 
-Een koptekst plus een lijst met cursisten. De `FOR`-loop haalt de cursisten één voor éen op uit de tabel cursisten.
+Jinja2 `for` loop toont alle cursisten. De tekst komt uit de `__repr__()` methode.
 
 ### `verwijder_cur.html`
 
+Bestudeer het volledige bestand [`verwijder_cur.html`](bestanden/templates/verwijder_cur.html).
+
 ```html
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron">
-    <h1>Afmelding binnen gekomen?</h1>
-    <p>Vul het ID van de cursist in en klik op Verwijder.</p>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.id.label }} {{ form.id() }}
-        {{ form.submit() }}
-    </form>
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Afmelding binnen gekomen?</h1>
+        <p>Vul het ID van de cursist in en klik op Verwijder.</p>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.id.label(class="form-label") }}
+                {{ form.id(class="form-control") }}
+            </div>
+            {{ form.submit(class="btn btn-danger") }}
+        </form>
+    </div>
 </div>
 {% endblock %}
 ```
 
-Ook hier weer de geheime controletag omdat het een formulier betreft.
-
 ## Stap 6: Testen
 
-Eerste test is het runnen van `beheer_cursist.py`:
+Start de applicatie:
 
-![het resultaat van het runnen van beheer_cursist.py](imgs/beheer_cursist.py.png)
+```console
+uv run python beheer_cursist.py
+```
 
-Tabel `Cursist` bestaat nu ook:
+### Homepage
 
-![De Tabel Cursist](imgs/tabel_cursist.png)
+> **Verwacht resultaat:** Een Bootstrap-pagina met een navigatiebalk bovenaan met links: Home, Voeg cursist toe, Toon cursisten, Verwijder cursist. De pagina toont een jumbotron-blok met de tekst "Welkom bij de beheersite van onze cursisten" en een instructie om een item uit de navigatiebalk te selecteren.
 
-Nu ‘Voeg cursist toe’:
+### Cursist toevoegen
 
-![voeg een nieuwe cursist toe](imgs/voeg-cursist-toe.png)
-Joyce is de eerste:
+Klik "Voeg cursist toe":
 
-![Joyce wordt toegevoegd als nieuwe cursist](imgs/joyce-als-eerste.png)
+> **Verwacht resultaat:** Een formulierpagina met de titel "Heeft zich een nieuwe cursist aangemeld?", een tekstveld met het label "Vul de naam van de nieuwe cursist in:" en een knop "Voeg toe".
 
-Na een klik op ‘Voeg toe’:
+Vul "Joyce" in en klik "Voeg toe":
 
-![Momenteel ingeschreven cursisten: alleen Joyce](imgs/joyce-toegevoegd.png)
+> **Verwacht resultaat:** Hetzelfde formulier als hierboven, maar nu met "Joyce" ingevuld in het naamveld.
 
-Vervolgens is Bram aan de beurt:
+Na submit zie je de lijst:
 
-![Bram wordt toegevoegd als cursist](imgs/bram-toevoegen.png)
+> **Verwacht resultaat:** De cursistenpagina met de titel "Dit zijn de momenteel ingeschreven cursisten" en één item in de lijst: "Naam van de cursist: Joyce" (id=1).
 
-Na een klik op ‘voeg toe’:
+### Nog een cursist toevoegen
 
-![overzicht van de momenteel ingeschreven cursisten: Joyce en Bram](imgs/ingeschreven-cursisten.png)
+Voeg "Bram" toe:
 
-Bram mag weer uit de Tabel verwijderd worden, zijn ID = 2, kan opgezocht worden:
+> **Verwacht resultaat:** Het toevoegformulier met "Bram" ingevuld in het naamveld.
 
-![De data die in de tabel staat](imgs/browse-data.png)
+Lijst met twee cursisten:
 
-![het afmelden van een cursist met id 2](imgs/afmelden.png)
+> **Verwacht resultaat:** De cursistenpagina met twee items in de lijst: "Naam van de cursist: Joyce" en "Naam van de cursist: Bram".
 
-Na een klik op ‘Verwijder’:
+### Cursist verwijderen
 
-![overzicht van de momenteel ingeschreven cursisten: alleen Joyce](imgs/verwijderen.png)
+Klik "Verwijder cursist". Bram heeft `id=2` (zie in database of lijst):
 
+| id | naam  |
+|----|-------|
+| 1  | Joyce |
+| 2  | Bram  |
 
-Terug naar Home:
+Vul ID 2 in:
 
-![home pagina](imgs/home.png)
+> **Verwacht resultaat:** De verwijderpagina met de titel "Afmelding binnen gekomen?" en een nummerveld met het label "Vul het ID van de cursist in die verwijderd gaat worden", met het getal "2" ingevuld.
 
+Na submit is Bram verwijderd:
 
-Als laatste nog een blik op de database:
+> **Verwacht resultaat:** De cursistenpagina met nog maar één item in de lijst: "Naam van de cursist: Joyce". Bram is verwijderd.
 
-![De data die in de Tabel staat](imgs/database-huidig.png)
+### Database controleren
 
-Inderdaad nog maar één cursist aanwezig.
+Met DB Browser for SQLite:
+
+| id | naam  |
+|----|-------|
+| 1  | Joyce |
+
+Eén cursist over - Joyce met ID 1.
+
+## Samenvatting
+
+Je hebt een complete CRUD webapp gemaakt:
+
+**Backend (Flask + SQLAlchemy)**:
+
+- Database setup met `db.Model`
+- Routes voor Create, Read, Delete
+- Formulieren met Flask-WTF
+
+**Frontend (Jinja2 + Bootstrap)**:
+
+- Basis template met navigatie
+- Formulier templates
+- Lijst template met data uit database
+
+**Database (SQLite)**:
+
+- Eén tabel (`cursisten`)
+- CRUD operaties via SQLAlchemy
+
+**Volgende stap:** [Oefening 1](oefeningen/flask-views-oefening1.md) - Bouw je eigen beheersite.
