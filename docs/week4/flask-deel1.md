@@ -33,13 +33,15 @@ Uit een database kunnen titel en gebruikersnaam opgevraagd worden en worden inge
 
 Flask wordt dus een microframework genoemd. Het is ontworpen om de kern van de applicatie eenvoudig en schaalbaar te houden. In plaats van een abstractielaag voor database-ondersteuning, ondersteunt Flask uitbreidingen om dergelijke mogelijkheden aan de applicatie toe te voegen.
 
-## Waarom is Flask een goede keuze voor een webframework?
+**Volgende stap:** [Deel 2](flask-deel2.md) - Flask installeren met uv.
 
-Flask is specifiek voor Python gebouwd. Verder is het gemakkelijk om met Flask aan de slag te gaan, omdat het geen enorme leercurve heeft. Bovendien is het erg expliciet, wat de leesbaarheid vergroot. Er zijn slechts een aantal coderegels nodig om een "Hello World" -app te creëren. Daarover zometeen meer.
+## Samenvatting
 
-Het wordt dus een microframework genoemd, maar dat betekent niet dat de gehele app in één enkel Python-bestand ondergebracht hoeft te worden. Vaak is het gewenst en nodig meerdere bestanden te gebruiken voor grote en complexe programma’s.
+In deze les heb je geleerd:
 
-Flask is één van de meest populaire webframeworks; het is up-to-date en modern. Bovendien is de functionaliteit op eenvoudige wijze uit te breiden.
-
-Maar voordat er met ontwikkelen begonnen kan worden, is het nodig Flask te installeren omdat het niet standaard als module wordt meegenomen bij het installeren van Python.
-
+- **Flask**: een Python microframework voor het bouwen van webapplicaties, met ingebouwde url-routing en een template-engine
+- **Microframework**: Flask houdt de kern klein en uitbreidbaar; functionaliteit zoals database-ondersteuning wordt via extensies toegevoegd in plaats van ingebouwd te zijn
+- **Web Application Framework**: een verzameling bibliotheken waarmee webapplicaties ontwikkeld worden zonder details op laag niveau zoals protocol- en threadbeheer
+- **WSGI**: de Web Server Gateway Interface, de standaard interface tussen webservers en Python-webapplicaties
+- **Werkzeug**: de WSGI-toolkit waarop Flask is gebouwd, die request- en response-afhandeling verzorgt
+- **Jinja2**: de template-engine van Flask, waarmee Python-variabelen in HTML-sjablonen ingevoegd worden via dubbele accolades (`{{ variabele }}`)

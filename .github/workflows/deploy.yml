@@ -1,40 +1,42 @@
-name: deploy-book
+name: deploy-docs
 
-# Only run this when the master branch changes
+# Deploy when main branch changes
 on:
   push:
     branches:
-    - main
-    # If your git repository has the Jupyter Book within some-subfolder next to
-    # unrelated files, you can make this run only if a file within that specific
-    # folder has been modified.
-    #
-    # paths:
-    # - some-subfolder/**
+      - main
 
-# This job installs dependencies, build the book, and pushes it to `gh-pages`
+# Build and deploy MkDocs site
 jobs:
-  deploy-book:
+  deploy-docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-    # Install dependencies
-    - name: Set up Python
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.10.*
+      # Install uv
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          cache-dependency-glob: "pyproject.toml"
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-    # Build the book
-    - name: Build the book
-      run: |
-        mkdocs build
-    # Push the book's HTML to github-pages
-    - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3.8.0
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Install dependencies with uv
+      - name: Install dependencies
+        run: uv sync
+
+      # Build the docs
+      - name: Build MkDocs site
+        run: uv run mkdocs build
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site

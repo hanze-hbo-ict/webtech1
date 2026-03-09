@@ -1,216 +1,583 @@
-# Flask – Templates
+# Flask – Templates met Jinja2
 
-Tot dusverre is de HTML-pagina alleen handmatig aangestuurd via een Python-string. Het ligt meer in de lijn der verwachtingen om een weergave te realiseren op basis van HTML-sjablonen. Flask zoekt automatisch naar HTML-sjablonen in de sjabloondirectory, `templates`. Later wordt nader ingegaan op de wijze hoe grotere applicaties kunnen worden gescheiden om meerdere sjabloondirectory's te hebben.
+Tot nu toe heb je HTML als Python strings geretourneerd. Dat werkt voor kleine voorbeelden, maar voor echte webapplicaties gebruik je **templates** - HTML bestanden met placeholders voor dynamische data.
 
-Sjablonen kunnen eenvoudig worden weergeven door de functie `render_template` uit flask te importeren en vervolgens een .html-bestand te retourneren vanuit onze view-functie.
+Flask gebruikt **Jinja2** als template engine. Jinja2 laat je variabelen, loops, conditionals en meer gebruiken in HTML. Dit scheidt presentatie (HTML) van logica (Python).
 
-## Tijd voor een voorbeeld
+Flask zoekt automatisch naar templates in de `templates/` directory in je project root.
 
-Voordat de code besproken kan worden, dient er een tweetal directories aangemaakt te worden. Zoals vermeld gaat Flask op zoek naar de map `templates`, waar de templates ondergebracht gaan worden. Die map is er nog niet. Ten tweede een folder om plaatjes in op te bergen om de sites op te leuken (deze directory noemen we `static`). De folders dienen op dezelfde hoogte in de directory te staan als de Python-files.
+## Project structuur met templates
 
-Voor het voorbeeld wordt er een afbeelding ‘drums.jpg’ in de folder `static` geplaatst en een HTML-file aangemaakt in de folder `templates`. De totale directory-listing ziet er dan als volgt uit:
+Voor templates heb je twee extra directories nodig:
+
+```console
+mkdir templates
+mkdir static
+```
+
+Je project structuur wordt dan:
 
 ```text
-.
+mijn-flask-app/
+├── .python-version
+├── .venv/
 ├── app.py
-├── static
-│   └── drums.jpg
-└── templates
+├── pyproject.toml
+├── uv.lock
+├── static/              # Voor CSS, images, JavaScript
+│   └── drums.jpg
+└── templates/           # Voor HTML templates
     └── basic.html
 ```
 
-De template met de naam `basic.html` heeft de onderstaande inhoud. Deze code moet geen verrassing meer zijn. Deze code vormt onze eerste template.
+## Je eerste template
+
+### Stap 1: Maak een HTML template
+
+Maak `templates/basic.html`:
 
 ```html
 <!DOCTYPE html>
 <html lang="nl">
     <head>
         <meta charset="UTF-8">
-        <title>Basic</title>
+        <title>Basic Template</title>
     </head>
     <body>
-        <h1>Hallo</h1>
-        <h2>Dit drumstel wordt gebruikt tijdens de lessen.</h2>
-        <img src="../static/drums.jpg" width="600" height="400">
+        <h1>Welkom bij muziekschool Session</h1>
+        <h2>Dit drumstel wordt gebruikt tijdens de lessen</h2>
+        <img src="{{ url_for('static', filename='drums.jpg') }}"
+             width="600"
+             height="400"
+             alt="Drumstel">
     </body>
 </html>
 ```
 
-## Renderen van de template
+**Let op:** `{{ url_for('static', filename='drums.jpg') }}`
 
-We maken nu in de bovenste directory van ons project (`Flask`) een python-bestand dat deze template gaat renderen wanneer er vanuit een client een specifieke request wordt gedaan. Nu tijd om een Python-file (eerste.py) aan te maken die deze template gaat inlezen. Om dit voor elkaar te krijgen, moeten we behalve de klasse `Flask` de functie `render_template` importeren. Vervolgens maken we opnieuw een *instantie* van de klasse `Flask`.
+- Jinja2 syntax voor dynamische URL generatie
+- Beter dan een vast ingesteld pad zoals `../static/drums.jpg`
+- Werkt ook als je app in een subdirectory draait
 
+### Stap 2: Render de template in Flask
+
+Update `app.py`:
 
 ```python
 from flask import Flask, render_template
+
 app = Flask(__name__)
-```
 
-Om de template te renderen maken we gebruik van dezelfde constructie als in de vorige paragraaf. Omdat de functies die worden gedecoreerd met een route feitelijk niets bijzonders zijn, kunnen we hierin alles doen wat we normaal ook met Python-functies kunnen doen. Dus ook de functie `render_template()` aanroepen.
 
-```python
 @app.route("/")
-def index():
+def index() -> str:
+    """Homepage met template rendering."""
     return render_template("basic.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
 ```
 
-![Het resultaat van een gerenderde template](imgs/drumstel.png)
+**Code uitleg:**
 
-Het hele proces wordt hieronder grafisch weergegeven:
+- `from flask import render_template` - Import render functie
+- `render_template("basic.html")` - Flask zoekt in `templates/` en rendert de HTML
+- Return type blijft `str` (render_template retourneert HTML string)
 
-![Een grafisch stappenplan](imgs/client-server.png)
+### Stap 3: Run en test
 
-Met behulp van `render_template` is het mogelijk om direct een HTML-bestand te renderen met een Flask-webapp. Maar daarmee is de kracht van Python nog helemaal niet benut!
+```console
+uv run python app.py
+```
 
-## Doorsturen van variabelen
+Ga naar `http://127.0.0.1:5000/` - je ziet de template met afbeelding!
 
-Wat het eigenlijke doel is, is een manier te vinden om de Python-code uit de app aan te kunnen passen door variabelen en logica te wijzigen en bij te werken, en die verse informatie vervolgens naar de HTML-template te sturen. En dan komt de *Jinja-template engine* in beeld. Met Jinja-sjablonen is het mogelijk variabelen rechtstreeks uit de Python-code in het HTML-bestand in te voegen.
+> **Verwacht resultaat:** De browser toont de gerenderde template met de kop "Welkom bij muziekschool Session", een subkop "Dit drumstel wordt gebruikt tijdens de lessen", en een afbeelding van een drumstel.
 
+## Variabelen doorgeven aan templates
 
-De syntax voor het invoegen van een variabele is `{{ variabele }}`. Bekijk de onderstaande template:
+De kracht van templates zit in **dynamische data**. Je geeft Python variabelen door aan de template:
 
-```html hl_lines="7"
+### Basis voorbeeld
+
+**Template** (`templates/welkom.html`):
+
+```html
+<!DOCTYPE html>
 <html lang="nl">
     <head>
         <meta charset="UTF-8">
-        <title>Voorbeeld</title>
+        <title>Welkom</title>
     </head>
     <body>
-        <h1>Hallo {{ naam }}</h1>
+        <h1>Hallo {{ naam }}!</h1>
+        <p>Je bent cursist nummer {{ cursist_id }}</p>
     </body>
 </html>
 ```
 
-Om deze template te renderen, passen we in onze server de functie `cursists()` aan, en wel op zo'n manier dat de *naam* die door de route hieraan wordt meegegeven wordt doorgestuurd aan de template.
+**Flask route** (`app.py`):
 
-```python hl_lines="3"
+```python
 @app.route("/cursist/<naam>")
-def cursist(naam):
-    return render_template("welkom.html", naam=naam)
+def cursist(naam: str) -> str:
+    """Cursist welkomstpagina met template.
+
+    Args:
+        naam: Naam van de cursist uit URL
+    """
+    cursist_id = 42  # Later: haal dit op uit database
+    return render_template("welkom.html", naam=naam, cursist_id=cursist_id)
 ```
 
-Dit alles levert het onderstaande resultaat op:
+**Hoe werkt dit:**
 
-![Dezelfde pagina, maar nu met een template](imgs/template_cursist_Joyce.png)
+- `{{ naam }}` in template wordt vervangen door waarde van `naam=naam`
+- `{{ cursist_id }}` wordt vervangen door `cursist_id=cursist_id`
+- Eerste `naam` = template variable, tweede `naam` = Python variable
 
-## Andere data-typen
+**Result:** Navigeer naar `http://localhost:5000/cursist/Joyce`
 
-In het vorige voorbeeld is een simpele python-string als variabele doorgegeven aan het HTML-bestand. Uiteraard kan dat met veel meer objecten van Python zoals, lijsten (list), dictionaries en meer geregeld worden.
+> **Verwacht resultaat:** De browser toont de pagina voor `/cursist/Joyce` met de kop "Hallo Joyce!" en de tekst "Je bent cursist nummer 42".
 
-Het voorbeeld wordt uitgebreid door er een lijst en een dictionary aan toe te voegen. De lijst zal bestaan uit de letters van de naam 'Joyce' en de `dict` wordt een combinatie van tweede student (nummer plus naam).
+## Data types in templates
 
-De parameters kunnen vervolgens (naar keuze) ingesteld worden in de `render_template()` en daarna gebruikt worden door deze volgens de `{{ ... }}` syntax in de template in te voegen.
+Je kunt alle Python types doorgeven: strings, integers, lists, dictionaries, etc.
 
-Nu als eerste de aanpassingen in onze server:
+### Voorbeeld met meerdere types
+
+**Flask route:**
 
 ```python
 @app.route("/demo")
-def demo():
-    naam ="Joyce"
-    letters = list(naam)
-    cur_dictionary = {"1234": "Sietse"}
+def demo() -> str:
+    """Demonstreer verschillende data types in templates."""
+    naam = "Joyce"
+    letters = list(naam)  # ['J', 'o', 'y', 'c', 'e']
+    cursist_dict = {"1234": "Sietse", "5678": "Carla"}
 
-    # voor de duidelijkheid zetten we hier de verschillende variabelen onder elkaar
-    # dat hoeft natuurlijk niet per se...
-    return render_template("voorbeeld01.html",
-                            naam=naam,
-                            letters=letters,
-                            cur_dictionary=cur_dictionary)
+    return render_template(
+        "demo.html",
+        naam=naam,
+        letters=letters,
+        cursist_dict=cursist_dict
+    )
 ```
 
-Als we dan de template als volgt aanpassen
+**Template** (`templates/demo.html`):
 
 ```html
-<h1>Hallo {{ naam }}</h1>
-<h1>{{ letters }}</h1>
-<h1>{{ cur_dictionary }}</h1>
+<!DOCTYPE html>
+<html lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Demo</title>
+    </head>
+    <body>
+        <h1>Naam: {{ naam }}</h1>
+        <h2>Letters als lijst: {{ letters }}</h2>
+        <h2>Cursist dict: {{ cursist_dict }}</h2>
+
+        <!-- Specifieke waardes ophalen -->
+        <p>Laatste 2 letters: {{ letters[3:] }}</p>
+        <p>Cursist 1234: {{ cursist_dict['1234'] }}</p>
+    </body>
+</html>
 ```
 
-Krijgen we het onderstaande resultaat:
+**Result:**
 
-![Het resultaat van verschillende datatypen](imgs/demo.png)
+> **Verwacht resultaat:** De browser toont de `/demo` pagina met de naam "Joyce", de letters als lijst (`['J', 'o', 'y', 'c', 'e']`), het cursistenwoordenboek, de laatste twee letters via slicing (`['c', 'e']`), en de waarde voor sleutel "1234" (`Sietse`).
 
-Deze uitkomst is één van de vele mogelijkheden om variabelen toe te voegen aan een HTML-bestand. Wanneer alleen de laatste twee letters van de naam en uitsluitend de naam van de student zichtbaar moet zijn, dient de template een wijziging te ondergaan.
+Je kunt Python syntax gebruiken in templates:
 
-```html
-<h1>Hallo {{ naam }}</h1>
-<h1>{{ letters[3:] }}</h1>
-<h1>{{ cur_dictionary['1234'] }}</h1>
-```
+- `letters[3:]` - List slicing
+- `cursist_dict['1234']` - Dictionary access
+- `naam.upper()` - String methods
+- En meer!
 
-## Control flow
+## Control flow in templates
 
-Met Jinja-sjablonen is het dus mogelijk om variabelen door te geven met behulp van de `{{ ... }}` syntax. Daarnaast kan ook gebruik gemaakt worden van de ‘control flow’ in de templates, zoals FOR-loops en IF-statements. Daarvoor is de syntax `{% ... %}` nodig.
+Jinja2 ondersteunt control flow met `{% ... %}` syntax.
 
-Laten we het snel uitleggen met een voorbeeld.
+### For loops
 
-### de `for`-lus
-
-Stel, er is een lijstvariabele aan de HTML doorgegeven. In plaats van de hele lijst in één keer weer te geven, kan ook ieder afzonderlijk item in de Python-lijst worden weergeven als onderdeel van een met opsommingstekens. Daarvoor is de volgende syntax nodig.
-
-```html
-<ul>
-{% for item in mylist %}
-    <li> {{ item }} </li>
-{% endfor %}
-</ul>
-```
-
-De code even kort besproken. Er wordt een ongeordende lijst (met bullets) aangemaakt die gevuld worden met items. Deze items zijn afkomstig uit een lijst (hier cursisten). Om de FOR-loop te beëindigen is het commando ‘endfor’ nodig.
-
-Een voorbeeld. Een opsomming van een drietal cursisten. Joyce en Sietze zijn al genoemd, daar komt nu ook nog Carla bij. Onze server krijgt hiervoor een nieuwe route, `cursisten`:
+**Flask route:**
 
 ```python
 @app.route("/cursisten")
-def cursisten():
-    cursisten = ["Joyce", "Sietze", "Carla"]
-    return render_template("cursisten_template.html",
-                           cursisten=cursisten)
+def cursisten() -> str:
+    """Lijst van alle cursisten."""
+    cursisten_lijst = ["Joyce", "Sietse", "Carla", "Henk"]
+    return render_template("cursisten.html", cursisten=cursisten_lijst)
 ```
 
-De template:
+**Template** (`templates/cursisten.html`):
 
 ```html
-<html>
+<!DOCTYPE html>
+<html lang="nl">
     <head>
-        <meta charset="utf-8">
-        <title></title>
+        <meta charset="UTF-8">
+        <title>Cursisten</title>
     </head>
     <body>
-        <p>De cursisten met een lus naar het scherm:</p>
+        <h1>Onze cursisten</h1>
         <ul>
-        {% for cur in cursisten %}
-            <li>{{ cur }}</li>
+        {% for cursist in cursisten %}
+            <li>{{ cursist }}</li>
         {% endfor %}
         </ul>
     </body>
 </html>
 ```
 
-En dan het resultaat:
+**Belangrijke punten:**
 
-![Cursisten met een lus naar het scherm](imgs/cursisten.png)
+- `{% for ... %}` opent de loop
+- `{% endfor %}` sluit de loop
+- `{{ cursist }}` toont elke waarde
+- Geen `:` nodig zoals in Python!
 
-### de `if`-lus
+**Result:**
 
-Er zijn meerdere vormen van controle. De FOR-loop is al besproken, tijd  nu voor het IF-statement. Er wordt gecontroleerd of een opgegeven naam ook werkelijk in de lijst voorkomt.
+> **Verwacht resultaat:** De browser toont de `/cursisten` pagina met de kop "Onze cursisten" en een ongeordende lijst met de namen Joyce, Sietse, Carla en Henk als afzonderlijke items.
 
-We breiden onze eerdere template uit met de onderstaande code:
+### If statements
+
+Voeg conditionele logica toe aan templates:
 
 ```html
-<h2>Komt Carla voor in de lijst?</h2>
-{% if 'Carla' in cursisten %}
-    <p>Carla komt in de lijst voor.</p>
+<!DOCTYPE html>
+<html lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cursisten Check</title>
+    </head>
+    <body>
+        <h1>Cursisten lijst</h1>
+        <ul>
+        {% for cursist in cursisten %}
+            <li>{{ cursist }}</li>
+        {% endfor %}
+        </ul>
+
+        <h2>Komt Carla voor in de lijst?</h2>
+        {% if 'Carla' in cursisten %}
+            <p class="success">Carla komt in de lijst voor!</p>
+        {% else %}
+            <p class="error">Carla komt niet in de lijst voor.</p>
+        {% endif %}
+    </body>
+</html>
+```
+
+**Result:**
+
+> **Verwacht resultaat:** De browser toont de cursistenlijst gevolgd door de subkop "Komt Carla voor in de lijst?" met daaronder de bevestigende tekst "Carla komt in de lijst voor!" omdat de `if`-conditie waar is.
+
+**If-elif-else:**
+
+```html
+{% if niveau == 1 %}
+    <p>Beginner cursus</p>
+{% elif niveau == 2 %}
+    <p>Gevorderde cursus</p>
+{% elif niveau == 3 %}
+    <p>Expert cursus</p>
 {% else %}
-    <p>Hmm, Carla komt blijkbaar niet in de lijst voor.</p>
+    <p>Onbekend niveau</p>
 {% endif %}
 ```
 
-Wat het volgende resultaat oplevert:
+## Filters in templates
 
-![Het resultaat van een if-statement](imgs/cursisten2.png)
+Jinja2 heeft ingebouwde **filters** om data te transformeren:
+
+```html
+<h1>{{ naam|upper }}</h1>              <!-- JOYCE -->
+<h1>{{ naam|lower }}</h1>              <!-- joyce -->
+<h1>{{ naam|capitalize }}</h1>         <!-- Joyce -->
+<h1>{{ naam|title }}</h1>              <!-- Joyce -->
+
+<p>Prijs: {{ prijs|round(2) }}</p>     <!-- 19.99 -->
+<p>Datum: {{ datum|default('Onbekend') }}</p>
+
+<!-- List filters -->
+<p>{{ cursisten|length }} cursisten</p>
+<p>{{ cursisten|join(', ') }}</p>      <!-- Joyce, Sietse, Carla -->
+```
+
+**Veelgebruikte filters:**
+
+- `|upper`, `|lower`, `|capitalize`, `|title` - String transformaties
+- `|length` - Lengte van list/string
+- `|default('waarde')` - Fallback als variabele None is
+- `|join(', ')` - Join list elementen
+- `|round(2)` - Rond float af
+- `|safe` - Mark HTML als veilig (voorkom escaping)
+
+## Template inheritance (belangrijk!)
+
+Voor grotere apps wil je niet steeds hetzelfde HTML herhalen. Gebruik **template inheritance**!
+
+### Base template
+
+**`templates/base.html`** (parent template):
+
+```html
+<!DOCTYPE html>
+<html lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Muziekschool Session{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/cursisten">Cursisten</a>
+            <a href="/contact">Contact</a>
+        </nav>
+
+        <main>
+            {% block content %}
+            <!-- Child templates vullen dit in -->
+            {% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Muziekschool Session</p>
+        </footer>
+    </body>
+</html>
+```
+
+### Child template
+
+**`templates/home.html`** (extends base):
+
+```html
+{% extends "base.html" %}
+
+{% block title %}Home - Muziekschool Session{% endblock %}
+
+{% block content %}
+    <h1>Welkom bij Muziekschool Session</h1>
+    <p>We bieden lessen in piano, gitaar, drums en zang.</p>
+{% endblock %}
+```
+
+**`templates/cursisten.html`** (extends base):
+
+```html
+{% extends "base.html" %}
+
+{% block title %}Cursisten - Muziekschool Session{% endblock %}
+
+{% block content %}
+    <h1>Onze cursisten</h1>
+    <ul>
+    {% for cursist in cursisten %}
+        <li>{{ cursist }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+```
+
+## Complete voorbeeld met types
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
 
 
+@app.route("/")
+def index() -> str:
+    """Homepage."""
+    return render_template("home.html")
 
 
+@app.route("/cursisten")
+def cursisten() -> str:
+    """Cursisten overzicht met template."""
+    cursisten_lijst = ["Joyce", "Sietse", "Carla"]
+    return render_template("cursisten.html", cursisten=cursisten_lijst)
 
+
+@app.route("/cursist/<int:cursist_id>")
+def cursist_detail(cursist_id: int) -> str:
+    """Cursist detail pagina.
+
+    Args:
+        cursist_id: ID van de cursist
+    """
+    # Later: haal uit database
+    cursist_data = {
+        "id": cursist_id,
+        "naam": "Joyce",
+        "instrument": "Piano",
+        "niveau": 2
+    }
+    return render_template("cursist_detail.html", cursist=cursist_data)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+**Template** (`templates/cursist_detail.html`):
+
+```html
+{% extends "base.html" %}
+
+{% block title %}{{ cursist.naam }} - Cursisten{% endblock %}
+
+{% block content %}
+    <h1>Cursist: {{ cursist.naam }}</h1>
+    <dl>
+        <dt>ID:</dt>
+        <dd>{{ cursist.id }}</dd>
+
+        <dt>Instrument:</dt>
+        <dd>{{ cursist.instrument }}</dd>
+
+        <dt>Niveau:</dt>
+        <dd>
+            {% if cursist.niveau == 1 %}
+                Beginner
+            {% elif cursist.niveau == 2 %}
+                Gevorderd
+            {% else %}
+                Expert
+            {% endif %}
+        </dd>
+    </dl>
+{% endblock %}
+```
+
+## Link met Week 3 (SQL)
+
+Straks combineer je templates met database queries:
+
+```python
+import sqlite3
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route("/products")
+def products() -> str:
+    """Product lijst uit database."""
+    with sqlite3.connect("shop.db") as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.execute("SELECT * FROM products ORDER BY name")
+        products_list = cursor.fetchall()
+
+    return render_template("products.html", products=products_list)
+```
+
+**Template** (`templates/products.html`):
+
+```html
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Producten</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Prijs</th>
+                <th>Voorraad</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>€{{ product.price|round(2) }}</td>
+                <td>{{ product.stock }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+```
+
+Met SQLAlchemy wordt dit nog makkelijker - dat zie je in Week 6.
+
+## Best practices
+
+### 1. Type hints in Flask routes
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def index() -> str:
+    """Homepage met type hint."""
+    return render_template("home.html")
+
+
+@app.route("/user/<int:user_id>")
+def user(user_id: int) -> str:
+    """User pagina met typed parameter."""
+    return render_template("user.html", user_id=user_id)
+```
+
+### 2. Template inheritance
+
+Gebruik altijd `base.html` voor consistente layout.
+
+### 3. Comments in templates
+
+```html
+{# Dit is een Jinja2 comment - wordt niet gerenderd #}
+
+{#
+Multi-line comment
+Ook mogelijk
+#}
+
+<!-- HTML comment - wordt WEL naar browser gestuurd -->
+```
+
+### 4. Template organization
+
+```text
+templates/
+├── base.html
+├── components/
+│   ├── navbar.html
+│   └── footer.html
+├── cursisten/
+│   ├── list.html
+│   └── detail.html
+└── home.html
+```
+
+Gebruik subdirectories voor grotere apps!
+
+## Samenvatting
+
+Je hebt geleerd:
+
+- **Templates maken** in `templates/` directory
+- **Static files** serveren uit `static/` directory
+- **Variabelen doorgeven** met `render_template()`
+- **Template syntax**: `{{ variabele }}` en `{% control %}`
+- **For loops**: `{% for item in items %}`
+- **If statements**: `{% if conditie %}`
+- **Filters**: `{{ naam|upper }}`, `{{ prijs|round(2) }}`
+- **Template inheritance**: `{% extends "base.html" %}`
+- **Type hints**: `-> str` voor render_template returns
+
+**Volgende stap:** Week 5 - Flask Forms en WTForms.

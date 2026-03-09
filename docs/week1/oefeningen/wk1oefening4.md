@@ -10,4 +10,3 @@ Download de bestanden [`oefening4.html`](../bestanden/oefening4.html), [`oefenin
 Het uiteindelijke resultaat moet er als volgt uit zien. Je mag natuurlijk ook nog wat meer toeters en bellen toevoegen, maar dit is het minimum:
 
 ![Voorbeeld van het eindresultaat](imgs/oefening4.png)
-

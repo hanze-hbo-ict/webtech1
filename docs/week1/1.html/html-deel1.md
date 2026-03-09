@@ -13,12 +13,12 @@ Het is de bedoeling ook tijdens dit kwartaal voor de fictieve muziekschool 'Sess
 Hieronder een kort overzicht van de onderdelen die tijdens dit kwartaal aan bod zullen komen:
 
 - Front-end development
-    - HTML
-    - CSS
-    - Bootstrap
+  - HTML
+  - CSS
+  - Bootstrap
 - Python
-    - Herhaling
-    - OOP
+  - Herhaling
+  - OOP
 - Templates, formulieren en databases
 - Flask
 - Authenticatie
@@ -45,22 +45,23 @@ Webpagina's kun je onderverdelen in *statische* en *dynamische* pagina's. Een *s
 
 ![Statische webpagina](imgs/statische_pagina.png)
 
-1.	De webbrowser vraagt een statische pagina op.
-2.	De webserver zoekt en vindt de pagina.
-3.	De webserver verzendt de pagina naar de betreffende browser.
+1. De webbrowser vraagt een statische pagina op.
+2. De webserver zoekt en vindt de pagina.
+3. De webserver verzendt de pagina naar de betreffende browser.
 
 ### Dynamische webpagina's
+
 Als de webserver echter een verzoek voor een *dynamische* pagina ontvangt, reageert de server anders: de pagina wordt doorgegeven aan een speciaal stukje software dat voor de afhandeling van de pagina moet zorgen. Deze speciale software wordt een *toepassingsserver* genoemd. Deze server leest de code op de pagina, verwerkt de pagina volgens de instructies in de code en verwijdert de code vervolgens van de pagina.
 
 Het resultaat is een statische pagina die de toepassingsserver weer teruggeeft aan de webserver, die de pagina op zijn beurt verzendt naar de browser waar de pagina in eerste instantie is opgevraagd. Als de pagina arriveert, ontvangt de browser alleen HTML.
 
 ![Dynamische pagina](imgs/dynamische_pagina.png)
 
-1.	De webbrowser vraagt een dynamische pagina op.
-2.	De server zoekt de pagina en geeft deze door aan de toepassingsserver
-3.	De toepassingsserver scant de pagina op instructies en voltooit de pagina.
-4.	De toepassingsserver retourneert de voltooide pagina aan de webserver.
-5.	De webserver verzendt de voltooide pagina naar de betreffende browser.
+1. De webbrowser vraagt een dynamische pagina op.
+2. De server zoekt de pagina en geeft deze door aan de toepassingsserver
+3. De toepassingsserver scant de pagina op instructies en voltooit de pagina.
+4. De toepassingsserver retourneert de voltooide pagina aan de webserver.
+5. De webserver verzendt de voltooide pagina naar de betreffende browser.
 
 Door middel van een toepassingsserver is het mogelijk bronnen aan de serverzijde te gebruiken, waaronder bijvoorbeeld een database. Een dynamische pagina kan de toepassingsserver de instructie geven om gegevens uit een database op te halen en deze in de HTML van de pagina in te voegen.
 
@@ -76,17 +77,14 @@ Nadat het stuurprogramma de communicatie tot stand heeft gebracht, wordt de quer
 
 ![Een site met een database](imgs/database-site.png)
 
-1.	De webbrowser vraagt een dynamische pagina op.
-2.	De webserver zoekt de pagina en geeft deze door aan de toepassingsserver.
-3.	De toepassingsserver scant de pagina op instructies.
-4.	De toepassingsserver verzendt de query naar het databasestuurprogramma.
-5.	Het stuurprogramma voert de query uit op de database.
-6.	De recordset wordt als resultaat geretourneerd aan het stuurprogramma.
-7.	Het stuurprogramma geeft de recordset door aan de toepassingsserver.
-8.	De toepassingsserver voegt de gegevens in op de pagina en geeft de pagina door aan de webserver.
-9.	De webserver verzendt de voltooide pagina naar de betreffende browser.
+1. De webbrowser vraagt een dynamische pagina op.
+2. De webserver zoekt de pagina en geeft deze door aan de toepassingsserver.
+3. De toepassingsserver scant de pagina op instructies.
+4. De toepassingsserver verzendt de query naar het databasestuurprogramma.
+5. Het stuurprogramma voert de query uit op de database.
+6. De recordset wordt als resultaat geretourneerd aan het stuurprogramma.
+7. Het stuurprogramma geeft de recordset door aan de toepassingsserver.
+8. De toepassingsserver voegt de gegevens in op de pagina en geeft de pagina door aan de webserver.
+9. De webserver verzendt de voltooide pagina naar de betreffende browser.
 
 Bijna iedere database kan voor een webtoepassing gebruikt worden, zolang het juiste  databasestuurprogramma maar op de server geïnstalleerd is.
-
-
-

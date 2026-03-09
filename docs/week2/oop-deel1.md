@@ -1,206 +1,288 @@
-# OOP Python – inleiding
+# OOP Python – Inleiding tot objecten
 
-Tot nu toe hebben we ons gericht op vormgeving van teksten en dergelijke aan de *client-kant* van onze webapplicatie. Om hier *functionaliteit* aan toe te voegen, kunnen we twee dingen doen:
+Je gaat nu werken met objecten in Python. Dit is een fundamenteel concept - later ga je zien hoe een database rij automatisch een object wordt in je code.
 
-- met behulp van JavaScript programmacode aan de *client-kant* zelf toevoegen, of
-- met behulp van een zogenaamde backend-programmeertaal functionaliteit aan de *server-kant* toevoegen en het resultaat daarvan terugsturen naar de client.
+## Waarom objecten?
 
-Om dit wat nader toe te lichten, herhalen we hier het plaatje uit week 1; bekijk eventueel [de beschrijving daarbij op de betreffende pagina](../week1/1.html/html-deel1.md):
+Tot nu toe heb je geprogrammeerd met losse variabelen en functies. Voor kleine programma's werkt dat prima, maar bij grotere applicaties zoals een webshop wordt het al snel onoverzichtelijk. Objecten groeperen gerelateerde data en functionaliteit.
 
-![Een site met een database](../week1/1.html/imgs/database-site.png)
+**Voorbeeld:** In een webshop heeft elk product eigenschappen (naam, prijs, voorraad) en acties (verkopen, prijs aanpassen). In plaats van losse variabelen gebruik je een *klasse* als sjabloon om *objecten* (instanties) te maken.
 
-Voor deze module hebben we voor de tweede optie gekozen. JavaScript en front-end development komen uitgebreid aan bod in het tweede jaar.
-
-We beginnen met een stukje herhaling over het object-georiënteerde programmeerparadigma in Python.
-
-## Wat is OOP?
-
-Tot nu toe is er geprogrammeerd volgens het imperatieve paradigma. Een programma gemaakt volgens dit principe bestaat uit een groot aantal coderegels die in een bepaalde volgorde geplaatst zijn en waarop de computer verteld wordt hoe deze regels uit te voeren.
-
-OOP (*Object Oriented Programming*) is een programmeerstijl (of *paradigma*) waarbij logische objecten gemaakt worden die methodes (functies, acties of gebeurtenissen) en eigenschappen (waarden) hebben. De bedoeling is dat dit leidt tot herbruikbare en beter leesbare programmacode. Conceptueel bestaat een programma uit objecten die aangemaakt worden en met elkaar interacteren.
-
-Het is niet zo dat beide stijlen onafhankelijk van elkaar functioneren. Binnen OOP wordt gebruikt gemaakt van de imperatieve coderingswijze en bij het imperatieve paradigma komen objecten regelmatig voor, zonder dat een gebruiker er vaak weet van heeft.
-
-## Klasse-definitie
-
-Om te beginnen een simpel voorbeeld om het principe van klassen en methoden uit te leggen. We bouwen een eenvoudige webshop waarbij we producten kunnen beheren. Bekijk het bestand [`product.py`](bestanden/webshop/product.py).
-
-```ipython
-In [1]: class Product:
-   ...:
-```
-
-Een klasse wordt gedefinieerd door het woord `class`, gevolgd door de naam van de klasse, beginnend met een hoofdletter. De klassedefinitie wordt afgesloten met een dubbele punt (`:`).
-
-Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze class bestaat. Dit geven we mee aan de methode die aangeroepen wordt wanneer er een object van een klasse wordt aangemaakt: de zogenaamde *constructor*. In Python is deze methode `__init__` (we komen daar zo wat uitgebreider op terug):
-
-```ipython
-   ...:     def __init__(self, naam, prijs, voorraad):
-   ...:         self._naam = naam
-   ...:         self._prijs = prijs
-   ...:         self._voorraad = voorraad
-   In [2]:
-```
-
-Het zijn er drie (3): `naam`, `prijs`, `voorraad`. De notatie `self` lijkt nu nog wat vreemd, maar dat went snel; zie eventueel [deze blogpost](https://www.bartbarnard.nl/programmeerblogs/python/self.html) voor meer informatie rondom `self`.
-
-Nu de klasse is gedefinieerd kunnen we er objecten van maken – een ander woord voor hiervoor is *instantie*: we maken *instanties* van de klasse `Product`:
-
-```ipython
-In [2]: laptop = Product("Laptop", 799.99, 5)
-```
-
-Er is een object aangemaakt met de naam `laptop`. Bij het aanmaken van deze nieuwe instantie is de invulling van drie eigenschappen verplicht. In de definitie van de klasse wordt gevraagd om `naam`, `prijs` en `voorraad`, dus deze drie waarden moeten opgegeven worden. Gebeurt dat niet, verschijnt er een foutmelding. Dus deze coderegel wil zeggen dat er een instantie (`laptop`) is aangemaakt voor de klasse (`Product`) waarbij naam (`Laptop`), prijs (`799.99`) en voorraad (`5`) als verplichte waarden worden meegegeven. De inhoud van de waarden van de velden van de instantie `laptop` kunnen ook getoond worden:
-
-```ipython
-In [4]: laptop._naam
-Out[4]: 'Laptop'
-
-In [5]: laptop._prijs
-Out[5]: 799.99
-
-In [6]:
-```
-
-Uiteraard kunnen er meerdere objecten bij deze klasse worden aangemaakt. Een tweede product is bijvoorbeeld een boek.
-
-```ipython
-In [6]: python_boek = Product("Python Crash Course", 34.95, 12)
-```
-
-De gegevens van beide objecten kunnen ook gecombineerd worden getoond.
-
-```ipython
-In [7]: print(f"Producten: {laptop._naam} = €{laptop._prijs}, {python_boek._naam} = €{python_boek._prijs}")
-Producten: Laptop = €799.99, Python Crash Course = €34.95
-
-In [8]:
-```
-
-Voor de overzichtelijkheid eerst een aantal beschrijvingen:
-
-Term | Omschrijving
------|------
-Klasse | template, sjabloon voor het maken van objecten; alle objecten die met dezelfde klasse zijn gemaakt, hebben dezelfde kenmerken.
-Object | een instantie van een klasse.
-Initialisatie | een nieuw object van een klasse.
-Methode | een functie gedefinieerd in een klasse.
-Attribuut | een variabele die is gebonden aan een object van een klasse.
-
-## Producten verkopen
-
-We breiden de definitie van `Product` uit met een tweede methode `verkoop()`. Het woord `self` moet je altijd aan een methode-definitie toevoegen, zelfs wanneer de methode zelf verder helemaal geen parameters heeft.
-
-Deze methode verkoopt een aantal producten en past de voorraad aan.
-
-```python
-def verkoop(self, aantal):
-    """Verkoop een aantal items van dit product"""
-    nieuwe_voorraad = self._voorraad - aantal
-    if nieuwe_voorraad >= 0:
-        self._voorraad = nieuwe_voorraad
-        print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
-    else:
-        print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
-```
-
-De volledige klasse ziet er nu als volgt uit:
+## Je eerste klasse: Product
 
 ```python
 class Product:
-    """Basisklasse voor alle producten in de webshop"""
-
-    def __init__(self, naam, prijs, voorraad):
-        self._naam = naam
-        self._prijs = prijs
-        self._voorraad = voorraad
-
-    def verkoop(self, aantal):
-        """Verkoop een aantal items van dit product"""
-        nieuwe_voorraad = self._voorraad - aantal
-        if nieuwe_voorraad >= 0:
-            self._voorraad = nieuwe_voorraad
-            print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
-        else:
-            print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
+    def __init__(self, naam: str, prijs: float, voorraad: int):
+        self.naam = naam
+        self.prijs = prijs
+        self.voorraad = voorraad
 ```
 
-Tijd voor de test! We maken een nieuw product en verkopen er een aantal:
+### Klasse definitie
+
+```python
+class Product:
+```
+
+Met `class` definieer je een nieuwe klasse. De naam begint altijd met een hoofdletter (`Product`, niet `product`).
+
+### Type annotaties
+
+```python
+def __init__(self, naam: str, prijs: float, voorraad: int):
+```
+
+De **type annotaties** (`: str`, `: float`, `: int`) geven aan welk datatype je verwacht:
+
+- `naam: str` - een string
+- `prijs: float` - een getal met decimalen
+- `voorraad: int` - een heel getal
+
+!!! info "Waarom type annotaties?"
+    Type annotaties zijn nieuw voor je, maar hebben drie grote voordelen:
+    1. Je ziet direct wat een functie verwacht - code wordt makkelijker te begrijpen
+    2. Je editor helpt je met autocompletion en waarschuwt voor fouten
+    3. Later (bij databases en webapplicaties) zijn ze vereist
+    Vanaf nu gebruik je ze standaard in je code.
+
+### De constructor: `__init__`
+
+```python
+def __init__(self, naam: str, prijs: float, voorraad: int):
+    self.naam = naam
+    self.prijs = prijs
+    self.voorraad = voorraad
+```
+
+De `__init__` methode is de **constructor** - deze wordt automatisch aangeroepen wanneer je een nieuw object aanmaakt.
+
+!!! note "`self` - het object zelf"
+    `self` verwijst naar het object zelf. Wanneer je `self.naam = naam` schrijft, maak je een **attribuut** aan dat bij dit specifieke object hoort.
+    **Belangrijk:** Elke methode moet `self` als eerste parameter hebben - Python geeft het huidige object automatisch door.
+
+### Objecten aanmaken
 
 ```python
 laptop = Product("Laptop", 799.99, 5)
-laptop.verkoop(2)
+muis = Product("Draadloze muis", 25.50, 20)
 ```
 
-En de uitkomst:
-
-```console
-Verkocht: 2x Laptop. Nog 3 op voorraad
-```
-
-## Een mooiere weergave met `__str__()`
-
-Het kan handig zijn als we een product netjes kunnen printen. Daarvoor gebruiken we de speciale methode `__str__()`:
+Je hebt nu twee **objecten** (instanties) van de klasse `Product`. Elk object heeft zijn eigen waarden:
 
 ```python
-def __str__(self):
-    return f"Product: {self._naam}, Prijs: €{self._prijs:.2f}, Voorraad: {self._voorraad}"
+print(laptop.naam)      # "Laptop"
+print(laptop.prijs)     # 799.99
+print(muis.naam)        # "Draadloze muis"
+print(muis.prijs)       # 25.50
 ```
 
-Nu kunnen we eenvoudig een product weergeven:
+### Terminologie
+
+Term | Betekenis
+---|---
+**Klasse** | Een sjabloon voor het maken van objecten (bijv. `Product`)
+**Object/Instantie** | Een concreet exemplaar van een klasse (bijv. `laptop`)
+**Attribuut** | Een variabele die bij een object hoort (bijv. `naam`, `prijs`)
+**Methode** | Een functie die bij een klasse hoort
+**Constructor** | De `__init__` methode die een nieuw object initialiseert
+
+## Methoden toevoegen
+
+Een klasse kan **methoden** bevatten - functies die bij de klasse horen:
+
+```python
+class Product:
+    def __init__(self, naam: str, prijs: float, voorraad: int):
+        self.naam = naam
+        self.prijs = prijs
+        self.voorraad = voorraad
+
+    def verkoop(self, aantal: int) -> bool:
+        """Verkoop een aantal items. Geeft True terug bij succes, False bij onvoldoende voorraad."""
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
+        return False
+```
+
+**Belangrijke details:**
+
+1. **Return type annotatie**: `-> bool` betekent dat deze methode een boolean teruggeeft
+2. **Docstring**: De regel tussen `"""` documenteert wat de methode doet
+3. **Return value**: De methode geeft `True` of `False` terug - de aanroepende code beslist wat ermee gebeurt
+
+!!! warning "Print vs Return in webapplicaties"
+    De `verkoop()` methode geeft een boolean terug in plaats van te printen. Dit is essentieel voor webapplicaties:
+    - `print()` schrijft naar de console - de gebruiker ziet dit niet
+    - `return` geeft data terug aan de aanroepende code
+    In Flask geef je data terug aan de browser. Je `Product` klasse weet alleen van producten - feedback tonen aan gebruikers doet je Flask route:
+    ```python
+    # Later in een Flask route:
+    if laptop.verkoop(2):
+        flash("Product verkocht!")
+        return redirect('/winkelwagen')
+    else:
+        flash("Onvoldoende voorraad")
+        return redirect('/producten')
+    ```
+    Dit heet **scheiding van verantwoordelijkheden** (separation of concerns): elke laag in je applicatie heeft zijn eigen verantwoordelijkheid.
+
+## De `__str__` methode
+
+Python heeft **speciale methoden** die beginnen en eindigen met dubbele underscores (`__`), ook wel "dunder methods" genoemd (van "double underscore").
+
+De `__str__` methode bepaalt hoe een object als string wordt weergegeven:
+
+```python
+class Product:
+    def __init__(self, naam: str, prijs: float, voorraad: int):
+        self.naam = naam
+        self.prijs = prijs
+        self.voorraad = voorraad
+
+    def verkoop(self, aantal: int) -> bool:
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
+        return False
+
+    def __str__(self) -> str:
+        return f"{self.naam}: €{self.prijs:.2f} ({self.voorraad} op voorraad)"
+```
+
+Nu kun je een product direct printen:
 
 ```python
 laptop = Product("Laptop", 799.99, 5)
 print(laptop)
+# Output: Laptop: €799.99 (5 op voorraad)
 ```
 
-Resultaat:
+## Volledige voorbeeld
 
-```console
-Product: Laptop, Prijs: €799.99, Voorraad: 5
+```python
+class Product:
+    """Een product in de webshop."""
+
+    def __init__(self, naam: str, prijs: float, voorraad: int):
+        self.naam = naam
+        self.prijs = prijs
+        self.voorraad = voorraad
+
+    def verkoop(self, aantal: int) -> bool:
+        """Verkoop een aantal items. Geeft True terug bij succes."""
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
+        return False
+
+    def voorraad_bijvullen(self, aantal: int) -> None:
+        """Voeg items toe aan de voorraad."""
+        self.voorraad += aantal
+
+    def __str__(self) -> str:
+        return f"{self.naam}: €{self.prijs:.2f} ({self.voorraad} op voorraad)"
+
+
+# Gebruik de klasse
+laptop = Product("Laptop", 799.99, 5)
+print(laptop)
+# Output: Laptop: €799.99 (5 op voorraad)
+
+# Verkoop
+if laptop.verkoop(2):
+    print(f"Verkocht! Nieuwe voorraad: {laptop.voorraad}")
+else:
+    print("Onvoldoende voorraad")
+# Output: Verkocht! Nieuwe voorraad: 3
+
+# Voorraad bijvullen
+laptop.voorraad_bijvullen(10)
+print(laptop)
+# Output: Laptop: €799.99 (13 op voorraad)
 ```
 
-## Testen van meerdere verkopen
+## Meerdere objecten
 
-Laten we nu meerdere verkopen uitvoeren om te zien hoe de voorraad wordt bijgehouden:
+Je kunt meerdere objecten van dezelfde klasse maken, elk met eigen data:
 
 ```python
 laptop = Product("Laptop", 799.99, 5)
-print(laptop)
+muis = Product("Draadloze muis", 25.50, 20)
+toetsenbord = Product("Mechanisch toetsenbord", 89.99, 15)
 
+# Elk object is onafhankelijk
 laptop.verkoop(2)
-print(laptop)
+muis.verkoop(5)
 
-laptop.verkoop(2)
-print(laptop)
-
-laptop.verkoop(2)  # Dit zal niet lukken - onvoldoende voorraad!
-print(laptop)
+print(laptop)        # Laptop: €799.99 (3 op voorraad)
+print(muis)          # Draadloze muis: €25.50 (15 op voorraad)
+print(toetsenbord)   # Mechanisch toetsenbord: €89.99 (15 op voorraad)
 ```
 
-Resultaat:
+Elk object heeft zijn eigen `voorraad` attribuut - wijzigingen in `laptop.voorraad` hebben geen effect op `muis.voorraad`.
 
-```console
-Product: Laptop, Prijs: €799.99, Voorraad: 5
-Verkocht: 2x Laptop. Nog 3 op voorraad
-Product: Laptop, Prijs: €799.99, Voorraad: 3
-Verkocht: 2x Laptop. Nog 1 op voorraad
-Product: Laptop, Prijs: €799.99, Voorraad: 1
-Onvoldoende voorraad. Nog maar 1 beschikbaar
-Product: Laptop, Prijs: €799.99, Voorraad: 1
+## Methoden met berekeningen
+
+Methoden kunnen ook berekeningen doen:
+
+```python
+class Product:
+    def __init__(self, naam: str, prijs: float, voorraad: int):
+        self.naam = naam
+        self.prijs = prijs
+        self.voorraad = voorraad
+
+    def bereken_voorraadwaarde(self) -> float:
+        """Bereken de totale waarde van de voorraad."""
+        return self.prijs * self.voorraad
+
+    def bereken_prijs_met_btw(self, btw_percentage: float = 21.0) -> float:
+        """Bereken prijs inclusief BTW."""
+        return self.prijs * (1 + btw_percentage / 100)
+
+    def __str__(self) -> str:
+        return f"{self.naam}: €{self.prijs:.2f}"
+
+
+laptop = Product("Laptop", 799.99, 5)
+
+print(f"Voorraadwaarde: €{laptop.bereken_voorraadwaarde():.2f}")
+# Output: Voorraadwaarde: €3999.95
+
+print(f"Prijs incl. BTW: €{laptop.bereken_prijs_met_btw():.2f}")
+# Output: Prijs incl. BTW: €968.39
+
+print(f"Prijs met 9% BTW: €{laptop.bereken_prijs_met_btw(9.0):.2f}")
+# Output: Prijs met 9% BTW: €871.99
 ```
 
-Perfect! Onze product-klasse houdt netjes de voorraad bij en waarschuwt wanneer er niet genoeg producten beschikbaar zijn.
+!!! tip "Default waarden"
+    `btw_percentage: float = 21.0` is een **default waarde** - als je geen waarde meegeeft, wordt 21.0 gebruikt. Dit is handig voor parameters die vaak dezelfde waarde hebben.
 
 ## Samenvatting
 
-In dit deel hebben we kennisgemaakt met:
+Je hebt nu gezien:
 
-- Het definiëren van een klasse met `class`
-- De constructor `__init__()` om objecten te initialiseren
-- Attributen (eigenschappen) van een klasse
-- Methoden (functies binnen een klasse)
-- Het aanmaken van instanties (objecten)
-- De speciale methode `__str__()` voor nette weergave
+- **Klassen en objecten**: Een klasse is een sjabloon, een object is een instantie
+- **Type annotaties**: `: str`, `: float`, `-> bool` maken code duidelijker en helpen fouten voorkomen
+- **Constructor**: `__init__` initialiseert nieuwe objecten
+- **Attributen**: Data die bij een object hoort (bijv. `self.naam`)
+- **Methoden**: Functies binnen een klasse, eerste parameter is altijd `self`
+- **Return values**: Methoden geven data terug (geen print statements)
+- **Speciale methoden**: `__str__` bepaalt string representatie
 
-In het volgende deel gaan we dieper in op het beschermen van attributen met getters en setters.
+### Belangrijke regels
+
+1. Type annotaties altijd gebruiken
+2. Return values in plaats van print statements (web-ready code)
+3. Elke methode heeft `self` als eerste parameter
+4. Klasse namen beginnen met hoofdletter, methode namen met kleine letter
+
+### Volgende stap
+
+In het volgende deel: **dataclasses** - een moderne manier om klassen te maken die vooral data bevatten. Dit maakt je code nog korter en leesbaarder.
+
+---
+
+**Maak nu [oefening 1](oefeningen/oop-oefening1.md).**
