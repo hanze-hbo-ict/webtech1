@@ -42,7 +42,7 @@ Als studenten geen project hebben of kunnen bedenken, is het ook prima om één 
 
 Hulpmiddel bij de beoordeling van het project kan een kort assessment met de betreffende practicumdocent zijn. Tijdens dit gesprek van zo'n 10 minuten laten de student-duo's hun uitwerking zien en worden ze bevraagd over de technische en niet-technische aspecten van hun realisatie. Ten behoeve van deze gesprekken wordt een extra lange laatste les in de laatste lesweek ingeroosterd - de docenten maken daarbinnen een separaat rooster voor de duo's.
 
-Basis voor de uiteindelijke beoordeling is [de beoordelings-rubric](rubrics_webtech.html). Mocht het project aan het eind van het blok nog onvoldoende blijken te zijn, dan worden door de betreffende practicumdocent individuele reparatieafspraken (inclusief deadline) gemaakt. In dat geval wordt de onvoldoende wel in Osiris geregistreerd en gelden de herstelwerkzaamheden als herkansing.
+Basis voor de uiteindelijke beoordeling is [de beoordelings-rubric](rubrics_webtech.md). Mocht het project aan het eind van het blok nog onvoldoende blijken te zijn, dan worden door de betreffende practicumdocent individuele reparatieafspraken (inclusief deadline) gemaakt. In dat geval wordt de onvoldoende wel in Osiris geregistreerd en gelden de herstelwerkzaamheden als herkansing.
 
 Deadlines zijn te vinden in [de BrightSpace-course van dit vak](https://brightspace.hanze.nl/d2l/home/13207).
 

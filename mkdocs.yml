@@ -1,7 +1,7 @@
 # Project information
 site_name: 'Webtechnologie 1'
 site_description: 'Onderwijsmateriaal voor de module Webtechnologie HBO-ICT jaar 1 semester 2'
-site_url: 'https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html'
+site_url: 'https://hanze-hbo-ict.github.io/webtech1/index.html'
 use_directory_urls: false
 
 theme:
@@ -46,6 +46,9 @@ markdown_extensions:
 
 extra_javascript:
   - js/imgs.js
+
+not_in_nav: |
+  rubrics_webtech.md
 
 nav:
 
