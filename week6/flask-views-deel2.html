@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -3140,9 +3140,12 @@ Het zijn er drie: <code>id</code>, <code>voornaam</code> en <code>leeftijd</code
 <h2 id="2-setup_databasepy">2. <code>setup_database.py</code><a class="headerlink" href="#2-setup_databasepy" title="Permanent link">&para;</a></h2>
 <p>Voor de tweede stap maken we gebruik van het bestand <a href="bestanden/crud/setup_database.py"><code>setup_database.py</code></a>. Let wel: Dit is een heel eenvoudig script dat laat zien hoe een database in te stellen. Later worden hierbij weer templates gebruikt.</p>
 <p>Ook voor deze file zal de opbouw van de code stap voor stap beschreven worden. In de eerste plaats worden er een aantal elementen uit de file <code>basic_model_app.py</code> geïmporteerd:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">basic_model_app</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">Cursist</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">basic_model_app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">Cursist</span>
 </code></pre></div>
-<p>De database en de tabel Cursist zijn ingeladen en nu moet de database en het bestand worden aangemaakt. Daarvoor is onderstaand commando beschikbaar:</p>
+<p>Daarna is het zaak om python te vertellen dat we binnen de <em>context</em> van onze app willen werken, zodat SQLAlchemy toegang heeft tot de Flask-configuratie. Dit doen we door alle volgende code in een <em>block</em> te zetten onder het volgende with-statement:</p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+</code></pre></div>
+<p>De app, database en tabel Cursist zijn ingeladen; nu moeten de database en het bestand worden aangemaakt. Daarvoor is onderstaand commando beschikbaar:</p>
 <div class="highlight"><pre><span></span><code><span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
 </code></pre></div>
 <h4 id="toevoegen-van-records">Toevoegen van records<a class="headerlink" href="#toevoegen-van-records" title="Permanent link">&para;</a></h4>
