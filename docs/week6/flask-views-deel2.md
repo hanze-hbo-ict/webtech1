@@ -111,10 +111,16 @@ Voor de tweede stap maken we gebruik van het bestand [`setup_database.py`](besta
 Ook voor deze file zal de opbouw van de code stap voor stap beschreven worden. In de eerste plaats worden er een aantal elementen uit de file `basic_model_app.py` geïmporteerd:
 
 ```python
-from basic_model_app import db, Cursist
+from basic_model_app import app, db, Cursist
 ```
 
-De database en de tabel Cursist zijn ingeladen en nu moet de database en het bestand worden aangemaakt. Daarvoor is onderstaand commando beschikbaar:
+Daarna is het zaak om python te vertellen dat we binnen de _context_ van onze app willen werken, zodat SQLAlchemy toegang heeft tot de Flask-configuratie. Dit doen we door alle volgende code in een _block_ te zetten onder het volgende with-statement:
+
+```python
+with app.app_context():
+```
+
+De app, database en tabel Cursist zijn ingeladen; nu moeten de database en het bestand worden aangemaakt. Daarvoor is onderstaand commando beschikbaar:
 
 ```python
 db.create_all()
