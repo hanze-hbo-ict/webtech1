@@ -1,148 +1,493 @@
-# Exceptions
+# Exception Handling bij Database Operaties
 
-In deze paragraaf wordt het werken met een database even losgelaten en worden de ‘exceptions’  geïntroduceerd. Exceptions worden gebruikt om een onverwachte of incorrecte programma-flow te ondervangen en bijvoorbeeld een foutmelding opo het scherm te tonen. Een geschikt Nederlands woord hiervoor is 'foutafhandeling'. Hoe zorgen we ervoor dat duidelijk is wat de fout precies is?
+Bij het werken met databases kunnen allerlei fouten optreden: database niet gevonden, constraint violations, connection errors, etc.
 
-Er zijn twee verschillende soorten fouten die gevonden kunnen worden bij de uitvoering van een programma. De eerste soort is al meerdere keren naar voren gekomen, namelijk fouten in de code. Deze fouten kunnen opgelost worden door verbeteringen aan te brengen in de code. In het volgende voorbeeld is per ongelijk een is-gelijk-teken (`=`) gebruikt in plaats van een min-teken (`-`): één toets te ver. Bij het runnen wordt geconstateerd dat er een fout in de code zit en er verschijnt een foutmelding met een aanwijzing naar de fout.
+## Waarom exception handling belangrijk is
 
-```ipython
-In [1]: x = 8 = 5
-  File "<ipython-input-1-6ddc385bfffb>", line 1
-    x = 8 = 5
-       ^
-SyntaxError: can't assign to literal
+In productie Flask applicaties wil je **nooit** dat gebruikers stack traces te zien krijgen. In plaats daarvan:
 
-In [2]:
+- Vang fouten af met `try`/`except`
+- Log de fout voor debugging
+- Toon een gebruiksvriendelijke foutmelding
+- Blijf in een consistente staat (geen corrupte data)
+
+## Database exceptions in SQLite
+
+SQLite heeft verschillende exception types die allemaal erven van `sqlite3.Error`:
+
+```python
+import sqlite3
+
+# Basis exception types:
+# - sqlite3.Error (parent van alle database errors)
+# - sqlite3.IntegrityError (constraint violations: UNIQUE, NOT NULL, etc.)
+# - sqlite3.OperationalError (database locked, table not found, etc.)
+# - sqlite3.ProgrammingError (SQL syntax errors)
 ```
 
-Andere onverwachte fouten, bijvoorbeeld problemen in de flow, of het willen aanmaken van een database terwijl de beschikbare ruimte op is, leveren meestal een crash van het programma op. Het doel van exceptions is dit in goede banen te leiden.
+## Basic exception handling
 
-Kijk naar de volgende code:
+### Voorbeeld zonder error handling (slecht)
 
-```ipython
-In [1]: y = 10
+```python
+import sqlite3
 
-In [2]: x = y - (2*5)
+def add_product_unsafe(name: str, price: float, stock: int, category_id: int) -> int:
+    """GEEN error handling - crasht bij fouten!"""
+    with sqlite3.connect("webshop.sqlite") as conn:
+        cursor = conn.execute(
+            "INSERT INTO products (name, price, stock, category_id) VALUES (?, ?, ?, ?)",
+            (name, price, stock, category_id)
+        )
+        conn.commit()
+        return cursor.lastrowid
 
-In [3]: y / x
----------------------------------------------------------------------------
-ZeroDivisionError                         Traceback (most recent call last)
-<ipython-input-3-68e2f9788128> in <module>
-----> 1 y / x
-
-ZeroDivisionError: division by zero
+# Dit crasht als name None is (NOT NULL constraint)
+productid = add_product_unsafe("Laptop HP", 899.99, 10, 1)  # Werkt
+productid = add_product_unsafe(None, 899.99, 10, 1)  # CRASH!
+# sqlite3.IntegrityError: NOT NULL constraint failed: products.name
 ```
 
-En inderdaad, delen door nul (0) is niet toegestaan. Deze vorm wordt ‘unhandled exception’ genoemd. Gevolg van een dergelijke werkwijze is dat het programma onmiddellijk beëindigd wordt. Python geeft aan wat de fout is en er wordt aangeven in welke regel de fout geconstateerd is.
+### Voorbeeld met error handling (goed)
 
-Python heeft de beschikking over [veel ‘Built-in Exceptions’](https://docs.python.org/3/library/exceptions.html). Deze exceptions doen het werk al voor de gebruiker door te laten zijn in hun beschrijving welke fout gesignaleerd is.
+```python
+import sqlite3
+from sqlite3 import Row
 
-Een interessante exception is de `RecursionError`. Recursie is natuurlijk al uitgebreid behandeld in het eerste kwartaal, bijvoorbeeld wanneer we de *faculteit* van een getal `n` moesten berekenen. Bij een waarde van `n` die duizend overstijgt, geeft Python helaas aan te maken te hebben met een *stack overflow*. En daar past een mooie foutafhandeling bij...
+def add_product_safe(name: str, price: float, stock: int, category_id: int) -> int | None:
+    """Met error handling - geeft None terug bij fout."""
+    try:
+        with sqlite3.connect("webshop.sqlite") as conn:
+            cursor = conn.execute(
+                "INSERT INTO products (name, price, stock, category_id) VALUES (?, ?, ?, ?)",
+                (name, price, stock, category_id)
+            )
+            conn.commit()
+            return cursor.lastrowid
 
-```ipython
-In [1]: def factorial(n):
-   ...:     # n! kan gelezen worden als n * (n - 1)!
-   ...:     if n <= 1:
-   ...:         return 1
-   ...:     else:
-   ...:         return n * factorial(n - 1)
-   ...:
+    except sqlite3.IntegrityError as e:
+        # NOT NULL of UNIQUE constraint violation
+        print(f"Fout: ongeldige waarde voor product '{name}'")
+        return None
+
+    except sqlite3.Error as e:
+        # Andere database fouten
+        print(f"Database fout: {e}")
+        return None
+
+# Gebruik
+productid = add_product_safe("Laptop HP", 899.99, 10, 1)
+if productid:
+    print(f"Product aangemaakt met ID {productid}")
+else:
+    print("Product niet aangemaakt")
+
+# None als naam - geen crash, netjes afgehandeld
+productid = add_product_safe(None, 899.99, 10, 1)
+if productid:
+    print(f"Product aangemaakt met ID {productid}")
+else:
+    print("Product niet aangemaakt")  # Dit wordt geprint
 ```
 
+## Specifieke exceptions afhandelen
 
-De output van 50! levert al een erg groot getal op.
+### IntegrityError (constraint violations)
 
-```ipython
-In [2]: factorial(50)
-Out[2]: 30414093201713378043612608166064768844377641568960512000000000000
+```python
+def add_product(name: str, price: float, stock: int, category_id: int) -> int | None:
+    """Voeg product toe met constraint validation."""
+    try:
+        with sqlite3.connect("webshop.sqlite") as conn:
+            conn.execute("PRAGMA foreign_keys = ON")
+            cursor = conn.execute(
+                "INSERT INTO products (name, price, stock, category_id) VALUES (?, ?, ?, ?)",
+                (name, price, stock, category_id)
+            )
+            conn.commit()
+            return cursor.lastrowid
+
+    except sqlite3.IntegrityError as e:
+        error_msg = str(e)
+
+        if "UNIQUE" in error_msg:
+            print(f"Product '{name}' bestaat al")
+        elif "NOT NULL" in error_msg:
+            print(f"Verplichte velden mogen niet leeg zijn")
+        elif "FOREIGN KEY" in error_msg:
+            print(f"Ongeldige categorie ID: {category_id}")
+        elif "CHECK" in error_msg:
+            print(f"Ongeldige waarde (bijv. negatieve prijs of voorraad)")
+        else:
+            print(f"Database constraint error: {error_msg}")
+
+        return None
+
+# Test
+add_product("Laptop HP", 899.99, 10, 1)  # Werkt
+add_product(None, 799.99, 5, 1)           # NOT NULL - netjes afgehandeld
+add_product("Mouse", 29.99, 10, 999)      # FOREIGN KEY - netjes afgehandeld
 ```
 
+### OperationalError (database problemen)
 
-Hetzelfde nog een keer maar nu voor `n = 10_000`:
+```python
+def get_all_products() -> list[Row]:
+    """Haal producten op met error handling."""
+    try:
+        with sqlite3.connect("webshop.sqlite") as conn:
+            conn.row_factory = Row
+            cursor = conn.execute("SELECT * FROM products")
+            return cursor.fetchall()
 
-```ipython
-In [4]: factorial(10_000)
----------------------------------------------------------------------------
-RecursionError                            Traceback (most recent call last)
+    except sqlite3.OperationalError as e:
+        error_msg = str(e)
 
-(...)
+        if "no such table" in error_msg:
+            print("Database tabel bestaat niet - run eerst create_webshop.py!")
+            return []
+        elif "locked" in error_msg:
+            print("Database is locked - probeer later opnieuw")
+            return []
+        else:
+            print(f"Database error: {error_msg}")
+            return []
 
-RecursionError: maximum recursion depth exceeded in comparison
+    except sqlite3.Error as e:
+        print(f"Onverwachte database fout: {e}")
+        return []
+
+# Gebruik
+products = get_all_products()
+if products:
+    for product in products:
+        print(f"{product['name']}: € {product['price']}")
+else:
+    print("Geen producten gevonden (of fout opgetreden)")
 ```
 
-Deze fout kunnen we netjes opvangen door gebruik te maken van een *exception*:
+## Complete database class met error handling
 
-```ipython
-In [7]: try:
-   ...:     print(factorial(10_000))
-   ...: except RecursionError:
-   ...:     print("Dit programma kan zulke grote getallen niet handelen.")
-   ...:
-   ...: print("Programma beëindigd!")
-   ...:
-Dit programma kan zulke grote getallen niet handelen.
-Programma beëindigd!
+Hier is een volledige class met exception handling:
+
+```python
+import sqlite3
+from sqlite3 import Row
+import logging
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+class ProductDatabase:
+    """Product database met complete error handling."""
+
+    def __init__(self, db_path: str = "shop.db"):
+        self.db_path = db_path
+        self._create_table()
+
+    def _create_table(self) -> None:
+        """Maak products tabel aan."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS products (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        name TEXT NOT NULL UNIQUE,
+                        price REAL NOT NULL CHECK(price > 0),
+                        stock INTEGER NOT NULL CHECK(stock >= 0)
+                    )
+                """)
+                conn.commit()
+                logger.info("Products tabel aangemaakt")
+
+        except sqlite3.Error as e:
+            logger.error(f"Fout bij aanmaken tabel: {e}")
+            raise  # Re-raise omdat dit een kritieke fout is
+
+    def add(self, name: str, price: float, stock: int) -> int | None:
+        """Voeg product toe met error handling."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.execute(
+                    "INSERT INTO products (name, price, stock) VALUES (?, ?, ?)",
+                    (name, price, stock)
+                )
+                conn.commit()
+                productid = cursor.lastrowid
+                logger.info(f"Product '{name}' toegevoegd met ID {productid}")
+                return productid
+
+        except sqlite3.IntegrityError as e:
+            if "UNIQUE" in str(e):
+                logger.warning(f"Product '{name}' bestaat al")
+            elif "CHECK" in str(e):
+                logger.warning(f"Ongeldige waarde voor '{name}': prijs={price}, stock={stock}")
+            else:
+                logger.error(f"Integrity error bij toevoegen '{name}': {e}")
+            return None
+
+        except sqlite3.Error as e:
+            logger.error(f"Database fout bij toevoegen '{name}': {e}")
+            return None
+
+    def get_all(self) -> list[Row]:
+        """Haal alle producten op."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.row_factory = Row
+                cursor = conn.execute("SELECT * FROM products ORDER BY name")
+                return cursor.fetchall()
+
+        except sqlite3.Error as e:
+            logger.error(f"Fout bij ophalen producten: {e}")
+            return []
+
+    def get_byid(self, productid: int) -> Row | None:
+        """Haal één product op."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                conn.row_factory = Row
+                cursor = conn.execute(
+                    "SELECT * FROM products WHERE id = ?",
+                    (productid,)
+                )
+                return cursor.fetchone()
+
+        except sqlite3.Error as e:
+            logger.error(f"Fout bij ophalen product {productid}: {e}")
+            return None
+
+    def update_stock(self, productid: int, new_stock: int) -> bool:
+        """Update voorraad met validatie."""
+        if new_stock < 0:
+            logger.warning(f"Negatieve voorraad niet toegestaan: {new_stock}")
+            return False
+
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.execute(
+                    "UPDATE products SET stock = ? WHERE id = ?",
+                    (new_stock, productid)
+                )
+                conn.commit()
+
+                if cursor.rowcount > 0:
+                    logger.info(f"Stock update voor product {productid}: {new_stock}")
+                    return True
+                else:
+                    logger.warning(f"Product {productid} niet gevonden")
+                    return False
+
+        except sqlite3.Error as e:
+            logger.error(f"Fout bij update stock voor product {productid}: {e}")
+            return False
+
+    def delete(self, productid: int) -> bool:
+        """Verwijder product."""
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.execute(
+                    "DELETE FROM products WHERE id = ?",
+                    (productid,)
+                )
+                conn.commit()
+
+                if cursor.rowcount > 0:
+                    logger.info(f"Product {productid} verwijderd")
+                    return True
+                else:
+                    logger.warning(f"Product {productid} niet gevonden")
+                    return False
+
+        except sqlite3.Error as e:
+            logger.error(f"Fout bij verwijderen product {productid}: {e}")
+            return False
+
+
+# Gebruik
+db = ProductDatabase()
+
+# Succesvol toevoegen
+productid = db.add("Laptop", 799.99, 10)
+if productid:
+    print(f"Product toegevoegd met ID {productid}")
+
+# Duplicate - wordt netjes afgevangen
+duplicateid = db.add("Laptop", 899.99, 5)
+if not duplicateid:
+    print("Product niet toegevoegd (bestaat al)")
+
+# Ongeldige waarde - wordt netjes afgevangen
+invalidid = db.add("Monitor", -50.00, 3)  # Negatieve prijs
+if not invalidid:
+    print("Product niet toegevoegd (ongeldige prijs)")
+
+# Stock update
+if db.update_stock(1, 15):
+    print("Stock bijgewerkt")
+
+# Haal alle producten op
+products = db.get_all()
+for product in products:
+    print(f"{product['name']}: €{product['price']} ({product['stock']} op voorraad)")
 ```
 
-Het codeblok wat vermeld staat onder `try` wordt normaal gesproken uitgevoerd. Op het moment dat er wordt waargenomen dat er een fout is ontstaan, wordt er automatisch gesprongen naar het codeblok onder `except`. De mededeling wordt getoond en het programma gestopt.
+## Flask specifieke error handling
 
-In de foutafwikkeling van dit programma  is ervan uitgegaan dat er slechts één soort fout kan optreden. Dat hoeft natuurlijk niet het geval te zijn. Om dit te illustreren, passen we onze methode aan met een (beetje gezocht, maar goed) extra fout, namelijk een deling door nul (`0`):
+In Flask wil je errors netjes afhandelen voor gebruikers:
 
-```ipython
-In [1]: def factorial(n):
-   ...:     # n! kan gelezen worden als n * (n - 1)!
-   ...:     if n <= 1:
-   ...:         return 1
-   ...:     else:
-   ...:         print(n / 0)
-   ...:         return n * factorial(n - 1)
-   ...:
+```python
+from flask import Flask, jsonify, request
+import sqlite3
+import logging
+
+app = Flask(__name__)
+logger = logging.getLogger(__name__)
+
+
+@app.route('/products', methods=['POST'])
+def add_product():
+    """Voeg product toe via API."""
+    data = request.get_json()
+
+    try:
+        name = data['name']
+        price = float(data['price'])
+        stock = int(data['stock'])
+
+        db = ProductDatabase()
+        productid = db.add(name, price, stock)
+
+        if productid:
+            return jsonify({
+                'success': True,
+                'id': productid,
+                'message': f'Product {name} toegevoegd'
+            }), 201
+        else:
+            return jsonify({
+                'success': False,
+                'message': 'Product kon niet worden toegevoegd (mogelijk duplicate)'
+            }), 400
+
+    except KeyError as e:
+        return jsonify({
+            'success': False,
+            'message': f'Ontbrekend veld: {e}'
+        }), 400
+
+    except ValueError as e:
+        return jsonify({
+            'success': False,
+            'message': f'Ongeldige waarde: {e}'
+        }), 400
+
+    except Exception as e:
+        logger.error(f"Onverwachte fout: {e}")
+        return jsonify({
+            'success': False,
+            'message': 'Server error'
+        }), 500
+
+
+@app.route('/products/<int:productid>')
+def get_product(productid):
+    """Haal product op via API."""
+    try:
+        db = ProductDatabase()
+        product = db.get_byid(productid)
+
+        if product:
+            return jsonify({
+                'success': True,
+                'product': dict(product)
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'message': 'Product niet gevonden'
+            }), 404
+
+    except Exception as e:
+        logger.error(f"Fout bij ophalen product {productid}: {e}")
+        return jsonify({
+            'success': False,
+            'message': 'Server error'
+        }), 500
 ```
 
-Als we deze code runnen, krijgen we natuurlijk dezelfde foutmelding als in het voorbeeld hierboven te zien:
+## Best practices
 
-```ipython
-In [2]: factorial(3)
----------------------------------------------------------------------------
-ZeroDivisionError                         Traceback (most recent call last)
-<ipython-input-2-3fd9b1939623> in <module>
-----> 1 factorial(3)
+**DOE WEL:**
 
-<ipython-input-1-72cc9778b48a> in factorial(n)
-      4         return 1
-      5     else:
-----> 6         print(n / 0)
-      7         return n * factorial(n-1)
+- Gebruik specifieke exceptions (`IntegrityError`, `OperationalError`)
+- Log errors voor debugging (`logging.error()`)
+- Return None of lege lijst bij fouten (geen crash)
+- Gebruik type hints (`int | None`, `list[Row]`)
+- Test error paths (wat gebeurt bij duplicates?)
 
-ZeroDivisionError: division by zero
+**DOE NIET:**
+
+- Bare `except:` zonder exception type
+- Fouten negeren (silent failures)
+- Stack traces tonen aan gebruikers
+- Exceptions gebruiken voor flow control
+- Sensitive info in error messages (geen SQL queries!)
+
+## Common patterns
+
+### Pattern 1: Try-except met return
+
+```python
+def safe_operation() -> Row | None:
+    """Veilige operatie die Row of None teruggeeft."""
+    try:
+        # Database operatie
+        return result
+    except sqlite3.Error as e:
+        logger.error(f"Fout: {e}")
+        return None
 ```
 
-Om dit op te vangen, kunnen we de *call* wat uitbreiden met een extra exceptie:
+### Pattern 2: Try-except met boolean
 
-```ipython hl_lines="5 6"
-In [3]: try:
-   ...:     print(factorial(800))
-   ...: except RecursionError:
-   ...:     print("Dit programma kan zulke grote getallen niet handelen.")
-   ...: except ZeroDivisionError:
-   ...:     print("Delen door het getal nul (0) is niet mogelijk!")
-   ...:
-   ...: print("Programma beëindigd!")
-   ...:
-
-Delen door het getal nul (0) is niet mogelijk!
-Programma beëindigd!
+```python
+def safe_update() -> bool:
+    """Update met success boolean."""
+    try:
+        # Update operatie
+        return True
+    except sqlite3.Error as e:
+        logger.error(f"Fout: {e}")
+        return False
 ```
 
-Je ziet dat een `try` meerdere *typen* fouten (`exception`) kan opleveren. Door verschillende van dergelijke blokken te definiëren, wordt de bijhorende afhandeling uitgevoerd.
+### Pattern 3: Try-except met default waarde
 
-Naast een `RecursionError` kan er ook een i`OverflowError` optreden. Dat kan gebeuren als een getal te groot is voor Python om er iets zinvols mee te geven. In theorie zal dit niet vaak voorkomen, maar als voorbeeld is het wel nuttig. Dit laat zien hoe je *dezelfde* foutafhandeling kunt uitvoeren wanneer er *verschillende* excepties optreden.
-
-```ipython
-In [4]: try:
-   ...:     print(factorial(1000))
-   ...: except (RecursionError, OverflowError):
-   ...:     print("Dit programma kan zulke grote getallen niet handelen.")
-   ...:
+```python
+def get_count() -> int:
+    """Haal count op, return 0 bij fout."""
+    try:
+        # Count query
+        return count
+    except sqlite3.Error as e:
+        logger.error(f"Fout: {e}")
+        return 0
 ```
 
-Op het moment dat één van beide uitzonderingen (`exceptions`)optreedt, verschijnt de melding die voor beide foutafhandelingen toepasselijk is. Deze methode is niet aan te bevelen voor de combinatie `RecursionError` en `ZeroDivisionError`, omdat beide een alternatieve foutmelding nodig hebben.
+## Samenvatting
+
+Je hebt geleerd:
+
+- **Database-specifieke exceptions** (`IntegrityError`, `OperationalError`)
+- **Try-except patterns** voor veilige database operaties
+- **Logging** voor debugging (niet print!)
+- **Return types** die fouten aangeven (`None`, `False`, empty list)
+- **Flask error handling** voor API's
+- **Best practices** voor production code
+
+**Tip:** Test altijd je error handling! Probeer bewust fouten te veroorzaken (duplicates, missing tables, etc.) om te zien of je code netjes reageert.
+
+**Volgende stap:** Je hebt nu alle SQLite basics! Met deze patterns kun je veilig databases gebruiken in Flask applicaties.

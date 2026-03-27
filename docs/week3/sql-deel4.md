@@ -1,119 +1,527 @@
-# SQL in Python
+# Complete Database Class: WebshopDatabase
 
-Hoogste tijd om SQL te gebruiken in Python. Het mooie van Python is dat bij de installatie automatisch SQLite3 wordt aangemaakt. In een vorige paragraaf is al kennis gemaakt met de tabel `contacts`. Bij wijze van voorbeeld zullen we deze tabel met behulp van Python opnieuw aanmaken en van een aantal records voorzien. Aansluitend zullen we vanuit een Python-programma de gegevens uit de database lezen.
+In de vorige delen heb je afzonderlijke functies gezien voor database operaties. Nu gaan we alles combineren in een **database class** - een moderne, herbruikbare oplossing voor het werken met de webshop database.
 
-## import sqlite3
+## Waarom een database class?
 
-Als een Python-file gekoppeld dient te worden aan een SQLite-database, moet als eerste SQLite geïmporteerd worden. De tweede stap is bekend te maken met welke database de Python-file gekoppeld gaat worden. Hieronder worden beide stappen weergegeven:
+Een database class biedt verschillende voordelen:
+
+- **Encapsulation**: Alle database logica op één plek
+- **Herbruikbaarheid**: Makkelijk te gebruiken in verschillende scripts
+- **Consistency**: Altijd dezelfde patterns (context managers, placeholders, etc.)
+- **Onderhoudbaarheid**: Aanpassingen hoef je maar op één plek te maken
+
+## De complete WebshopDatabase class
+
+Hier is een complete implementatie met alle patterns die je tot nu toe hebt geleerd:
+
+```python
+import sqlite3
+from sqlite3 import Row
 
 
-```ipython
-In [1]: import sqlite3
-In [2]: db = sqlite3.connect("contacts.sqlite")
+class WebshopDatabase:
+    """Database manager voor de webshop.sqlite database.
+
+    Deze class biedt methoden voor het ophalen van categorieën en producten
+    uit de webshop database, inclusief JOIN queries en statistieken.
+
+    Attributes:
+        db_path (str): Pad naar de SQLite database file.
+    """
+
+    def __init__(self, db_path: str = "webshop.sqlite"):
+        """Initialiseer de database manager.
+
+        Args:
+            db_path: Pad naar de database file (default: "webshop.sqlite")
+        """
+        self.db_path = db_path
+
+    def _get_connection(self) -> sqlite3.Connection:
+        """Maak database connectie met row_factory ingesteld.
+
+        Returns:
+            sqlite3.Connection: Database connectie object
+        """
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = Row
+        return conn
+
+    # ==================== CATEGORIES ====================
+
+    def get_all_categories(self, order_by: str = "name") -> list[Row]:
+        """Haal alle categorieën op, gesorteerd.
+
+        Args:
+            order_by: Kolom om op te sorteren: "id" of "name" (default: "name")
+
+        Returns:
+            Lijst met alle categorieën
+        """
+        valid_columns = {"id", "name"}
+        if order_by not in valid_columns:
+            order_by = "name"
+        with self._get_connection() as conn:
+            cursor = conn.execute(f"SELECT * FROM categories ORDER BY {order_by}")
+            return cursor.fetchall()
+
+    def get_category_by_id(self, category_id: int) -> Row | None:
+        """Haal één categorie op op basis van ID.
+
+        Args:
+            category_id: ID van de categorie
+
+        Returns:
+            Categorie record of None als niet gevonden
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM categories WHERE id = ?",
+                (category_id,)
+            )
+            return cursor.fetchone()
+
+    def search_categories(self, search_term: str) -> list[Row]:
+        """Zoek categorieën op basis van naam.
+
+        Args:
+            search_term: Zoekterm voor categorie naam
+
+        Returns:
+            Lijst met matchende categorieën
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM categories WHERE name LIKE ? ORDER BY name",
+                (f"%{search_term}%",)
+            )
+            return cursor.fetchall()
+
+    # ==================== PRODUCTS ====================
+
+    def get_all_products(self) -> list[Row]:
+        """Haal alle producten op met categorie informatie."""
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    p.id,
+                    p.name AS product,
+                    p.price,
+                    p.stock,
+                    c.name AS category
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                ORDER BY c.name, p.name
+            """)
+            return cursor.fetchall()
+
+    def get_product_by_id(self, product_id: int) -> Row | None:
+        """Haal één product op op basis van ID.
+
+        Args:
+            product_id: ID van het product
+
+        Returns:
+            Product record of None als niet gevonden
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM products WHERE id = ?",
+                (product_id,)
+            )
+            return cursor.fetchone()
+
+    def get_products_by_category(self, category_id: int) -> list[Row]:
+        """Haal alle producten op van een specifieke categorie.
+
+        Args:
+            category_id: ID van de categorie
+
+        Returns:
+            Lijst met producten van deze categorie
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM products WHERE category_id = ? ORDER BY name",
+                (category_id,)
+            )
+            return cursor.fetchall()
+
+    def search_products(self, search_term: str) -> list[Row]:
+        """Zoek producten inclusief categorie informatie.
+
+        Args:
+            search_term: Zoekterm voor product naam
+
+        Returns:
+            Lijst met matchende producten met volledige informatie
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    c.name AS category,
+                    p.name AS product,
+                    p.price,
+                    p.stock,
+                    p.id
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                WHERE p.name LIKE ?
+                ORDER BY c.name, p.name
+            """, (f"%{search_term}%",))
+            return cursor.fetchall()
+
+    def get_products_in_price_range(
+        self,
+        min_price: float,
+        max_price: float
+    ) -> list[Row]:
+        """Haal producten op binnen een prijsrange.
+
+        Args:
+            min_price: Minimale prijs
+            max_price: Maximale prijs
+
+        Returns:
+            Lijst met producten in de prijsrange
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    c.name AS category,
+                    p.name AS product,
+                    p.price,
+                    p.stock
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                WHERE p.price BETWEEN ? AND ?
+                ORDER BY p.price ASC
+            """, (min_price, max_price))
+            return cursor.fetchall()
+
+    def get_products_in_stock(self, min_stock: int = 1) -> list[Row]:
+        """Haal producten op die op voorraad zijn.
+
+        Args:
+            min_stock: Minimale voorraad (default: 1)
+
+        Returns:
+            Lijst met producten die op voorraad zijn
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    c.name AS category,
+                    p.name AS product,
+                    p.price,
+                    p.stock
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                WHERE p.stock >= ?
+                ORDER BY c.name, p.name
+            """, (min_stock,))
+            return cursor.fetchall()
+
+    # ==================== CATALOG ====================
+
+    def get_category_catalog(self, category_id: int) -> dict:
+        """Haal complete catalogus op voor een categorie.
+
+        Args:
+            category_id: ID van de categorie
+
+        Returns:
+            Dictionary met categorie info en alle producten
+        """
+        category = self.get_category_by_id(category_id)
+        if not category:
+            return {}
+
+        products = self.get_products_by_category(category_id)
+
+        catalog = {
+            "category": category["name"],
+            "category_id": category_id,
+            "description": category["description"],
+            "products": [
+                {
+                    "product_id": product["id"],
+                    "name": product["name"],
+                    "price": product["price"],
+                    "stock": product["stock"],
+                    "description": product["description"]
+                }
+                for product in products
+            ]
+        }
+
+        return catalog
+
+    # ==================== STATISTICS ====================
+
+    def get_statistics(self) -> dict:
+        """Haal database statistieken op.
+
+        Returns:
+            Dictionary met statistieken
+        """
+        with self._get_connection() as conn:
+            stats = {}
+
+            # Tel categorieën
+            cursor = conn.execute("SELECT COUNT(*) as count FROM categories")
+            stats["total_categories"] = cursor.fetchone()["count"]
+
+            # Tel producten
+            cursor = conn.execute("SELECT COUNT(*) as count FROM products")
+            stats["total_products"] = cursor.fetchone()["count"]
+
+            # Tel producten op voorraad
+            cursor = conn.execute("SELECT COUNT(*) as count FROM products WHERE stock > 0")
+            stats["products_in_stock"] = cursor.fetchone()["count"]
+
+            # Gemiddelde prijs
+            cursor = conn.execute("SELECT AVG(price) as avg_price FROM products")
+            stats["average_price"] = cursor.fetchone()["avg_price"]
+
+            # Totale voorraad waarde
+            cursor = conn.execute("SELECT SUM(price * stock) as total_value FROM products")
+            stats["total_inventory_value"] = cursor.fetchone()["total_value"]
+
+            return stats
+
+    def get_category_statistics(self) -> list[Row]:
+        """Haal statistieken op per categorie.
+
+        Returns:
+            Lijst met statistieken per categorie
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    c.name AS category,
+                    COUNT(p.id) AS product_count,
+                    AVG(p.price) AS avg_price,
+                    SUM(p.stock) AS total_stock,
+                    SUM(p.price * p.stock) AS inventory_value
+                FROM categories c
+                LEFT JOIN products p ON c.id = p.category_id
+                GROUP BY c.id, c.name
+                ORDER BY product_count DESC
+            """)
+            return cursor.fetchall()
+
+
+# ==================== GEBRUIK ====================
+
+if __name__ == "__main__":
+    db = WebshopDatabase()
+
+    # Toon statistieken
+    stats = db.get_statistics()
+    print("=== Webshop Database Statistics ===")
+    print(f"Categorieën: {stats['total_categories']}")
+    print(f"Producten: {stats['total_products']}")
+    print(f"Op voorraad: {stats['products_in_stock']}")
+    print(f"Gemiddelde prijs: €{stats['average_price']:.2f}")
+    print(f"Totale voorraad waarde: €{stats['total_inventory_value']:.2f}\n")
+
+    # Categorie statistieken
+    print("=== Statistieken per categorie ===")
+    cat_stats = db.get_category_statistics()
+    for cat in cat_stats[:5]:
+        print(f"{cat['category']}: {cat['product_count']} producten, "
+              f"gemiddeld €{cat['avg_price']:.2f}, "
+              f"voorraad: {cat['total_stock']}")
+
+    print()
+
+    # Haal complete catalogus op
+    print("=== Electronics Catalogus (category_id=1) ===")
+    catalog = db.get_category_catalog(1)
+    if catalog:
+        print(f"Categorie: {catalog['category']}")
+        print(f"Beschrijving: {catalog['description']}\n")
+        for product in catalog["products"][:5]:  # Toon eerste 5
+            print(f"  {product['name']}: €{product['price']} ({product['stock']} op voorraad)")
+        print()
+
+    # Zoek producten
+    print("=== Producten met 'book' in de naam ===")
+    products = db.search_products("book")
+    for product in products[:5]:  # Toon eerste 5
+        print(f"{product['category']}: {product['product']} - €{product['price']}")
+
+    print()
+
+    # Prijsrange
+    print("=== Producten tussen €10 en €30 ===")
+    products = db.get_products_in_price_range(10.0, 30.0)
+    for product in products[:5]:
+        print(f"{product['product']}: €{product['price']}")
 ```
 
-Met dit commando wordt de database aangemaakt (als je op je filesystem kijkt, zie je dat het bestand [`contacts.sqlite`](bestanden/contacts.sqlite) is aangemaakt). Omdat de database nog geen tabellen heeft, moeten we deze eerst aanmaken. Om sql in Python uit te voeren, maken we gebruik van het commando `execute`.
+## Gebruik van de class
 
-```ipython
-In [3]: db.execute("CREATE TABLE IF NOT EXISTS contacts(name text, phone integer, email text)")
-Out[3]: <sqlite3.Cursor at 0x10bf95f10>
+### Basis gebruik
+
+```python
+# Maak een database instance
+db = WebshopDatabase()
+
+# Haal alle categorieën op
+categories = db.get_all_categories()
+for category in categories:
+    print(f"{category['id']}: {category['name']}")
+
+# Zoek specifiek
+laptop_products = db.search_products("laptop")
+for product in laptop_products:
+    print(f"{product['product']}: €{product['price']}")
 ```
 
-!!! Info "Checken of de tabel al bestaat"
-    De toevoeging `IF NOT EXISTS` zorgt ervoor dat er geen foutmelding verschijnt op het moment dat er al een tabel met dezelfde naam is. Deze regel wordt dan door het programma genegeerd.
+### Catalogus ophalen
 
-Nu voeren we twee records toe:
+```python
+# Haal alle producten op voor een categorie
+catalog = db.get_category_catalog(category_id=2)  # Books
 
-```ipython
-In [4]: db.execute("INSERT INTO contacts VALUES ('Bart', 1234567, 'bart@org.nl')")
-In [4]: db.execute("INSERT INTO contacts VALUES ('Henk', 7654321, 'henk@org.nl')")
+print(f"Categorie: {catalog['category']}")
+print(f"Beschrijving: {catalog['description']}\n")
+
+for product in catalog['products']:
+    print(f"  {product['name']}: €{product['price']} ({product['stock']} op voorraad)")
 ```
 
-Om er zeker van te zijn dat de gegevens zijn opgeslagen, maken we gebruik van het commando `commit`. Dit herken je, als het goed is, uit de periode 1, waar het ging over *transacties*.
+### Eigen database pad
 
-```ipython
-In [5]: db.commit()
+```python
+# Gebruik een andere database file
+db = WebshopDatabase("path/to/other/webshop.sqlite")
 ```
 
-## Cursors
+## Design patterns in de class
 
-Om in Python met data te kunnen werken, moeten we gebruik maken van een *cursor*.  Een database-cursor is een techniek die het mogelijk maakt om over regels in een result-set te itereren. Je kunt je een cursor voorstellen als een pijltje naar een specifieke regel in zo'n result-set. Met behulp van die pijl kun je de huidige record ophalen, aanpassen of verwijderen.
+Deze class demonstreert verschillende belangrijke patterns:
 
-![Database cursor](imgs/cursor.png)
+### 1. Private helper method
 
-Om met een cursor te kunnen werken, moet je het volgende stappenplan volgen:
-
-1. Definieer een cursor die gekoppeld is aan de database-connectie (`cursor=db.cursor()`)
-2. Open die cursor en hang daar een result-set aan (`cursor.execute(...)`)
-3. Haal regel voor regel de data op en gebruik dat in je lokale programmeeromgeving (`cursor.fetchone()`)
-4. Sluit de cursor wanneer je hiermee klaar bent (`cursor.close()`)
-
-We zullen dat stappenplan hieronder met voorbeelden verder toelichten.
-
-
-## Opvragen van data
-
-Na het runnen van deze regels is de database aangemaakt en zijn de records toegevoegd. Een testje is te zien of de gegevens ook daadwerkelijk zijn verwerkt. Daarvoor moeten we dus gebruik maken van een cursor:
-
-```ipython
-In [6]: cursor = db.cursor()
-
-In [7]: cursor.execute("SELECT * FROM contacts")
-Out[7]: <sqlite3.Cursor at 0x10c06bab0>
+```python
+def _get_connection(self) -> sqlite3.Connection:
+    """Helper method die niet bedoeld is voor extern gebruik."""
+    # ...
 ```
 
-De opgevraagde rijen zijn nu benaderbaar via de cursor. We kunnen hier gebruik maken van een `for`-lus om deze gegevens één voor één af te drukken.
+De underscore `_` geeft aan dat dit een interne method is.
 
-```ipython
-In [8]: for row in cursor:
-   ...:     print(row)
+### 2. Type hints overal
 
-('Bart', 1234567, 'bart@org.nl')
-('Henk', 7654321, 'henk@org.nl')
+```python
+def get_product_by_id(self, product_id: int) -> Row | None:
+    #                              ↑ input type    ↑ return type
 ```
 
-Het resultaat van de query is een tupel. Het is daarom ook mogelijk om individuele gegevens afzonderlijk naar het scherm te schrijven.
+### 3. Docstrings met Args en Returns
 
-```ipython
-In [9]: for name, phone, email in cursor:
-   ...:     print(name  )
-   ...:     print(phone)
-   ...:     print(email)
-   ...:     print ('---------')
+```python
+def search_products(self, search_term: str) -> list[Row]:
+    """Zoek producten op basis van naam.
 
-Bart
-1234567
-bart@org.nl
----------
-Henk
-7654321
-henk@org.nl
----------
+    Args:
+        search_term: Zoekterm voor product naam
+
+    Returns:
+        Lijst met matchende producten
+    """
 ```
 
-Moeten de gegevens als een lijst getoond worden is daar de methode `fetchall()` voor beschikbaar.
+### 4. Context managers
 
-```ipython
-In [10]: cursor.fetchall()
-Out[10]:
-[('Bart', 1234567, 'bart@org.nl'),
- ('Henk', 7654321, 'henk@org.nl'),
+```python
+with self._get_connection() as conn:
+    # Gebruik connection
+    # Automatische cleanup
 ```
 
-Merk op dat het resultaat van de bovenstaande methode een *list* is: er zitten blokhaken (`[` een `]`) omheen.
+### 5. Placeholders tegen SQL injection
 
-!!! Info "Het resetten van de cursor"
-    De bovenstaande code werkt niet zonder meer. Om het resultaat opnieuw te krijgen moeten we de cursor *resetten* of de query opnieuw uitvoeren. We gaan hieronder uitgebreid in op die cursor.
-
-Een andere handige methode is `fetchone()`. Deze methode haalt de huidige regel op en verplaatst de cursor naar de volgende regel. Op deze manier kun je door je resultaten heen itereren totdat de methode geen resultaat meer teruggeeft:
-
-```ipython
-In [11]: cursor.fetchone()
-Out[11]: ('Bart', 1234567, 'bart@org.nl')
-
-In [12]: cursor.fetchone()
-Out[12]: ('Henk', 7654321, 'henk@org.nl')
-
-In [13]: cursor.fetchone()
+```python
+cursor.execute(
+    "SELECT * FROM products WHERE name LIKE ?",
+    (f"%{search_term}%",)  # Veilig!
+)
 ```
 
+## Uitbreidingen (optioneel)
+
+Je kunt de class uitbreiden met extra functionaliteit:
+
+### Data toevoegen
+
+```python
+def add_product(
+    self,
+    name: str,
+    price: float,
+    stock: int,
+    category_id: int,
+    description: str | None = None
+) -> int:
+    """Voeg een nieuw product toe."""
+    with self._get_connection() as conn:
+        cursor = conn.execute(
+            """INSERT INTO products (name, price, stock, category_id, description)
+               VALUES (?, ?, ?, ?, ?)""",
+            (name, price, stock, category_id, description)
+        )
+        conn.commit()
+        return cursor.lastrowid
+```
+
+### Data wijzigen
+
+```python
+def update_stock(self, product_id: int, new_stock: int) -> bool:
+    """Update de voorraad van een product."""
+    with self._get_connection() as conn:
+        cursor = conn.execute(
+            "UPDATE products SET stock = ? WHERE id = ?",
+            (new_stock, product_id)
+        )
+        conn.commit()
+        return cursor.rowcount > 0
+```
+
+### Error handling
+
+```python
+def get_product_by_id(self, product_id: int) -> Row | None:
+    """Haal product op met error handling."""
+    try:
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM products WHERE id = ?",
+                (product_id,)
+            )
+            return cursor.fetchone()
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return None
+```
+
+## Samenvatting
+
+Je hebt geleerd:
+
+- Een complete database class bouwen
+- Methods organiseren per entiteit (categories, products)
+- Private helper methods gebruiken (`_get_connection`)
+- Complexe data structuren returnen (catalogus dictionary)
+- Statistieken berekenen met aggregatiefuncties
+- Type hints en docstrings consequent toepassen
+- Alle patterns combineren (context managers, placeholders, row_factory)
+
+**Volgende stap:** [Deel 5](sql-deel5.md) - SQL injection preventie.
+
+Deze class is een startpunt: je voegt zelf methoden toe voor de queries die jouw applicatie nodig heeft. Met SQLAlchemy schrijf je geen raw SQL meer, maar Python code die de queries automatisch genereert - dat zie je in week 6.
