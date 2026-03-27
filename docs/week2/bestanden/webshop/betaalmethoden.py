@@ -1,47 +1,94 @@
+"""Betaalmethode klassen voor polymorfisme demonstratie."""
+
+
 class Creditcard:
-    """Klasse voor de betaalmethode Creditcard uit het deel over polymorfisme"""
+    """Klasse voor de betaalmethode Creditcard."""
 
-    def valideer(self):
-        print("Creditcardnummer wordt gevalideerd...")
+    def valideer(self) -> bool:
+        """Valideer de Creditcard.
 
-    def verwerk_betaling(self, bedrag):
-        print(f"€{bedrag:.2f} wordt afgeschreven van creditcard")
+        Returns:
+            True als validatie geslaagd
+        """
+        return True
 
-    def bevestig(self):
-        print("Betaling bevestigd. Transactie afgerond.")
+    def verwerk_betaling(self, bedrag: float) -> str:
+        """Verwerk de betaling.
+
+        Args:
+            bedrag: Te betalen bedrag in euro's
+
+        Returns:
+            Bevestigingsbericht van de betaling
+        """
+        return f"€{bedrag:.2f} wordt afgeschreven van creditcard"
+
+    def bevestig(self) -> None:
+        """Bevestig de transactie."""
+
 
 class iDEAL:
-    """Klasse voor de betaalmethode iDEAL uit het deel over polymorfisme"""
+    """Klasse voor de betaalmethode iDEAL."""
 
-    def valideer(self):
-        print("Bankrekening wordt geverifieerd...")
+    def valideer(self) -> bool:
+        """Valideer de bankrekening.
 
-    def verwerk_betaling(self, bedrag):
-        print(f"€{bedrag:.2f} wordt overgemaakt via iDEAL")
+        Returns:
+            True als validatie geslaagd
+        """
+        return True
 
-    def bevestig(self):
-        print("iDEAL betaling geslaagd!")
+    def verwerk_betaling(self, bedrag: float) -> str:
+        """Verwerk de betaling.
+
+        Args:
+            bedrag: Te betalen bedrag in euro's
+
+        Returns:
+            Bevestigingsbericht van de betaling
+        """
+        return f"€{bedrag:.2f} wordt overgemaakt via iDEAL"
+
+    def bevestig(self) -> None:
+        """Bevestig de transactie."""
+
 
 class PayPal:
-    """Klasse voor de betaalmethode PayPal uit het deel over polymorfisme"""
+    """Klasse voor de betaalmethode PayPal."""
 
-    def valideer(self):
-        print("PayPal account wordt gecontroleerd...")
+    def valideer(self) -> bool:
+        """Valideer het PayPal account.
 
-    def verwerk_betaling(self, bedrag):
-        print(f"€{bedrag:.2f} wordt betaald via PayPal")
+        Returns:
+            True als validatie geslaagd
+        """
+        return True
 
-    def bevestig(self):
-        print("PayPal transactie voltooid!")
+    def verwerk_betaling(self, bedrag: float) -> str:
+        """Verwerk de betaling.
+
+        Args:
+            bedrag: Te betalen bedrag in euro's
+
+        Returns:
+            Bevestigingsbericht van de betaling
+        """
+        return f"€{bedrag:.2f} wordt betaald via PayPal"
+
+    def bevestig(self) -> None:
+        """Bevestig de transactie."""
 
 
-def test_betaling(betaalmethode, bedrag):
-    """ Driver-functie om een betaalmethode te testen"""
-    betaalmethode.valideer()
-    betaalmethode.verwerk_betaling(bedrag)
-    betaalmethode.bevestig()
+def test_betaling(betaalmethode, bedrag: float) -> None:
+    """Testfunctie om een betaalmethode te testen."""
+    if betaalmethode.valideer():
+        bericht = betaalmethode.verwerk_betaling(bedrag)
+        betaalmethode.bevestig()
+        print(bericht)
+    else:
+        print(f"Validatie mislukt voor {type(betaalmethode).__name__}")
 
-# De tests
+
 if __name__ == '__main__':
     visa = Creditcard()
     test_betaling(visa, 99.99)

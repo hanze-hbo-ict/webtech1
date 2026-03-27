@@ -1,236 +1,276 @@
-# OOP Python – Methoden en inkapseling
+# OOP Python – Dataclasses
 
-Inkapseling (Engels: *encapsulation*) is één van de fundamenten van object-georiënteerd programmeren. Het wordt gebruikt om onbevoegden niet de gelegenheid te bieden de kenmerken van een object zomaar aan te passen. Als dat mogelijk moet zijn dan dienen zij toegang te krijgen tot de zogenaamde `getters` en `setters`, waarover zo dadelijk meer.
+In het vorige deel heb je gezien hoe je klassen maakt met `__init__`. Voor klassen die vooral data bevatten, heeft Python een modernere aanpak: **dataclasses**. Deze maken je code korter en leesbaarder.
 
-Aan het eind van deze tekst maken we [oefening nummer 1](oefeningen/oop-oefening1.html).
+## Het probleem met reguliere klassen
 
-!!! Info "zichtbaarheid"
-    Python wijkt nadrukkelijk af van het idee van inkapseling zoals het bijvoorbeeld gedaan wordt bij Java. Python gebruikt niet de sleutel-woorden `private` of `protected` om de zichtbaarheid van een methode aan te geven.
-
-## Het voorbeeld Voorraad
-
-Als voorbeeld hier een uitbreiding van onze webshop, waarbij het mogelijk is voorraad bij te bestellen, producten te verkopen en een geschiedenis van alle voorraad-mutaties bij te houden, inclusief tijdstip. Uiteraard is de opzet erg beperkt.
-
-De code wordt in stapjes opgebouwd; we slaan deze code uiteindelijk op in het bestand [`voorraad.py`](bestanden/webshop/voorraad.py).
-
-## Klasse en methoden
-
-Stap 1: de klasse
+Kijk naar deze `Product` klasse:
 
 ```python
-class Voorraad:
+class Product:
+    def __init__(self, naam: str, prijs: float, voorraad: int = 0):
+        self.naam = naam
+        self.prijs = prijs
+        self.voorraad = voorraad
 ```
 
-Stap 2: het importeren van de huidige tijd
+Dit werkt prima, maar er is veel **boilerplate** (herhalende, weinig toevoegende code): je typt elke attribuutnaam drie keer. Voor klassen met veel attributen wordt dit vervelend.
+
+## Dataclasses: minder code, zelfde resultaat
+
+Python biedt een elegantere manier voor data-klassen: **dataclasses**.
+
+Je herkent een dataclass aan de `@dataclass` **decorator** (het `@`-symbool) boven de klasse:
 
 ```python
-import datetime
+from dataclasses import dataclass
+
+@dataclass
+class Product:
+    naam: str
+    prijs: float
+    voorraad: int = 0
 ```
 
-Stap 3: een functie om het tijdstip van de mutatie vast te leggen.
+!!! info "Wat betekent `@dataclass`?"
+    De `@` syntax is een **decorator** - een speciale aanduiding die functionaliteit toevoegt aan je klasse.
+    Je hoeft nu niet precies te begrijpen hoe decorators werken. Belangrijk is dat `@dataclass` ervoor zorgt dat Python automatisch een aantal methoden voor je genereert:
+    - `__init__()` - constructor met alle attributen als parameters
+    - `__repr__()` - nette string representatie voor debugging
+    - `__eq__()` - vergelijking tussen objecten
+    Dit scheelt veel typwerk en voorkomt fouten. Later zie je meer decorators zoals `@app.route` in Flask.
+
+Je gebruikt de klasse precies hetzelfde:
 
 ```python
-@staticmethod
-def _current_time():
-    now = datetime.datetime.now()
-    return f"{now: %Y-%m-%d %H:%M:%S}"
+laptop = Product("Laptop", 799.99, 5)
+print(laptop.naam)        # "Laptop"
+print(laptop.prijs)       # 799.99
+print(laptop)             # Product(naam='Laptop', prijs=799.99, voorraad=5)
 ```
 
-De functie `_current_time()` retourneert het tijdstip van de mutatie in het opgegeven formaat, tot op de seconde nauwkeurig. De `@staticmethod` decorator geeft aan dat dit een functie is die bij de klasse hoort maar niet afhankelijk is van een specifieke instantie.
+## Methoden toevoegen aan dataclasses
 
-## De constructor
-
-Stap 4: de constructor
+Je kunt gewoon methoden toevoegen zoals bij normale klassen:
 
 ```python
-def __init__(self, product_naam, aantal):
-    self._product_naam = product_naam
-    self.__aantal = aantal
-    self._mutatie_geschiedenis = []
-    print(f"Voorraad aangemaakt voor {self._product_naam}")
+from dataclasses import dataclass
+
+@dataclass
+class Product:
+    naam: str
+    prijs: float
+    voorraad: int = 0
+
+    def verkoop(self, aantal: int) -> bool:
+        """Verkoop een aantal items."""
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
+        return False
+
+    def bereken_voorraadwaarde(self) -> float:
+        """Bereken totale waarde van voorraad."""
+        return self.prijs * self.voorraad
+
+
+laptop = Product("Laptop", 799.99, 5)
+laptop.verkoop(2)
+print(f"Voorraadwaarde: €{laptop.bereken_voorraadwaarde():.2f}")
+# Output: Voorraadwaarde: €2399.97
 ```
 
-## Bijbestellen en verkopen
+## Type hints verdieping
 
-Bij het aanmaken van een nieuwe voorraad wordt gevraagd om een productnaam en een beginhoeveelheid. De variabele `_mutatie_geschiedenis` is een lijst (`[]`) waarin alle mutaties worden vastgelegd.
+Nu je dataclasses gebruikt, is het tijd om meer type hints te leren kennen.
 
-Stap 5: de methode `bijbestellen()`
+### str | None - waarden die None kunnen zijn
+
+Soms mag een waarde `None` zijn. Dat geef je aan met `str | None`:
 
 ```python
-def bijbestellen(self, aantal):
-    if aantal > 0:
-        self.__aantal += aantal
-        self._mutatie_geschiedenis.append((Voorraad._current_time(), aantal))
-        self.toon_voorraad()
+from dataclasses import dataclass
+
+@dataclass
+class Product:
+    naam: str
+    prijs: float
+    voorraad: int = 0
+    beschrijving: str | None = None  # Mag None zijn
+
+laptop = Product("Laptop", 799.99, 5, "Gaming laptop")
+muis = Product("Muis", 25.50, 10)  # Geen beschrijving
+
+if laptop.beschrijving:
+    print(laptop.beschrijving)
 ```
 
-Indien het bij te bestellen aantal groter dan nul (`0`) is, wordt de voorraad aangepast en wordt de mutatie toegevoegd aan de lijst `_mutatie_geschiedenis[]` (zie je wat het datatype is van dat wat er aan de lijst wordt toegevoegd?). Ook de actuele voorraad wordt nu getoond.
+!!! tip "str | None"
+    `beschrijving: str | None = None` betekent: "een string OF None". De `= None` is de standaardwaarde als je niets invult.
 
-Stap 6: de methode `verkoop()`
+### List - lijsten met types
+
+Voor lijsten geef je aan welk type elementen erin zitten:
 
 ```python
-def verkoop(self, aantal):
-    if 0 < aantal <= self.__aantal:
-        self.__aantal -= aantal
-        self._mutatie_geschiedenis.append((Voorraad._current_time(), -aantal))
-    else:
-        print("Het aantal dient groter dan nul (0) en maximaal gelijk aan de voorraad te zijn")
-    self.toon_voorraad()
+from dataclasses import dataclass, field
+
+@dataclass
+class Winkelwagen:
+    klant_naam: str
+    producten: list[Product] = field(default_factory=list)
+
+    def voeg_toe(self, product: Product) -> None:
+        """Voeg een product toe aan de winkelwagen."""
+        self.producten.append(product)
+
+    def bereken_totaal(self) -> float:
+        """Bereken totaalprijs van alle producten."""
+        return sum(p.prijs for p in self.producten)
+
+
+wagen = Winkelwagen("Jan Jansen")
+wagen.voeg_toe(Product("Laptop", 799.99))
+wagen.voeg_toe(Product("Muis", 25.50))
+print(f"Totaal: €{wagen.bereken_totaal():.2f}")
+# Output: Totaal: €825.49
 ```
 
-Er vindt een controle plaats of de voorraad toereikend is voor de verkoop. Zo niet, volgt er een passende mededeling. Zo ja, wordt de voorraad bijgewerkt en de mutatie weer in de lijst vastgelegd. Ook hier wordt de actuele voorraad getoond.
+!!! note "field(default_factory=list)"
+    Voor **veranderbare** default waarden (lists, dicts) moet je `field(default_factory=list)` gebruiken in plaats van `= []`.
+    **Waarom?** Een gewoon `= []` zou gedeeld worden tussen alle instanties: Python maakt die lijst eenmalig aan bij het laden van de klasse, niet bij elke aanmaak van een object. Met `default_factory` krijgt elke instantie zijn eigen lege lijst.
 
-Stap 7: de methode `toon_voorraad()`
+## Preview: Database modellen
+
+Database modellen (die je later gaat maken) lijken erg op dataclasses:
 
 ```python
-def toon_voorraad(self):
-    print(f"Voorraad {self._product_naam} bedraagt {self.__aantal}")
+# Dit is hoe SQLAlchemy 2.0+ modellen eruitzien:
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+class Base(DeclarativeBase):
+    pass
+
+class Product(Base):
+    __tablename__ = "products"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str] = mapped_column(String(100))
+    prijs: Mapped[float]
+    voorraad: Mapped[int] = mapped_column(default=0)
 ```
 
-## Mutatie-overzicht
+Zie je de overeenkomst? Type annotations + class attributes, net als dataclasses!
 
-Stap 8: het mutatie-overzicht
+## Volledige voorbeeld: Webshop
+
+Een compleet voorbeeld met dataclasses:
 
 ```python
-def toon_mutaties(self):
-    print(f"\nMutatie-geschiedenis voor {self._product_naam}:")
-    for datum, aantal in self._mutatie_geschiedenis:
-        if aantal > 0:
-            mutatie_type = "bijbesteld"
-        else:
-            mutatie_type = "verkocht"
-            aantal = abs(aantal)
-        print(f"  {datum}: {aantal} {mutatie_type}")
+from dataclasses import dataclass, field
+
+@dataclass
+class Product:
+    naam: str
+    prijs: float
+    voorraad: int = 0
+
+    def verkoop(self, aantal: int) -> bool:
+        if self.voorraad >= aantal:
+            self.voorraad -= aantal
+            return True
+        return False
+
+
+@dataclass
+class Klant:
+    naam: str
+    email: str
+    korting_percentage: float = 0.0
+
+    def bereken_korting(self, bedrag: float) -> float:
+        """Bereken korting op een bedrag."""
+        return bedrag * (self.korting_percentage / 100)
+
+
+@dataclass
+class Bestelling:
+    klant: Klant
+    producten: list[Product] = field(default_factory=list)
+    betaald: bool = False
+
+    def voeg_product_toe(self, product: Product) -> None:
+        """Voeg een product toe aan de bestelling."""
+        self.producten.append(product)
+
+    def bereken_subtotaal(self) -> float:
+        """Bereken subtotaal (zonder korting)."""
+        return sum(p.prijs for p in self.producten)
+
+    def bereken_totaal(self) -> float:
+        """Bereken totaal (met korting)."""
+        subtotaal = self.bereken_subtotaal()
+        korting = self.klant.bereken_korting(subtotaal)
+        return subtotaal - korting
+
+
+# Gebruik
+jan = Klant("Jan Jansen", "jan@email.nl", 10.0)
+bestelling = Bestelling(jan)
+
+laptop = Product("Laptop", 799.99, 5)
+muis = Product("Muis", 25.50, 20)
+
+bestelling.voeg_product_toe(laptop)
+bestelling.voeg_product_toe(muis)
+
+print(f"Subtotaal: €{bestelling.bereken_subtotaal():.2f}")
+print(f"Korting: €{jan.bereken_korting(bestelling.bereken_subtotaal()):.2f}")
+print(f"Totaal: €{bestelling.bereken_totaal():.2f}")
+
+# Output:
+# Subtotaal: €825.49
+# Korting: €82.55
+# Totaal: €742.94
 ```
 
-In een lus wordt de volledige lijst van mutaties doorlopen en wordt de informatie naar het scherm geschreven.
+## Wanneer dataclasses gebruiken?
 
-## De volledige code
+**Gebruik dataclasses:**
 
-De volledige klasse ziet er nu als volgt uit:
+- Voor klassen die vooral data bevatten
+- Veel attributen, weinig logica
+- Je wilt leesbare, overzichtelijke code
 
-```python
-import datetime
+**Gebruik reguliere klassen:**
 
+- Complexe initialisatielogica nodig
+- Veel eigen dunder-methoden (speciale methoden met dubbele underscores, zoals `__len__`, `__iter__`)
+- Geen data container maar echt gedrag
 
-class Voorraad:
-    """Klasse voor het bijhouden van productvoorraad"""
-
-    @staticmethod
-    def _current_time():
-        now = datetime.datetime.now()
-        return f"{now: %Y-%m-%d %H:%M:%S}"
-
-    def __init__(self, product_naam, aantal):
-        self._product_naam = product_naam
-        self.__aantal = aantal
-        self._mutatie_geschiedenis = []
-        print(f"Voorraad aangemaakt voor {self._product_naam}")
-
-    def bijbestellen(self, aantal):
-        if aantal > 0:
-            self.__aantal += aantal
-            self._mutatie_geschiedenis.append((Voorraad._current_time(), aantal))
-            self.toon_voorraad()
-
-    def verkoop(self, aantal):
-        if 0 < aantal <= self.__aantal:
-            self.__aantal -= aantal
-            self._mutatie_geschiedenis.append((Voorraad._current_time(), -aantal))
-        else:
-            print("Het aantal dient groter dan nul (0) en maximaal gelijk aan de voorraad te zijn")
-        self.toon_voorraad()
-
-    def toon_voorraad(self):
-        print(f"Voorraad {self._product_naam} bedraagt {self.__aantal}")
-
-    def toon_mutaties(self):
-        print(f"\nMutatie-geschiedenis voor {self._product_naam}:")
-        for datum, aantal in self._mutatie_geschiedenis:
-            if aantal > 0:
-                mutatie_type = "bijbesteld"
-            else:
-                mutatie_type = "verkocht"
-                aantal = abs(aantal)
-            print(f"  {datum}: {aantal} {mutatie_type}")
-```
-
-## Testen
-
-Nu is het tijd om de voorraad te testen!
-
-```python
-laptop_voorraad = Voorraad("Laptop", 10)
-laptop_voorraad.bijbestellen(5)
-laptop_voorraad.verkoop(3)
-laptop_voorraad.verkoop(7)
-laptop_voorraad.bijbestellen(10)
-laptop_voorraad.toon_mutaties()
-```
-
-Dit geeft de volgende uitvoer:
-
-```console
-Voorraad aangemaakt voor Laptop
-Voorraad Laptop bedraagt 15
-Voorraad Laptop bedraagt 12
-Voorraad Laptop bedraagt 5
-Voorraad Laptop bedraagt 15
-
-Mutatie-geschiedenis voor Laptop:
-  2026-01-31 14:23:15: 5 bijbesteld
-  2026-01-31 14:23:15: 3 verkocht
-  2026-01-31 14:23:15: 7 verkocht
-  2026-01-31 14:23:16: 10 bijbesteld
-```
-
-## Private versus Protected attributen
-
-Je ziet in de code dat we twee soorten underscores gebruiken:
-
-- **Enkele underscore** (`_product_naam`): Dit is een *conventie* in Python om aan te geven dat een attribuut "protected" is. Het is bedoeld voor intern gebruik maar is nog steeds toegankelijk van buitenaf.
-- **Dubbele underscore** (`__aantal`): Dit triggert Python's *name mangling* mechanisme, waardoor het attribuut moeilijker direct toegankelijk wordt van buitenaf.
-
-Laten we dit demonstreren:
-
-```python
-laptop_voorraad = Voorraad("Laptop", 10)
-
-# Dit werkt (protected met enkele underscore):
-print(laptop_voorraad._product_naam)  # Output: Laptop
-
-# Dit werkt NIET (private met dubbele underscore):
-print(laptop_voorraad.__aantal)  # AttributeError!
-```
-
-Het tweede voorbeeld geeft een foutmelding:
-
-```console
-AttributeError: 'Voorraad' object has no attribute '__aantal'
-```
-
-Python heeft het attribuut `__aantal` hernoemd naar `_Voorraad__aantal` (name mangling) om directe toegang te voorkomen. Dit is Python's manier om attributen meer "private" te maken, hoewel ze technisch gezien nog steeds toegankelijk zijn via `laptop_voorraad._Voorraad__aantal`.
-
-## Waarom inkapseling?
-
-Inkapseling heeft verschillende voordelen:
-
-1. **Controle**: Je kunt validatie toevoegen (zoals in `verkoop()` waar we checken of er genoeg voorraad is)
-2. **Flexibiliteit**: Je kunt later de interne implementatie aanpassen zonder de interface te wijzigen
-3. **Beveiliging**: Je voorkomt dat gebruikers per ongeluk of opzettelijk ongeldige waarden instellen
-
-In het volgende deel gaan we kijken naar getters en setters, en hoe we de `@property` decorator kunnen gebruiken voor elegantere toegang tot private attributen.
+!!! tip "Database modellen zijn dataclass-achtig"
+    SQLAlchemy modellen die je later maakt, gebruiken hetzelfde patroon: type annotaties met klasse-attributen. Als je dataclasses begrijpt, begrijp je ook de moderne SQLAlchemy syntax.
 
 ## Samenvatting
 
-In dit deel hebben we geleerd over:
+Je hebt nu gezien:
 
-- Inkapseling als OOP-principe
-- Het verschil tussen `_` (protected) en `__` (private) attributen
-- Het gebruik van `@staticmethod` voor klassemethoden
-- Het bijhouden van een geschiedenis met tijdstempels
-- Het valideren van input in methoden
+- **Dataclasses**: Minder herhalende code (boilerplate) voor data containers met `@dataclass`
+- **Type hints**: `str | None`, `list[Product]` voor complexere types
+- **field()**: Voor veranderbare standaardwaarden met `default_factory`
+- **Preview**: Database modellen volgen hetzelfde patroon
 
-In het volgende deel gaan we kijken naar meerdere klassen die met elkaar samenwerken.
+### Belangrijkste voordelen dataclasses
 
-Maak nu [oefening nummer 1](oefeningen/oop-oefening1.html).
+1. **Minder code** - geen repetitieve `__init__`
+2. **Automatische methoden** - `__repr__`, `__eq__` gratis
+3. **Type safety** - duidelijk welke attributen een klasse heeft
+4. **Voorbereidend** - SQLAlchemy modellen werken vergelijkbaar
+
+### Volgende stap
+
+In het volgende deel: **inheritance** - hoe klassen van elkaar kunnen erven. Dit is essentieel voor database modellen.
+
+---
+
+**Maak nu [oefening 2](oefeningen/oop-oefening2.md).**
