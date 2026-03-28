@@ -6,6 +6,6 @@ Hieronder staat een webpagina afgebeeld met informatie over Flask. Het is de bed
 
 **Extra informatie:**
 
-- URL van Flask: https://flask.palletsprojects.com/
+- URL van Flask: <https://flask.palletsprojects.com/>
 - Afmetingen van het logo zijn: 200 x 150.
-- Alle informatie over tags is te vinden op: https://developer.mozilla.org/nl/
+- Alle informatie over tags is te vinden op: <https://developer.mozilla.org/nl/>
